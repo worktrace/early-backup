@@ -4,3 +4,9 @@
 *.iml
 *.ipr
 *.iws
+
+# Lockfiles.
+pnpm-lock.yaml
+
+# Node dependencies.
+node_modules/

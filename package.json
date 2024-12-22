@@ -1,0 +1,15 @@
+{
+  "name": "@worktrace/monorepo",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write .",
+    "review": "prettier --check . && oxlint"
+  },
+  "devDependencies": {
+    "oxlint": "^0.15.3",
+    "prettier": "^3.4.2",
+    "prettier-plugin-sh": "^0.14.0"
+  }
+}

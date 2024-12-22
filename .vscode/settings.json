@@ -5,7 +5,11 @@
   "editor.tabSize": 2,
   "editor.rulers": [80],
 
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": { "source.organizeImports": "always" },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
   // Code spell checker (requires recommended extensions).
   "cSpell.ignorePaths": [".git", "node_modules", "pnpm-lock.yaml"],
-  "cSpell.words": ["worktrace"]
+  "cSpell.words": ["esbenp", "lockfiles", "oxlint", "worktrace"]
 }
