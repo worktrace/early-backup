@@ -6,6 +6,13 @@
 *.iws
 
 # Lockfiles.
+#
+# Lockfiles are ignored for potential usage of mirrors.
+# Certain registries are not available in certain areas,
+# that developers here can only use mirrors.
+# Some of the lockfiles might contain information about the source,
+# which is different between mirrors.
+# So that the lockfiles are ignored for potential merge conflict troubles here.
 pnpm-lock.yaml
 
 # Node dependencies.
