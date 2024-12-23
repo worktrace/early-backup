@@ -24,6 +24,10 @@ Desktop.ini
 # which is different between mirrors.
 # So that the lockfiles are ignored for potential merge conflict troubles here.
 pnpm-lock.yaml
+Cargo.lock
 
 # Node dependencies.
 node_modules/
+
+# Cargo outputs.
+/target/

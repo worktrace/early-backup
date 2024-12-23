@@ -9,7 +9,11 @@
 // https://code.visualstudio.com/docs/configure/extensions/extension-marketplace
 {
   "recommendations": [
+    // Languages and frameworks.
+    "rust-lang.rust-analyzer",
+
     // Configurations.
+    "tamasfe.even-better-toml",
     "redhat.vscode-yaml",
 
     // Code qualities.

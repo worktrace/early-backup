@@ -1,4 +1,6 @@
 semi: false
 
+# Toml plugin might incompatible with VSCode extension,
+# so that it's not installed inside node.
 plugins:
   - prettier-plugin-sh
