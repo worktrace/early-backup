@@ -1,4 +1,13 @@
-# Miscellaneous.
+# Code editors and platform local preferences.
+#
+# 1. Windows: local desktop configuration files.
+# 2. MacOS: local desktop service store files.
+# 3. Android Studio local workspace preferences.
+# 4. VSCode workspace settings are not ignored as the recommended editor.
+# 5. You may customize your own preferences in VSCode's user settings.
+#
+# see https://code.visualstudio.com/docs/configure/settings#_user-settings
+# see https://code.visualstudio.com/docs/configure/settings#_workspace-settings
 Desktop.ini
 .DS_Store
 .idea/
