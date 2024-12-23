@@ -1,5 +1,17 @@
+// How to install recommended extensions:
+//
+// 1. Open the extensions panel (locates inside the primary sidebar).
+// 2. Input "@recommended" into the search bar to show all recommended ones.
+// 3. You may install each of them manually, or click the
+// "Install all recommended extensions" button to install them all at once.
+//
+// see:
+// https://code.visualstudio.com/docs/configure/extensions/extension-marketplace
 {
   "recommendations": [
+    // Configurations.
+    "redhat.vscode-yaml",
+
     // Code qualities.
     "oxc.oxc-vscode",
     "esbenp.prettier-vscode",

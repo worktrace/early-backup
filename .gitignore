@@ -1,4 +1,14 @@
-# Miscellaneous.
+# Code editors and platform local preferences.
+#
+# 1. Windows: local desktop configuration files.
+# 2. MacOS: local desktop service store files.
+# 3. Android Studio local workspace preferences.
+# 4. VSCode workspace settings are not ignored as the recommended editor.
+# 5. You may customize your own preferences in VSCode's user settings.
+#
+# see https://code.visualstudio.com/docs/configure/settings#_user-settings
+# see https://code.visualstudio.com/docs/configure/settings#_workspace-settings
+Desktop.ini
 .DS_Store
 .idea/
 *.iml
@@ -6,6 +16,13 @@
 *.iws
 
 # Lockfiles.
+#
+# Lockfiles are ignored for potential usage of mirrors.
+# Certain registries are not available in certain areas,
+# that developers here can only use mirrors.
+# Some of the lockfiles might contain information about the source,
+# which is different between mirrors.
+# So that the lockfiles are ignored for potential merge conflict troubles here.
 pnpm-lock.yaml
 
 # Node dependencies.
