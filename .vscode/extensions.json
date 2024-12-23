@@ -9,6 +9,9 @@
 // https://code.visualstudio.com/docs/configure/extensions/extension-marketplace
 {
   "recommendations": [
+    // Configurations.
+    "redhat.vscode-yaml",
+
     // Code qualities.
     "oxc.oxc-vscode",
     "esbenp.prettier-vscode",
