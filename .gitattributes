@@ -1,2 +1,16 @@
+# Git EOL normalization.
+#
+# 1. EOL means end of line characters, which marks line breaks in files.
+# 2. Windows uses CRLF(\r\n) as eol while unix-like systems use LF(\n).
+# 3. It might cause potential conflicts when merging from different platforms.
+# 4. EOLs are usually invisible characters, which might cause confuse.
+# 5. Such settings will auto detect file mode specify which eol to use.
+#
+# Developers may configure eol normalization in their local git configs,
+# but this shared config file will ensure eol normalization configured
+# for all contributors when collaborating on multi-platforms.
+#
+# see https://git-scm.com/docs/gitattributes#_text
+# see https://git-scm.com/docs/gitattributes#_eol
 * text=auto eol=lf
 **/windows/**/* text=auto eol=crlf
