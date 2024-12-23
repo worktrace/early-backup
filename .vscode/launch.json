@@ -1,0 +1,18 @@
+{
+  // see https://code.visualstudio.com/docs/debugtest/debugging-configuration
+  "configurations": [
+    {
+      // Override default launch path provided by the Flutter extension,
+      // because the Flutter app is not at the root of the workspace.
+      //
+      // see https://docs.flutter.dev/tools/vs-code#running-and-debugging
+      // see https://docs.flutter.dev/tools/devtools/vscode#run-and-debug
+      // see https://dartcode.org/docs/launch-configuration/
+      "name": "Launch Flutter",
+      "type": "dart",
+      "request": "launch",
+      "program": "${workspaceFolder}/apps/flutter/lib/main.dart",
+      "cwd": "${workspaceFolder}/apps/flutter"
+    }
+  ]
+}
