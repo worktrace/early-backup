@@ -1,0 +1,7 @@
+name: worktrace_monorepo
+version: 0.0.0
+publish_to: none
+environment: { sdk: ^3.6.0 }
+
+workspace:
+  - apps/flutter

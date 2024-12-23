@@ -42,6 +42,8 @@
     "lockfiles",
     "oxlint",
     "pubspec",
+    "swiftpm",
+    "symbolication",
     "tamasfe",
     "worktrace"
   ]
