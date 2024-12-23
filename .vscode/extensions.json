@@ -11,6 +11,8 @@
   "recommendations": [
     // Languages and frameworks.
     "rust-lang.rust-analyzer",
+    "dart-code.dart-code",
+    "dart-code.flutter",
 
     // Configurations.
     "tamasfe.even-better-toml",
