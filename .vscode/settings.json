@@ -20,7 +20,26 @@
     "package.json": "pnpm-lock.yaml"
   },
 
+  "files.associations": {
+    ".metadata": "yaml"
+  },
+
   // Code spell checker (requires recommended extensions).
-  "cSpell.ignorePaths": ["node_modules", "pnpm-lock.yaml"],
-  "cSpell.words": ["esbenp", "lockfiles", "oxlint", "tamasfe", "worktrace"]
+  "cSpell.ignorePaths": [
+    ".dart_tool",
+    "node_modules",
+    "target",
+    ".metadata",
+    "Cargo.lock",
+    "pnpm-lock.yaml",
+    "pubspec.lock"
+  ],
+  "cSpell.words": [
+    "esbenp",
+    "lockfiles",
+    "oxlint",
+    "pubspec",
+    "tamasfe",
+    "worktrace"
+  ]
 }
