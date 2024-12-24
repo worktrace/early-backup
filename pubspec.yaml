@@ -7,3 +7,6 @@ workspace:
   - apps/flutter
   - packages/auto_stories_compat
   - packages/auto_stories_dev
+
+dependencies:
+  auto_stories_dev: ^0.0.0
