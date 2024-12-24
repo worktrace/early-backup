@@ -1,0 +1,6 @@
+# Analysis options for the whole monorepo.
+#
+# see: https://dart.dev/tools/analysis
+# see: https://dart.dev/tools/analysis#the-analysis-options-file
+# see: https://dart.dev/tools/analysis#including-shared-options
+include: package:auto_stories_dev/analysis_options.yaml
