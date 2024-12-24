@@ -1,0 +1,12 @@
+name: auto_stories
+description: Auto generate widget preview with minimal configurations.
+version: 0.0.0
+resolution: workspace
+environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
+
+dependencies:
+  flutter: { sdk: flutter }
+
+dev_dependencies:
+  flutter_test: { sdk: flutter }
+  flutter_lints: ^5.0.0
