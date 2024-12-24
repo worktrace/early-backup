@@ -38,13 +38,20 @@
     "pubspec.lock"
   ],
   "cSpell.words": [
+    "combinators",
     "esbenp",
+    "futureor",
+    "interps",
+    "ints",
     "lockfiles",
+    "nonobvious",
     "oxlint",
     "pubspec",
     "swiftpm",
     "symbolication",
     "tamasfe",
+    "tearoffs",
+    "unawaited",
     "worktrace"
   ]
 }
