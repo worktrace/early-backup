@@ -59,3 +59,28 @@ extension WrapAlign on Widget {
     );
   }
 }
+
+extension WrapDisplay on List<Widget> {
+  Column asColumn({
+    Key? key,
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+    MainAxisSize mainAxisSize = MainAxisSize.max,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
+    TextDirection? textDirection,
+    VerticalDirection verticalDirection = VerticalDirection.down,
+    TextBaseline? textBaseline,
+    double spacing = 0.0,
+  }) {
+    return Column(
+      key: key,
+      mainAxisAlignment: mainAxisAlignment,
+      mainAxisSize: mainAxisSize,
+      crossAxisAlignment: crossAxisAlignment,
+      textDirection: textDirection,
+      verticalDirection: verticalDirection,
+      textBaseline: textBaseline,
+      spacing: spacing,
+      children: this,
+    );
+  }
+}
