@@ -1,5 +1,33 @@
 import 'package:flutter/widgets.dart';
 
+class LocaleAdapter<T extends LocaleThemeBase> {
+  const LocaleAdapter({
+    this.settings = const [],
+    this.locales = const [],
+    required this.defaultLocale,
+  });
+
+  final List<LocaleID> settings;
+  final List<T> locales;
+  final T defaultLocale;
+
+  T get adapt {
+    final ids = settings.isEmpty ? LocaleID.platform : settings;
+    var handler = defaultLocale;
+    var matchLevel = LocaleMatch.none;
+    for (final setting in ids) {
+      for (final locale in locales) {
+        final level = setting.compare(locale.id);
+        if (level == LocaleMatch.all) return locale;
+        if (level <= matchLevel) continue;
+        matchLevel = level;
+        handler = locale;
+      }
+    }
+    return handler;
+  }
+}
+
 abstract class LocaleThemeBase {
   const LocaleThemeBase({
     required this.name,
