@@ -1,5 +1,17 @@
 import 'package:flutter/widgets.dart';
 
+abstract class LocaleThemeBase {
+  const LocaleThemeBase({
+    required this.name,
+    required this.id,
+    this.direction = TextDirection.ltr,
+  });
+
+  final String name;
+  final LocaleID id;
+  final TextDirection direction;
+}
+
 @immutable
 class LocaleID {
   const LocaleID(this.languageCode, {this.scriptCode, this.areaCode});
