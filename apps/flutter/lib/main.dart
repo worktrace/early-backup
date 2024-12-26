@@ -11,7 +11,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MediaQuery(
       data: MediaQueryData.fromView(View.of(context)),
-      child: Directionality(
+      child: const Directionality(
         textDirection: TextDirection.ltr,
         child: Center(
           child: Text('WorkTrace'),
