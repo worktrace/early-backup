@@ -56,7 +56,7 @@ class _InheritUpdateState extends State<InheritUpdate> {
         .asText() //
         .gesture(onTap: () => message = widget.afterMessage);
 
-    return [inheritProbe, button].asColumn().center().inherit(message);
+    return [inheritProbe, button].asColumn().center.inherit(message);
   }
 
   @override
