@@ -10,6 +10,9 @@ abstract class LocaleThemeBase {
   final String name;
   final LocaleID id;
   final TextDirection direction;
+
+  @override
+  String toString() => '$name($id)';
 }
 
 @immutable
