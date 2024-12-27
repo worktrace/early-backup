@@ -1,4 +1,7 @@
+import 'package:auto_stories/auto_stories.dart';
 import 'package:flutter/widgets.dart';
+
+import 'state.dart';
 
 void main() {
   runApp(const App());
@@ -9,14 +12,11 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MediaQuery(
-      data: MediaQueryData.fromView(View.of(context)),
-      child: Directionality(
-        textDirection: TextDirection.ltr,
-        child: Center(
-          child: Text('WorkTrace'),
-        ),
-      ),
-    );
+    return 'WorkTrace'
+        .asText()
+        .center()
+        .adaptiveColorTheme(ColorTheme.adapter())
+        .textDirection(TextDirection.ltr)
+        .mediaAsView(context);
   }
 }
