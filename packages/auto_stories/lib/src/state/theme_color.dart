@@ -21,6 +21,11 @@ extension WrapColorTheme on Widget {
   }
 }
 
+/// Define how to apply color themes.
+///
+/// Similar to the `ThemeMode` defined in `package:flutter/material.dart`.
+/// This enum is redefined here to avoid unnecessary import of
+/// the `material` library.
 enum ColorThemeMode {
   system,
   light,
