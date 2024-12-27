@@ -11,6 +11,30 @@ extension WrapColorTheme on Widget {
         .background(theme.background)
         .maybeForegroundAs(context, theme.foreground);
   }
+
+  ColorThemeApply<T> colorTheme<T extends ColorThemeBase>(T theme, {Key? key}) {
+    return ColorThemeApply(
+      key: key,
+      theme: theme,
+      child: this,
+    );
+  }
+}
+
+class ColorThemeApply<T extends ColorThemeBase> extends StatelessWidget {
+  const ColorThemeApply({super.key, required this.theme, required this.child});
+
+  final T theme;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) => child.colorThemeAs(context, theme);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<T>('theme', theme));
+  }
 }
 
 abstract class ColorThemeBase extends AreaColors {
