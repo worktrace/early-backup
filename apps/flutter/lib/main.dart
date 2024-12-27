@@ -12,7 +12,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => const AppRoot()
-      .adaptiveLocale(localesOf([])) //
+      .adaptiveColorTheme(ColorTheme.adapter())
+      .adaptiveLocale(localesOf([]))
       .mediaAsView(context);
 }
 
