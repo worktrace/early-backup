@@ -21,6 +21,20 @@ extension WrapColorTheme on Widget {
   }
 }
 
+class ColorThemeAdapter<T extends ColorThemeBase> {
+  const ColorThemeAdapter({
+    this.mode = ColorThemeMode.system,
+    required this.dark,
+    required this.light,
+  });
+
+  final ColorThemeMode mode;
+  final T dark;
+  final T light;
+
+  T get adapt => mode.shouldDark ? dark : light;
+}
+
 /// Define how to apply color themes.
 ///
 /// Similar to the `ThemeMode` defined in `package:flutter/material.dart`.
