@@ -5,6 +5,14 @@ import 'package:flutter/widgets.dart';
 import 'binding.dart';
 
 extension WrapLocale on Widget {
+  LocaleApply<T> locale<T extends LocaleThemeBase>(T locale, {Key? key}) {
+    return LocaleApply(
+      key: key,
+      locale: locale,
+      child: this,
+    );
+  }
+
   // ignore: unnecessary_this readability.
   Inherit<T> localeAs<T extends LocaleThemeBase>(T locale) => this
       .textDirection(locale.direction) //
@@ -92,6 +100,22 @@ class LocaleAdapter<T extends LocaleThemeBase> {
       }
     }
     return handler;
+  }
+}
+
+class LocaleApply<T extends LocaleThemeBase> extends StatelessWidget {
+  const LocaleApply({super.key, required this.locale, required this.child});
+
+  final T locale;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) => child.localeAs(locale);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<T>('locale', locale));
   }
 }
 
