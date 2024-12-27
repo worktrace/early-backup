@@ -1,5 +1,6 @@
 import 'package:auto_stories/auto_stories.dart';
 import 'package:flutter/widgets.dart';
+import 'package:worktrace/state/locales/ar.dart';
 
 import 'build_in_locales.dart';
 
@@ -16,15 +17,20 @@ class LocaleTheme extends LocaleThemeBase {
   final String worktrace;
 }
 
-LocaleAdapter<LocaleTheme> localesOf(List<LocaleID> settings) {
+LocaleAdapter<LocaleTheme> localesOf(
+  List<LocaleID> settings, {
+  List<LocaleTheme> locales = buildInLocales,
+  LocaleTheme defaultLocale = zhHansCN,
+}) {
   return LocaleAdapter<LocaleTheme>(
     settings: settings,
-    locales: buildInLocales,
-    defaultLocale: zhHansCN,
+    locales: locales,
+    defaultLocale: defaultLocale,
   );
 }
 
 const List<LocaleTheme> buildInLocales = [
+  arEG,
   enGB,
   enUS,
   zhHansCN,
