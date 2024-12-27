@@ -21,6 +21,19 @@ extension WrapColorTheme on Widget {
   }
 }
 
+enum ColorThemeMode {
+  system,
+  light,
+  dark;
+
+  bool get shouldDark {
+    final mode = WidgetsBinding.instance.platformDispatcher.platformBrightness;
+    return this == ColorThemeMode.system
+        ? mode == Brightness.dark
+        : this == ColorThemeMode.dark;
+  }
+}
+
 class ColorThemeApply<T extends ColorThemeBase> extends StatelessWidget {
   const ColorThemeApply({super.key, required this.theme, required this.child});
 
