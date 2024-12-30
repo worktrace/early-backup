@@ -51,6 +51,7 @@
     "oxlint",
     "pubspec",
     "rtl",
+    "squircle",
     "swiftpm",
     "symbolication",
     "tamasfe",
