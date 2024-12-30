@@ -3,6 +3,21 @@ import 'package:flutter/widgets.dart';
 
 typedef DataBuilder<T> = Widget Function(BuildContext context, T data);
 
+abstract class SingleAnimationWidget extends StatefulWidget {
+  const SingleAnimationWidget({
+    super.key,
+    this.animation = const AnimationData(),
+  });
+
+  final AnimationData animation;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AnimationData>('animation', animation));
+  }
+}
+
 /// The animation [controller] had been bind with [setState] callback here.
 /// You may consider [SingleAnimationStateBare] instead.
 abstract class SingleAnimationState<S extends StatefulWidget>
