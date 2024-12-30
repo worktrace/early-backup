@@ -1,5 +1,25 @@
 import 'package:flutter/widgets.dart';
 
+extension AnimationUtils on AnimationController {
+  TickerFuture animateAs(AnimationData animation, double target) {
+    return animateTo(
+      target,
+      duration: animation.duration,
+      curve: animation.curve,
+    );
+  }
+
+  TickerFuture animateToEnd(AnimationData animation) {
+    if (value == upperBound) return TickerFuture.complete();
+    return animateAs(animation, upperBound);
+  }
+
+  TickerFuture animateToStart(AnimationData animation) {
+    if (value == lowerBound) return TickerFuture.complete();
+    return animateAs(animation, lowerBound);
+  }
+}
+
 class AnimationData {
   const AnimationData({
     this.duration = const Duration(milliseconds: 300),
