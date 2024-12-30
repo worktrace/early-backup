@@ -2,6 +2,9 @@ import 'package:flutter/widgets.dart';
 
 extension SizeUtils on Size {
   Rect get toRectFill => Rect.fromLTWH(0, 0, width, height);
+  Rect toRect(Offset offset) {
+    return Rect.fromLTWH(offset.dx, offset.dy, width, height);
+  }
 }
 
 /// Computed value of golden ratio (sqrt(5) - 1) / 2.
