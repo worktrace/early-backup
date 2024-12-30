@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+typedef DataBuilder<T> = Widget Function(BuildContext context, T data);
+
 /// The animation [controller] had been bind with [setState] callback here.
 /// You may consider [SingleAnimationStateBare] instead.
 abstract class SingleAnimationState<S extends StatefulWidget>
