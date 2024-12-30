@@ -17,6 +17,18 @@ class AnimationData {
   }
 }
 
+/// Similar to [Tween], but not nullable, and conciser.
+class AnimationTween<T> {
+  const AnimationTween({required this.begin, required this.end});
+
+  final T begin;
+  final T end;
+
+  T of(AnimationController controller, Lerp<T> lerp) {
+    return lerp(begin, end, controller.value);
+  }
+}
+
 /// The type declaration of a lerp function for code reuse.
 typedef Lerp<T> = T Function(T begin, T end, double t);
 
