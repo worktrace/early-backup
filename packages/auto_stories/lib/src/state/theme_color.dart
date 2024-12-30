@@ -4,8 +4,6 @@ import 'package:flutter/widgets.dart';
 
 import 'binding.dart';
 
-typedef DataBuilder<T> = Widget Function(BuildContext context, T data);
-
 extension WrapColorTheme on Widget {
   Widget colorThemeAs<T extends ColorThemeBase>(BuildContext context, T theme) {
     return inherit(theme)
