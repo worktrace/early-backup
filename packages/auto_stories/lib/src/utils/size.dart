@@ -1,5 +1,9 @@
 import 'package:flutter/widgets.dart';
 
+extension SizeUtils on Size {
+  Rect get toRectFill => Rect.fromLTWH(0, 0, width, height);
+}
+
 /// Computed value of golden ratio (sqrt(5) - 1) / 2.
 const double goldenRatio = _goldenRatio;
 

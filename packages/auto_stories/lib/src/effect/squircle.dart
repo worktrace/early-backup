@@ -1,6 +1,22 @@
 import 'package:auto_stories/src/utils.dart';
 import 'package:flutter/widgets.dart';
 
+class SquircleClipper extends CustomClipper<Path> {
+  const SquircleClipper({this.radius = BorderRadius.zero});
+
+  final BorderRadius radius;
+
+  @override
+  Path getClip(Size size) {
+    return drawSquircle(size.toRectFill, radius);
+  }
+
+  @override
+  bool shouldReclip(covariant SquircleClipper oldClipper) {
+    return radius != oldClipper.radius;
+  }
+}
+
 /// Computed value of sqrt^4(1/2).
 const squircleRatio = 0.8408964152537146;
 
