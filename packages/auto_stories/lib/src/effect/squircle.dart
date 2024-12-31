@@ -4,6 +4,13 @@ import 'package:flutter/widgets.dart';
 class SquircleBorder extends OutlinedBorder {
   const SquircleBorder({required this.border, required this.radius});
 
+  factory SquircleBorder.lerp(SquircleBorder a, SquircleBorder b, double t) {
+    return SquircleBorder(
+      border: BorderSide.lerp(a.border, b.border, t),
+      radius: lerpBorderRadius(a.radius, b.radius, t),
+    );
+  }
+
   final BorderSide border;
   final BorderRadius radius;
 
