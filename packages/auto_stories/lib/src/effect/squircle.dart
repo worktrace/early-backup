@@ -1,6 +1,47 @@
 import 'package:auto_stories/src/utils.dart';
 import 'package:flutter/widgets.dart';
 
+extension WrapSquircle on Widget {
+  ClipPath clipSquircle({
+    Key? key,
+    required BorderRadius radius,
+    Clip clipBehavior = Clip.antiAlias,
+  }) {
+    return clipPath(
+      key: key,
+      clipper: SquircleClipper(radius: radius),
+      clipBehavior: clipBehavior,
+    );
+  }
+
+  Widget squircle({
+    Key? key,
+    required BorderSide border,
+    required BorderRadius radius,
+    Color? color,
+    DecorationImage? image,
+    Gradient? gradient,
+    List<BoxShadow>? shadows,
+    DecorationPosition position = DecorationPosition.background,
+    Clip clipBehavior = Clip.antiAlias,
+  }) {
+    final shape = SquircleBorder(border: border, radius: radius);
+    final clipped = clipSquircle(radius: radius, clipBehavior: clipBehavior);
+    if (border == BorderSide.none) return clipped;
+    return clipped.decorate(
+      key: key,
+      position: position,
+      decoration: ShapeDecoration(
+        shape: shape,
+        color: color,
+        image: image,
+        gradient: gradient,
+        shadows: shadows,
+      ),
+    );
+  }
+}
+
 class SquircleBorder extends OutlinedBorder {
   const SquircleBorder({required this.border, required this.radius});
 
