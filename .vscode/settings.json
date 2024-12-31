@@ -36,7 +36,8 @@
     ".metadata",
     "Cargo.lock",
     "pnpm-lock.yaml",
-    "pubspec.lock"
+    "pubspec.lock",
+    "*.svg"
   ],
   "cSpell.words": [
     "combinators",
