@@ -1,6 +1,47 @@
 import 'package:auto_stories/src/utils.dart';
 import 'package:flutter/widgets.dart';
 
+class SquircleBorder extends OutlinedBorder {
+  const SquircleBorder({required this.border, required this.radius});
+
+  final BorderSide border;
+  final BorderRadius radius;
+
+  @override
+  SquircleBorder copyWith({BorderSide? side, BorderRadius? radius}) {
+    return SquircleBorder(
+      border: side ?? border,
+      radius: radius ?? this.radius,
+    );
+  }
+
+  @override
+  Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
+    return drawSquircle(rect.deflate(border.strokeInset), radius);
+  }
+
+  @override
+  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
+    return drawSquircle(rect.inflate(border.strokeOutset), radius);
+  }
+
+  @override
+  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
+    if (border.style == BorderStyle.none) return;
+    final path = drawSquircle(rect.inflate(border.strokeAlign), radius);
+    final paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..color = border.color
+      ..strokeWidth = border.width;
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  SquircleBorder scale(double t) {
+    return SquircleBorder(border: border.scale(t), radius: radius * t);
+  }
+}
+
 class SquircleClipper extends CustomClipper<Path> {
   const SquircleClipper({this.radius = BorderRadius.zero});
 
