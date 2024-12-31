@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'animation.dart';
+
 extension WrapColors on Widget {
   Widget maybeBackground(Color color) {
     return color == Colors.transparent ? this : background(color);
@@ -65,7 +67,17 @@ class Foreground extends StatelessWidget {
 }
 
 class AreaColors {
-  const AreaColors({this.background = Colors.transparent, this.foreground});
+  const AreaColors({
+    this.background = Colors.transparent,
+    this.foreground,
+  });
+
+  factory AreaColors.lerp(AreaColors a, AreaColors b, double t) {
+    return AreaColors(
+      background: lerpColor(a.background, b.background, t),
+      foreground: Color.lerp(a.foreground, b.foreground, t),
+    );
+  }
 
   final Color background;
   final Color? foreground;
