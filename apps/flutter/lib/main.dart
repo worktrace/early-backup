@@ -12,7 +12,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => const AppRoot()
-      .adaptiveColorTheme(ColorTheme.adapter())
+      .adaptiveAnimatedColorTheme(ColorTheme.adapter(), ColorTheme.lerp)
       .adaptiveLocale(localesOf([]))
       .mediaAsView(context);
 }

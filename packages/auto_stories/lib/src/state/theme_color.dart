@@ -31,6 +31,39 @@ extension WrapColorTheme on Widget {
       child: this,
     );
   }
+
+  SingleAnimation<T> animatedColorTheme<T extends ColorThemeBase>(
+    T theme,
+    Lerp<T> lerp, {
+    Key? key,
+    AnimationData animation = const AnimationData(),
+  }) {
+    return SingleAnimation(
+      key: key,
+      animation: animation,
+      data: theme,
+      lerp: lerp,
+      builder: colorThemeAs<T>,
+    );
+  }
+
+  AdaptiveColorTheme<T> adaptiveAnimatedColorTheme<T extends ColorThemeBase>(
+    ColorThemeAdapter<T> adapter,
+    Lerp<T> lerp, {
+    Key? key,
+    AnimationData animation = const AnimationData(
+      duration: Duration(milliseconds: 345),
+    ),
+  }) {
+    return AdaptiveColorTheme<T>(
+      key: key,
+      adapter: adapter,
+      builder: (context, theme) {
+        return animatedColorTheme<T>(theme, lerp, animation: animation);
+      },
+      child: this,
+    );
+  }
 }
 
 class AdaptiveColorTheme<T extends ColorThemeBase> extends StatefulWidget {
