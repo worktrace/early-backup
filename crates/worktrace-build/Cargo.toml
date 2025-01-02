@@ -3,4 +3,9 @@ name = "worktrace-build"
 version = "0.0.0"
 edition = "2021"
 
+[features]
+default = ["full"]
+full = ["logo"]
+logo = []
+
 [dependencies]

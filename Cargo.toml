@@ -1,3 +1,22 @@
 [workspace]
 resolver = "2"
 members = ["apps/net", "crates/*"]
+
+# The package as placeholder to enable monorepo build script at root.
+[package]
+name = "worktrace-monorepo"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[lib]
+name = "worktrace_monorepo_placeholder"
+path = "crates/placeholder.rs"
+
+[features]
+default = ["full"]
+full = ["logo"]
+logo = []
+
+[build-dependencies]
+worktrace-build = { path = "crates/worktrace-build", features = ["full"] }
