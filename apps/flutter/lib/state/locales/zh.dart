@@ -2,7 +2,7 @@ import 'package:auto_stories/auto_stories.dart';
 import 'package:flutter/widgets.dart';
 import 'package:worktrace/state.dart';
 
-class ZhLocale extends LocaleTheme {
+class ZhLocale extends Locale {
   const ZhLocale({
     super.name = '中文',
     super.id = const LocaleID('zh', scriptCode: 'hans'),

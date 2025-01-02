@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'binding.dart';
 
 extension WrapLocale on Widget {
-  LocaleApply<T> locale<T extends LocaleThemeBase>(T locale, {Key? key}) {
+  LocaleApply<T> locale<T extends LocaleBase>(T locale, {Key? key}) {
     return LocaleApply(
       key: key,
       locale: locale,
@@ -14,11 +14,11 @@ extension WrapLocale on Widget {
   }
 
   // ignore: unnecessary_this readability.
-  Inherit<T> localeAs<T extends LocaleThemeBase>(T locale) => this
+  Inherit<T> localeAs<T extends LocaleBase>(T locale) => this
       .textDirection(locale.direction) //
       .inherit(locale);
 
-  AdaptiveLocale<T> adaptiveLocale<T extends LocaleThemeBase>(
+  AdaptiveLocale<T> adaptiveLocale<T extends LocaleBase>(
     LocaleAdapter<T> adapter, {
     Key? key,
   }) {
@@ -29,7 +29,7 @@ extension WrapLocale on Widget {
   }
 }
 
-class AdaptiveLocale<T extends LocaleThemeBase> extends StatefulWidget {
+class AdaptiveLocale<T extends LocaleBase> extends StatefulWidget {
   const AdaptiveLocale({super.key, required this.adapter, required this.child});
 
   final LocaleAdapter<T> adapter;
@@ -45,7 +45,7 @@ class AdaptiveLocale<T extends LocaleThemeBase> extends StatefulWidget {
   }
 }
 
-class _AdaptiveLocaleState<T extends LocaleThemeBase>
+class _AdaptiveLocaleState<T extends LocaleBase>
     extends WidgetBindingState<AdaptiveLocale<T>> {
   late T _locale = widget.adapter.adapt;
   T get locale => _locale;
@@ -75,7 +75,7 @@ class _AdaptiveLocaleState<T extends LocaleThemeBase>
   }
 }
 
-class LocaleAdapter<T extends LocaleThemeBase> {
+class LocaleAdapter<T extends LocaleBase> {
   const LocaleAdapter({
     this.settings = const [],
     this.locales = const [],
@@ -103,7 +103,7 @@ class LocaleAdapter<T extends LocaleThemeBase> {
   }
 }
 
-class LocaleApply<T extends LocaleThemeBase> extends StatelessWidget {
+class LocaleApply<T extends LocaleBase> extends StatelessWidget {
   const LocaleApply({super.key, required this.locale, required this.child});
 
   final T locale;
@@ -119,8 +119,8 @@ class LocaleApply<T extends LocaleThemeBase> extends StatelessWidget {
   }
 }
 
-abstract class LocaleThemeBase {
-  const LocaleThemeBase({
+abstract class LocaleBase {
+  const LocaleBase({
     required this.name,
     required this.id,
     this.direction = TextDirection.ltr,

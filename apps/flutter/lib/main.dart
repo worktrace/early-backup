@@ -22,7 +22,7 @@ class AppRoot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final locale = context.find<LocaleTheme>()!;
+    final locale = context.find<Locale>()!;
     return locale.worktrace.asText().center();
   }
 }

@@ -93,7 +93,7 @@ void main() {
   });
 }
 
-class LocaleTheme extends LocaleThemeBase {
+class LocaleTheme extends LocaleBase {
   const LocaleTheme({
     required super.name,
     required super.id,
