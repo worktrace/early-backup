@@ -1,1 +1,2 @@
-pub mod placeholder {}
+#[cfg(feature = "logo")]
+pub mod logo;
