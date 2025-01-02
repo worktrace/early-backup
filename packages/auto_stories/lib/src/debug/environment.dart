@@ -27,7 +27,7 @@ class EnsureText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget temp = child;
+    var temp = child;
     if (MediaQuery.maybeOf(context) == null) temp = child.mediaAsView(context);
     if (Directionality.maybeOf(context) == null) {
       temp = temp.textDirection(defaultDirection);
@@ -38,7 +38,7 @@ class EnsureText extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    final TextDirection d = defaultDirection;
+    final d = defaultDirection;
     properties.add(EnumProperty<TextDirection>('defaultDirection', d));
   }
 }
