@@ -27,6 +27,9 @@ pnpm-lock.yaml
 pubspec.lock
 Cargo.lock
 
+# Script compilation output.
+out/
+
 # Node dependencies.
 node_modules/
 
