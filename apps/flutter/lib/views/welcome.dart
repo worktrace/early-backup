@@ -5,7 +5,7 @@ import 'package:worktrace/state.dart';
 final welcomeRoute = GoRoute(
   path: '/',
   builder: (context, state) {
-    final locale = context.find<LocaleTheme>()!;
+    final locale = context.find<Locale>()!;
     return '${locale.loading}...'.asText().center();
   },
 );
