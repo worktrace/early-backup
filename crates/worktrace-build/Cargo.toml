@@ -1,0 +1,16 @@
+[package]
+name = "worktrace-build"
+version = "0.0.0"
+edition = "2021"
+
+[features]
+default = ["full"]
+full = ["logo"]
+logo = ["dep:image", "dep:png", "dep:resvg", "dep:usvg"]
+
+[dependencies]
+image = { version = "0.25.5", optional = true }
+png = { version = "0.17.16", optional = true }
+resvg = { version = "0.44.0", optional = true }
+thiserror = "2.0.9"
+usvg = { version = "0.44.0", optional = true }

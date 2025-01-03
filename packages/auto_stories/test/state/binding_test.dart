@@ -10,6 +10,24 @@ void main() {
     await t.pumpWidget(inheritProbe.center().inherit(message).ensureText());
     expect(find.text(message), findsOneWidget);
   });
+
+  testWidgets('inherit update', (t) async {
+    const before = 'before';
+    const after = 'after';
+    const button = 'button';
+    const widget = InheritUpdate(
+      beforeMessage: before,
+      afterMessage: after,
+      buttonName: button,
+    );
+    await t.pumpWidget(widget.ensureText());
+    expect(find.text(before), findsOneWidget);
+    expect(find.text(button), findsOneWidget);
+
+    await t.tap(find.text(button));
+    await t.pump();
+    expect(find.text(after), findsOneWidget);
+  });
 }
 
 final inheritProbe = Builder(
@@ -52,8 +70,8 @@ class _InheritUpdateState extends State<InheritUpdate> {
 
   @override
   Widget build(BuildContext context) {
-    final GestureDetector button = widget.buttonName
-        .asText() //
+    final button = widget.buttonName
+        .asText()
         .gesture(onTap: () => message = widget.afterMessage);
 
     return [inheritProbe, button].asColumn().center.inherit(message);
