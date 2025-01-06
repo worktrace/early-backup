@@ -37,6 +37,7 @@ impl FlutterLogoSources {
         self.apply_android(flutter_app_root)?;
         self.apply_ios(flutter_app_root)?;
         self.apply_macos(flutter_app_root)?;
+        self.apply_web(flutter_app_root)?;
         Ok(())
     }
 
@@ -112,6 +113,25 @@ impl FlutterLogoSources {
             target_from(1024),
         ];
         svg_to_pngs(&self.app, targets.iter())
+    }
+
+    pub fn apply_web(&self, flutter_app_root: &Path) -> Result<(), RenderSvgErr> {
+        let base_path = flutter_app_root.join("web").join("icons");
+        let target_from = |size: u32| {
+            let filename = format!("Icon-{}.png", size);
+            RenderTarget::square(base_path.join(filename), size)
+        };
+        let maskable_target_from = |size: u32| {
+            let filename = format!("Icon-maskable-{}.png", size);
+            RenderTarget::square(base_path.join(filename), size)
+        };
+        let targets: [RenderTarget; 4] = [
+            target_from(192),
+            target_from(512),
+            maskable_target_from(192),
+            maskable_target_from(512),
+        ];
+        svg_to_pngs(&self.full, targets.iter())
     }
 }
 
