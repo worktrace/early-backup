@@ -1,4 +1,4 @@
-use std::{path::Path, slice::Iter};
+use std::{fs::create_dir_all, path::Path, slice::Iter};
 
 use worktrace_build::logo::{render_svg_logo, RenderLogoErr};
 
@@ -15,6 +15,7 @@ fn render_logo(
     out_dir: impl AsRef<Path>,
     names: Iter<impl AsRef<str>>,
 ) -> Result<(), RenderLogoErr> {
+    create_dir_all(&out_dir)?;
     for name in names {
         let svg_src = src_dir.as_ref().join(format!("{}.svg", name.as_ref()));
         let png_out = out_dir.as_ref().join(format!("{}.png", name.as_ref()));
