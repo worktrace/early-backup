@@ -43,12 +43,14 @@
     "combinators",
     "esbenp",
     "futureor",
+    "hdpi",
     "interps",
     "ints",
     "lerp",
     "lockfiles",
     "ltr",
     "ltwh",
+    "mdpi",
     "nonobvious",
     "oxlint",
     "pixmap",
@@ -65,6 +67,9 @@
     "thiserror",
     "unawaited",
     "usvg",
-    "worktrace"
+    "worktrace",
+    "xhdpi",
+    "xxhdpi",
+    "xxxhdpi"
   ]
 }

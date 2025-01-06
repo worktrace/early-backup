@@ -8,6 +8,70 @@ use png::EncodingError;
 use resvg::{render, tiny_skia::Pixmap};
 use usvg::{Options, Transform, Tree};
 
+pub struct FlutterLogoSources {
+    /// Path to the svg logo with smooth corner radius and paddings,
+    /// which is usually designed for Windows, macOS, Linux and HarmonyOS.
+    pub app: PathBuf,
+
+    /// Path to the full sized square svg logo,
+    /// which is usually designed for Android and iOS.
+    pub full: PathBuf,
+
+    /// Path to the circle svg logo,
+    /// which is usually designed for web browser favicon.
+    pub round: PathBuf,
+}
+
+impl FlutterLogoSources {
+    pub fn from(app: impl AsRef<Path>, full: impl AsRef<Path>, round: impl AsRef<Path>) -> Self {
+        Self {
+            app: app.as_ref().into(),
+            full: full.as_ref().into(),
+            round: round.as_ref().into(),
+        }
+    }
+
+    /// Render png files into all image files required by a Flutter app.
+    pub fn apply(&self, flutter_app_root: impl AsRef<Path>) -> Result<(), RenderSvgErr> {
+        self.apply_android(flutter_app_root)?;
+        Ok(())
+    }
+
+    pub fn apply_android(&self, flutter_app_root: impl AsRef<Path>) -> Result<(), RenderSvgErr> {
+        let base_path = flutter_app_root
+            .as_ref()
+            .join("android")
+            .join("app")
+            .join("src")
+            .join("main")
+            .join("res");
+        const FILENAME: &str = "ic_launcher.png";
+
+        let hdpi = RenderTarget {
+            path: base_path.join("mipmap-hdpi").join(FILENAME),
+            size: some_size(72),
+        };
+        let mdpi = RenderTarget {
+            path: base_path.join("mipmap-mdpi").join(FILENAME),
+            size: some_size(48),
+        };
+        let xhdpi = RenderTarget {
+            path: base_path.join("mipmap-xhdpi").join(FILENAME),
+            size: some_size(96),
+        };
+        let xxhdpi = RenderTarget {
+            path: base_path.join("mipmap-xxhdpi").join(FILENAME),
+            size: some_size(144),
+        };
+        let xxxhdpi = RenderTarget {
+            path: base_path.join("mipmap-xxxhdpi").join(FILENAME),
+            size: some_size(192),
+        };
+
+        svg_to_pngs(&self.full, [hdpi, mdpi, xhdpi, xxhdpi, xxxhdpi].iter())
+    }
+}
+
 pub struct RenderTarget {
     pub path: PathBuf,
     pub size: Option<(u32, u32)>,
@@ -22,10 +86,7 @@ impl RenderTarget {
     }
 }
 
-pub fn svg_to_png(
-    tree_map: &Tree,
-    target: &RenderTarget,
-) -> Result<(), RenderSvgErr> {
+pub fn svg_to_png(tree_map: &Tree, target: &RenderTarget) -> Result<(), RenderSvgErr> {
     let (width, height) = target.size.unwrap_or_else(|| {
         let size = tree_map.size().to_int_size();
         (size.width(), size.height())
@@ -48,17 +109,18 @@ pub fn svg_to_png(
     Ok(())
 }
 
-pub fn svg_to_pngs(
-    source: impl AsRef<Path>,
-    targets: Iter<RenderTarget>,
-) -> Result<(), RenderSvgErr> {
-    let data = read(source)?;
+pub fn svg_to_pngs(src: impl AsRef<Path>, targets: Iter<RenderTarget>) -> Result<(), RenderSvgErr> {
+    let data = read(src)?;
     let options = Options::default();
     let tree_map = Tree::from_data(&data, &options)?;
     for target in targets {
         svg_to_png(&tree_map, target)?;
     }
     Ok(())
+}
+
+fn some_size(size: u32) -> Option<(u32, u32)> {
+    Some((size, size))
 }
 
 #[derive(Debug, thiserror::Error)]
