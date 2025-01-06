@@ -45,9 +45,27 @@ abstract class WidgetBindingState<T extends StatefulWidget> extends State<T>
   }
 }
 
-class BindState<T> {
-  const BindState({required this.state, required this.setState});
+abstract class SingleValueNotifierState<S extends StatefulWidget, T>
+    extends State<S> {
+  ValueNotifier<T> get notifier;
 
-  final T state;
-  final ValueChanged<T> setState;
+  @override
+  @mustCallSuper
+  void initState() {
+    super.initState();
+    notifier.addListener(() => setState(() {}));
+  }
+
+  @override
+  @mustCallSuper
+  void dispose() {
+    notifier.removeListener(() => setState(() {}));
+    super.dispose();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<T>>('notifier', notifier));
+  }
 }
