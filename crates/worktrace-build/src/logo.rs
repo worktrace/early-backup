@@ -6,7 +6,7 @@ use std::{
 
 use png::EncodingError;
 use resvg::{render, tiny_skia::Pixmap};
-use usvg::{Options, Transform, Tree};
+use usvg::{ImageRendering, Options, ShapeRendering, Transform, Tree};
 
 pub struct FlutterLogoSources {
     /// Path to the svg logo with smooth corner radius and paddings,
@@ -86,6 +86,7 @@ impl RenderTarget {
     }
 }
 
+/// Render a single png file from the tree map.
 pub fn svg_to_png(tree_map: &Tree, target: &RenderTarget) -> Result<(), RenderSvgErr> {
     let (width, height) = target.size.unwrap_or_else(|| {
         let size = tree_map.size().to_int_size();
@@ -109,16 +110,21 @@ pub fn svg_to_png(tree_map: &Tree, target: &RenderTarget) -> Result<(), RenderSv
     Ok(())
 }
 
+/// Render from a single svg source to multiple png file targets.
 pub fn svg_to_pngs(src: impl AsRef<Path>, targets: Iter<RenderTarget>) -> Result<(), RenderSvgErr> {
     let data = read(src)?;
-    let options = Options::default();
-    let tree_map = Tree::from_data(&data, &options)?;
+    let mut options = Options::default();
+    options.shape_rendering = ShapeRendering::GeometricPrecision;
+    options.image_rendering = ImageRendering::OptimizeQuality;
+
+    let tree = Tree::from_data(&data, &options)?;
     for target in targets {
-        svg_to_png(&tree_map, target)?;
+        svg_to_png(&tree, target)?;
     }
     Ok(())
 }
 
+/// Helper for square image size.
 fn some_size(size: u32) -> Option<(u32, u32)> {
     Some((size, size))
 }
