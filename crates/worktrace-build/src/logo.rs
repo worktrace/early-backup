@@ -33,9 +33,10 @@ impl FlutterLogoSources {
 
     /// Render png files into all image files required by a Flutter app.
     pub fn apply(&self, flutter_app_root: impl AsRef<Path>) -> Result<(), RenderSvgErr> {
-        let base_path = flutter_app_root.as_ref();
-        self.apply_android(base_path)?;
-        self.apply_ios(base_path)?;
+        let flutter_app_root = flutter_app_root.as_ref();
+        self.apply_android(flutter_app_root)?;
+        self.apply_ios(flutter_app_root)?;
+        self.apply_macos(flutter_app_root)?;
         Ok(())
     }
 
@@ -89,6 +90,28 @@ impl FlutterLogoSources {
             target_from(1024, 1),
         ];
         svg_to_pngs(&self.full, targets.iter())
+    }
+
+    pub fn apply_macos(&self, flutter_app_root: &Path) -> Result<(), RenderSvgErr> {
+        let base_path = flutter_app_root
+            .join("macos")
+            .join("Runner")
+            .join("Assets.xcassets")
+            .join("AppIcon.appiconset");
+        let target_from = |size: u32| {
+            let filename = format!("app_icon_{}.png", size);
+            RenderTarget::square(base_path.join(filename), size)
+        };
+        let targets: [RenderTarget; 7] = [
+            target_from(16),
+            target_from(32),
+            target_from(64),
+            target_from(128),
+            target_from(256),
+            target_from(512),
+            target_from(1024),
+        ];
+        svg_to_pngs(&self.app, targets.iter())
     }
 }
 
