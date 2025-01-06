@@ -40,6 +40,7 @@
     "*.svg"
   ],
   "cSpell.words": [
+    "appiconset",
     "combinators",
     "esbenp",
     "futureor",
@@ -68,6 +69,7 @@
     "unawaited",
     "usvg",
     "worktrace",
+    "xcassets",
     "xhdpi",
     "xxhdpi",
     "xxxhdpi"

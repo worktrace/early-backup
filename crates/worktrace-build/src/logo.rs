@@ -45,29 +45,17 @@ impl FlutterLogoSources {
             .join("src")
             .join("main")
             .join("res");
-        const FILENAME: &str = "ic_launcher.png";
 
-        let hdpi = RenderTarget {
-            path: base_path.join("mipmap-hdpi").join(FILENAME),
-            size: some_size(72),
+        let format_path = |name: &str| {
+            base_path
+                .join(format!("mipmap-{}", name))
+                .join("ic_launcher.png")
         };
-        let mdpi = RenderTarget {
-            path: base_path.join("mipmap-mdpi").join(FILENAME),
-            size: some_size(48),
-        };
-        let xhdpi = RenderTarget {
-            path: base_path.join("mipmap-xhdpi").join(FILENAME),
-            size: some_size(96),
-        };
-        let xxhdpi = RenderTarget {
-            path: base_path.join("mipmap-xxhdpi").join(FILENAME),
-            size: some_size(144),
-        };
-        let xxxhdpi = RenderTarget {
-            path: base_path.join("mipmap-xxxhdpi").join(FILENAME),
-            size: some_size(192),
-        };
-
+        let hdpi = RenderTarget::square(format_path("hdpi"), 72);
+        let mdpi = RenderTarget::square(format_path("mdpi"), 48);
+        let xhdpi = RenderTarget::square(format_path("xhdpi"), 96);
+        let xxhdpi = RenderTarget::square(format_path("xxhdpi"), 144);
+        let xxxhdpi = RenderTarget::square(format_path("xxxhdpi"), 192);
         svg_to_pngs(&self.full, [hdpi, mdpi, xhdpi, xxhdpi, xxxhdpi].iter())
     }
 }
@@ -83,6 +71,10 @@ impl RenderTarget {
             path: path.as_ref().into(),
             size,
         }
+    }
+
+    pub fn square(path: impl AsRef<Path>, size: u32) -> Self {
+        Self::from(path, Some((size, size)))
     }
 }
 
@@ -122,11 +114,6 @@ pub fn svg_to_pngs(src: impl AsRef<Path>, targets: Iter<RenderTarget>) -> Result
         svg_to_png(&tree, target)?;
     }
     Ok(())
-}
-
-/// Helper for square image size.
-fn some_size(size: u32) -> Option<(u32, u32)> {
-    Some((size, size))
 }
 
 #[derive(Debug, thiserror::Error)]
