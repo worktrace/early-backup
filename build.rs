@@ -19,7 +19,7 @@ fn render_logo(
     for name in names {
         let svg_src = src_dir.as_ref().join(format!("{}.svg", name.as_ref()));
         let png_out = out_dir.as_ref().join(format!("{}.png", name.as_ref()));
-        render_svg_logo(&svg_src, &png_out)?;
+        render_svg_logo(&svg_src, &png_out, Some((256, 256)))?;
     }
     Ok(())
 }
