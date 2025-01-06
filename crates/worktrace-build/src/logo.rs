@@ -33,13 +33,14 @@ impl FlutterLogoSources {
 
     /// Render png files into all image files required by a Flutter app.
     pub fn apply(&self, flutter_app_root: impl AsRef<Path>) -> Result<(), RenderSvgErr> {
-        self.apply_android(flutter_app_root)?;
+        let base_path = flutter_app_root.as_ref();
+        self.apply_android(base_path)?;
+        self.apply_ios(base_path)?;
         Ok(())
     }
 
-    pub fn apply_android(&self, flutter_app_root: impl AsRef<Path>) -> Result<(), RenderSvgErr> {
+    pub fn apply_android(&self, flutter_app_root: &Path) -> Result<(), RenderSvgErr> {
         let base_path = flutter_app_root
-            .as_ref()
             .join("android")
             .join("app")
             .join("src")
@@ -57,6 +58,37 @@ impl FlutterLogoSources {
         let xxhdpi = RenderTarget::square(format_path("xxhdpi"), 144);
         let xxxhdpi = RenderTarget::square(format_path("xxxhdpi"), 192);
         svg_to_pngs(&self.full, [hdpi, mdpi, xhdpi, xxhdpi, xxxhdpi].iter())
+    }
+
+    pub fn apply_ios(&self, flutter_app_root: &Path) -> Result<(), RenderSvgErr> {
+        let base_path = flutter_app_root
+            .join("ios")
+            .join("Runner")
+            .join("Assets.xcassets")
+            .join("AppIcon.appiconset");
+
+        let target_from = |base_size: u32, times: u32| {
+            let filename = format!("Icon-App-{}x{}@{}x.png", base_size, base_size, times);
+            RenderTarget::square(base_path.join(filename), base_size * times)
+        };
+        let targets: [RenderTarget; 15] = [
+            target_from(20, 1),
+            target_from(20, 2),
+            target_from(20, 3),
+            target_from(29, 1),
+            target_from(29, 2),
+            target_from(29, 3),
+            target_from(40, 1),
+            target_from(40, 2),
+            target_from(40, 3),
+            target_from(60, 2),
+            target_from(60, 3),
+            target_from(76, 1),
+            target_from(76, 2),
+            RenderTarget::square(base_path.join("Icon-App-83.5x83.5@2x.png"), 167),
+            target_from(1024, 1),
+        ];
+        svg_to_pngs(&self.full, targets.iter())
     }
 }
 
