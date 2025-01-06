@@ -44,3 +44,10 @@ abstract class WidgetBindingState<T extends StatefulWidget> extends State<T>
     super.dispose();
   }
 }
+
+class BindState<T> {
+  const BindState({required this.state, required this.setState});
+
+  final T state;
+  final ValueChanged<T> setState;
+}
