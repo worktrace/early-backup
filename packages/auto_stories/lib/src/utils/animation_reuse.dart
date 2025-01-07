@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'animation.dart';
+import 'inherit.dart';
 
 class SingleAnimation<T> extends SingleAnimationWidget {
   const SingleAnimation({
