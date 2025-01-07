@@ -1,9 +1,11 @@
 use std::{
-    fs::read,
+    fs::{read, File},
+    io::BufWriter,
     path::{Path, PathBuf},
     slice::Iter,
 };
 
+use image::{codecs::ico::IcoEncoder, ImageError, ImageReader};
 use png::EncodingError;
 use resvg::{render, tiny_skia::Pixmap};
 use usvg::{ImageRendering, Options, ShapeRendering, Transform, Tree};
@@ -32,7 +34,7 @@ impl FlutterLogoSources {
     }
 
     /// Render png files into all image files required by a Flutter app.
-    pub fn apply(&self, flutter_app_root: impl AsRef<Path>) -> Result<(), RenderSvgErr> {
+    pub fn apply(&self, flutter_app_root: impl AsRef<Path>) -> Result<(), RenderImageErr> {
         let flutter_app_root = flutter_app_root.as_ref();
         self.apply_android(flutter_app_root)?;
         self.apply_ios(flutter_app_root)?;
@@ -41,7 +43,7 @@ impl FlutterLogoSources {
         Ok(())
     }
 
-    pub fn apply_android(&self, flutter_app_root: &Path) -> Result<(), RenderSvgErr> {
+    pub fn apply_android(&self, flutter_app_root: &Path) -> Result<(), RenderImageErr> {
         let base_path = flutter_app_root
             .join("android")
             .join("app")
@@ -62,7 +64,7 @@ impl FlutterLogoSources {
         svg_to_pngs(&self.full, [hdpi, mdpi, xhdpi, xxhdpi, xxxhdpi].iter())
     }
 
-    pub fn apply_ios(&self, flutter_app_root: &Path) -> Result<(), RenderSvgErr> {
+    pub fn apply_ios(&self, flutter_app_root: &Path) -> Result<(), RenderImageErr> {
         let base_path = flutter_app_root
             .join("ios")
             .join("Runner")
@@ -93,7 +95,7 @@ impl FlutterLogoSources {
         svg_to_pngs(&self.full, targets.iter())
     }
 
-    pub fn apply_macos(&self, flutter_app_root: &Path) -> Result<(), RenderSvgErr> {
+    pub fn apply_macos(&self, flutter_app_root: &Path) -> Result<(), RenderImageErr> {
         let base_path = flutter_app_root
             .join("macos")
             .join("Runner")
@@ -115,7 +117,7 @@ impl FlutterLogoSources {
         svg_to_pngs(&self.app, targets.iter())
     }
 
-    pub fn apply_web(&self, flutter_app_root: &Path) -> Result<(), RenderSvgErr> {
+    pub fn apply_web(&self, flutter_app_root: &Path) -> Result<(), RenderImageErr> {
         let base_path = flutter_app_root.join("web").join("icons");
         let target_from = |size: u32| {
             let filename = format!("Icon-{}.png", size);
@@ -154,12 +156,12 @@ impl RenderTarget {
 }
 
 /// Render a single png file from the tree map.
-pub fn svg_to_png(tree_map: &Tree, target: &RenderTarget) -> Result<(), RenderSvgErr> {
+pub fn svg_to_png(tree_map: &Tree, target: &RenderTarget) -> Result<(), RenderImageErr> {
     let (width, height) = target.size.unwrap_or_else(|| {
         let size = tree_map.size().to_int_size();
         (size.width(), size.height())
     });
-    let mut pixmap = Pixmap::new(width, height).ok_or(RenderSvgErr::Pixmap)?;
+    let mut pixmap = Pixmap::new(width, height).ok_or(RenderImageErr::Pixmap)?;
 
     // Transform as configured size, scale rather than clip.
     let transform = if let Some(size) = target.size {
@@ -178,7 +180,10 @@ pub fn svg_to_png(tree_map: &Tree, target: &RenderTarget) -> Result<(), RenderSv
 }
 
 /// Render from a single svg source to multiple png file targets.
-pub fn svg_to_pngs(src: impl AsRef<Path>, targets: Iter<RenderTarget>) -> Result<(), RenderSvgErr> {
+pub fn svg_to_pngs(
+    src: impl AsRef<Path>,
+    targets: Iter<RenderTarget>,
+) -> Result<(), RenderImageErr> {
     let data = read(src)?;
     let mut options = Options::default();
     options.shape_rendering = ShapeRendering::GeometricPrecision;
@@ -191,8 +196,17 @@ pub fn svg_to_pngs(src: impl AsRef<Path>, targets: Iter<RenderTarget>) -> Result
     Ok(())
 }
 
+pub fn png_to_ico(src: impl AsRef<Path>, out: impl AsRef<Path>) -> Result<(), RenderImageErr> {
+    let encoder = IcoEncoder::new(BufWriter::new(File::create(out)?));
+    ImageReader::open(src)?
+        .with_guessed_format()?
+        .decode()?
+        .write_with_encoder(encoder)?;
+    Ok(())
+}
+
 #[derive(Debug, thiserror::Error)]
-pub enum RenderSvgErr {
+pub enum RenderImageErr {
     #[error("file system error: {0}")]
     FS(#[from] std::io::Error),
 
@@ -201,6 +215,9 @@ pub enum RenderSvgErr {
 
     #[error("cannot create pixmap")]
     Pixmap,
+
+    #[error("image format error")]
+    Format(#[from] ImageError),
 
     #[error("cannot encode png: {0}")]
     Encoding(#[from] EncodingError),
