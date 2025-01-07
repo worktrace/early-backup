@@ -1,24 +1,21 @@
-use std::{path::Path, slice::Iter};
+use std::{env::var, path::PathBuf};
 
-use worktrace_build::logo::{render_svg_logo, RenderLogoErr};
+use worktrace_build::logo::{FlutterLogoSources, RenderImgErr};
 
 fn main() {
+    let root = PathBuf::from(var("CARGO_MANIFEST_DIR").unwrap());
     #[cfg(feature = "logo")]
     {
-        let logo_names = ["worktrace-app", "worktrace-full"];
-        render_logo("brand", "brand/out", logo_names.iter()).unwrap();
+        apply_logo(&root).unwrap();
     }
 }
 
-fn render_logo(
-    src_dir: impl AsRef<Path>,
-    out_dir: impl AsRef<Path>,
-    names: Iter<impl AsRef<str>>,
-) -> Result<(), RenderLogoErr> {
-    for name in names {
-        let svg_src = src_dir.as_ref().join(format!("{}.svg", name.as_ref()));
-        let png_out = out_dir.as_ref().join(format!("{}.png", name.as_ref()));
-        render_svg_logo(&svg_src, &png_out)?;
-    }
-    Ok(())
+fn apply_logo(root: &PathBuf) -> Result<(), RenderImgErr> {
+    let brand = root.join("brand");
+    let flutter_logos = FlutterLogoSources::from(
+        brand.join("worktrace-app.svg"),
+        brand.join("worktrace-full.svg"),
+        brand.join("worktrace-round.svg"),
+    );
+    flutter_logos.apply(root.join("apps").join("flutter"))
 }
