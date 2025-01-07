@@ -1,6 +1,6 @@
 use std::{env::var, path::PathBuf};
 
-use worktrace_build::logo::{FlutterLogoSources, RenderImageErr};
+use worktrace_build::logo::{FlutterLogoSources, RenderImgErr};
 
 fn main() {
     let root = PathBuf::from(var("CARGO_MANIFEST_DIR").unwrap());
@@ -10,7 +10,7 @@ fn main() {
     }
 }
 
-fn apply_logo(root: &PathBuf) -> Result<(), RenderImageErr> {
+fn apply_logo(root: &PathBuf) -> Result<(), RenderImgErr> {
     let brand = root.join("brand");
     let flutter_logos = FlutterLogoSources::from(
         brand.join("worktrace-app.svg"),

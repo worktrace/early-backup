@@ -1,13 +1,18 @@
 use std::{
-    fs::{read, remove_file, File},
-    io::BufWriter,
+    fs::{read, File},
     path::{Path, PathBuf},
     slice::Iter,
 };
 
-use image::{codecs::ico::IcoEncoder, ImageError, ImageReader};
+use image::{
+    codecs::ico::{IcoEncoder, IcoFrame},
+    ImageBuffer, ImageError, Rgba,
+};
 use png::EncodingError;
-use resvg::{render, tiny_skia::Pixmap};
+use resvg::{
+    render,
+    tiny_skia::{Pixmap, PremultipliedColorU8},
+};
 use usvg::{Options, Transform, Tree};
 
 pub struct FlutterLogoSources {
@@ -34,7 +39,7 @@ impl FlutterLogoSources {
     }
 
     /// Render png files into all image files required by a Flutter app.
-    pub fn apply(&self, flutter_app_root: impl AsRef<Path>) -> Result<(), RenderImageErr> {
+    pub fn apply(&self, flutter_app_root: impl AsRef<Path>) -> Result<(), RenderImgErr> {
         let flutter_app_root = flutter_app_root.as_ref();
         self.apply_android(flutter_app_root)?;
         self.apply_ios(flutter_app_root)?;
@@ -44,7 +49,7 @@ impl FlutterLogoSources {
         Ok(())
     }
 
-    pub fn apply_android(&self, flutter_app_root: &Path) -> Result<(), RenderImageErr> {
+    pub fn apply_android(&self, flutter_app_root: &Path) -> Result<(), RenderImgErr> {
         let base_path = flutter_app_root
             .join("android")
             .join("app")
@@ -65,7 +70,7 @@ impl FlutterLogoSources {
         svg_to_pngs(&self.full, [hdpi, mdpi, xhdpi, xxhdpi, xxxhdpi].iter())
     }
 
-    pub fn apply_ios(&self, flutter_app_root: &Path) -> Result<(), RenderImageErr> {
+    pub fn apply_ios(&self, flutter_app_root: &Path) -> Result<(), RenderImgErr> {
         let base_path = flutter_app_root
             .join("ios")
             .join("Runner")
@@ -96,7 +101,7 @@ impl FlutterLogoSources {
         svg_to_pngs(&self.full, targets.iter())
     }
 
-    pub fn apply_macos(&self, flutter_app_root: &Path) -> Result<(), RenderImageErr> {
+    pub fn apply_macos(&self, flutter_app_root: &Path) -> Result<(), RenderImgErr> {
         let base_path = flutter_app_root
             .join("macos")
             .join("Runner")
@@ -118,7 +123,7 @@ impl FlutterLogoSources {
         svg_to_pngs(&self.app, targets.iter())
     }
 
-    pub fn apply_web(&self, flutter_app_root: &Path) -> Result<(), RenderImageErr> {
+    pub fn apply_web(&self, flutter_app_root: &Path) -> Result<(), RenderImgErr> {
         let base_path = flutter_app_root.join("web").join("icons");
         let target_from = |size: u32| {
             let filename = format!("Icon-{}.png", size);
@@ -137,17 +142,13 @@ impl FlutterLogoSources {
         svg_to_pngs(&self.full, targets.iter())
     }
 
-    pub fn apply_windows(&self, flutter_app_root: &Path) -> Result<(), RenderImageErr> {
+    pub fn apply_windows(&self, flutter_app_root: &Path) -> Result<(), RenderImgErr> {
         let base_path = flutter_app_root
             .join("windows")
             .join("runner")
             .join("resources");
-        const FILENAME: &str = "app_icon";
-        let png_path = base_path.join(format!("{}.png", FILENAME));
-        let ico_path = base_path.join(format!("{}.ico", FILENAME));
-        svg_to_png(&self.app, RenderTarget::square(&png_path, 1024))?;
-        png_to_ico(&png_path, ico_path)?;
-        remove_file(png_path)?;
+        let path = base_path.join("app_icon.ico");
+        svg_to_ico(&self.app, RenderTarget::square(&path, 256))?;
         Ok(())
     }
 }
@@ -170,18 +171,17 @@ impl RenderTarget {
     }
 }
 
-/// Render a single png file from the tree map.
-pub fn svg_tree_to_png(tree_map: &Tree, target: &RenderTarget) -> Result<(), RenderImageErr> {
-    let (width, height) = target.size.unwrap_or_else(|| {
-        let size = tree_map.size().to_int_size();
+pub fn render_svg_pixmap(tree: &Tree, size: Option<(u32, u32)>) -> Result<Pixmap, RenderImgErr> {
+    let (width, height) = size.unwrap_or_else(|| {
+        let size = tree.size().to_int_size();
         (size.width(), size.height())
     });
-    let mut pixmap = Pixmap::new(width, height).ok_or(RenderImageErr::Pixmap)?;
+    let mut pixmap = Pixmap::new(width, height).ok_or(RenderImgErr::Pixmap)?;
 
     // Transform as configured size, scale rather than clip.
-    let transform = if let Some(size) = target.size {
+    let transform = if let Some(size) = size {
         let (width, height) = size;
-        let svg_size = tree_map.size().to_int_size();
+        let svg_size = tree.size().to_int_size();
         let scale_x = width as f32 / svg_size.width() as f32;
         let scale_y = height as f32 / svg_size.height() as f32;
         Transform::from_scale(scale_x, scale_y)
@@ -189,43 +189,50 @@ pub fn svg_tree_to_png(tree_map: &Tree, target: &RenderTarget) -> Result<(), Ren
         Transform::default()
     };
 
-    render(&tree_map, transform, &mut pixmap.as_mut());
-    pixmap.save_png(&target.path)?;
+    render(&tree, transform, &mut pixmap.as_mut());
+    Ok(pixmap)
+}
+
+pub fn svg_to_ico(src: impl AsRef<Path>, target: RenderTarget) -> Result<(), RenderImgErr> {
+    let tree = Tree::from_data(&read(src)?, &Options::default())?;
+    let (width, height) = target.size.unwrap_or_else(|| {
+        let size = tree.size().to_int_size();
+        (size.width(), size.height())
+    });
+    let pixmap = render_svg_pixmap(&tree, Some((width, height)))?;
+    let img = ImageBuffer::from_fn(width, height, |x, y| {
+        let pixel = pixmap
+            .pixel(x, y)
+            .unwrap_or(PremultipliedColorU8::TRANSPARENT);
+        Rgba([pixel.red(), pixel.green(), pixel.blue(), pixel.alpha()])
+    });
+    let frame = IcoFrame::with_encoded(
+        img.into_vec(),
+        width,
+        height,
+        image::ExtendedColorType::Rgba8,
+    )?;
+    IcoEncoder::new(File::create(target.path)?).encode_images(&[frame])?;
     Ok(())
 }
 
-pub fn svg_to_png(src: impl AsRef<Path>, target: RenderTarget) -> Result<(), RenderImageErr> {
-    let data = read(src)?;
-    let options = Options::default();
-    let tree = Tree::from_data(&data, &options)?;
-    svg_tree_to_png(&tree, &target)
+pub fn svg_to_png(src: impl AsRef<Path>, target: RenderTarget) -> Result<(), RenderImgErr> {
+    let tree = Tree::from_data(&read(src)?, &Options::default())?;
+    render_svg_pixmap(&tree, target.size)?.save_png(&target.path)?;
+    Ok(())
 }
 
 /// Render from a single svg source to multiple png file targets.
-pub fn svg_to_pngs(
-    src: impl AsRef<Path>,
-    targets: Iter<RenderTarget>,
-) -> Result<(), RenderImageErr> {
-    let data = read(src)?;
-    let options = Options::default();
-    let tree = Tree::from_data(&data, &options)?;
+pub fn svg_to_pngs(src: impl AsRef<Path>, targets: Iter<RenderTarget>) -> Result<(), RenderImgErr> {
+    let tree = Tree::from_data(&read(src)?, &Options::default())?;
     for target in targets {
-        svg_tree_to_png(&tree, target)?;
+        render_svg_pixmap(&tree, target.size)?.save_png(&target.path)?;
     }
     Ok(())
 }
 
-pub fn png_to_ico(src: impl AsRef<Path>, out: impl AsRef<Path>) -> Result<(), RenderImageErr> {
-    let encoder = IcoEncoder::new(BufWriter::new(File::create(out)?));
-    ImageReader::open(src)?
-        .with_guessed_format()?
-        .decode()?
-        .write_with_encoder(encoder)?;
-    Ok(())
-}
-
 #[derive(Debug, thiserror::Error)]
-pub enum RenderImageErr {
+pub enum RenderImgErr {
     #[error("file system error: {0}")]
     FS(#[from] std::io::Error),
 
