@@ -1,5 +1,5 @@
 use std::{
-    fs::{read, File},
+    fs::{read, remove_file, File},
     io::BufWriter,
     path::{Path, PathBuf},
     slice::Iter,
@@ -8,7 +8,7 @@ use std::{
 use image::{codecs::ico::IcoEncoder, ImageError, ImageReader};
 use png::EncodingError;
 use resvg::{render, tiny_skia::Pixmap};
-use usvg::{ImageRendering, Options, ShapeRendering, Transform, Tree};
+use usvg::{Options, Transform, Tree};
 
 pub struct FlutterLogoSources {
     /// Path to the svg logo with smooth corner radius and paddings,
@@ -40,6 +40,7 @@ impl FlutterLogoSources {
         self.apply_ios(flutter_app_root)?;
         self.apply_macos(flutter_app_root)?;
         self.apply_web(flutter_app_root)?;
+        self.apply_windows(flutter_app_root)?;
         Ok(())
     }
 
@@ -135,6 +136,20 @@ impl FlutterLogoSources {
         ];
         svg_to_pngs(&self.full, targets.iter())
     }
+
+    pub fn apply_windows(&self, flutter_app_root: &Path) -> Result<(), RenderImageErr> {
+        let base_path = flutter_app_root
+            .join("windows")
+            .join("runner")
+            .join("resources");
+        const FILENAME: &str = "app_icon";
+        let png_path = base_path.join(format!("{}.png", FILENAME));
+        let ico_path = base_path.join(format!("{}.ico", FILENAME));
+        svg_to_png(&self.app, RenderTarget::square(&png_path, 1024))?;
+        png_to_ico(&png_path, ico_path)?;
+        remove_file(png_path)?;
+        Ok(())
+    }
 }
 
 pub struct RenderTarget {
@@ -156,7 +171,7 @@ impl RenderTarget {
 }
 
 /// Render a single png file from the tree map.
-pub fn svg_to_png(tree_map: &Tree, target: &RenderTarget) -> Result<(), RenderImageErr> {
+pub fn svg_tree_to_png(tree_map: &Tree, target: &RenderTarget) -> Result<(), RenderImageErr> {
     let (width, height) = target.size.unwrap_or_else(|| {
         let size = tree_map.size().to_int_size();
         (size.width(), size.height())
@@ -179,19 +194,23 @@ pub fn svg_to_png(tree_map: &Tree, target: &RenderTarget) -> Result<(), RenderIm
     Ok(())
 }
 
+pub fn svg_to_png(src: impl AsRef<Path>, target: RenderTarget) -> Result<(), RenderImageErr> {
+    let data = read(src)?;
+    let options = Options::default();
+    let tree = Tree::from_data(&data, &options)?;
+    svg_tree_to_png(&tree, &target)
+}
+
 /// Render from a single svg source to multiple png file targets.
 pub fn svg_to_pngs(
     src: impl AsRef<Path>,
     targets: Iter<RenderTarget>,
 ) -> Result<(), RenderImageErr> {
     let data = read(src)?;
-    let mut options = Options::default();
-    options.shape_rendering = ShapeRendering::GeometricPrecision;
-    options.image_rendering = ImageRendering::OptimizeQuality;
-
+    let options = Options::default();
     let tree = Tree::from_data(&data, &options)?;
     for target in targets {
-        svg_to_png(&tree, target)?;
+        svg_tree_to_png(&tree, target)?;
     }
     Ok(())
 }
