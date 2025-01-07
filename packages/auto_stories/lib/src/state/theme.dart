@@ -13,3 +13,7 @@ extension WrapTheme on Widget {
     return inherit<S>(sizes).inherit<C>(colors);
   }
 }
+
+abstract class ThemeBase {
+  const ThemeBase();
+}
