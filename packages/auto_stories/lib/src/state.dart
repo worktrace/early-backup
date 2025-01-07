@@ -1,4 +1,3 @@
-export 'state/binding.dart';
 export 'state/locale.dart';
 export 'state/theme.dart';
 export 'state/theme_color.dart';

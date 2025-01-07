@@ -1,6 +1,6 @@
+import 'package:auto_stories/src/utils.dart';
 import 'package:flutter/widgets.dart';
 
-import 'binding.dart';
 import 'theme_color.dart';
 import 'theme_size.dart';
 
