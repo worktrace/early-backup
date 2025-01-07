@@ -38,6 +38,7 @@
     "Cargo.lock",
     "pnpm-lock.yaml",
     "pubspec.lock",
+    "LICENSE",
     "*.svg"
   ],
   "cSpell.words": [
@@ -50,6 +51,7 @@
     "lockfiles",
     "ltr",
     "ltwh",
+    "mulan",
     "nonobvious",
     "oxlint",
     "pixmap",
