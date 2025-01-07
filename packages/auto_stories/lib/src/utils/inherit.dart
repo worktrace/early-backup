@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 extension FindContext on BuildContext {
   T? find<T>() => dependOnInheritedWidgetOfExactType<Inherit<T>>()?.data;
   void update<T>(T data) {
-    dependOnInheritedWidgetOfExactType<InheritUpdater<T>>()?.onChange(data);
+    dependOnInheritedWidgetOfExactType<InheritUpdate<T>>()?.onChange(data);
   }
 }
 
@@ -17,8 +17,8 @@ extension WrapInherit on Widget {
     );
   }
 
-  InheritUpdater<T> inheritUpdater<T>(ValueChanged<T> onChange, {Key? key}) {
-    return InheritUpdater<T>(
+  InheritUpdate<T> inheritUpdate<T>(ValueChanged<T> onChange, {Key? key}) {
+    return InheritUpdate<T>(
       key: key,
       onChange: onChange,
       child: this,
@@ -43,8 +43,8 @@ class Inherit<T> extends InheritedWidget {
   }
 }
 
-class InheritUpdater<T> extends InheritedWidget {
-  const InheritUpdater({
+class InheritUpdate<T> extends InheritedWidget {
+  const InheritUpdate({
     super.key,
     required this.onChange,
     required super.child,
@@ -53,7 +53,7 @@ class InheritUpdater<T> extends InheritedWidget {
   final ValueChanged<T> onChange;
 
   @override
-  bool updateShouldNotify(covariant InheritUpdater<T> oldWidget) {
+  bool updateShouldNotify(covariant InheritUpdate<T> oldWidget) {
     return onChange != oldWidget.onChange;
   }
 
@@ -105,6 +105,6 @@ class _HandlerState<T> extends State<Handler<T>> {
     return widget
         .builder(context, _data)
         .inherit(_data)
-        .inheritUpdater(updateData);
+        .inheritUpdate(updateData);
   }
 }

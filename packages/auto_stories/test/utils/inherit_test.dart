@@ -82,7 +82,7 @@ class _InheritUpdateState extends State<InheritUpdate> {
         .asColumn()
         .center
         .inherit(message)
-        .inheritUpdater<String>((value) => message = value);
+        .inheritUpdate<String>((value) => message = value);
   }
 
   @override
