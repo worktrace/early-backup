@@ -6,13 +6,10 @@ use std::{
 
 use image::{
     codecs::ico::{IcoEncoder, IcoFrame},
-    ImageBuffer, ImageError, Rgba,
+    ExtendedColorType, ImageBuffer, ImageError, Rgba,
 };
 use png::EncodingError;
-use resvg::{
-    render,
-    tiny_skia::{Pixmap, PremultipliedColorU8},
-};
+use resvg::{render, tiny_skia::Pixmap};
 use usvg::{Options, Transform, Tree};
 
 pub struct FlutterLogoSources {
@@ -148,6 +145,7 @@ impl FlutterLogoSources {
             .join("runner")
             .join("resources");
         let path = base_path.join("app_icon.ico");
+        // Ico format must be smaller than 256x256.
         svg_to_ico(&self.app, RenderTarget::square(&path, 256))?;
         Ok(())
     }
@@ -200,17 +198,15 @@ pub fn svg_to_ico(src: impl AsRef<Path>, target: RenderTarget) -> Result<(), Ren
         (size.width(), size.height())
     });
     let pixmap = render_svg_pixmap(&tree, Some((width, height)))?;
-    let img = ImageBuffer::from_fn(width, height, |x, y| {
-        let pixel = pixmap
-            .pixel(x, y)
-            .unwrap_or(PremultipliedColorU8::TRANSPARENT);
+    let image_buffer = ImageBuffer::from_fn(width, height, |x, y| {
+        let pixel = pixmap.pixel(x, y).unwrap();
         Rgba([pixel.red(), pixel.green(), pixel.blue(), pixel.alpha()])
     });
-    let frame = IcoFrame::with_encoded(
-        img.into_vec(),
+    let frame = IcoFrame::as_png(
+        &image_buffer.into_raw(),
         width,
         height,
-        image::ExtendedColorType::Rgba8,
+        ExtendedColorType::Rgba8,
     )?;
     IcoEncoder::new(File::create(target.path)?).encode_images(&[frame])?;
     Ok(())
