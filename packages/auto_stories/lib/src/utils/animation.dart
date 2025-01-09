@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-typedef DataBuilder<T> = Widget Function(BuildContext context, T data);
-
 abstract class SingleAnimationWidget extends StatefulWidget {
   const SingleAnimationWidget({
     super.key,

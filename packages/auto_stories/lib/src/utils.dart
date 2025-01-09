@@ -1,6 +1,8 @@
 export 'utils/animation.dart';
 export 'utils/animation_reuse.dart';
+export 'utils/binding.dart';
 export 'utils/colors.dart';
+export 'utils/inherit.dart';
 export 'utils/interact.dart';
 export 'utils/paint.dart';
 export 'utils/range.dart';

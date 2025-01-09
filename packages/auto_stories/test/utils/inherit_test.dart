@@ -70,11 +70,19 @@ class _InheritUpdateState extends State<InheritUpdate> {
 
   @override
   Widget build(BuildContext context) {
-    final button = widget.buttonName
-        .asText()
-        .gesture(onTap: () => message = widget.afterMessage);
+    final button = Builder(
+      builder: (context) {
+        return widget.buttonName
+            .asText()
+            .gesture(onTap: () => context.update<String>(widget.afterMessage));
+      },
+    );
 
-    return [inheritProbe, button].asColumn().center.inherit(message);
+    return [inheritProbe, button]
+        .asColumn()
+        .center
+        .inherit(message)
+        .inheritUpdate<String>((value) => message = value);
   }
 
   @override
