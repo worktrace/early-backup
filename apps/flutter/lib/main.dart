@@ -25,7 +25,7 @@ class App extends StatelessWidget {
       routeInformationProvider: routes.routeInformationProvider,
       backButtonDispatcher: routes.backButtonDispatcher,
     )
-        .adaptiveAnimatedColorTheme(ColorTheme.adapter(), ColorTheme.lerp)
+        .adaptiveAnimatedTheme(Theme.adapter(), Theme.lerp)
         .adaptiveLocale(localesOf([]))
         .mediaAsView(context);
   }
