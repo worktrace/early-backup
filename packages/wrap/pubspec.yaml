@@ -1,5 +1,5 @@
-name: wrap
-description: Chain style programming syntax sugar utilities for flutter widgets.
+name: auto_stories
+description: Auto generate widget preview with minimal configurations.
 version: 0.0.0
 resolution: workspace
 environment: { sdk: ^3.6.0, flutter: "^3.27.0" }

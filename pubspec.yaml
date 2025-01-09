@@ -8,6 +8,7 @@ workspace:
   - packages/auto_stories
   - packages/auto_stories_compat
   - packages/auto_stories_dev
+  - packages/wrap
 
 dependencies:
   auto_stories_dev: ^0.0.0
