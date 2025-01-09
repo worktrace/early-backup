@@ -2,35 +2,35 @@ import 'package:auto_stories/src/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-extension WrapColorTheme on Widget {
-  Widget colorThemeAs<T extends ColorThemeBase>(BuildContext context, T theme) {
+extension WrapTheme on Widget {
+  Widget themeAs<T extends ThemeBase>(BuildContext context, T theme) {
     return inherit(theme)
         .inherit(theme.brightness)
         .background(theme.background)
         .maybeForegroundAs(context, theme.foreground);
   }
 
-  ColorThemeApply<T> colorTheme<T extends ColorThemeBase>(T theme, {Key? key}) {
-    return ColorThemeApply(
+  ThemeApply<T> theme<T extends ThemeBase>(T theme, {Key? key}) {
+    return ThemeApply(
       key: key,
       theme: theme,
       child: this,
     );
   }
 
-  AdaptiveColorTheme<T> adaptiveColorTheme<T extends ColorThemeBase>(
-    ColorThemeAdapter<T> adapter, {
+  AdaptiveTheme<T> adaptiveTheme<T extends ThemeBase>(
+    ThemeAdapter<T> adapter, {
     Key? key,
   }) {
-    return AdaptiveColorTheme<T>(
+    return AdaptiveTheme<T>(
       key: key,
       adapter: adapter,
-      builder: colorThemeAs<T>,
+      builder: themeAs<T>,
       child: this,
     );
   }
 
-  SingleAnimation<T> animatedColorTheme<T extends ColorThemeBase>(
+  SingleAnimation<T> animatedTheme<T extends ThemeBase>(
     T theme,
     Lerp<T> lerp, {
     Key? key,
@@ -41,55 +41,53 @@ extension WrapColorTheme on Widget {
       animation: animation,
       data: theme,
       lerp: lerp,
-      builder: colorThemeAs<T>,
+      builder: themeAs<T>,
     );
   }
 
-  AdaptiveColorTheme<T> adaptiveAnimatedColorTheme<T extends ColorThemeBase>(
-    ColorThemeAdapter<T> adapter,
+  AdaptiveTheme<T> adaptiveAnimatedTheme<T extends ThemeBase>(
+    ThemeAdapter<T> adapter,
     Lerp<T> lerp, {
     Key? key,
     AnimationData animation = const AnimationData(
       duration: Duration(milliseconds: 345),
     ),
   }) {
-    return AdaptiveColorTheme<T>(
+    return AdaptiveTheme<T>(
       key: key,
       adapter: adapter,
-      builder: (context, theme) {
-        return animatedColorTheme<T>(theme, lerp, animation: animation);
-      },
+      builder: (_, data) => animatedTheme<T>(data, lerp, animation: animation),
       child: this,
     );
   }
 }
 
-class AdaptiveColorTheme<T extends ColorThemeBase> extends StatefulWidget {
-  const AdaptiveColorTheme({
+class AdaptiveTheme<T extends ThemeBase> extends StatefulWidget {
+  const AdaptiveTheme({
     super.key,
     required this.adapter,
     required this.builder,
     required this.child,
   });
 
-  final ColorThemeAdapter<T> adapter;
+  final ThemeAdapter<T> adapter;
   final DataBuilder<T> builder;
   final Widget child;
 
   @override
-  State<AdaptiveColorTheme<T>> createState() => _AdaptiveColorThemeState<T>();
+  State<AdaptiveTheme<T>> createState() => _AdaptiveThemeState<T>();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<ColorThemeAdapter<T>>('adapter', adapter))
+      ..add(DiagnosticsProperty<ThemeAdapter<T>>('adapter', adapter))
       ..add(ObjectFlagProperty<DataBuilder<T>?>.has('renderer', builder));
   }
 }
 
-class _AdaptiveColorThemeState<T extends ColorThemeBase>
-    extends WidgetBindingState<AdaptiveColorTheme<T>> {
+class _AdaptiveThemeState<T extends ThemeBase>
+    extends WidgetBindingState<AdaptiveTheme<T>> {
   late T _theme = widget.adapter.adapt;
   T get theme => _theme;
   set theme(T value) {
@@ -97,7 +95,7 @@ class _AdaptiveColorThemeState<T extends ColorThemeBase>
   }
 
   @override
-  void didUpdateWidget(covariant AdaptiveColorTheme<T> oldWidget) {
+  void didUpdateWidget(covariant AdaptiveTheme<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.adapter != oldWidget.adapter) theme = widget.adapter.adapt;
   }
@@ -109,7 +107,7 @@ class _AdaptiveColorThemeState<T extends ColorThemeBase>
   }
 
   @override
-  Widget build(BuildContext context) => widget.child.colorTheme(theme);
+  Widget build(BuildContext context) => widget.child.theme(theme);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -118,14 +116,14 @@ class _AdaptiveColorThemeState<T extends ColorThemeBase>
   }
 }
 
-class ColorThemeAdapter<T extends ColorThemeBase> {
-  const ColorThemeAdapter({
-    this.mode = ColorThemeMode.system,
+class ThemeAdapter<T extends ThemeBase> {
+  const ThemeAdapter({
+    this.mode = ThemeMode.system,
     required this.dark,
     required this.light,
   });
 
-  final ColorThemeMode mode;
+  final ThemeMode mode;
   final T dark;
   final T light;
 
@@ -137,27 +135,25 @@ class ColorThemeAdapter<T extends ColorThemeBase> {
 /// Similar to the `ThemeMode` defined in `package:flutter/material.dart`.
 /// This enum is redefined here to avoid unnecessary import of
 /// the `material` library.
-enum ColorThemeMode {
+enum ThemeMode {
   system,
   light,
   dark;
 
   bool get shouldDark {
-    final mode = WidgetsBinding.instance.platformDispatcher.platformBrightness;
-    return this == ColorThemeMode.system
-        ? mode == Brightness.dark
-        : this == ColorThemeMode.dark;
+    final b = WidgetsBinding.instance.platformDispatcher.platformBrightness;
+    return this == system ? b == Brightness.dark : this == dark;
   }
 }
 
-class ColorThemeApply<T extends ColorThemeBase> extends StatelessWidget {
-  const ColorThemeApply({super.key, required this.theme, required this.child});
+class ThemeApply<T extends ThemeBase> extends StatelessWidget {
+  const ThemeApply({super.key, required this.theme, required this.child});
 
   final T theme;
   final Widget child;
 
   @override
-  Widget build(BuildContext context) => child.colorThemeAs(context, theme);
+  Widget build(BuildContext context) => child.themeAs(context, theme);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -166,14 +162,14 @@ class ColorThemeApply<T extends ColorThemeBase> extends StatelessWidget {
   }
 }
 
-abstract class ColorThemeBase extends AreaColors {
-  const ColorThemeBase.light({
+abstract class ThemeBase extends AreaColors {
+  const ThemeBase.light({
     required super.foreground,
     required super.background,
     this.brightness = Brightness.light,
   });
 
-  const ColorThemeBase.dark({
+  const ThemeBase.dark({
     required super.foreground,
     required super.background,
     this.brightness = Brightness.dark,

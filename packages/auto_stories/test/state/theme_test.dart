@@ -5,31 +5,31 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('adapt color theme mode', (t) async {
+  testWidgets('adapt theme mode', (t) async {
     t.binding.platformDispatcher.platformBrightnessTestValue = Brightness.light;
-    expect(ColorThemeMode.system.shouldDark, false);
-    expect(ColorThemeMode.light.shouldDark, false);
-    expect(ColorThemeMode.dark.shouldDark, true);
+    expect(ThemeMode.system.shouldDark, false);
+    expect(ThemeMode.light.shouldDark, false);
+    expect(ThemeMode.dark.shouldDark, true);
 
     t.binding.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
-    expect(ColorThemeMode.system.shouldDark, true);
-    expect(ColorThemeMode.light.shouldDark, false);
-    expect(ColorThemeMode.dark.shouldDark, true);
+    expect(ThemeMode.system.shouldDark, true);
+    expect(ThemeMode.light.shouldDark, false);
+    expect(ThemeMode.dark.shouldDark, true);
 
     t.binding.platformDispatcher.platformBrightnessTestValue = Brightness.light;
-    expect(ColorThemeMode.system.shouldDark, false);
-    expect(ColorThemeMode.light.shouldDark, false);
-    expect(ColorThemeMode.dark.shouldDark, true);
+    expect(ThemeMode.system.shouldDark, false);
+    expect(ThemeMode.light.shouldDark, false);
+    expect(ThemeMode.dark.shouldDark, true);
   });
 
-  testWidgets('adaptive color theme', (t) async {
+  testWidgets('adaptive theme', (t) async {
     final probe = Builder(
       builder: (context) {
-        return context.find<ColorTheme>()!.brightness.name.asText().center();
+        return context.find<Theme>()!.brightness.name.asText().center();
       },
     );
     t.binding.platformDispatcher.platformBrightnessTestValue = Brightness.light;
-    final widget = probe.adaptiveColorTheme(ColorTheme.adapter());
+    final widget = probe.adaptiveTheme(Theme.adapter());
     await t.pumpWidget(widget.ensureText());
     expect(find.text(Brightness.light.name), findsOneWidget);
 
@@ -43,23 +43,24 @@ void main() {
   });
 }
 
-class ColorTheme extends ColorThemeBase {
-  const ColorTheme.light({
+class Theme extends ThemeBase {
+  const Theme.light({
     super.background = Colors.snow,
     super.foreground = Colors.ink,
   }) : super.light();
 
-  const ColorTheme.dark({
+  const Theme.dark({
     super.background = Colors.coal,
     super.foreground = Colors.lunar,
   }) : super.dark();
 
-  static ColorThemeAdapter<ColorTheme> adapter({
-    ColorThemeMode mode = ColorThemeMode.system,
-  }) =>
-      ColorThemeAdapter(
-        light: const ColorTheme.light(),
-        dark: const ColorTheme.dark(),
-        mode: mode,
-      );
+  static ThemeAdapter<Theme> adapter({
+    ThemeMode mode = ThemeMode.system,
+  }) {
+    return ThemeAdapter(
+      light: const Theme.light(),
+      dark: const Theme.dark(),
+      mode: mode,
+    );
+  }
 }
