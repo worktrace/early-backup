@@ -1,0 +1,11 @@
+name: work_trace_ui
+description: UI components for visualization of the WorkTrace applications.
+version: 0.0.0
+resolution: workspace
+environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
+
+dependencies:
+  flutter: { sdk: flutter }
+
+dev_dependencies:
+  flutter_test: { sdk: flutter }
