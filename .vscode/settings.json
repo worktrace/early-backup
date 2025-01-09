@@ -20,7 +20,8 @@
   "explorer.fileNesting.patterns": {
     "pubspec.yaml": "pubspec.lock, .metadata",
     "package.json": "pnpm-lock.yaml",
-    "Cargo.toml": "Cargo.lock"
+    "Cargo.toml": "Cargo.lock",
+    "readme.md": "license"
   },
 
   "files.associations": {
@@ -37,6 +38,7 @@
     "Cargo.lock",
     "pnpm-lock.yaml",
     "pubspec.lock",
+    "LICENSE",
     "*.svg"
   ],
   "cSpell.words": [
@@ -52,6 +54,7 @@
     "ltr",
     "ltwh",
     "mdpi",
+    "mulan",
     "nonobvious",
     "oxlint",
     "pixmap",
