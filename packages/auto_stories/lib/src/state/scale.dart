@@ -1,5 +1,5 @@
 abstract class ScaleBasic {
-  const ScaleBasic({this.scale = 1});
+  const ScaleBasic({this.normal = 1});
 
-  final double scale;
+  final double normal;
 }
