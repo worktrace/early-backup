@@ -6,7 +6,6 @@ environment: { sdk: ^3.6.0 }
 workspace:
   - apps/flutter
   - packages/auto_stories
-  - packages/auto_stories_compat
   - packages/auto_stories_dev
   - packages/work_trace
   - packages/work_trace_ui
