@@ -43,3 +43,4 @@
 library;
 
 export 'src/environment.dart';
+export 'src/geometry.dart';
