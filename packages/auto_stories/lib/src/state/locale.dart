@@ -1,6 +1,7 @@
 import 'package:auto_stories/src/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:wrap/wrap.dart';
 
 extension WrapLocale on Widget {
   LocaleApply<T> locale<T extends LocaleBase>(T locale, {Key? key}) {

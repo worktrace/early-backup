@@ -3,6 +3,7 @@ import 'package:auto_stories/debug.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:wrap/wrap.dart';
 
 void main() {
   testWidgets('inherit data', (t) async {

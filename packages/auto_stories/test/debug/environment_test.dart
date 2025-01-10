@@ -1,6 +1,6 @@
-import 'package:auto_stories/auto_stories.dart';
 import 'package:auto_stories/debug.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:wrap/wrap.dart';
 
 void main() {
   testWidgets('ensure text', (t) async {
