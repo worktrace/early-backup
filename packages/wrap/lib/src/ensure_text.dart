@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:wrap/wrap.dart';
+
+import 'environment.dart';
 
 extension WrapEnsureText on Widget {
   EnsureText ensureText({
