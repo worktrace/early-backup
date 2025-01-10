@@ -1,4 +1,4 @@
-name: wrap
+name: auto_stories
 description: Chain style programming syntax sugar utilities for flutter widgets.
 version: 0.0.0
 resolution: workspace
@@ -6,6 +6,7 @@ environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
 
 dependencies:
   flutter: { sdk: flutter }
+  wrap: ^0.0.0
 
 dev_dependencies:
   flutter_test: { sdk: flutter }

@@ -1,6 +1,7 @@
-import 'package:auto_stories/src/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'environment.dart';
 
 extension WrapEnsureText on Widget {
   EnsureText ensureText({

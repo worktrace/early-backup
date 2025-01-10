@@ -1,4 +1,4 @@
-name: auto_stories
+name: wrap
 description: Auto generate widget preview with minimal configurations.
 version: 0.0.0
 resolution: workspace
