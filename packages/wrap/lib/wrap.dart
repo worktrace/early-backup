@@ -42,5 +42,6 @@
 /// in performance sensitive cases such as long loops.
 library;
 
+export 'src/decorate.dart';
 export 'src/environment.dart';
 export 'src/geometry.dart';
