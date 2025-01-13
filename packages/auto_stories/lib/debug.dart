@@ -1,1 +1,1 @@
-export 'src/debug.dart';
+export 'package:wrap/debug.dart';
