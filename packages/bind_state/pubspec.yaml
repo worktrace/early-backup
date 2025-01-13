@@ -1,0 +1,11 @@
+name: bind_state
+description: Code reuse for stateful widgets with a single data to handle.
+version: 0.0.0
+resolution: workspace
+environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
+
+dependencies:
+  flutter: { sdk: flutter }
+
+dev_dependencies:
+  flutter_test: { sdk: flutter }
