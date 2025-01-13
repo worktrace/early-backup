@@ -1,8 +1,0 @@
-name: auto_stories_compat
-description: Compatible utilities between package:flutter and package:analyzer.
-version: 0.0.0
-resolution: workspace
-environment: { sdk: ^3.6.0 }
-
-dev_dependencies:
-  test: ^1.24.0
