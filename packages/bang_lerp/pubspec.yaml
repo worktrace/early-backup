@@ -1,15 +1,11 @@
-name: auto_stories
-description: Auto generate widget preview with minimal configurations.
+name: bang_lerp
+description: Not nullable lerp compute optimization over the standard library.
 version: 0.0.0
 resolution: workspace
 environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
 
 dependencies:
-  bang_lerp: ^0.0.0
   flutter: { sdk: flutter }
-  inherit: ^0.0.0
-  modifier: ^0.0.0
-  wrap: ^1.0.0
 
 dev_dependencies:
   flutter_test: { sdk: flutter }
