@@ -1,3 +1,4 @@
+export 'package:bang_lerp/bang_lerp.dart';
 export 'package:wrap/wrap.dart';
 
 export 'utils/animation.dart';

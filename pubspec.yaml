@@ -7,6 +7,7 @@ workspace:
   - apps/flutter
   - packages/auto_stories
   - packages/auto_stories_dev
+  - packages/bang_lerp
   - packages/work_trace
   - packages/work_trace_ui
   - packages/wrap

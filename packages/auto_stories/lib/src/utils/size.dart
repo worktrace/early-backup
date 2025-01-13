@@ -1,6 +1,5 @@
+import 'package:bang_lerp/bang_lerp.dart';
 import 'package:flutter/widgets.dart';
-
-import 'animation.dart';
 
 extension SizeUtils on Size {
   Rect get toRectFill => Rect.fromLTWH(0, 0, width, height);
