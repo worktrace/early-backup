@@ -1,4 +1,3 @@
-import 'package:bang_lerp/bang_lerp.dart';
 import 'package:flutter/widgets.dart';
 
 extension SizeUtils on Size {
@@ -28,17 +27,4 @@ extension RadiusConvert on Radius {
 
   /// Equals y / x.
   double get ratioInverse => y / x;
-}
-
-Radius lerpRadius(Radius a, Radius b, double t) {
-  return Radius.elliptical(lerpDouble(a.x, b.x, t), lerpDouble(a.y, b.y, t));
-}
-
-BorderRadius lerpBorderRadius(BorderRadius a, BorderRadius b, double t) {
-  return BorderRadius.only(
-    topLeft: lerpRadius(a.topLeft, b.topLeft, t),
-    topRight: lerpRadius(a.topRight, b.topRight, t),
-    bottomLeft: lerpRadius(a.bottomLeft, b.bottomLeft, t),
-    bottomRight: lerpRadius(a.bottomRight, b.bottomRight, t),
-  );
 }
