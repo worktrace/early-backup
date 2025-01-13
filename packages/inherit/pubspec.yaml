@@ -1,14 +1,11 @@
-name: auto_stories
-description: Auto generate widget preview with minimal configurations.
+name: inherit
+description: Inherit and data handle utilities for code reuse.
 version: 0.0.0
 resolution: workspace
 environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
 
 dependencies:
   flutter: { sdk: flutter }
-  inherit: ^0.0.0
-  modifier: ^0.0.0
-  wrap: ^1.0.0
 
 dev_dependencies:
   flutter_test: { sdk: flutter }

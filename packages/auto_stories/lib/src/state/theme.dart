@@ -56,11 +56,13 @@ extension WrapTheme on Widget {
     return AdaptiveTheme<T>(
       key: key,
       adapter: adapter,
-      builder: (_, data) => animatedTheme<T>(data, lerp, animation: animation),
+      builder: (_, t) => animatedTheme<T>(t, lerp, animation: animation),
       child: this,
     );
   }
 }
+
+typedef _DataBuilder<T> = Widget Function(BuildContext context, T data);
 
 class AdaptiveTheme<T extends ThemeBase> extends StatefulWidget {
   const AdaptiveTheme({
@@ -71,7 +73,7 @@ class AdaptiveTheme<T extends ThemeBase> extends StatefulWidget {
   });
 
   final ThemeAdapter<T> adapter;
-  final DataBuilder<T> builder;
+  final Widget Function(BuildContext context, T data) builder;
   final Widget child;
 
   @override
@@ -82,7 +84,7 @@ class AdaptiveTheme<T extends ThemeBase> extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty<ThemeAdapter<T>>('adapter', adapter))
-      ..add(ObjectFlagProperty<DataBuilder<T>?>.has('renderer', builder));
+      ..add(ObjectFlagProperty<_DataBuilder<T>?>.has('renderer', builder));
   }
 }
 
