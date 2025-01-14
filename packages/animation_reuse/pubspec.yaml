@@ -1,17 +1,13 @@
-name: auto_stories
-description: Auto generate widget preview with minimal configurations.
+name: animation_reuse
+description: Animation and widget code reuse for Flutter code optimization.
 version: 0.0.0
 resolution: workspace
 environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
 
 dependencies:
-  animation_reuse: ^0.0.0
   bang_lerp: ^0.0.0
   bind_state: ^0.0.0
   flutter: { sdk: flutter }
-  inherit: ^0.0.0
-  modifier: ^0.0.0
-  wrap: ^1.0.0
 
 dev_dependencies:
   flutter_test: { sdk: flutter }

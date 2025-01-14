@@ -1,10 +1,9 @@
 import 'package:bang_lerp/bang_lerp.dart';
+import 'package:bind_state/bind_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'animation.dart';
-
-typedef _DataBuilder<T> = Widget Function(BuildContext context, T data);
 
 class SingleAnimation<T> extends SingleAnimationWidget {
   const SingleAnimation({
@@ -17,7 +16,7 @@ class SingleAnimation<T> extends SingleAnimationWidget {
 
   final T data;
   final Lerp<T> lerp;
-  final Widget Function(BuildContext context, T data) builder;
+  final DataBuilder<T> builder;
 
   @override
   State<SingleAnimation<T>> createState() => _SingleAnimationState<T>();
@@ -28,7 +27,7 @@ class SingleAnimation<T> extends SingleAnimationWidget {
     properties
       ..add(DiagnosticsProperty<T>('data', data))
       ..add(ObjectFlagProperty<Lerp<T>>.has('lerp', lerp))
-      ..add(ObjectFlagProperty<_DataBuilder<T>>.has('builder', builder));
+      ..add(ObjectFlagProperty<DataBuilder<T>>.has('builder', builder));
   }
 }
 
