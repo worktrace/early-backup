@@ -5,6 +5,7 @@ resolution: workspace
 environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
 
 dependencies:
+  bind_state: ^0.0.0
   flutter: { sdk: flutter }
   modifier: ^0.0.0
   wrap: ^1.0.0

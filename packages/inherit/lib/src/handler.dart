@@ -1,9 +1,8 @@
+import 'package:bind_state/bind_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'inherit.dart';
-
-typedef _DataBuilder<T> = Widget Function(BuildContext context, T data);
 
 class Handler<T> extends StatefulWidget {
   const Handler({
@@ -15,7 +14,7 @@ class Handler<T> extends StatefulWidget {
 
   final T data;
   final ValueChanged<T>? onChange;
-  final Widget Function(BuildContext context, T data) builder;
+  final DataBuilder<T> builder;
 
   @override
   State<Handler<T>> createState() => _HandlerState<T>();
@@ -26,7 +25,7 @@ class Handler<T> extends StatefulWidget {
     properties
       ..add(ObjectFlagProperty<ValueChanged<T>?>.has('onChange', onChange))
       ..add(DiagnosticsProperty<T>('data', data))
-      ..add(ObjectFlagProperty<_DataBuilder<T>>.has('builder', builder));
+      ..add(ObjectFlagProperty<DataBuilder<T>>.has('builder', builder));
   }
 }
 
