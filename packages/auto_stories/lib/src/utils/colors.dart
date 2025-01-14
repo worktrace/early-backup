@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 
 class AreaColors {
   const AreaColors({
-    this.background = Colors.transparent,
+    this.background = const Color(0x00000000),
     this.foreground,
   });
 
@@ -16,15 +16,4 @@ class AreaColors {
 
   final Color background;
   final Color? foreground;
-}
-
-abstract class Colors {
-  // Transparent colors.
-  static const transparent = Color(0x00000000);
-
-  // Mono colors.
-  static const snow = Color.fromARGB(255, 245, 247, 248);
-  static const lunar = Color.fromARGB(255, 189, 188, 187);
-  static const ink = Color.fromARGB(255, 49, 51, 52);
-  static const coal = Color.fromARGB(255, 24, 23, 23);
 }
