@@ -6,5 +6,4 @@ export 'package:modifier/modifier.dart';
 export 'package:wrap/wrap.dart';
 
 export 'utils/colors.dart';
-export 'utils/range.dart';
 export 'utils/size.dart';

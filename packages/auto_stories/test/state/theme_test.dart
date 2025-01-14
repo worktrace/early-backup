@@ -45,13 +45,13 @@ void main() {
 
 class Theme extends ThemeBase {
   const Theme.light({
-    super.background = Colors.snow,
-    super.foreground = Colors.ink,
+    super.background = const Color(0xfffefdfa),
+    super.foreground = const Color(0xff232426),
   }) : super.light();
 
   const Theme.dark({
-    super.background = Colors.coal,
-    super.foreground = Colors.lunar,
+    super.background = const Color(0xff18191a),
+    super.foreground = const Color(0xffdedede),
   }) : super.dark();
 
   static ThemeAdapter<Theme> adapter({
