@@ -5,6 +5,7 @@ environment: { sdk: ^3.6.0 }
 
 workspace:
   - apps/flutter
+  - packages/animation_reuse
   - packages/auto_stories
   - packages/auto_stories_dev
   - packages/bang_lerp
