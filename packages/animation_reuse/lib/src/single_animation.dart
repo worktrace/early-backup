@@ -1,4 +1,5 @@
 import 'package:bang_lerp/bang_lerp.dart';
+import 'package:bind_state/bind_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
