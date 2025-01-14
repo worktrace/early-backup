@@ -9,3 +9,4 @@ dependencies:
 
 dev_dependencies:
   flutter_test: { sdk: flutter }
+  wrap: ^1.0.0
