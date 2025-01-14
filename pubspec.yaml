@@ -19,6 +19,7 @@ workspace:
   - packages/bind_state
   - packages/inherit
   - packages/modifier
+  - packages/syntax_sugar
   - packages/wrap
 
 dependencies:
