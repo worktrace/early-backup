@@ -38,10 +38,8 @@ class _HandlerState<T> extends State<Handler<T>> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return widget
-        .builder(context, _data)
-        .inherit(_data)
-        .inheritUpdate(updateData);
-  }
+  Widget build(BuildContext context) => widget
+      .builder(context, _data) //
+      .inherit(_data)
+      .inheritUpdate(updateData);
 }
