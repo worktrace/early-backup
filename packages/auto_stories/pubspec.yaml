@@ -6,6 +6,7 @@ environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
 
 dependencies:
   bang_lerp: ^0.0.0
+  bind_state: ^0.0.0
   flutter: { sdk: flutter }
   inherit: ^0.0.0
   modifier: ^0.0.0

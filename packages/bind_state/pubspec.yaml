@@ -1,13 +1,11 @@
-name: inherit
-description: Inherit and data handle utilities for code reuse.
+name: bind_state
+description: Code reuse for stateful widgets with a single data to handle.
 version: 0.0.0
 resolution: workspace
 environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
 
 dependencies:
   flutter: { sdk: flutter }
-  modifier: ^0.0.0
-  wrap: ^1.0.0
 
 dev_dependencies:
   flutter_test: { sdk: flutter }
