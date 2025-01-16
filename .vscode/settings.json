@@ -9,12 +9,16 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": { "source.organizeImports": "always" },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[proto3]": { "editor.defaultFormatter": "xaver.clang-format" },
   "[toml]": { "editor.defaultFormatter": "tamasfe.even-better-toml" },
   "[dart]": { "editor.defaultFormatter": "Dart-Code.dart-code" },
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer",
     "editor.tabSize": 4
   },
+
+  // Specify style for clang-format for proto buffers.
+  "clang-format.fallbackStyle": "LLVM",
 
   // File nesting patterns (enable as you wish locally).
   "explorer.fileNesting.patterns": {
@@ -72,6 +76,7 @@
     "unawaited",
     "usvg",
     "worktrace",
+    "xaver",
     "xcassets",
     "xhdpi",
     "xxhdpi",
