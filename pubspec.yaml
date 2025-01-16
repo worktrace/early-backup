@@ -11,6 +11,7 @@ workspace:
 
   # Development toolkit and command-line tool.
   - packages/auto_stories
+  - packages/auto_stories_anno
   - packages/auto_stories_dev
 
   # Utilities and code reuse.
