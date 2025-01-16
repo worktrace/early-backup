@@ -1,6 +1,8 @@
-import 'package:auto_stories/auto_stories.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:inherit/inherit.dart';
+import 'package:wrap/debug.dart';
+import 'package:wrap/wrap.dart';
 
 void main() {
   test('adapt settings', () {
@@ -42,7 +44,7 @@ void main() {
       locales: [enUS, zhHansSG],
       defaultLocale: zhHansCN,
     );
-    await t.pumpWidget(probe.center().adaptiveLocale(adapter));
+    await t.pumpWidget(probe.center().adaptiveLocale(adapter).ensureText());
     expect(find.text(zhHansCN.id.toString()), findsOneWidget);
 
     binding.platformDispatcher.localesTestValue = [const Locale('en')];
@@ -72,7 +74,7 @@ void main() {
       locales: [enUS, zhHansSG],
       defaultLocale: zhHantHK,
     );
-    await t.pumpWidget(probe.center().adaptiveLocale(adapter));
+    await t.pumpWidget(probe.center().adaptiveLocale(adapter).ensureText());
     expect(find.text(zhHantHK.id.toString()), findsOneWidget);
 
     // Match first in the system locales.
