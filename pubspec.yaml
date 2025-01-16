@@ -4,10 +4,25 @@ publish_to: none
 environment: { sdk: ^3.6.0 }
 
 workspace:
+  # Application and code components.
   - apps/flutter
+  - packages/work_trace
+  - packages/work_trace_ui
+
+  # Development toolkit and command-line tool.
   - packages/auto_stories
-  - packages/auto_stories_compat
+  - packages/auto_stories_anno
   - packages/auto_stories_dev
+
+  # Utilities and code reuse.
+  - packages/animation_reuse
+  - packages/bang_lerp
+  - packages/bind_state
+  - packages/inherit
+  - packages/modifier
+  - packages/smooth_effects
+  - packages/syntax_sugar
+  - packages/wrap
 
 dependencies:
   auto_stories_dev: ^0.0.0

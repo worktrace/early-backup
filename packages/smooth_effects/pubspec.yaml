@@ -1,0 +1,14 @@
+name: smooth_effects
+description: Animation effects to make Flutter app smooth and elegant.
+version: 0.0.0
+resolution: workspace
+environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
+
+dependencies:
+  bang_lerp: ^0.0.0
+  flutter: { sdk: flutter }
+  syntax_sugar: ^0.0.0
+  wrap: ^1.0.0
+
+dev_dependencies:
+  flutter_test: { sdk: flutter }

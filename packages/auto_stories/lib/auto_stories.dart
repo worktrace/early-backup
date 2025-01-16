@@ -1,3 +1,1 @@
-export 'src/effect.dart';
-export 'src/state.dart';
-export 'src/utils.dart';
+export 'package:auto_stories_anno/auto_stories_anno.dart';

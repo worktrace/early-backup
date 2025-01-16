@@ -1,4 +1,4 @@
-import 'package:auto_stories/auto_stories.dart';
+import 'package:auto_stories/kit.dart';
 import 'package:flutter/widgets.dart' hide Locale;
 import 'package:worktrace/state/locales/ar.dart';
 

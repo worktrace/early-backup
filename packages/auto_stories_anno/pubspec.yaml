@@ -1,0 +1,8 @@
+name: auto_stories_anno
+description: Annotations for code generating of the auto_stories toolchain.
+version: 0.0.0
+resolution: workspace
+environment: { sdk: ^3.6.0 }
+
+dev_dependencies:
+  test: ^1.24.0

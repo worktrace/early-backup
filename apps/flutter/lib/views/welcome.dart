@@ -1,4 +1,4 @@
-import 'package:auto_stories/auto_stories.dart';
+import 'package:auto_stories/kit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:worktrace/state.dart';
 
