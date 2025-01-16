@@ -1,0 +1,11 @@
+name: paint_logo
+description: Paint logo to Flutter canvas, and also export to svg and images.
+version: 0.0.0
+resolution: workspace
+environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
+
+dependencies:
+  flutter: { sdk: flutter }
+
+dev_dependencies:
+  flutter_test: { sdk: flutter }
