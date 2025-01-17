@@ -20,7 +20,7 @@ workspace:
   - packages/bind_state
   - packages/inherit
   - packages/modifier
-  - packages/paint_logo
+  - packages/paint_graph
   - packages/smooth_effects
   - packages/syntax_sugar
   - packages/wrap
