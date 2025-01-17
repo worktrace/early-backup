@@ -20,9 +20,11 @@ workspace:
   - packages/bind_state
   - packages/inherit
   - packages/modifier
+  - packages/paint_graph
   - packages/smooth_effects
   - packages/syntax_sugar
   - packages/wrap
 
 dependencies:
   auto_stories_dev: ^0.0.0
+  work_trace_ui: ^0.0.0
