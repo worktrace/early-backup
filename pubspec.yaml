@@ -16,7 +16,7 @@ workspace:
 
   # Utilities and code reuse.
   - packages/animation_reuse
-  - packages/bang_lerp
+  - packages/avoid_nullable
   - packages/bind_state
   - packages/inherit
   - packages/modifier

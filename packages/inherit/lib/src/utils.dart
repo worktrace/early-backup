@@ -1,4 +1,4 @@
-import 'package:bang_lerp/bang_lerp.dart';
+import 'package:avoid_nullable/avoid_nullable.dart';
 import 'package:flutter/widgets.dart';
 
 class AreaColors {

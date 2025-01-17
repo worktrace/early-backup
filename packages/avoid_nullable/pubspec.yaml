@@ -1,5 +1,5 @@
-name: bang_lerp
-description: Not nullable lerp compute optimization over the standard library.
+name: avoid_nullable
+description: Utilities to avoid unnecessary nullable to improve performance.
 version: 0.0.0
 resolution: workspace
 environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
