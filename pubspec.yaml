@@ -27,3 +27,4 @@ workspace:
 
 dependencies:
   auto_stories_dev: ^0.0.0
+  work_trace_ui: ^0.0.0
