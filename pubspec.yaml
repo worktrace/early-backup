@@ -20,7 +20,6 @@ workspace:
   - packages/custom_app
   - packages/inherit
   - packages/modifier
-  - packages/paint_svg
   - packages/smooth_ui
   - packages/state_reuse
   - packages/wrap
