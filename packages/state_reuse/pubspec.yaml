@@ -1,13 +1,13 @@
-name: animation_reuse
-description: Animation and widget code reuse for Flutter code optimization.
+name: state_reuse
+description: Code reuse utilities for data binding of stateful widgets.
 version: 0.0.0
 resolution: workspace
 environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
 
 dependencies:
   avoid_nullable: ^0.0.0
-  bind_state: ^0.0.0
   flutter: { sdk: flutter }
 
 dev_dependencies:
   flutter_test: { sdk: flutter }
+  wrap: ^1.0.0

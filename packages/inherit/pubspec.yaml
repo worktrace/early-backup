@@ -5,11 +5,10 @@ resolution: workspace
 environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
 
 dependencies:
-  animation_reuse: ^0.0.0
   avoid_nullable: ^0.0.0
-  bind_state: ^0.0.0
   flutter: { sdk: flutter }
   modifier: ^0.0.0
+  state_reuse: ^0.0.0
   wrap: ^1.0.0
 
 dev_dependencies:

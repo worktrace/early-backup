@@ -1,7 +1,7 @@
-import 'package:bind_state/bind_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:state_reuse/state_reuse.dart';
 import 'package:wrap/debug.dart';
 import 'package:wrap/wrap.dart';
 
