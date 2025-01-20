@@ -19,7 +19,7 @@ workspace:
   - packages/inherit
   - packages/modifier
   - packages/paint_graph
-  - packages/smooth_effects
+  - packages/smooth_ui
   - packages/state_reuse
   - packages/syntax_sugar
   - packages/wrap
