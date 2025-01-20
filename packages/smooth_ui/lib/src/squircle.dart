@@ -1,6 +1,6 @@
 import 'package:avoid_nullable/avoid_nullable.dart';
+import 'package:compat_utils/compat_utils.dart';
 import 'package:flutter/widgets.dart';
-import 'package:syntax_sugar/syntax_sugar.dart';
 import 'package:wrap/wrap.dart';
 
 import 'utils.dart';

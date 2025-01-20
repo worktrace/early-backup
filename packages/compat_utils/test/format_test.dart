@@ -1,4 +1,4 @@
-import 'package:syntax_sugar/syntax_sugar.dart';
+import 'package:compat_utils/compat_utils.dart';
 import 'package:test/test.dart';
 
 void main() {

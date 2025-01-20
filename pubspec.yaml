@@ -16,13 +16,13 @@ workspace:
 
   # Utilities and code reuse.
   - packages/avoid_nullable
+  - packages/compat_utils
   - packages/custom_app
   - packages/inherit
   - packages/modifier
   - packages/paint_svg
   - packages/smooth_ui
   - packages/state_reuse
-  - packages/syntax_sugar
   - packages/wrap
 
 dependencies:
