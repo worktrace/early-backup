@@ -15,14 +15,14 @@ workspace:
   - packages/auto_stories_dev
 
   # Utilities and code reuse.
-  - packages/animation_reuse
-  - packages/bang_lerp
-  - packages/bind_state
+  - packages/avoid_nullable
+  - packages/compat_utils
+  - packages/custom_app
   - packages/inherit
   - packages/modifier
-  - packages/paint_graph
-  - packages/smooth_effects
-  - packages/syntax_sugar
+  - packages/paint_svg
+  - packages/smooth_ui
+  - packages/state_reuse
   - packages/wrap
 
 dependencies:

@@ -1,0 +1,8 @@
+name: compat_utils
+description: A utilities library containing useful tools and syntax sugars.
+version: 0.0.0
+resolution: workspace
+environment: { sdk: ^3.6.0 }
+
+dev_dependencies:
+  test: ^1.24.0
