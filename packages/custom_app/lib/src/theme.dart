@@ -1,11 +1,9 @@
 import 'package:avoid_nullable/avoid_nullable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:inherit/inherit.dart';
 import 'package:state_reuse/state_reuse.dart';
 import 'package:wrap/wrap.dart';
-
-import 'inherit.dart';
-import 'utils.dart';
 
 extension WrapTheme on Widget {
   Widget themeAs<T extends ThemeBase>(BuildContext context, T theme) {

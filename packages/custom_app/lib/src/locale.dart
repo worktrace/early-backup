@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:inherit/inherit.dart';
 import 'package:state_reuse/state_reuse.dart';
 import 'package:wrap/wrap.dart';
-
-import 'inherit.dart';
 
 extension WrapLocale on Widget {
   LocaleApply<T> locale<T extends LocaleBase>(T locale, {Key? key}) {
