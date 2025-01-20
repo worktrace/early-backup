@@ -2,6 +2,7 @@
 library;
 
 export 'package:avoid_nullable/avoid_nullable.dart';
+export 'package:custom_app/custom_app.dart';
 export 'package:inherit/inherit.dart';
 export 'package:modifier/modifier.dart';
 export 'package:smooth_ui/smooth_ui.dart';

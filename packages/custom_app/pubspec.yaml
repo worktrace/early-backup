@@ -1,20 +1,15 @@
-name: auto_stories
-description: Auto generate widget preview with minimal configurations.
+name: custom_app
+description: Customizable app framework without material or cupertino.
 version: 0.0.0
 resolution: workspace
 environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
 
 dependencies:
-  auto_stories_anno: ^0.0.0
   avoid_nullable: ^0.0.0
-  custom_app: ^0.0.0
   flutter: { sdk: flutter }
-  inherit: ^0.0.0
-  modifier: ^0.0.0
-  smooth_ui: ^0.0.0
   state_reuse: ^0.0.0
-  syntax_sugar: ^0.0.0
   wrap: ^1.0.0
 
 dev_dependencies:
   flutter_test: { sdk: flutter }
+  modifier: ^0.0.0

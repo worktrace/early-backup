@@ -16,6 +16,7 @@ workspace:
 
   # Utilities and code reuse.
   - packages/avoid_nullable
+  - packages/custom_app
   - packages/inherit
   - packages/modifier
   - packages/paint_svg
