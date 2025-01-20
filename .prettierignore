@@ -1,0 +1,9 @@
+# Git tracked but auto-generated files.
+# see https://prettier.io/docs/ignore#ignoring-files-prettierignore
+
+# Auto generated and managed by Flutter.
+**/flutter/android/**/*
+**/flutter/ios/**/*
+**/flutter/linux/**/*
+**/flutter/macos/**/*
+**/flutter/windows/**/*
