@@ -22,14 +22,16 @@
 
   // File nesting patterns (enable as you wish locally).
   "explorer.fileNesting.patterns": {
-    "pubspec.yaml": "pubspec.lock, .metadata",
+    ".flutter-plugins": ".flutter-plugins-dependencies",
+    "pubspec.yaml": "pubspec.lock, .metadata, .flutter-plugins",
     "package.json": "pnpm-lock.yaml",
     "Cargo.toml": "Cargo.lock",
     "readme.md": "license"
   },
 
   "files.associations": {
-    ".metadata": "yaml"
+    ".metadata": "yaml",
+    ".flutter-plugins-dependencies": "json"
   },
 
   // Code spell checker (requires recommended extensions).
