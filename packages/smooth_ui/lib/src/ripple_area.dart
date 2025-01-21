@@ -4,12 +4,14 @@ import 'ripple.dart';
 import 'utils.dart';
 
 class RippleAreaPainter extends RipplePainter {
-  const RippleAreaPainter({super.center, super.radius, super.color});
+  const RippleAreaPainter({super.center, super.ratio, super.color});
 
   @override
   void paint(Canvas canvas, Size size) {
+    final radius = size.longerThanDiagonal * ratio;
+    final paint = Paint()..color = color;
     canvas
       ..clipRect(size.toRectFill)
-      ..drawCircle(center, radius, Paint()..color = color);
+      ..drawCircle(center, radius, paint);
   }
 }
