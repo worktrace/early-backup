@@ -1,7 +1,29 @@
 import 'package:flutter/gestures.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 extension WrapInteract on Widget {
+  MouseRegion mouse({
+    Key? key,
+    PointerEnterEventListener? onEnter,
+    PointerExitEventListener? onExit,
+    PointerHoverEventListener? onHover,
+    MouseCursor cursor = MouseCursor.defer,
+    bool opaque = true,
+    HitTestBehavior? hitTestBehavior,
+  }) {
+    return MouseRegion(
+      key: key,
+      onEnter: onEnter,
+      onExit: onExit,
+      onHover: onHover,
+      cursor: cursor,
+      opaque: opaque,
+      hitTestBehavior: hitTestBehavior,
+      child: this,
+    );
+  }
+
   GestureDetector gesture({
     Key? key,
 
