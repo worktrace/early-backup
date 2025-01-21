@@ -8,8 +8,10 @@
     "review": "prettier --check . && oxlint"
   },
   "devDependencies": {
+    "@types/node": "^22.10.7",
     "oxlint": "^0.15.3",
     "prettier": "^3.4.2",
-    "prettier-plugin-sh": "^0.14.0"
+    "prettier-plugin-sh": "^0.14.0",
+    "vite-node": "^3.0.2"
   }
 }

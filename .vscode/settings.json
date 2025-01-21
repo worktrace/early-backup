@@ -50,6 +50,7 @@
     "combinators",
     "cupertino",
     "esbenp",
+    "esbuild",
     "futureor",
     "hdpi",
     "interps",
