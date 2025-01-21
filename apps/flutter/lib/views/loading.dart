@@ -6,6 +6,10 @@ final loadingRoute = GoRoute(
   path: '/',
   builder: (context, state) {
     final locale = context.find<Locale>()!;
-    return '${locale.loading}...'.asText().center();
+    return LoadingContainer(
+      onFinish: () {},
+      onError: (err, trace) {},
+      child: '${locale.loading}...'.asText().center(),
+    );
   },
 );
