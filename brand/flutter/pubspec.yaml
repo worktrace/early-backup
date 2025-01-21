@@ -1,11 +1,13 @@
-name: paint_svg
-description: An abstract layer to support both Flutter canvas and svg output.
+name: worktrace_brand
+description: Paint brand effects such as logo and banner of WorkTrace.
 version: 0.0.0
+publish_to: none
 resolution: workspace
 environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
 
 dependencies:
   flutter: { sdk: flutter }
+  wrap: ^1.0.0
 
 dev_dependencies:
   flutter_test: { sdk: flutter }
