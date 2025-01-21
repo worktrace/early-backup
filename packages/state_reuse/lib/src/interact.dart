@@ -2,6 +2,31 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'animation.dart';
+
+abstract class AnimatedMouseWidget extends MouseWidget {
+  const AnimatedMouseWidget({
+    super.key,
+    this.animation = const AnimationDefibrillation(),
+    super.onEnter,
+    super.onExit,
+    super.onHover,
+    super.cursor,
+    super.opaque,
+    super.hitTestBehavior,
+  });
+
+  final AnimationDefibrillation animation;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      DiagnosticsProperty<AnimationDefibrillation>('animation', animation),
+    );
+  }
+}
+
 abstract class MouseWidget extends StatefulWidget {
   const MouseWidget({
     super.key,
