@@ -34,4 +34,21 @@ extension WrapDisplay on List<Widget> {
       children: this,
     );
   }
+
+  Stack asStack({
+    Key? key,
+    AlignmentGeometry alignment = AlignmentDirectional.topStart,
+    TextDirection? textDirection,
+    StackFit fit = StackFit.loose,
+    Clip clipBehavior = Clip.hardEdge,
+  }) {
+    return Stack(
+      key: key,
+      alignment: alignment,
+      textDirection: textDirection,
+      fit: fit,
+      clipBehavior: clipBehavior,
+      children: this,
+    );
+  }
 }
