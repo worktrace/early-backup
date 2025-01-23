@@ -9,6 +9,44 @@ extension WrapAlign on Widget {
       child: this,
     );
   }
+
+  Positioned position({
+    Key? key,
+    double? left,
+    double? top,
+    double? right,
+    double? bottom,
+    double? width,
+    double? height,
+  }) {
+    return Positioned(
+      key: key,
+      left: left,
+      top: top,
+      right: right,
+      bottom: bottom,
+      width: width,
+      height: height,
+      child: this,
+    );
+  }
+
+  Positioned positionFill({
+    Key? key,
+    double? left = 0.0,
+    double? top = 0.0,
+    double? right = 0.0,
+    double? bottom = 0.0,
+  }) {
+    return Positioned.fill(
+      key: key,
+      top: top,
+      left: left,
+      right: right,
+      bottom: bottom,
+      child: this,
+    );
+  }
 }
 
 extension WrapDisplay on List<Widget> {
