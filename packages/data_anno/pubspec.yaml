@@ -1,0 +1,8 @@
+name: data_anno
+description: The annotations defining how to generate code for data classes.
+version: 0.0.0
+resolution: workspace
+environment: { sdk: ^3.6.0 }
+
+dev_dependencies:
+  test: ^1.24.0
