@@ -29,6 +29,25 @@ abstract class RippleBase extends AnimatedMouseWidget {
   }
 }
 
+abstract class RippleBaseState<S extends RippleBase>
+    extends SingleAnimationState<S> {
+  CustomPainter get painter;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: painter,
+      child: widget.child,
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<CustomPainter>('painter', painter));
+  }
+}
+
 abstract class RipplePainter extends CustomPainter {
   const RipplePainter({
     this.center = Offset.zero,
