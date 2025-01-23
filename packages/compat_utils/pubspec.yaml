@@ -1,5 +1,5 @@
 name: compat_utils
-description: A utilities library containing useful tools and syntax sugars.
+description: Compatible utilities between package:flutter and package:analyzer.
 version: 0.0.0
 resolution: workspace
 environment: { sdk: ^3.6.0 }
