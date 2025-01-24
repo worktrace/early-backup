@@ -117,10 +117,10 @@ abstract class RippleBaseState<S extends RippleBase>
 
 abstract class RipplePainter extends CustomPainter {
   const RipplePainter({
+    required this.color,
     this.center = Offset.zero,
     this.ratio = 0,
-    this.color = transparent,
-  });
+  }) : assert(color != transparent);
 
   final Offset center;
   final double ratio;

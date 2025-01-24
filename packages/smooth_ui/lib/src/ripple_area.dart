@@ -4,7 +4,7 @@ import 'ripple.dart';
 import 'utils.dart';
 
 class RippleAreaPainter extends RipplePainter {
-  const RippleAreaPainter({super.center, super.ratio, super.color});
+  const RippleAreaPainter({super.center, super.ratio, required super.color});
 
   @override
   void paint(Canvas canvas, Size size) {
