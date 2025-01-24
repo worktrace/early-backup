@@ -11,6 +11,9 @@ class AreaColors {
     this.foreground,
   });
 
+  factory AreaColors.background(Color color) => AreaColors(background: color);
+  factory AreaColors.foreground(Color color) => AreaColors(foreground: color);
+
   factory AreaColors.lerp(AreaColors a, AreaColors b, double t) {
     return AreaColors(
       background: lerpColor(a.background, b.background, t),
