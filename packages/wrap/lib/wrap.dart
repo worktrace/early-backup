@@ -46,4 +46,5 @@ export 'src/decorate.dart';
 export 'src/environment.dart';
 export 'src/geometry.dart';
 export 'src/interact.dart';
+export 'src/paint.dart';
 export 'src/style.dart';
