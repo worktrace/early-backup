@@ -1,11 +1,11 @@
-name: compat_utils
-description: Compatible utilities between package:flutter and package:analyzer.
+name: data_anno
+description: The annotations defining how to generate code for data classes.
 version: 0.0.0
 resolution: workspace
 environment: { sdk: ^3.6.0 }
 
 dependencies:
-  path: ^1.9.0
+  meta: ^1.15.0
 
 dev_dependencies:
   test: ^1.24.0

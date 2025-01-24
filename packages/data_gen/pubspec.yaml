@@ -1,10 +1,11 @@
-name: compat_utils
-description: Compatible utilities between package:flutter and package:analyzer.
+name: data_gen
+description: Generate convert code boilerplates for data classes automatically.
 version: 0.0.0
 resolution: workspace
 environment: { sdk: ^3.6.0 }
 
 dependencies:
+  analyzer: ^6.11.0
   path: ^1.9.0
 
 dev_dependencies:
