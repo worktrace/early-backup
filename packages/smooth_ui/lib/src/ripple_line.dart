@@ -1,6 +1,29 @@
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
+import 'package:wrap/wrap.dart';
+
+import 'ripple.dart';
+
+class SingleRippleLinePainter extends RipplePainter {
+  const SingleRippleLinePainter({
+    required super.color,
+    super.center,
+    super.ratio,
+    this.padding = EdgeInsets.zero,
+  });
+
+  final EdgeInsets padding;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (ratio == 0) return;
+    canvas.drawRRect(
+      lineAreaOf(size, padding, center, ratio).capsule,
+      Paint()..color = color,
+    );
+  }
+}
 
 Rect lineAreaOf(Size size, EdgeInsets padding, Offset center, double ratio) {
   return size.width > size.height
