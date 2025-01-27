@@ -8,6 +8,7 @@ class RippleAreaPainter extends RipplePainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    if (ratio == 0) return;
     final radius = size.longerThanDiagonal * ratio;
     final paint = Paint()..color = color;
     canvas
