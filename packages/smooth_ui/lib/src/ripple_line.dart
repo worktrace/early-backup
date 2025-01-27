@@ -5,8 +5,8 @@ import 'package:wrap/wrap.dart';
 
 import 'ripple.dart';
 
-class SingleRippleLinePainter extends RipplePainter {
-  const SingleRippleLinePainter({
+class RippleLinePainter extends RipplePainter {
+  const RippleLinePainter({
     required super.color,
     super.center,
     super.ratio,
