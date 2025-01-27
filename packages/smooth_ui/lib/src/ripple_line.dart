@@ -1,9 +1,52 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:wrap/wrap.dart';
 
 import 'ripple.dart';
+
+class RippleLine extends RippleBase {
+  const RippleLine({
+    super.key,
+    super.animation,
+    this.color = kRippleColor,
+    super.hold,
+    super.onEnter,
+    super.onExit,
+    super.onHover,
+    super.opaque = true,
+    super.hitTestBehavior = HitTestBehavior.opaque,
+    this.padding = EdgeInsets.zero,
+    super.child,
+  });
+
+  final Color color;
+  final EdgeInsets padding;
+
+  @override
+  State<RippleLine> createState() => _RippleHoverLineState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ColorProperty('color', color))
+      ..add(DiagnosticsProperty<EdgeInsets>('padding', padding));
+  }
+}
+
+class _RippleHoverLineState extends RippleBaseState<RippleLine> {
+  @override
+  CustomPainter get painter {
+    return RippleLinePainter(
+      color: widget.color,
+      center: center,
+      ratio: controller.value,
+      padding: widget.padding,
+    );
+  }
+}
 
 class RippleLinePainter extends RipplePainter {
   const RippleLinePainter({

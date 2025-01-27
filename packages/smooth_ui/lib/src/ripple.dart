@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:state_reuse/state_reuse.dart';
 import 'package:wrap/wrap.dart';
 
+const kRippleColor = Color.fromARGB(255, 8, 140, 222);
 const kRippleDuration = Duration(milliseconds: 245);
 const kRippleAnimation = AnimationDefibrillation(duration: kRippleDuration);
 
