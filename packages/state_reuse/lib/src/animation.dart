@@ -21,6 +21,18 @@ class AnimationData {
   }
 }
 
+const kHoverDefibrillation = Duration(milliseconds: 35);
+
+class AnimationDefibrillation extends AnimationData {
+  const AnimationDefibrillation({
+    super.duration,
+    super.curve,
+    this.defibrillation = kHoverDefibrillation,
+  });
+
+  final Duration defibrillation;
+}
+
 extension AnimationUtils on AnimationController {
   TickerFuture animateAs(AnimationData animation, double target) {
     return animateTo(

@@ -8,6 +8,7 @@ dependencies:
   avoid_nullable: ^0.0.0
   compat_utils: ^0.0.0
   flutter: { sdk: flutter }
+  state_reuse: ^0.0.0
   wrap: ^1.0.0
 
 dev_dependencies:
