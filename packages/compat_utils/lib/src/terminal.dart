@@ -74,3 +74,36 @@ mixin TerminalColor {
         '$resetBackgroundCode';
   }
 }
+
+class BasicColor with TerminalColor {
+  const BasicColor(this.code)
+      : assert((code >= 30 && code <= 37) || (code >= 90 && code <= 97));
+
+  final int code;
+
+  @override
+  String get foregroundCode => '\x1b[${code}m';
+
+  @override
+  String get backgroundCode => '\x1b[${code + 10}m';
+}
+
+// Normal basic colors.
+const black = BasicColor(30);
+const red = BasicColor(31);
+const green = BasicColor(32);
+const yellow = BasicColor(33);
+const blue = BasicColor(34);
+const magenta = BasicColor(35);
+const cyan = BasicColor(36);
+const white = BasicColor(37);
+
+// Highlighted basic colors.
+const hiBlack = BasicColor(90);
+const hiRed = BasicColor(91);
+const hiGreen = BasicColor(92);
+const hiYellow = BasicColor(93);
+const hiBlue = BasicColor(94);
+const hiMagenta = BasicColor(95);
+const hiCyan = BasicColor(96);
+const hiWhite = BasicColor(97);
