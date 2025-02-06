@@ -1,3 +1,15 @@
+extension StringUtils on String {
+  String removePrefix(String prefix) {
+    return startsWith(prefix) ? substring(prefix.length) : this;
+  }
+
+  String removeSuffix(String suffix) {
+    return endsWith(suffix) ? substring(0, length - suffix.length) : this;
+  }
+
+  String get unwrapParenthesis => removePrefix('(').removeSuffix(')');
+}
+
 extension CaseConvert on String {
   /// Split string into parts according to their case.
   ///
