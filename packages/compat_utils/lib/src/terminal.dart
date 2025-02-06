@@ -22,3 +22,14 @@ class TerminalFont {
         '$resetDecorateCode';
   }
 }
+
+const bold = TerminalFont(code: 1, resetCode: 22);
+const faint = TerminalFont(code: 2, resetCode: 22);
+const italic = TerminalFont(code: 3, resetCode: 23);
+const underline = TerminalFont(code: 4, resetCode: 24);
+const blink = TerminalFont(code: 5, resetCode: 25);
+const blinkRapid = TerminalFont(code: 6, resetCode: 25);
+const negative = TerminalFont(code: 7, resetCode: 27);
+const conceal = TerminalFont(code: 8, resetCode: 28);
+const strikethrough = TerminalFont(code: 9, resetCode: 29);
+const doubleUnderline = TerminalFont(code: 21, resetCode: 24);
