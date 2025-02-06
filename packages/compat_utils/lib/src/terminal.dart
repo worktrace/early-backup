@@ -107,3 +107,16 @@ const hiBlue = BasicColor(94);
 const hiMagenta = BasicColor(95);
 const hiCyan = BasicColor(96);
 const hiWhite = BasicColor(97);
+
+/// A terminal color defined by a [code] from 0 to 255.
+class CodeColor with TerminalColor {
+  const CodeColor(this.code) : assert(code >= 0 && code <= 0xff);
+
+  final int code;
+
+  @override
+  String get foregroundCode => '\x1b[38;5;${code}m';
+
+  @override
+  String get backgroundCode => '\x1b[48;5;${code}m';
+}
