@@ -33,3 +33,44 @@ const negative = TerminalFont(code: 7, resetCode: 27);
 const conceal = TerminalFont(code: 8, resetCode: 28);
 const strikethrough = TerminalFont(code: 9, resetCode: 29);
 const doubleUnderline = TerminalFont(code: 21, resetCode: 24);
+
+mixin TerminalColor {
+  static const resetForegroundCode = '\x1b[39m';
+  static const resetBackgroundCode = '\x1b[49m';
+
+  String get foregroundCode;
+  String get backgroundCode;
+
+  String foreground(String raw) => decorateForeground(raw);
+  String background(String raw) => decorateBackground(raw);
+
+  String wrapForeground(String raw) {
+    return '$foregroundCode$raw$resetForegroundCode';
+  }
+
+  String wrapBackground(String raw) {
+    return '$backgroundCode$raw$resetBackgroundCode';
+  }
+
+  String decorateForeground(String raw) {
+    final resetIndex = raw.lastIndexOf(resetForegroundCode);
+    if (resetIndex < 0) return '$foregroundCode$raw$resetForegroundCode';
+    final separateIndex = resetIndex + resetForegroundCode.length;
+    return '$foregroundCode'
+        '${raw.substring(0, separateIndex)}'
+        '$foregroundCode'
+        '${raw.substring(separateIndex)}'
+        '$resetForegroundCode';
+  }
+
+  String decorateBackground(String raw) {
+    final resetIndex = raw.lastIndexOf(resetBackgroundCode);
+    if (resetIndex < 0) return '$backgroundCode$raw$resetBackgroundCode';
+    final separateIndex = resetIndex + resetBackgroundCode.length;
+    return '$backgroundCode'
+        '${raw.substring(0, separateIndex)}'
+        '$backgroundCode'
+        '${raw.substring(separateIndex)}'
+        '$resetBackgroundCode';
+  }
+}
