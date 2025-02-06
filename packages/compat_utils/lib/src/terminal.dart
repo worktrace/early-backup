@@ -15,12 +15,10 @@ class TerminalFont {
     final resetIndex = raw.lastIndexOf(resetDecorateCode);
     if (resetIndex < 0) return '$decorateCode$raw$resetDecorateCode';
     final separateIndex = resetIndex + resetDecorateCode.length;
-    return [
-      decorateCode,
-      raw.substring(0, separateIndex),
-      decorateCode,
-      raw.substring(separateIndex),
-      resetDecorateCode,
-    ].join();
+    return '$decorateCode'
+        '${raw.substring(0, separateIndex)}'
+        '$decorateCode'
+        '${raw.substring(separateIndex)}'
+        '$resetDecorateCode';
   }
 }
