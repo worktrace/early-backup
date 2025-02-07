@@ -1,4 +1,44 @@
 import 'format.dart';
+import 'terminal_wrap.dart';
+
+enum TraceLevel {
+  trace,
+  debug,
+  info,
+  warn,
+  error;
+
+  // Override operators.
+  bool operator >(TraceLevel other) => index > other.index;
+  bool operator <(TraceLevel other) => index < other.index;
+  bool operator >=(TraceLevel other) => index >= other.index;
+  bool operator <=(TraceLevel other) => index <= other.index;
+
+  /// The max length of all value names.
+  ///
+  /// 1. `static final` value rather than getter to improve performance.
+  /// 2. It is useful when indenting the log output.
+  /// 3. Attention that this is the exact length, extra spaces might required.
+  static final int width = TraceLevel.values
+      .map((value) => value.name.length)
+      .reduce((a, b) => a > b ? a : b);
+
+  String decorate({int? pad}) {
+    final content = pad == null ? name : name.padLeft(pad);
+    switch (this) {
+      case trace:
+        return content.magenta.italic;
+      case debug:
+        return content.blue.italic;
+      case info:
+        return content.green.italic;
+      case warn:
+        return content.yellow.italic;
+      case error:
+        return content.red.italic;
+    }
+  }
+}
 
 TracePosition? tracePosition({int depth = 2}) {
   final lines = StackTrace.current
