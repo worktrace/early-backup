@@ -26,17 +26,22 @@
     "pubspec.yaml": "pubspec.lock, .metadata, .flutter-plugins",
     "package.json": "pnpm-lock.yaml",
     "Cargo.toml": "Cargo.lock",
-    "readme.md": "license"
+    "readme.md": "license",
+    "*.js": "${capture}.d.ts, ${capture}.js.map",
+    "*.d.ts": "${capture}.d.ts.map"
   },
 
   "files.associations": {
     ".metadata": "yaml",
-    ".flutter-plugins-dependencies": "json"
+    ".flutter-plugins-dependencies": "json",
+    ".js.map": "json",
+    ".d.ts.map": "json"
   },
 
   // Code spell checker (requires recommended extensions).
   "cSpell.ignorePaths": [
     ".dart_tool",
+    "out",
     "locales",
     "node_modules",
     "target",
