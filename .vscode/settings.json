@@ -27,8 +27,10 @@
     "package.json": "pnpm-lock.yaml",
     "Cargo.toml": "Cargo.lock",
     "readme.md": "license",
-    "*.js": "${capture}.d.ts, ${capture}.js.map",
-    "*.d.ts": "${capture}.d.ts.map"
+    "*.ts": "${capture}.d.ts",
+    "*.js": "${capture}.js.map",
+    "*.cjs": "${capture}.cjs.map",
+    "*.d.ts": "${capture}.js, ${capture}.cjs, ${capture}.d.ts.map"
   },
 
   "files.associations": {
