@@ -1,0 +1,16 @@
+{
+  "name": "@worktrace/shell",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "watch": "tsc --project tsconfig.json --watch"
+  }
+}
