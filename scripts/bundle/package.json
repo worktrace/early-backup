@@ -1,0 +1,7 @@
+{
+  "name": "@worktrace/bundle",
+  "description": "Shared build script for bundling typescript libraries.",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true
+}
