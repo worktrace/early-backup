@@ -8,6 +8,19 @@ extension StringUtils on String {
   }
 
   String get unwrapParenthesis => removePrefix('(').removeSuffix(')');
+
+  (String, String)? splitOnce(String separator) {
+    final index = indexOf(separator);
+    if (index == -1) return null;
+    return (substring(0, index), substring(index + separator.length));
+  }
+}
+
+extension StringBufferUtils on StringBuffer {
+  /// When not empty, add a space, to split between the following contents.
+  void get adaptSpace {
+    if (isNotEmpty) write(' ');
+  }
 }
 
 extension FormatDateTime on DateTime {
