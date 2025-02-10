@@ -33,6 +33,7 @@
     "*.d.ts": "${capture}.js, ${capture}.cjs, ${capture}.d.ts.map"
   },
 
+  // Special files.
   "files.associations": {
     ".metadata": "yaml",
     ".flutter-plugins-dependencies": "json",
@@ -40,6 +41,9 @@
     "*.cjs.map": "json",
     "*.d.ts.map": "json"
   },
+  "editor.wordWrapColumn": 80,
+  "[javascript]": { "editor.wordWrap": "wordWrapColumn" },
+  "[json]": { "editor.wordWrap": "wordWrapColumn" },
 
   // Code spell checker (requires recommended extensions).
   "cSpell.ignorePaths": [
