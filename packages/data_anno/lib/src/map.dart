@@ -2,15 +2,16 @@ import 'package:meta/meta_meta.dart';
 
 import 'annotation.dart';
 
-const mapEncode = MapEncode();
-const mapDecode = MapDecode();
+abstract class MapAnnotation extends DataAnnotation {
+  const MapAnnotation();
+}
 
 @Target({TargetKind.classType})
-class MapEncode extends DataAnnotation {
+class MapEncode extends MapAnnotation {
   const MapEncode();
 }
 
 @Target({TargetKind.constructor})
-class MapDecode extends DataAnnotation {
+class MapDecode extends MapAnnotation {
   const MapDecode();
 }
