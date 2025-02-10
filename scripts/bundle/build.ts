@@ -1,10 +1,10 @@
 // This script is here because the lib cannot build itself.
 import terser from "@rollup/plugin-terser"
 import typescript from "@rollup/plugin-typescript"
-import { readFileSync } from "node:fs"
+import { generateDtsBundle } from "dts-bundle-generator"
+import { readFileSync, writeFileSync } from "node:fs"
 import { join, normalize } from "node:path"
 import { rollup } from "rollup"
-
 export interface ExportPaths {
   /**
    * This field is not defined in package.json specification,
@@ -59,9 +59,10 @@ export async function bundle(
   paths: ExportPaths,
   tsconfigPath?: string,
 ) {
+  const input = normalize(join(root, paths.source))
   const bundle = await rollup({
     plugins: [typescript({ tsconfig: tsconfigPath }), terser()],
-    input: normalize(join(root, paths.source)),
+    input,
     external(source, _importer, isResolved) {
       if (isResolved) return false
       return source.startsWith("node:")
@@ -77,6 +78,10 @@ export async function bundle(
     format: "commonjs",
     sourcemap: true,
   })
+
+  // Generate bundle.
+  const results = generateDtsBundle([{ filePath: input }])
+  writeFileSync(normalize(join(root, paths.dts)), results.join("\n"))
 }
 
 export async function bundlePackage(root: string, tsconfigPath?: string) {
