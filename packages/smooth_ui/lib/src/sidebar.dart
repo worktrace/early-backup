@@ -5,12 +5,14 @@ import 'package:wrap/wrap.dart';
 class SidebarContainer extends StatefulWidget {
   const SidebarContainer({
     super.key,
+    this.sizes = const SidebarSizes(),
     this.sidebarWidth = 256,
     this.primary = true,
     required this.sidebar,
     required this.child,
   });
 
+  final SidebarSizes sizes;
   final double sidebarWidth;
 
   /// Whether the sidebar is on the beginning side as text direction.
@@ -32,6 +34,7 @@ class SidebarContainer extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty<SidebarSizes>('sizes', sizes))
       ..add(DoubleProperty('sidebarWidth', sidebarWidth))
       ..add(DiagnosticsProperty<bool>('primary', primary));
   }
@@ -58,4 +61,20 @@ class _SidebarContainerState extends State<SidebarContainer> {
 
     return [content, sidebar].asStack(clipBehavior: Clip.antiAlias);
   }
+}
+
+class SidebarSizes {
+  const SidebarSizes({
+    this.resize = const ResizeBarSizes(),
+  });
+
+  final ResizeBarSizes resize;
+}
+
+class ResizeBarSizes {
+  const ResizeBarSizes({
+    this.width = 5,
+  });
+
+  final double width;
 }
