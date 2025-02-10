@@ -5,7 +5,8 @@ import { generateDtsBundle } from "dts-bundle-generator"
 import { readFileSync, writeFileSync } from "node:fs"
 import { join, normalize } from "node:path"
 import { rollup } from "rollup"
-export interface ExportPaths {
+
+interface ExportPaths {
   /**
    * This field is not defined in package.json specification,
    * but required by this package to tell the compiler where the entry is.
@@ -20,7 +21,7 @@ export interface ExportPaths {
  * There might be one or more layer of export path defines.
  * @param root path to the root folder where package.json locates.
  */
-export function parseExportPaths(root: string): ExportPaths[] {
+function parseExportPaths(root: string): ExportPaths[] {
   const manifest = readFileSync(join(root, "package.json")).toString()
   const exports = JSON.parse(manifest)["exports"]
 
@@ -54,11 +55,7 @@ export function parseExportPaths(root: string): ExportPaths[] {
   return handler
 }
 
-export async function bundle(
-  root: string,
-  paths: ExportPaths,
-  tsconfigPath?: string,
-) {
+async function bundle(root: string, paths: ExportPaths, tsconfigPath?: string) {
   const input = normalize(join(root, paths.source))
   const bundle = await rollup({
     plugins: [typescript({ tsconfig: tsconfigPath }), terser()],
@@ -84,7 +81,7 @@ export async function bundle(
   writeFileSync(normalize(join(root, paths.dts)), results.join("\n"))
 }
 
-export async function bundlePackage(root: string, tsconfigPath?: string) {
+async function bundlePackage(root: string, tsconfigPath?: string) {
   await Promise.all(
     parseExportPaths(root).map((paths) => bundle(root, paths, tsconfigPath)),
   )
