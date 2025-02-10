@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:state_reuse/state_reuse.dart';
 
-typedef RouteAnimationBuilder = Widget Function(
+typedef RouteCompare = bool Function(Widget current, Widget previous);
+
+typedef RouteRenderer = Widget Function(
   double value,
   Widget child,
   Widget oldChild,
@@ -12,11 +14,13 @@ class RouteContainer extends SingleAnimationWidget {
   const RouteContainer({
     super.key,
     super.animation,
-    required this.animationBuilder,
+    required this.compare,
+    required this.renderer,
     required this.child,
   });
 
-  final RouteAnimationBuilder animationBuilder;
+  final RouteCompare compare;
+  final RouteRenderer renderer;
   final Widget child;
 
   @override
@@ -25,10 +29,10 @@ class RouteContainer extends SingleAnimationWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    final a = animationBuilder;
-    properties.add(
-      ObjectFlagProperty<RouteAnimationBuilder>.has('animationBuilder', a),
-    );
+    final r = renderer;
+    properties
+      ..add(ObjectFlagProperty<RouteCompare>.has('compare', compare))
+      ..add(ObjectFlagProperty<RouteRenderer>.has('animationBuilder', r));
   }
 }
 
@@ -36,7 +40,7 @@ class _RouteContainerState extends SingleAnimationState<RouteContainer> {
   @override
   void didUpdateWidget(covariant RouteContainer oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.child != oldWidget.child) {}
+    if (!widget.compare(widget.child, oldWidget.child)) {}
   }
 
   @override
