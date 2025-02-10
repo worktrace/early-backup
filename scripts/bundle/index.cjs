@@ -1,2 +1,2 @@
-"use strict";exports.placeholder=function(){};
+"use strict";var t=require("node:fs"),e=require("node:path");exports.parseExportPaths=function(r){const s=t.readFileSync(e.join(r,"package.json")).toString(),n=JSON.parse(s).exports,o=t=>{if("object"!=typeof t||null===t)return null;const e=t.source,r=t.import,s=t.require,n=t.types;return"string"!=typeof e||"string"!=typeof r||"string"!=typeof s||"string"!=typeof n?null:{source:e,esm:r,cjs:s,dts:n}},i=o(n);if(i)return[i];const p=[];for(const[t,e]of Object.entries(n)){const t=o(e);t&&p.push(t)}return p};
 //# sourceMappingURL=index.cjs.map
