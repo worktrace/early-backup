@@ -11,7 +11,8 @@
     "strictBuiltinIteratorReturn": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
-    "strictPropertyInitialization": true
+    "strictPropertyInitialization": true,
+    "noImplicitAny": false
   },
   "include": ["build.ts", "index.ts"]
 }
