@@ -27,16 +27,23 @@
     "package.json": "pnpm-lock.yaml",
     "Cargo.toml": "Cargo.lock",
     "readme.md": "license",
-    "*.js": "${capture}.d.ts, ${capture}.js.map",
-    "*.d.ts": "${capture}.d.ts.map"
+    "*.ts": "${capture}.d.ts",
+    "*.js": "${capture}.js.map",
+    "*.cjs": "${capture}.cjs.map",
+    "*.d.ts": "${capture}.js, ${capture}.cjs, ${capture}.d.ts.map"
   },
 
+  // Special files.
   "files.associations": {
     ".metadata": "yaml",
     ".flutter-plugins-dependencies": "json",
-    ".js.map": "json",
-    ".d.ts.map": "json"
+    "*.js.map": "json",
+    "*.cjs.map": "json",
+    "*.d.ts.map": "json"
   },
+  "editor.wordWrapColumn": 80,
+  "[javascript]": { "editor.wordWrap": "wordWrapColumn" },
+  "[json]": { "editor.wordWrap": "wordWrapColumn" },
 
   // Code spell checker (requires recommended extensions).
   "cSpell.ignorePaths": [

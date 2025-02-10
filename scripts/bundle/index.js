@@ -1,0 +1,2 @@
+import{readFileSync as t}from"node:fs";import{join as o}from"node:path";function r(r){const e=t(o(r,"package.json")).toString(),n=JSON.parse(e).exports,s=t=>{if("object"!=typeof t||null===t)return null;const o=t.source,r=t.import,e=t.require,n=t.types;return"string"!=typeof o||"string"!=typeof r||"string"!=typeof e||"string"!=typeof n?null:{source:o,esm:r,cjs:e,dts:n}},p=s(n);if(p)return[p];const f=[];for(const[t,o]of Object.entries(n)){const t=s(o);t&&f.push(t)}return f}export{r as parseExportPaths};
+//# sourceMappingURL=index.js.map
