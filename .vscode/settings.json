@@ -36,8 +36,9 @@
   "files.associations": {
     ".metadata": "yaml",
     ".flutter-plugins-dependencies": "json",
-    ".js.map": "json",
-    ".d.ts.map": "json"
+    "*.js.map": "json",
+    "*.cjs.map": "json",
+    "*.d.ts.map": "json"
   },
 
   // Code spell checker (requires recommended extensions).
