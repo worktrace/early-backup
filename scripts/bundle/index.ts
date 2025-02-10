@@ -1,5 +1,9 @@
-import { readFileSync } from "node:fs"
-import { join } from "node:path"
+import terser from "@rollup/plugin-terser"
+import typescript from "@rollup/plugin-typescript"
+import { generateDtsBundle } from "dts-bundle-generator"
+import { readFileSync, writeFileSync } from "node:fs"
+import { join, normalize } from "node:path"
+import { rollup } from "rollup"
 
 export interface ExportPaths {
   /**
@@ -48,4 +52,40 @@ export function parseExportPaths(root: string): ExportPaths[] {
     if (item) handler.push(item)
   }
   return handler
+}
+
+export async function bundle(
+  root: string,
+  paths: ExportPaths,
+  tsconfigPath?: string,
+) {
+  const input = normalize(join(root, paths.source))
+  const bundle = await rollup({
+    plugins: [typescript({ tsconfig: tsconfigPath }), terser()],
+    input,
+    external(source, _importer, isResolved) {
+      if (isResolved) return false
+      return source.startsWith("node:")
+    },
+  })
+  await bundle.write({
+    file: normalize(join(root, paths.esm)),
+    format: "esm",
+    sourcemap: true,
+  })
+  await bundle.write({
+    file: normalize(join(root, paths.cjs)),
+    format: "commonjs",
+    sourcemap: true,
+  })
+
+  // Generate bundle.
+  const results = generateDtsBundle([{ filePath: input }])
+  writeFileSync(normalize(join(root, paths.dts)), results.join("\n"))
+}
+
+export async function bundlePackage(root: string, tsconfigPath?: string) {
+  await Promise.all(
+    parseExportPaths(root).map((paths) => bundle(root, paths, tsconfigPath)),
+  )
 }
