@@ -26,7 +26,7 @@
     "pubspec.yaml": "pubspec.lock, .metadata, .flutter-plugins",
     "package.json": "pnpm-lock.yaml",
     "Cargo.toml": "Cargo.lock",
-    "readme.md": "license",
+    "readme.md": "license, license.*",
     "*.ts": "${capture}.d.ts",
     "*.js": "${capture}.js.map",
     "*.cjs": "${capture}.cjs.map",
