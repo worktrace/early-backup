@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    // Module resolution.
+    "target": "es2023",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+
+    // Linter options.
+    "strict": true,
+    "strictBindCallApply": true,
+    "strictBuiltinIteratorReturn": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "noImplicitAny": false
+  }
+}
