@@ -12,8 +12,9 @@ import { rollup } from "rollup"
  *
  * @param src path to the input folder where package.json locates.
  * @param out path to the output folder where package.json locates.
+ * @param main override entry of the output extension script.
  */
-function compileManifest(src: string, out: string) {
+function compileManifest(src: string, out: string, main?: string) {
   const raw = readFileSync(join(src, "package.json")).toString()
   const manifest = JSON.parse(raw)
 
@@ -24,6 +25,7 @@ function compileManifest(src: string, out: string) {
   manifest.devDependencies = undefined
   manifest.peerDependencies = undefined
 
+  if (main) manifest.main = main
   writeFileSync(join(out, "package.json"), JSON.stringify(manifest))
 }
 
@@ -42,12 +44,13 @@ async function bundleExtension(src: string, out: string) {
 async function main() {
   const root = import.meta.dirname
   const out = join(root, "out")
+  const outFilename = "extension.js"
   mkdirSync(out, { recursive: true })
 
-  compileManifest(root, out)
+  compileManifest(root, out, outFilename)
   await bundleExtension(
     join(root, "src", "extension.ts"),
-    join(out, "extension.js"),
+    join(out, outFilename),
   )
 }
 main()
