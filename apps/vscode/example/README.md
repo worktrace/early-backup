@@ -1,0 +1,1 @@
+# WorkTrace VSCode Extension Example

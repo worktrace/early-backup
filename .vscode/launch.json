@@ -8,11 +8,25 @@
       // see https://docs.flutter.dev/tools/vs-code#running-and-debugging
       // see https://docs.flutter.dev/tools/devtools/vscode#run-and-debug
       // see https://dartcode.org/docs/launch-configuration/
-      "name": "Launch Flutter",
+      "name": "Flutter App",
       "type": "dart",
       "request": "launch",
       "program": "${workspaceFolder}/apps/flutter/lib/main.dart",
       "cwd": "${workspaceFolder}/apps/flutter"
+    },
+    {
+      // see https://code.visualstudio.com/docs/configure/command-line
+      // see https://code.visualstudio.com/api/get-started/your-first-extension
+      // see https://code.visualstudio.com/api/advanced-topics/extension-host
+      "name": "VSCode Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "preLaunchTask": "npm: build - apps/vscode",
+      "cwd": "${workspaceFolder}/apps/vscode/out",
+      "args": [
+        "${workspaceFolder}/apps/vscode/example",
+        "--extensionDevelopmentPath=${workspaceFolder}/apps/vscode/out"
+      ]
     }
   ]
 }
