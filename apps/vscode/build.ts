@@ -1,7 +1,14 @@
 import nodeResolve from "@rollup/plugin-node-resolve"
 import terser from "@rollup/plugin-terser"
 import typescript from "@rollup/plugin-typescript"
-import { cpSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
+import {
+  cpSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs"
 import { join } from "node:path"
 import { rollup } from "rollup"
 
@@ -37,6 +44,13 @@ function copyAssets(src: string, out: string, items: string[]) {
   }
 }
 
+function emptyFolder(root: string) {
+  mkdirSync(root, { recursive: true })
+  for (const item of readdirSync(root)) {
+    rmSync(join(root, item), { recursive: true })
+  }
+}
+
 async function bundleExtension(src: string, out: string) {
   const bundle = await rollup({
     plugins: [typescript(), nodeResolve(), terser()],
@@ -54,7 +68,7 @@ async function main() {
   const src = join(root, "src")
   const out = join(root, "out")
   const outFilename = "extension.js"
-  mkdirSync(out, { recursive: true })
+  emptyFolder(out)
   copyAssets(root, out, ["README.md", "LICENSE.txt"])
   copyAssets(src, out, ["themes"])
 

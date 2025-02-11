@@ -17,7 +17,7 @@
         "label": "WorkTrace Dark",
         "id": "worktrace-dark",
         "uiTheme": "vs-dark",
-        "path": "dark-color-theme.json"
+        "path": "themes/dark-color-theme.json"
       }
     ],
     "commands": [
