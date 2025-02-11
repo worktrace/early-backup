@@ -8,7 +8,6 @@ workspace:
   - apps/flutter
   - brand/flutter
   - packages/work_trace
-  - packages/work_trace_ui
 
   # Development toolkit and command-line tool.
   - packages/auto_stories
