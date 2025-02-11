@@ -8,6 +8,17 @@
   "engines": {
     "vscode": "^1.86.0"
   },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "worktrace.hello",
+        "title": "WorkTrace Hello"
+      }
+    ]
+  },
   "scripts": {
     "build": "vite-node build.ts"
   },
