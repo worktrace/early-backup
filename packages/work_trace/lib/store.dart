@@ -1,1 +1,1 @@
-void placeholder() {}
+export 'src/store.dart';
