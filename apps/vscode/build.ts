@@ -18,6 +18,7 @@ function compileManifest(src: string, out: string, main?: string) {
   const raw = readFileSync(join(src, "package.json")).toString()
   const manifest = JSON.parse(raw)
 
+  manifest.type = undefined
   manifest.private = undefined
   manifest.scripts = undefined
   manifest.dependencies = undefined
@@ -41,7 +42,7 @@ async function bundleExtension(
       return source == "vscode" || source.startsWith("node:")
     },
   })
-  await bundle.write({ file: out, format: "esm" })
+  await bundle.write({ file: out, format: "commonjs" })
 }
 
 async function main() {
