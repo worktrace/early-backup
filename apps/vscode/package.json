@@ -1,7 +1,15 @@
 {
   "name": "@worktrace/vscode",
   "description": "WorkTrace VSCode extension for version control and themes.",
-  "type": "module",
   "version": "0.0.0",
-  "private": true
+  "type": "module",
+  "private": true,
+  "displayName": "WorkTrace for VSCode",
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.86.0",
+    "@worktrace/tsconfig": "workspace:*"
+  }
 }
