@@ -1,0 +1,7 @@
+{
+  "name": "@worktrace/vscode",
+  "description": "WorkTrace VSCode extension for version control and themes.",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true
+}
