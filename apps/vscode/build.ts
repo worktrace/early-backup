@@ -47,7 +47,7 @@ async function main() {
   const outFilename = "extension.js"
   mkdirSync(out, { recursive: true })
 
-  compileManifest(root, out, `./${outFilename}`)
+  compileManifest(root, out, outFilename)
   await bundleExtension(
     join(root, "src", "extension.ts"),
     join(out, outFilename),
