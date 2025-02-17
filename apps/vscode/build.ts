@@ -1,6 +1,7 @@
 import nodeResolve from "@rollup/plugin-node-resolve"
 import terser from "@rollup/plugin-terser"
 import typescript from "@rollup/plugin-typescript"
+import { createVSIX } from "@vscode/vsce"
 import {
   cpSync,
   mkdirSync,
@@ -10,6 +11,7 @@ import {
   writeFileSync,
 } from "node:fs"
 import { join } from "node:path"
+import { argv } from "node:process"
 import { rollup } from "rollup"
 
 /**
@@ -82,5 +84,12 @@ async function main() {
     join(out, outFilename),
     join(root, "tsconfig.json"),
   )
+
+  // Bundle VSCode extension pack if specified in args.
+  // see https://code.visualstudio.com/api/references/extension-manifest
+  if (argv.includes("pack")) {
+    writeFileSync(join(out, ".vscodeignore"), "# Placeholder.")
+    await createVSIX({ cwd: out })
+  }
 }
 main()

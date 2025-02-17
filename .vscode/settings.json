@@ -91,6 +91,7 @@
     "thiserror",
     "unawaited",
     "usvg",
+    "vscodeignore",
     "worktrace",
     "xaver",
     "xcassets",
