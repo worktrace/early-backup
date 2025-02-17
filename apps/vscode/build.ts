@@ -2,6 +2,7 @@ import nodeResolve from "@rollup/plugin-node-resolve"
 import terser from "@rollup/plugin-terser"
 import typescript from "@rollup/plugin-typescript"
 import { createVSIX } from "@vscode/vsce"
+import jsonc from "comment-json"
 import {
   cpSync,
   mkdirSync,
@@ -37,6 +38,22 @@ function compileManifest(src: string, out: string, main?: string) {
 
   if (main) manifest.main = main
   writeFileSync(join(out, "package.json"), JSON.stringify(manifest))
+}
+
+/**
+ * Compress all jsonc files of the themes.
+ * @param src path to the folder where all themes located.
+ * @param out path to the folder to output theme files.
+ */
+function compileThemes(src: string, out: string) {
+  mkdirSync(out, { recursive: true })
+  for (const item of readdirSync(src)) {
+    const srcPath = join(src, item)
+    const outPath = join(out, item)
+    const content = readFileSync(srcPath).toString()
+    const result = jsonc.stringify(jsonc.parse(content))
+    writeFileSync(outPath, result)
+  }
 }
 
 function copyAssets(src: string, out: string, items: string[]) {
@@ -76,7 +93,8 @@ async function main() {
   const out = join(root, "out")
   const outFilename = "extension.js"
   emptyFolder(out)
-  copyAssets(root, out, ["themes", "README.md", "LICENSE.txt"])
+  copyAssets(root, out, ["README.md", "LICENSE.txt"])
+  compileThemes(join(root, "themes"), join(out, "themes"))
 
   compileManifest(root, out, outFilename)
   await bundleExtension(
