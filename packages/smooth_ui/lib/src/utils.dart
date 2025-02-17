@@ -25,6 +25,29 @@ class AreaColors {
   final Color? foreground;
 }
 
+class CardColors extends AreaColors {
+  const CardColors({
+    super.background,
+    super.foreground,
+    this.border = transparent,
+    this.shadow = transparent,
+  });
+
+  factory CardColors.lerp(CardColors a, CardColors b, double t) {
+    return CardColors(
+      background: lerpColor(a.background, b.background, t),
+      foreground: Color.lerp(a.foreground, b.foreground, t),
+      border: lerpColor(a.border, b.border, t),
+      shadow: lerpColor(a.shadow, b.shadow, t),
+    );
+  }
+
+  final Color border;
+  final Color shadow;
+
+  bool get hasShadow => shadow != transparent;
+}
+
 extension SizeUtils on Size {
   Rect get toRectFill => Rect.fromLTWH(0, 0, width, height);
   Rect toRect(Offset offset) {
