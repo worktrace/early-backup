@@ -12,6 +12,14 @@
     "onStartupFinished"
   ],
   "contributes": {
+    "themes": [
+      {
+        "label": "WorkTrace Dark",
+        "id": "worktrace-dark",
+        "uiTheme": "vs-dark",
+        "path": "themes/dark-color-theme.json"
+      }
+    ],
     "commands": [
       {
         "command": "worktrace.hello",

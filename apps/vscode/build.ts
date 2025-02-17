@@ -1,7 +1,14 @@
 import nodeResolve from "@rollup/plugin-node-resolve"
 import terser from "@rollup/plugin-terser"
 import typescript from "@rollup/plugin-typescript"
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs"
+import {
+  cpSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs"
 import { join } from "node:path"
 import { rollup } from "rollup"
 
@@ -29,6 +36,21 @@ function compileManifest(src: string, out: string, main?: string) {
   writeFileSync(join(out, "package.json"), JSON.stringify(manifest))
 }
 
+function copyAssets(src: string, out: string, items: string[]) {
+  for (const item of items) {
+    const srcPath = join(src, item)
+    const outPath = join(out, item)
+    cpSync(srcPath, outPath, { recursive: true })
+  }
+}
+
+function emptyFolder(root: string) {
+  mkdirSync(root, { recursive: true })
+  for (const item of readdirSync(root)) {
+    rmSync(join(root, item), { recursive: true })
+  }
+}
+
 async function bundleExtension(
   src: string,
   out: string,
@@ -47,13 +69,16 @@ async function bundleExtension(
 
 async function main() {
   const root = import.meta.dirname
+  const src = join(root, "src")
   const out = join(root, "out")
   const outFilename = "extension.js"
-  mkdirSync(out, { recursive: true })
+  emptyFolder(out)
+  copyAssets(root, out, ["README.md", "LICENSE.txt"])
+  copyAssets(src, out, ["themes"])
 
   compileManifest(root, out, outFilename)
   await bundleExtension(
-    join(root, "src", "extension.ts"),
+    join(src, "extension.ts"),
     join(out, outFilename),
     join(root, "tsconfig.json"),
   )
