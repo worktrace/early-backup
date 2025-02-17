@@ -33,6 +33,7 @@ function compileManifest(src: string, out: string, main?: string) {
   manifest.dependencies = undefined
   manifest.devDependencies = undefined
   manifest.peerDependencies = undefined
+  manifest.activationEvents = ["onStartupFinished"]
 
   if (main) manifest.main = main
   writeFileSync(join(out, "package.json"), JSON.stringify(manifest))
@@ -75,8 +76,7 @@ async function main() {
   const out = join(root, "out")
   const outFilename = "extension.js"
   emptyFolder(out)
-  copyAssets(root, out, ["README.md", "LICENSE.txt"])
-  copyAssets(src, out, ["themes"])
+  copyAssets(root, out, ["themes", "README.md", "LICENSE.txt"])
 
   compileManifest(root, out, outFilename)
   await bundleExtension(

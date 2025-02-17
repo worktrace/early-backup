@@ -15,6 +15,9 @@
       "cwd": "${workspaceFolder}/apps/flutter"
     },
     {
+      // Launch VSCode extension in the output folder.
+      // In this mode, hot update of themes are not available.
+      //
       // see https://code.visualstudio.com/docs/configure/command-line
       // see https://code.visualstudio.com/api/get-started/your-first-extension
       // see https://code.visualstudio.com/api/advanced-topics/extension-host
@@ -26,6 +29,19 @@
       "args": [
         "${workspaceFolder}/apps/vscode/example",
         "--extensionDevelopmentPath=${workspaceFolder}/apps/vscode/out"
+      ]
+    },
+    {
+      // Launch VSCode extension in the source folder.
+      // This launcher is designed to develop the themes.
+      // Scripts are not available in this mode.
+      "name": "VSCode Themes",
+      "type": "extensionHost",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/apps/vscode",
+      "args": [
+        "${workspaceFolder}/apps/vscode/example",
+        "--extensionDevelopmentPath=${workspaceFolder}/apps/vscode"
       ]
     }
   ]
