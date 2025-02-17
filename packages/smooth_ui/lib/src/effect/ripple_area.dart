@@ -1,3 +1,4 @@
+import 'package:avoid_nullable/avoid_nullable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -107,4 +108,30 @@ class RippleAreaPainter extends RipplePainter {
       ..clipRect(size.toRectFill)
       ..drawCircle(center, radius, paint);
   }
+}
+
+class RippleCardColors extends CardColors {
+  const RippleCardColors({
+    super.foreground,
+    super.background,
+    super.border,
+    super.shadow,
+    this.ripple = const AreaColors(background: kDimRippleColor),
+  });
+
+  factory RippleCardColors.lerp(
+    RippleCardColors a,
+    RippleCardColors b,
+    double t,
+  ) {
+    return RippleCardColors(
+      foreground: Color.lerp(a.foreground, b.foreground, t),
+      background: lerpColor(a.background, b.background, t),
+      border: lerpColor(a.border, b.border, t),
+      shadow: lerpColor(a.shadow, b.shadow, t),
+      ripple: AreaColors.lerp(a.ripple, b.ripple, t),
+    );
+  }
+
+  final AreaColors ripple;
 }
