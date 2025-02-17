@@ -2,6 +2,9 @@ import 'package:avoid_nullable/avoid_nullable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:wrap/wrap.dart';
 
+const white = Color(0xFFFFFFFF);
+const black = Color(0xFF000000);
+
 class AreaColors {
   const AreaColors({
     this.background = transparent,
