@@ -1,0 +1,42 @@
+{
+  "name": "worktrace-vscode",
+  "description": "WorkTrace VSCode extension for version control and themes.",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "displayName": "WorkTrace for VSCode",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/worktrace/worktrace",
+    "directory": "apps/vscode"
+  },
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "WorkTrace Dark",
+        "id": "worktrace-dark",
+        "uiTheme": "vs-dark",
+        "path": "themes/dark-color-theme.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "worktrace.hello",
+        "title": "WorkTrace Hello"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "vite-node build.ts",
+    "package": "vite-node build.ts pack"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.86.0",
+    "@vscode/vsce": "^3.2.2",
+    "@worktrace/tsconfig": "workspace:*",
+    "comment-json": "^4.2.5"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@worktrace/tsconfig",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./tsconfig.node.json": "./tsconfig.node.json"
+  }
+}

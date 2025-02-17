@@ -6,3 +6,4 @@ All components inside this monorepo expect the following items are licensed unde
 
 1. All the product names and logos as brand.
 2. The website is released under the Mulan PubL 2.0 to avoid scam websites.
+3. The VSCode extension is released under the MIT license.
