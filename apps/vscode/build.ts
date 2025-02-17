@@ -18,8 +18,8 @@ function compileManifest(src: string, out: string, main?: string) {
   const raw = readFileSync(join(src, "package.json")).toString()
   const manifest = JSON.parse(raw)
 
-  manifest.private = undefined
   manifest.type = undefined
+  manifest.private = undefined
   manifest.scripts = undefined
   manifest.dependencies = undefined
   manifest.devDependencies = undefined
@@ -29,9 +29,13 @@ function compileManifest(src: string, out: string, main?: string) {
   writeFileSync(join(out, "package.json"), JSON.stringify(manifest))
 }
 
-async function bundleExtension(src: string, out: string) {
+async function bundleExtension(
+  src: string,
+  out: string,
+  tsconfigPath?: string,
+) {
   const bundle = await rollup({
-    plugins: [typescript(), nodeResolve(), terser()],
+    plugins: [typescript({ tsconfig: tsconfigPath }), nodeResolve(), terser()],
     input: src,
     external(source, _importer, isResolved) {
       if (isResolved) return false
@@ -51,6 +55,7 @@ async function main() {
   await bundleExtension(
     join(root, "src", "extension.ts"),
     join(out, outFilename),
+    join(root, "tsconfig.json"),
   )
 }
 main()
