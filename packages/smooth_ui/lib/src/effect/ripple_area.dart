@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:smooth_ui/src/utils.dart';
 import 'package:state_reuse/state_reuse.dart';
 import 'package:wrap/wrap.dart';
 
 import 'ripple.dart';
-import 'utils.dart';
 
 extension WrapRippleArea on Widget? {
   RippleArea ripple({
