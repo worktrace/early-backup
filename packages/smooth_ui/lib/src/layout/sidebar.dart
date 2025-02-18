@@ -47,18 +47,25 @@ class SidebarContainer extends StatefulWidget {
 }
 
 class _SidebarContainerState extends State<SidebarContainer> {
+  Widget sidebar(BuildContext context) {
+    final colors = widget.colors;
+    return widget.sidebar
+        .background(colors.background)
+        .maybeForegroundAs(context, colors.foreground);
+  }
+
   @override
   Widget build(BuildContext context) {
     final realDirection = Directionality.of(context);
     final left = (realDirection == TextDirection.ltr) == widget.primary;
 
-    final sidebar = widget.sidebar.position(
-      top: 0,
-      left: left ? 0 : null,
-      right: left ? null : 0,
-      bottom: 0,
-      width: widget.sidebarWidth,
-    );
+    final sidebar = this.sidebar(context).position(
+          top: 0,
+          left: left ? 0 : null,
+          right: left ? null : 0,
+          bottom: 0,
+          width: widget.sidebarWidth,
+        );
 
     final content = widget.child.positionFill(
       left: left ? widget.sidebarWidth : 0,
