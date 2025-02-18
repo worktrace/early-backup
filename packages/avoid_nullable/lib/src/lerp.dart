@@ -34,6 +34,10 @@ Color lerpColor(Color a, Color b, double t) {
   );
 }
 
+Offset lerpOffset(Offset a, Offset b, double t) {
+  return Offset(lerpDouble(a.dx, b.dx, t), lerpDouble(a.dy, b.dy, t));
+}
+
 Radius lerpRadius(Radius a, Radius b, double t) {
   return Radius.elliptical(lerpDouble(a.x, b.x, t), lerpDouble(a.y, b.y, t));
 }
