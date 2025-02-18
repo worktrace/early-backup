@@ -1,5 +1,6 @@
 import 'package:avoid_nullable/avoid_nullable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smooth_ui/src/effect.dart';
 import 'package:smooth_ui/src/utils.dart';
@@ -56,6 +57,25 @@ class SidebarContainer extends StatefulWidget {
 }
 
 class _SidebarContainerState extends State<SidebarContainer> {
+  var _resizeHover = false;
+  var _resolvedResizeHover = false;
+
+  Future<void> _enterResize(PointerEnterEvent event) async {
+    _resizeHover = true;
+    await Future<void>.delayed(widget.resizeAnimation.defibrillation);
+    if (!_resizeHover) return;
+    setState(() => _resolvedResizeHover = true);
+  }
+
+  Future<void> _exitResize(PointerExitEvent event) async {
+    _resizeHover = false;
+    await Future<void>.delayed(widget.resizeAnimation.defibrillation);
+    if (_resizeHover) return;
+    setState(() => _resolvedResizeHover = false);
+  }
+
+  bool get _showResize => _resolvedResizeHover;
+
   Widget sidebar(BuildContext context, {bool left = true}) {
     final colors = widget.colors;
     final size = widget.size;
@@ -64,11 +84,15 @@ class _SidebarContainerState extends State<SidebarContainer> {
     final resize = null
         .rippleLine(
           animation: widget.resizeAnimation,
+          hold: _resolvedResizeHover,
           opaque: false,
           color: colors.resize,
           padding: size.resizePadding.resolve(mockDirection),
         )
-        .mouse(cursor: widget.resizeCursor)
+        .mouse(
+          onEnter: _enterResize,
+          onExit: _exitResize,
+        )
         .position(
           top: 0,
           left: left ? null : 0,
@@ -79,6 +103,7 @@ class _SidebarContainerState extends State<SidebarContainer> {
 
     return [widget.sidebar, resize]
         .asStack(clipBehavior: Clip.antiAlias)
+        .mouse(cursor: _showResize ? widget.resizeCursor : MouseCursor.defer)
         .background(colors.background)
         .maybeForegroundAs(context, colors.foreground);
   }
