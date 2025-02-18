@@ -20,8 +20,8 @@ typedef RouteRenderer = Widget Function(
 ///
 /// 1. Specify the [compare] function to determine whether to play animation.
 /// 2. Specify [renderer] function to tell how to render the change animation.
-class RouteContainer extends SingleAnimationWidget {
-  const RouteContainer({
+class RouteAnimation extends SingleAnimationWidget {
+  const RouteAnimation({
     super.key,
     super.animation,
     required this.compare,
@@ -34,7 +34,7 @@ class RouteContainer extends SingleAnimationWidget {
   final Widget child;
 
   @override
-  State<RouteContainer> createState() => _RouteContainerState();
+  State<RouteAnimation> createState() => _RouteAnimationState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -46,12 +46,12 @@ class RouteContainer extends SingleAnimationWidget {
   }
 }
 
-class _RouteContainerState extends SingleAnimationState<RouteContainer> {
+class _RouteAnimationState extends SingleAnimationState<RouteAnimation> {
   late Widget? _oldChild;
   late Widget _child = widget.child;
 
   @override
-  void didUpdateWidget(covariant RouteContainer oldWidget) {
+  void didUpdateWidget(covariant RouteAnimation oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (!widget.compare(widget.child, _child)) unawaited(playAnimation());
   }
