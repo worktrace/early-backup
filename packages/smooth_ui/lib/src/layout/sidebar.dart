@@ -3,11 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smooth_ui/src/effect.dart';
 import 'package:smooth_ui/src/utils.dart';
+import 'package:state_reuse/state_reuse.dart';
 import 'package:wrap/wrap.dart';
 
 class SidebarContainer extends StatefulWidget {
   const SidebarContainer({
     super.key,
+    this.resizeAnimation = const AnimationDefibrillation(),
+    this.resizeCursor = SystemMouseCursors.resizeColumn,
     this.colors = const SidebarColors(),
     this.size = const SidebarSize(),
     this.sidebarWidth = 256,
@@ -15,6 +18,9 @@ class SidebarContainer extends StatefulWidget {
     required this.sidebar,
     required this.child,
   });
+
+  final AnimationDefibrillation resizeAnimation;
+  final MouseCursor resizeCursor;
 
   final SidebarColors colors;
   final SidebarSize size;
@@ -38,7 +44,10 @@ class SidebarContainer extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
+    final r = resizeAnimation;
     properties
+      ..add(DiagnosticsProperty<AnimationDefibrillation>('resizeAnimation', r))
+      ..add(DiagnosticsProperty<MouseCursor>('resizeCursor', resizeCursor))
       ..add(DiagnosticsProperty<SidebarColors>('colors', colors))
       ..add(DiagnosticsProperty<SidebarSize>('size', size))
       ..add(DoubleProperty('sidebarWidth', sidebarWidth))
@@ -47,9 +56,29 @@ class SidebarContainer extends StatefulWidget {
 }
 
 class _SidebarContainerState extends State<SidebarContainer> {
-  Widget sidebar(BuildContext context) {
+  Widget sidebar(BuildContext context, {bool left = true}) {
     final colors = widget.colors;
-    return widget.sidebar
+    final size = widget.size;
+    final mockDirection = left ? TextDirection.ltr : TextDirection.rtl;
+
+    final resize = null
+        .rippleLine(
+          animation: widget.resizeAnimation,
+          opaque: false,
+          color: colors.resize,
+          padding: size.resizePadding.resolve(mockDirection),
+        )
+        .mouse(cursor: widget.resizeCursor)
+        .position(
+          top: 0,
+          left: left ? null : 0,
+          right: left ? 0 : null,
+          bottom: 0,
+          width: size.resizeWidth,
+        );
+
+    return [widget.sidebar, resize]
+        .asStack(clipBehavior: Clip.antiAlias)
         .background(colors.background)
         .maybeForegroundAs(context, colors.foreground);
   }
@@ -59,7 +88,7 @@ class _SidebarContainerState extends State<SidebarContainer> {
     final realDirection = Directionality.of(context);
     final left = (realDirection == TextDirection.ltr) == widget.primary;
 
-    final sidebar = this.sidebar(context).position(
+    final sidebar = this.sidebar(context, left: left).position(
           top: 0,
           left: left ? 0 : null,
           right: left ? null : 0,
