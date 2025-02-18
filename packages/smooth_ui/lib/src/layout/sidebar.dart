@@ -9,7 +9,7 @@ class SidebarContainer extends StatefulWidget {
   const SidebarContainer({
     super.key,
     this.colors = const SidebarColors(),
-    this.sizes = const SidebarSizes(),
+    this.size = const SidebarSize(),
     this.sidebarWidth = 256,
     this.primary = true,
     required this.sidebar,
@@ -17,7 +17,7 @@ class SidebarContainer extends StatefulWidget {
   });
 
   final SidebarColors colors;
-  final SidebarSizes sizes;
+  final SidebarSize size;
   final double sidebarWidth;
 
   /// Whether the sidebar is on the beginning side as text direction.
@@ -40,7 +40,7 @@ class SidebarContainer extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty<SidebarColors>('colors', colors))
-      ..add(DiagnosticsProperty<SidebarSizes>('sizes', sizes))
+      ..add(DiagnosticsProperty<SidebarSize>('size', size))
       ..add(DoubleProperty('sidebarWidth', sidebarWidth))
       ..add(DiagnosticsProperty<bool>('primary', primary));
   }
@@ -93,18 +93,46 @@ class SidebarColors extends RippleCardColors {
   final Color resize;
 }
 
-class SidebarSizes {
-  const SidebarSizes({
-    this.resize = const ResizeBarSizes(),
-  });
+class SidebarSize extends CardSize {
+  const SidebarSize({
+    this.padding = const EdgeInsetsDirectional.only(
+      top: 16,
+      start: 16,
+      bottom: 16,
+    ),
+    super.strokeAlign,
+    super.border,
+    super.shadow,
+    this.sidebarMinWidth = 160,
+    this.contentMinWidth = 185,
+    this.resizeWidth = 6,
+    this.resizePadding = const EdgeInsetsDirectional.only(
+      top: 2,
+      start: 4,
+      bottom: 2,
+    ),
+  }) : assert(resizeWidth > 0);
 
-  final ResizeBarSizes resize;
-}
+  factory SidebarSize.lerp(SidebarSize a, SidebarSize b, double t) {
+    return SidebarSize(
+      padding: lerpEdgeInsetsDirectional(a.padding, b.padding, t),
+      strokeAlign: lerpDouble(a.strokeAlign, b.strokeAlign, t),
+      border: BorderSize.lerp(a.border, b.border, t),
+      shadow: BoxShadowSize.lerp(a.shadow, b.shadow, t),
+      sidebarMinWidth: lerpDouble(a.sidebarMinWidth, b.sidebarMinWidth, t),
+      contentMinWidth: lerpDouble(a.contentMinWidth, b.contentMinWidth, t),
+      resizeWidth: lerpDouble(a.resizeWidth, b.resizeWidth, t),
+      resizePadding: lerpEdgeInsetsDirectional(
+        a.resizePadding,
+        b.resizePadding,
+        t,
+      ),
+    );
+  }
 
-class ResizeBarSizes {
-  const ResizeBarSizes({
-    this.width = 5,
-  });
-
-  final double width;
+  final EdgeInsetsDirectional padding;
+  final double sidebarMinWidth;
+  final double contentMinWidth;
+  final double resizeWidth;
+  final EdgeInsetsDirectional resizePadding;
 }
