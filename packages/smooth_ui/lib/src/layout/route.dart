@@ -12,6 +12,14 @@ typedef RouteRenderer = Widget Function(
   Widget oldChild,
 );
 
+/// Play route animation when [child] has changed.
+///
+/// This widget is designed to provide more flexible control over
+/// the route animation regardless of the routers provided by packages
+/// such as `go_router`.
+///
+/// 1. Specify the [compare] function to determine whether to play animation.
+/// 2. Specify [renderer] function to tell how to render the change animation.
 class RouteContainer extends SingleAnimationWidget {
   const RouteContainer({
     super.key,
