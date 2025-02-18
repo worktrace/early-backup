@@ -34,6 +34,10 @@ Color lerpColor(Color a, Color b, double t) {
   );
 }
 
+Offset lerpOffset(Offset a, Offset b, double t) {
+  return Offset(lerpDouble(a.dx, b.dx, t), lerpDouble(a.dy, b.dy, t));
+}
+
 Radius lerpRadius(Radius a, Radius b, double t) {
   return Radius.elliptical(lerpDouble(a.x, b.x, t), lerpDouble(a.y, b.y, t));
 }
@@ -44,5 +48,27 @@ BorderRadius lerpBorderRadius(BorderRadius a, BorderRadius b, double t) {
     topRight: lerpRadius(a.topRight, b.topRight, t),
     bottomLeft: lerpRadius(a.bottomLeft, b.bottomLeft, t),
     bottomRight: lerpRadius(a.bottomRight, b.bottomRight, t),
+  );
+}
+
+EdgeInsets lerpEdgeInsets(EdgeInsets a, EdgeInsets b, double t) {
+  return EdgeInsets.only(
+    top: lerpDouble(a.top, b.top, t),
+    left: lerpDouble(a.left, b.left, t),
+    right: lerpDouble(a.right, b.right, t),
+    bottom: lerpDouble(a.bottom, b.bottom, t),
+  );
+}
+
+EdgeInsetsDirectional lerpEdgeInsetsDirectional(
+  EdgeInsetsDirectional a,
+  EdgeInsetsDirectional b,
+  double t,
+) {
+  return EdgeInsetsDirectional.only(
+    top: lerpDouble(a.top, b.top, t),
+    start: lerpDouble(a.start, b.start, t),
+    end: lerpDouble(a.end, b.end, t),
+    bottom: lerpDouble(a.bottom, b.bottom, t),
   );
 }

@@ -3,7 +3,7 @@ import 'package:compat_utils/compat_utils.dart';
 import 'package:flutter/widgets.dart';
 import 'package:wrap/wrap.dart';
 
-import 'utils.dart';
+import '../utils.dart';
 
 extension WrapSquircle on Widget {
   ClipPath clipSquircle({
