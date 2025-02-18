@@ -1,4 +1,5 @@
 import 'package:avoid_nullable/avoid_nullable.dart';
+import 'package:compat_utils/compat_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
@@ -56,7 +57,9 @@ class SidebarContainer extends StatefulWidget {
   }
 }
 
-class _SidebarContainerState extends State<SidebarContainer> {
+class _SidebarContainerState extends State<SidebarContainer> with AdaptSize {
+  late double _sidebarWidth = widget.sidebarWidth;
+
   var _resizeHover = false;
   var _resolvedResizeHover = false;
 
@@ -74,7 +77,54 @@ class _SidebarContainerState extends State<SidebarContainer> {
     setState(() => _resolvedResizeHover = false);
   }
 
-  bool get _showResize => _resolvedResizeHover;
+  var _resizing = false;
+  bool get _showResize => _resolvedResizeHover || _resizing;
+
+  double _delta = 0;
+
+  double _computeSide(Offset localPosition) {
+    final ltr = Directionality.of(context) == TextDirection.ltr;
+    final left = widget.primary == ltr;
+    return left ? localPosition.dx : sizeOrZero.width - localPosition.dx;
+  }
+
+  var _tapOnResizeBar = false;
+
+  void _tapDown(TapDownDetails details) {
+    if (_resizeHover) {
+      _delta = _sidebarWidth - _computeSide(details.localPosition);
+      setState(() => _tapOnResizeBar = true);
+    }
+  }
+
+  void _horizontalDragStart(DragStartDetails details) {
+    if (_tapOnResizeBar) {
+      setState(() {
+        _resolvedResizeHover = false;
+        _resizing = true;
+      });
+    }
+  }
+
+  void _horizontalDragUpdate(DragUpdateDetails details) {
+    if (_resizing) {
+      final width = _computeSide(details.localPosition) + _delta;
+      final size = widget.size;
+      final resolved = width.limit(
+        min: size.sidebarMinWidth,
+        max: this.size!.width - size.contentMinWidth,
+      );
+      setState(() => _sidebarWidth = resolved);
+    }
+  }
+
+  void _horizontalDragEnd(DragEndDetails details) {
+    _delta = 0;
+    setState(() {
+      _resizing = false;
+      _tapOnResizeBar = false;
+    });
+  }
 
   Widget sidebar(BuildContext context, {bool left = true}) {
     final colors = widget.colors;
@@ -101,13 +151,12 @@ class _SidebarContainerState extends State<SidebarContainer> {
 
     return [widget.sidebar, resize]
         .asStack(clipBehavior: Clip.antiAlias)
-        .mouse(cursor: _showResize ? widget.resizeCursor : MouseCursor.defer)
         .background(colors.background)
         .maybeForegroundAs(context, colors.foreground);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget render(BuildContext context) {
     final realDirection = Directionality.of(context);
     final left = (realDirection == TextDirection.ltr) == widget.primary;
 
@@ -116,15 +165,24 @@ class _SidebarContainerState extends State<SidebarContainer> {
           left: left ? 0 : null,
           right: left ? null : 0,
           bottom: 0,
-          width: widget.sidebarWidth,
+          width: _sidebarWidth,
         );
 
     final content = widget.child.positionFill(
-      left: left ? widget.sidebarWidth : 0,
-      right: left ? 0 : widget.sidebarWidth,
+      left: left ? _sidebarWidth : 0,
+      right: left ? 0 : _sidebarWidth,
     );
 
-    return [content, sidebar].asStack(clipBehavior: Clip.antiAlias);
+    return [content, sidebar]
+        .asStack(clipBehavior: Clip.antiAlias)
+        .mouse(cursor: _showResize ? widget.resizeCursor : MouseCursor.defer)
+        .gesture(
+          onHorizontalDragStart: _horizontalDragStart,
+          onHorizontalDragUpdate: _horizontalDragUpdate,
+          onHorizontalDragEnd: _horizontalDragEnd,
+          onTapDown: _tapDown,
+          onTapUp: (details) => _tapOnResizeBar = false,
+        );
   }
 }
 
