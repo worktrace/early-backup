@@ -85,13 +85,11 @@ class _SidebarContainerState extends State<SidebarContainer> {
         .rippleLine(
           animation: widget.resizeAnimation,
           hold: _resolvedResizeHover,
+          onEnter: _enterResize,
+          onExit: _exitResize,
           opaque: false,
           color: colors.resize,
           padding: size.resizePadding.resolve(mockDirection),
-        )
-        .mouse(
-          onEnter: _enterResize,
-          onExit: _exitResize,
         )
         .position(
           top: 0,
