@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:state_reuse/state_reuse.dart';
@@ -37,14 +39,25 @@ class RouteContainer extends SingleAnimationWidget {
 }
 
 class _RouteContainerState extends SingleAnimationState<RouteContainer> {
+  late Widget? _oldChild;
+  late Widget _child = widget.child;
+
   @override
   void didUpdateWidget(covariant RouteContainer oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (!widget.compare(widget.child, oldWidget.child)) {}
+    if (!widget.compare(widget.child, _child)) unawaited(playAnimation());
+  }
+
+  Future<void> playAnimation() async {
+    _oldChild = _child;
+    _child = widget.child;
+    await controller.animateAs(widget.animation, 1);
+    _oldChild = null;
+    controller.reset();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return widget.child;
-  }
+  Widget build(BuildContext context) => controller.isAnimating
+      ? widget.renderer(controller.value, _child, _oldChild!)
+      : widget.child;
 }
