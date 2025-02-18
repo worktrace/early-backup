@@ -89,3 +89,23 @@ class BoxShadowSize {
     );
   }
 }
+
+class CardSize {
+  const CardSize({
+    this.strokeAlign = BorderSide.strokeAlignOutside,
+    this.border = BorderSize.zero,
+    this.shadow = BoxShadowSize.zero,
+  });
+
+  factory CardSize.lerp(CardSize a, CardSize b, double t) {
+    return CardSize(
+      strokeAlign: lerpDouble(a.strokeAlign, b.strokeAlign, t),
+      border: BorderSize.lerp(a.border, b.border, t),
+      shadow: BoxShadowSize.lerp(a.shadow, b.shadow, t),
+    );
+  }
+
+  final double strokeAlign;
+  final BorderSize border;
+  final BoxShadowSize shadow;
+}
