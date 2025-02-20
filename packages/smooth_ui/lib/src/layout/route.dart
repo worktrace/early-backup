@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:state_reuse/state_reuse.dart';
+import 'package:wrap/wrap.dart';
 
 typedef RouteCompare = bool Function(Widget current, Widget previous);
 
@@ -37,17 +38,19 @@ extension WrapRouteAnimation on Widget {
 ///
 /// 1. Specify the [compare] function to determine whether to play animation.
 /// 2. Specify [renderer] function to tell how to render the change animation.
+/// 3. Attention that once playing animation, the widget structure will change,
+/// that some state will be lost. You may need to save those state manually.
 class RouteAnimation extends SingleAnimationWidget {
   const RouteAnimation({
     super.key,
     super.animation,
     this.compare,
-    required this.renderer,
+    this.renderer,
     required this.child,
   });
 
   final RouteCompare? compare;
-  final RouteRenderer renderer;
+  final RouteRenderer? renderer;
   final Widget child;
 
   @override
@@ -77,6 +80,29 @@ class _RouteAnimationState extends SingleAnimationState<RouteAnimation> {
     return current.runtimeType == previous.runtimeType;
   }
 
+  /// Resolve with default renderer function.
+  RouteRenderer get renderer => widget.renderer ?? defaultRenderer;
+
+  static Widget defaultRenderer(
+    double value,
+    Widget child,
+    Widget oldChild,
+  ) {
+    const double blurSigma = 16;
+
+    final current = child
+        .blur(blurSigma * (1 - value)) //
+        .opacity(value)
+        .positionFill();
+
+    final old = oldChild
+        .blur(blurSigma * value) //
+        .opacity(1 - value)
+        .positionFill();
+
+    return [old, current].asStack();
+  }
+
   @override
   void didUpdateWidget(covariant RouteAnimation oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -93,12 +119,14 @@ class _RouteAnimationState extends SingleAnimationState<RouteAnimation> {
 
   @override
   Widget build(BuildContext context) => controller.isAnimating
-      ? widget.renderer(controller.value, _child, _oldChild!)
+      ? renderer(controller.value, _child, _oldChild!)
       : widget.child;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<RouteCompare>.has('compare', compare));
+    properties
+      ..add(ObjectFlagProperty<RouteCompare>.has('compare', compare))
+      ..add(ObjectFlagProperty<RouteRenderer>.has('renderer', renderer));
   }
 }
