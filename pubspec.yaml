@@ -19,7 +19,6 @@ workspace:
   - packages/avoid_nullable
   - packages/compat_utils
   - packages/custom_app
-  - packages/data_anno
   - packages/data_gen
   - packages/inherit
   - packages/modifier

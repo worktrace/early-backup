@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:data_anno/data_anno.dart';
+
+import 'annotation.dart';
 
 extension ParseDataAnnotation on Annotation {
   DataAnnotation? get parse {
