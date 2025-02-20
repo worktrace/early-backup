@@ -1,12 +1,12 @@
 import 'package:meta/meta_meta.dart';
 
-import 'annotation.dart';
+import 'abstraction.dart';
 
 abstract class MapAnnotation extends DataAnnotation {
   const MapAnnotation();
 
   @override
-  String get libraryIdentifier => 'package:data_anno/src/map.dart';
+  String get libraryIdentifier => 'package:data_gen/src/annotation/map.dart';
 }
 
 @Target({TargetKind.classType})
