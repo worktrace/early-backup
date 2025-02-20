@@ -27,4 +27,4 @@ workspace:
   - packages/wrap
 
 dependencies:
-  auto_stories_dev: ^0.0.0
+  auto_stories: ^0.0.0
