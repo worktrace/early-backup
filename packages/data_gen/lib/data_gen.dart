@@ -1,1 +1,1 @@
-
+export 'src/generator.dart';
