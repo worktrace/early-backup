@@ -4,6 +4,9 @@ import 'annotation.dart';
 
 abstract class MapAnnotation extends DataAnnotation {
   const MapAnnotation();
+
+  @override
+  String get libraryIdentifier => 'package:data_anno/src/map.dart';
 }
 
 @Target({TargetKind.classType})
