@@ -113,7 +113,7 @@ class _AdaptiveThemeState<T extends ThemeBase>
   }
 
   @override
-  Widget build(BuildContext context) => widget.child.theme(theme);
+  Widget build(BuildContext context) => widget.child.themeAs(context, theme);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
