@@ -1,3 +1,4 @@
+import 'package:data_gen/src/name.dart';
 import 'package:meta/meta_meta.dart';
 
 import 'abstraction.dart';
@@ -10,11 +11,13 @@ abstract class MapAnnotation extends DataAnnotation {
 }
 
 @Target({TargetKind.classType})
+@name
 class MapEncode extends MapAnnotation {
   const MapEncode();
 }
 
 @Target({TargetKind.constructor})
+@name
 class MapDecode extends MapAnnotation {
   const MapDecode();
 }
