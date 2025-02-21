@@ -5,8 +5,4 @@
 // NameGenerator
 // **************************************************************************
 
-part of 'map.dart';
-
-const _$mapEncodeClassName = 'MapEncode';
-
-const _$mapDecodeClassName = 'MapDecode';
+part of 'name.dart';

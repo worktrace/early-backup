@@ -3,6 +3,8 @@ import 'package:meta/meta_meta.dart';
 
 import 'abstraction.dart';
 
+part 'map.name.dart';
+
 abstract class MapAnnotation extends DataAnnotation {
   const MapAnnotation();
 
@@ -14,10 +16,16 @@ abstract class MapAnnotation extends DataAnnotation {
 @name
 class MapEncode extends MapAnnotation {
   const MapEncode();
+
+  @override
+  String get name => _$mapEncodeClassName;
 }
 
 @Target({TargetKind.constructor})
 @name
 class MapDecode extends MapAnnotation {
   const MapDecode();
+
+  @override
+  String get name => _$mapDecodeClassName;
 }
