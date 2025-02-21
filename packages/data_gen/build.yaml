@@ -1,0 +1,7 @@
+builders:
+  name_generator:
+    import: package:data_gen/src/build.dart
+    builder_factories: [nameBuilder]
+    build_extensions: { ".dart": [".name.dart"] }
+    auto_apply: root_package
+    build_to: source

@@ -1,5 +1,10 @@
 abstract class DataAnnotation {
   const DataAnnotation();
 
-  String get libraryIdentifier;
+  /// Name of the annotation class, for the generator to parse.
+  String get name;
+}
+
+mixin DataAnnotationShortcut on DataAnnotation {
+  String get shortcut;
 }

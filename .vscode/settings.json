@@ -27,6 +27,7 @@
     "package.json": "pnpm-lock.yaml",
     "Cargo.toml": "Cargo.lock",
     "readme.md": "license",
+    "*.dart": "${capture}.*.dart",
     "*.ts": "${capture}.d.ts",
     "*.js": "${capture}.js.map",
     "*.cjs": "${capture}.cjs.map",

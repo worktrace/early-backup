@@ -1,20 +1,40 @@
+import 'package:data_gen/src/annotation/name.dart';
 import 'package:meta/meta_meta.dart';
 
 import 'abstraction.dart';
 
+part 'map.name.dart';
+
 abstract class MapAnnotation extends DataAnnotation {
   const MapAnnotation();
-
-  @override
-  String get libraryIdentifier => 'package:data_gen/src/annotation/map.dart';
 }
 
+@name
+const mapEncode = GenerateMapEncode();
+
+@name
+const mapDecode = GenerateMapDecode();
+
 @Target({TargetKind.classType})
-class MapEncode extends MapAnnotation {
-  const MapEncode();
+@name
+class GenerateMapEncode extends MapAnnotation with DataAnnotationShortcut {
+  const GenerateMapEncode();
+
+  @override
+  String get name => _$GenerateMapEncode$className;
+
+  @override
+  String get shortcut => _$mapEncode$topLevelVariableName;
 }
 
 @Target({TargetKind.constructor})
-class MapDecode extends MapAnnotation {
-  const MapDecode();
+@name
+class GenerateMapDecode extends MapAnnotation with DataAnnotationShortcut {
+  const GenerateMapDecode();
+
+  @override
+  String get name => _$GenerateMapDecode$className;
+
+  @override
+  String get shortcut => _$mapDecode$topLevelVariableName;
 }
