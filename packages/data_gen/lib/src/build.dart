@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
-import 'package:compat_utils/compat_utils.dart';
 import 'package:path/path.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -42,7 +41,8 @@ class NameGenerator extends GeneratorForAnnotation<GenerateName> {
   }
 
   String _generateClassName(ClassElement element) {
-    final varName = '_\$${element.displayName.camelCase}ClassName';
-    return "const $varName = '${element.displayName}';";
+    final name = '_\$${element.displayName}\$className';
+    final value = element.displayName;
+    return "const $name = '$value';";
   }
 }

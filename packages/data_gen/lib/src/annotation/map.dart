@@ -15,7 +15,7 @@ class GenerateMapEncode extends MapAnnotation {
   const GenerateMapEncode();
 
   @override
-  String get name => _$generateMapEncodeClassName;
+  String get name => _$GenerateMapEncode$className;
 }
 
 @Target({TargetKind.constructor})
@@ -24,5 +24,5 @@ class GenerateMapDecode extends MapAnnotation {
   const GenerateMapDecode();
 
   @override
-  String get name => _$generateMapDecodeClassName;
+  String get name => _$GenerateMapDecode$className;
 }

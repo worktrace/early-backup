@@ -16,5 +16,5 @@ class GenerateName extends DataAnnotation {
   const GenerateName();
 
   @override
-  String get name => _$generateNameClassName;
+  String get name => _$GenerateName$className;
 }

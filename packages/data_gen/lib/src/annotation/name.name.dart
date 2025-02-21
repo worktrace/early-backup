@@ -7,4 +7,4 @@
 
 part of 'name.dart';
 
-const _$generateNameClassName = 'GenerateName';
+const _$GenerateName$className = 'GenerateName';

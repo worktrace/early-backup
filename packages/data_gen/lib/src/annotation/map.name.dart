@@ -7,6 +7,6 @@
 
 part of 'map.dart';
 
-const _$generateMapEncodeClassName = 'GenerateMapEncode';
+const _$GenerateMapEncode$className = 'GenerateMapEncode';
 
-const _$generateMapDecodeClassName = 'GenerateMapDecode';
+const _$GenerateMapDecode$className = 'GenerateMapDecode';
