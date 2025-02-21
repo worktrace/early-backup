@@ -1,7 +1,7 @@
-import 'package:data_gen/src/annotation/name.dart';
 import 'package:meta/meta_meta.dart';
 
 import 'abstraction.dart';
+import 'name.dart';
 
 part 'map.name.dart';
 
