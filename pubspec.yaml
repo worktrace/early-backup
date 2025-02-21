@@ -18,7 +18,6 @@ workspace:
   - packages/data_gen
   - packages/inherit
   - packages/modifier
-  - packages/name_gen
   - packages/smooth_ui
   - packages/state_reuse
   - packages/wrap
