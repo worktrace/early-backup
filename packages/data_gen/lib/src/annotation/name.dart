@@ -7,14 +7,18 @@ import 'abstraction.dart';
 
 part 'name.name.dart';
 
+@name
 const name = GenerateName();
 
 /// The annotation to generate name of the annotated element.
-@Target({TargetKind.classType})
+@Target({TargetKind.classType, TargetKind.topLevelVariable})
 @name
-class GenerateName extends DataAnnotation {
+class GenerateName extends DataAnnotation with DataAnnotationShortcut {
   const GenerateName();
 
   @override
   String get name => _$GenerateName$className;
+
+  @override
+  String get shortcut => _$name$topLevelVariableName;
 }

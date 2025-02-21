@@ -8,3 +8,5 @@
 part of 'name.dart';
 
 const _$GenerateName$className = 'GenerateName';
+
+const _$name$topLevelVariableName = 'name';

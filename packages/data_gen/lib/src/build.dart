@@ -35,14 +35,22 @@ class NameGenerator extends GeneratorForAnnotation<GenerateName> {
     switch (element) {
       case ClassElement _:
         return _generateClassName(element);
+      case TopLevelVariableElement _:
+        return _generateTopLevelVariableName(element);
       default:
         throw Exception('unsupported element type: ${element.runtimeType}');
     }
   }
 
   String _generateClassName(ClassElement element) {
-    final name = '_\$${element.displayName}\$className';
     final value = element.displayName;
+    final name = '_\$$value\$className';
+    return "const $name = '$value';";
+  }
+
+  String _generateTopLevelVariableName(TopLevelVariableElement element) {
+    final value = element.displayName;
+    final name = '_\$$value\$topLevelVariableName';
     return "const $name = '$value';";
   }
 }

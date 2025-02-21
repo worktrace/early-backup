@@ -10,3 +10,7 @@ part of 'map.dart';
 const _$GenerateMapEncode$className = 'GenerateMapEncode';
 
 const _$GenerateMapDecode$className = 'GenerateMapDecode';
+
+const _$mapEncode$topLevelVariableName = 'mapEncode';
+
+const _$mapDecode$topLevelVariableName = 'mapDecode';
