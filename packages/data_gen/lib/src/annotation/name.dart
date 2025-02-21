@@ -13,7 +13,7 @@ const name = GenerateName();
 /// The annotation to generate name of the annotated element.
 @Target({TargetKind.classType, TargetKind.topLevelVariable})
 @name
-class GenerateName extends DataAnnotation with DataAnnotationShortcut {
+class GenerateName extends DataAnnotation {
   const GenerateName();
 
   @override
@@ -21,7 +21,4 @@ class GenerateName extends DataAnnotation with DataAnnotationShortcut {
 
   @override
   String get name => _$GenerateName$className;
-
-  @override
-  String get shortcut => _$name$topLevelVariableName;
 }

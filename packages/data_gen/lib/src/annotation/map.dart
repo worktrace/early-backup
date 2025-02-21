@@ -17,7 +17,7 @@ const mapDecode = GenerateMapDecode();
 
 @Target({TargetKind.classType})
 @name
-class GenerateMapEncode extends MapAnnotation with DataAnnotationShortcut {
+class GenerateMapEncode extends MapAnnotation {
   const GenerateMapEncode();
 
   @override
@@ -25,14 +25,11 @@ class GenerateMapEncode extends MapAnnotation with DataAnnotationShortcut {
 
   @override
   String get name => _$GenerateMapEncode$className;
-
-  @override
-  String get shortcut => _$mapEncode$topLevelVariableName;
 }
 
 @Target({TargetKind.constructor})
 @name
-class GenerateMapDecode extends MapAnnotation with DataAnnotationShortcut {
+class GenerateMapDecode extends MapAnnotation {
   const GenerateMapDecode();
 
   @override
@@ -40,7 +37,4 @@ class GenerateMapDecode extends MapAnnotation with DataAnnotationShortcut {
 
   @override
   String get name => _$GenerateMapDecode$className;
-
-  @override
-  String get shortcut => _$mapDecode$topLevelVariableName;
 }
