@@ -21,6 +21,9 @@ class GenerateMapEncode extends MapAnnotation with DataAnnotationShortcut {
   const GenerateMapEncode();
 
   @override
+  String get libraryIdentifier => _$libraryIdentifier;
+
+  @override
   String get name => _$GenerateMapEncode$className;
 
   @override
@@ -31,6 +34,9 @@ class GenerateMapEncode extends MapAnnotation with DataAnnotationShortcut {
 @name
 class GenerateMapDecode extends MapAnnotation with DataAnnotationShortcut {
   const GenerateMapDecode();
+
+  @override
+  String get libraryIdentifier => _$libraryIdentifier;
 
   @override
   String get name => _$GenerateMapDecode$className;

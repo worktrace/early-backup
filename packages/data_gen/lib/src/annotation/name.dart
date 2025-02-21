@@ -17,6 +17,9 @@ class GenerateName extends DataAnnotation with DataAnnotationShortcut {
   const GenerateName();
 
   @override
+  String get libraryIdentifier => _$libraryIdentifier;
+
+  @override
   String get name => _$GenerateName$className;
 
   @override
