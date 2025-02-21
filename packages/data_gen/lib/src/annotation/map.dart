@@ -11,9 +11,11 @@ abstract class MapAnnotation extends DataAnnotation {
 
 @name
 const mapEncode = GenerateMapEncode();
+const mapEncodeAnnotationName = _$mapEncode$topLevelVariableName;
 
 @name
 const mapDecode = GenerateMapDecode();
+const mapDecodeAnnotationName = _$mapDecode$topLevelVariableName;
 
 @Target({TargetKind.classType})
 @name

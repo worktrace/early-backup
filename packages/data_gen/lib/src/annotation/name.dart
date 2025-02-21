@@ -9,6 +9,7 @@ part 'name.name.dart';
 
 @name
 const name = GenerateName();
+const nameAnnotationName = _$name$topLevelVariableName;
 
 /// The annotation to generate name of the annotated element.
 @Target({TargetKind.classType, TargetKind.topLevelVariable})
