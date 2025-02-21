@@ -1,4 +1,4 @@
-import 'package:data_gen/src/name.dart';
+import 'package:data_gen/src/annotation/name.dart';
 import 'package:meta/meta_meta.dart';
 
 import 'abstraction.dart';
@@ -7,25 +7,22 @@ part 'map.name.dart';
 
 abstract class MapAnnotation extends DataAnnotation {
   const MapAnnotation();
-
-  @override
-  String get libraryIdentifier => 'package:data_gen/src/annotation/map.dart';
 }
 
 @Target({TargetKind.classType})
 @name
-class MapEncode extends MapAnnotation {
-  const MapEncode();
+class GenerateMapEncode extends MapAnnotation {
+  const GenerateMapEncode();
 
   @override
-  String get name => _$mapEncodeClassName;
+  String get name => _$generateMapEncodeClassName;
 }
 
 @Target({TargetKind.constructor})
 @name
-class MapDecode extends MapAnnotation {
-  const MapDecode();
+class GenerateMapDecode extends MapAnnotation {
+  const GenerateMapDecode();
 
   @override
-  String get name => _$mapDecodeClassName;
+  String get name => _$generateMapDecodeClassName;
 }

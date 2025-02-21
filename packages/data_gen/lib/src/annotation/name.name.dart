@@ -6,3 +6,5 @@
 // **************************************************************************
 
 part of 'name.dart';
+
+const _$generateNameClassName = 'GenerateName';
