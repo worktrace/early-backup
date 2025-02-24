@@ -65,6 +65,17 @@ class DartPackage {
     }
     return handler;
   }
+
+  bool get hasFlutterTest {
+    final manifest = this.manifest;
+    for (final key in ['dependencies', 'dev_dependencies']) {
+      if (manifest.containsKey(key)) {
+        final deps = manifest[key] as YamlMap;
+        if (deps.containsKey('flutter_test')) return true;
+      }
+    }
+    return false;
+  }
 }
 
 enum _DependenciesMode {
