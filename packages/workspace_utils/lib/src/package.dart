@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:compat_utils/compat_utils.dart';
 import 'package:path/path.dart';
+import 'package:yaml/yaml.dart';
 
 class DartPackage {
   const DartPackage(this.root);
@@ -18,4 +19,7 @@ class DartPackage {
   Directory get libDir => Directory(join(root.path, 'lib'));
   Directory get testDir => Directory(join(root.path, 'test'));
   Directory get exampleDir => Directory(join(root.path, 'example'));
+
+  File get manifestFile => File(join(root.path, 'pubspec.yaml'));
+  YamlMap get manifest => loadYaml(manifestFile.readAsStringSync()) as YamlMap;
 }
