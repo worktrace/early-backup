@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:compat_utils/compat_utils.dart';
 import 'package:path/path.dart';
+import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
 
 class DartPackage {
@@ -22,4 +23,26 @@ class DartPackage {
 
   File get manifestFile => File(join(root.path, 'pubspec.yaml'));
   YamlMap get manifest => loadYaml(manifestFile.readAsStringSync()) as YamlMap;
+
+  String get name {
+    final name = manifest['name'];
+    if (name is String) return name;
+    throw PubspecException(message: 'cannot find name', root: root);
+  }
+
+  Version get version {
+    final version = manifest['version'];
+    if (version is String) return Version.parse(version);
+    throw PubspecException(message: 'cannot find version', root: root);
+  }
+}
+
+class PubspecException implements Exception {
+  const PubspecException({required this.message, required this.root});
+
+  final String message;
+  final Directory root;
+
+  @override
+  String toString() => 'PubspecException at $root: $message';
 }
