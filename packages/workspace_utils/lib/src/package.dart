@@ -44,9 +44,30 @@ class DartPackage {
         .whereType<String>()
         .map(DartPackage.from);
   }
+
+  Map<String, VersionConstraint> get dependencies {
+    return _parseDependencies(_DependenciesMode.dependencies);
+  }
+
+  Map<String, VersionConstraint> get devDependencies {
+    return _parseDependencies(_DependenciesMode.devDependencies);
+  }
+
+  Map<String, VersionConstraint> _parseDependencies(_DependenciesMode mode) {
+    final dependencies = manifest[mode.asPubspecKey];
+    if (dependencies is! YamlMap) return {};
+    final handler = <String, VersionConstraint>{};
+    for (final entry in dependencies.entries) {
+      if (entry.key is String && entry.value is String) {
+        final version = VersionConstraint.parse(entry.value as String);
+        handler[entry.key as String] = version;
+      }
+    }
+    return handler;
+  }
 }
 
-enum DependenciesMode {
+enum _DependenciesMode {
   dependencies,
   devDependencies;
 
