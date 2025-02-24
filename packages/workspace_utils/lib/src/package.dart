@@ -35,6 +35,15 @@ class DartPackage {
     if (version is String) return Version.parse(version);
     throw PubspecException(message: 'cannot find version', root: root);
   }
+
+  Iterable<DartPackage> get children {
+    final manifest = this.manifest;
+    if (!manifest.containsKey('workspace')) return [];
+    if (manifest['workspace'] is! YamlList) return [];
+    return (manifest['workspace'] as YamlList)
+        .whereType<String>()
+        .map(DartPackage.from);
+  }
 }
 
 class PubspecException implements Exception {
