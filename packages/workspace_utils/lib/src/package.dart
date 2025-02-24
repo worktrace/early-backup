@@ -85,6 +85,23 @@ class DartPackage {
         .where((file) => file.path.endsWith('_test.dart'))
         .isNotEmpty;
   }
+
+  Future<void> testCurrent({
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+  }) async {
+    final process = await Process.start(
+      hasFlutterTest ? 'flutter' : 'dart',
+      ['test'],
+      runInShell: true,
+      workingDirectory: root.path,
+      mode: mode,
+    );
+    if (await process.exitCode != 0) {
+      var message = 'test failed at: ${root.path}';
+      if (mode == ProcessStartMode.detached) message += stderr.toString();
+      throw Exception(message);
+    }
+  }
 }
 
 enum _DependenciesMode {
