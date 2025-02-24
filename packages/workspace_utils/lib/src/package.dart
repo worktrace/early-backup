@@ -76,6 +76,15 @@ class DartPackage {
     }
     return false;
   }
+
+  bool get hasTestFile {
+    if (!testDir.existsSync()) return false;
+    return testDir
+        .listSync(recursive: true)
+        .whereType<File>()
+        .where((file) => file.path.endsWith('_test.dart'))
+        .isNotEmpty;
+  }
 }
 
 enum _DependenciesMode {
