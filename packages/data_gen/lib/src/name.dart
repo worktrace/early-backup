@@ -12,7 +12,6 @@ Builder nameBuilder(BuilderOptions options) {
     const NameGenerator(),
     generatedExtension: '.name.dart',
   );
-  // return SharedPartBuilder([const NameGenerator()], 'name');
 }
 
 class NameGenerator extends GeneratorForAnnotation<GenerateName> {
@@ -23,7 +22,11 @@ class NameGenerator extends GeneratorForAnnotation<GenerateName> {
   @override
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) async {
     final result = await super.generate(library, buildStep);
-    return "part of '${basename(library.element.identifier)}';\n\n$result";
+    return [
+      "part of '${basename(library.element.identifier)}';",
+      _generateLibraryIdentifier(library.element),
+      result,
+    ].join('\n\n');
   }
 
   @override
@@ -40,6 +43,13 @@ class NameGenerator extends GeneratorForAnnotation<GenerateName> {
       default:
         throw Exception('unsupported element type: ${element.runtimeType}');
     }
+  }
+
+  String _generateLibraryIdentifier(Element element) {
+    final identifier = element.library?.identifier;
+    if (identifier == null) throw Exception('cannot parse library identifier');
+    const comment = '// ignore: unused_element may not be used.';
+    return '$comment\n' "const _\$libraryIdentifier = '$identifier';";
   }
 
   String _generateClassName(ClassElement element) {

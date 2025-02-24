@@ -9,16 +9,17 @@ part 'name.name.dart';
 
 @name
 const name = GenerateName();
+const nameAnnotationName = _$name$topLevelVariableName;
 
 /// The annotation to generate name of the annotated element.
 @Target({TargetKind.classType, TargetKind.topLevelVariable})
 @name
-class GenerateName extends DataAnnotation with DataAnnotationShortcut {
+class GenerateName extends AnnotationToParse {
   const GenerateName();
 
   @override
-  String get name => _$GenerateName$className;
+  String get libraryIdentifier => _$libraryIdentifier;
 
   @override
-  String get shortcut => _$name$topLevelVariableName;
+  String get name => _$GenerateName$className;
 }
