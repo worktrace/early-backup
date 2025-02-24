@@ -46,6 +46,13 @@ class DartPackage {
   }
 }
 
+enum DependenciesMode {
+  dependencies,
+  devDependencies;
+
+  String get asPubspecKey => name.snakeCase;
+}
+
 class PubspecException implements Exception {
   const PubspecException({required this.message, required this.root});
 
