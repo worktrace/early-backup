@@ -8,7 +8,6 @@ workspace:
   - apps/flutter
   - brand/flutter
   - packages/work_trace
-  - packages/work_trace_ui
 
   # Shared libraries for code reuse.
   - packages/auto_stories
