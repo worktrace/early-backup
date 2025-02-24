@@ -1,0 +1,11 @@
+name: workspace_utils
+description: Utilities for Dart workspace bulk operations on multiple packages.
+version: 0.0.0
+resolution: workspace
+environment: { sdk: ^3.6.0 }
+
+dependencies:
+  compat_utils: ^0.0.0
+
+dev_dependencies:
+  test: ^1.24.0

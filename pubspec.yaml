@@ -19,7 +19,9 @@ workspace:
   - packages/modifier
   - packages/smooth_ui
   - packages/state_reuse
+  - packages/workspace_utils
   - packages/wrap
 
 dependencies:
   auto_stories: ^0.0.0
+  workspace_utils: ^0.0.0
