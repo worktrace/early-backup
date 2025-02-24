@@ -14,7 +14,7 @@ const nameAnnotationName = _$name$topLevelVariableName;
 /// The annotation to generate name of the annotated element.
 @Target({TargetKind.classType, TargetKind.topLevelVariable})
 @name
-class GenerateName extends DataAnnotation {
+class GenerateName extends AnnotationToParse {
   const GenerateName();
 
   @override
