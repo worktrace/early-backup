@@ -1,5 +1,5 @@
 name: data_gen
-description: Generate convert code boilerplates for data classes automatically.
+description: Generate common boilerplates for data classes automatically.
 version: 0.0.0
 resolution: workspace
 environment: { sdk: ^3.6.0 }
