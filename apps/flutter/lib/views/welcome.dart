@@ -4,14 +4,16 @@ import 'package:worktrace/state.dart';
 
 import 'sidebar.dart';
 
-final welcomeRoute = GoRoute(
-  path: '/welcome',
-  builder: (context, state) {
-    final theme = context.find<Theme>()!;
-    return SidebarContainer(
-      colors: theme.sidebar,
-      sidebar: const Sidebar(),
-      child: 'content'.asText().center(),
-    );
-  },
-);
+GoRoute get welcomeRoute {
+  return GoRoute(
+    path: '/welcome',
+    builder: (context, state) {
+      final theme = context.find<Theme>()!;
+      return SidebarContainer(
+        colors: theme.sidebar,
+        sidebar: const Sidebar(),
+        child: 'content'.asText().center(),
+      );
+    },
+  );
+}
