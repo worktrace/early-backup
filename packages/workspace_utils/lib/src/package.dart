@@ -86,6 +86,21 @@ class DartPackage {
         .isNotEmpty;
   }
 
+  Future<void> test({
+    bool includeChildren = true,
+    bool recursive = false,
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+  }) async {
+    if (hasTestFile) await testCurrent(mode: mode);
+    for (final child in children) {
+      await child.test(
+        includeChildren: recursive,
+        recursive: recursive,
+        mode: mode,
+      );
+    }
+  }
+
   Future<void> testCurrent({
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
