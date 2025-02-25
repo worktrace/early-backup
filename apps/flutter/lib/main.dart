@@ -21,7 +21,7 @@ class AppRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     final routes = GoRouter(
       initialLocation: loadingRoute.path,
-      routes: [loadingRoute, welcomeRoute],
+      routes: [loadingRoute, welcomeRoute, wantRoute],
     );
 
     return Router(
