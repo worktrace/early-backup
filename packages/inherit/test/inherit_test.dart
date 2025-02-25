@@ -52,15 +52,14 @@ class InheritUpdate extends UpdateTester {
 
 class _InheritUpdateState extends UpdateTesterState<InheritUpdate> {
   @override
-  Widget build(BuildContext context) {
-    final button = Builder(
-      builder: (context) {
-        return widget.button
-            .asText()
-            .gesture(onTap: () => context.update<String>(widget.after));
-      },
-    );
+  Widget buttonBuilder(BuildContext context) {
+    return widget.button
+        .asText()
+        .gesture(onTap: () => context.update<String>(widget.after));
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return [inheritProbe, button]
         .asColumn()
         .center

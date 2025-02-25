@@ -30,6 +30,9 @@ abstract class UpdateTesterState<T extends UpdateTester> extends State<T> {
     if (_message != value) setState(() => _message = value);
   }
 
+  Widget buttonBuilder(BuildContext context);
+  Widget get button => Builder(builder: buttonBuilder);
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
