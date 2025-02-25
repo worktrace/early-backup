@@ -14,7 +14,7 @@ final wantRoute = GoRoute(
   },
 );
 
-GoRoute exampleRoute() {
+GoRoute get exampleRoute {
   return GoRoute(
     path: '/example',
     builder: (context, state) {
