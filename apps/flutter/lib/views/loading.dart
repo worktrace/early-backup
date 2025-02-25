@@ -4,14 +4,16 @@ import 'package:worktrace/state.dart';
 
 import 'want.dart';
 
-final loadingRoute = GoRoute(
-  path: '/',
-  builder: (context, state) {
-    final locale = context.find<Locale>()!;
-    return LoadingContainer(
-      onFinish: () => context.go(wantRoute.path),
-      onError: (err, trace) {},
-      child: '${locale.loading}...'.asText().center(),
-    );
-  },
-);
+GoRoute get loadingRoute {
+  return GoRoute(
+    path: '/',
+    builder: (context, state) {
+      final locale = context.find<Locale>()!;
+      return LoadingContainer(
+        onFinish: () => context.go(wantRoute.path),
+        onError: (err, trace) {},
+        child: '${locale.loading}...'.asText().center(),
+      );
+    },
+  );
+}
