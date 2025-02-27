@@ -1,6 +1,7 @@
 import 'package:auto_stories/kit.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:worktrace/views/graph.dart';
 
 import 'state.dart';
 import 'views.dart';
@@ -21,7 +22,7 @@ class AppRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     final routes = GoRouter(
       initialLocation: loadingRoute.path,
-      routes: [loadingRoute, welcomeRoute],
+      routes: [loadingRoute, welcomeRoute, wantRoute, graphRoute],
     );
 
     return Router(

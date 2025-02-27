@@ -2,17 +2,15 @@ import 'package:auto_stories/kit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:worktrace/state.dart';
 
-import 'sidebar.dart';
-
-GoRoute get welcomeRoute {
+GoRoute get wantRoute {
   return GoRoute(
-    path: '/welcome',
+    path: '/want',
     builder: (context, state) {
       final theme = context.find<Theme>()!;
       return SidebarContainer(
         colors: theme.sidebar,
-        sidebar: const Sidebar(),
-        child: 'content'.asText().center(),
+        sidebar: 'sidebar'.asText().center(),
+        child: 'want view'.asText().center(),
       );
     },
   );
