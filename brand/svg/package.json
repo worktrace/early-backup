@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
+  "scripts": {
+    "build": "vite-node build.ts --config tsconfig.json"
+  },
   "dependencies": {
     "@worktrace/tsconfig": "workspace:*",
     "svg-path-commander": "^2.1.10"
