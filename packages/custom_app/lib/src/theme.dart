@@ -129,6 +129,14 @@ class ThemeAdapter<T extends ThemeBase> extends ThemeTween<T> {
     required super.light,
   });
 
+  factory ThemeAdapter.from(ThemeTween<T> tween, ThemeMode mode) {
+    return ThemeAdapter<T>(
+      mode: mode,
+      dark: tween.dark,
+      light: tween.light,
+    );
+  }
+
   final ThemeMode mode;
 
   T get adapt => mode.shouldDark ? dark : light;

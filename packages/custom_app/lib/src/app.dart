@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:inherit/inherit.dart';
+import 'package:wrap/wrap.dart';
 
 import 'locale.dart';
 import 'settings.dart';
@@ -26,9 +27,9 @@ class CustomApp<T extends ThemeBase, L extends LocaleBase,
   Widget build(BuildContext context) {
     return Handler(
       data: settings,
-      builder: (context, settings) {
-        return child;
-      },
+      builder: (context, settings) => child
+          .adaptiveTheme(ThemeAdapter.from(themes, settings.themeMode))
+          .mediaAsView(context),
     );
   }
 
