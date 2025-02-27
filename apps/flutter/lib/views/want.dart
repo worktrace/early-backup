@@ -10,7 +10,7 @@ GoRoute get wantRoute {
       return SidebarContainer(
         colors: theme.sidebar,
         sidebar: 'sidebar'.asText().center(),
-        child: 'create want'.asText().center(),
+        child: 'want view'.asText().center(),
       );
     },
   );
