@@ -13,15 +13,26 @@ Future<void> main(List<String> arguments) async {
 }
 
 class TestCommand extends Command<void> {
+  TestCommand() {
+    argParser.addOption(
+      rootOption,
+      abbr: rootOption.substring(0, 1).toLowerCase(),
+      help: 'Specify the root directory where workspace root locates.',
+    );
+  }
+
   @override
   String get name => 'test';
 
   @override
   String get description => 'Test all packages inside the root workspace.';
 
+  static const rootOption = 'root';
+
   @override
   Future<void> run() async {
-    final package = DartPackage.resolve();
+    final root = argResults?.option(rootOption);
+    final package = DartPackage.resolve(path: root ?? '');
     await package.test();
   }
 }
