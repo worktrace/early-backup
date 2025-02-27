@@ -6,6 +6,10 @@ import 'package:smooth_ui/smooth_ui.dart';
 import 'package:state_reuse/state_reuse.dart';
 import 'package:wrap/wrap.dart';
 
+const themeAnimation = AnimationData(
+  duration: Duration(milliseconds: 345),
+);
+
 extension WrapTheme on Widget {
   Widget themeAs<T extends ThemeBase>(BuildContext context, T theme) {
     return inherit(theme)
@@ -49,19 +53,43 @@ extension WrapTheme on Widget {
     );
   }
 
+  Widget maybeAnimatedTheme<T extends ThemeBase>(
+    T theme, {
+    Key? key,
+    Lerp<T>? lerp,
+    AnimationData animation = const AnimationData(),
+  }) {
+    return lerp != null
+        ? animatedTheme<T>(theme, lerp, key: key, animation: animation)
+        : this.theme(theme, key: key);
+  }
+
   AdaptiveTheme<T> adaptiveAnimatedTheme<T extends ThemeBase>(
     ThemeAdapter<T> adapter,
     Lerp<T> lerp, {
     Key? key,
-    AnimationData animation = const AnimationData(
-      duration: Duration(milliseconds: 345),
-    ),
+    AnimationData animation = themeAnimation,
   }) {
     return AdaptiveTheme<T>(
       key: key,
       adapter: adapter,
       builder: (_, t) => animatedTheme<T>(t, lerp, animation: animation),
       child: this,
+    );
+  }
+
+  AdaptiveTheme<T> adaptiveMaybeAnimatedTheme<T extends ThemeBase>(
+    ThemeAdapter<T> adapter, {
+    Key? key,
+    Lerp<T>? lerp,
+    AnimationData animation = themeAnimation,
+  }) {
+    if (lerp == null) return adaptiveTheme<T>(adapter, key: key);
+    return adaptiveAnimatedTheme<T>(
+      adapter,
+      lerp,
+      key: key,
+      animation: animation,
     );
   }
 }
