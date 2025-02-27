@@ -1,0 +1,4 @@
+{
+  "extends": "@worktrace/tsconfig/tsconfig.node.json",
+  "include": ["src", "build.ts"]
+}
