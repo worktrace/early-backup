@@ -10,15 +10,13 @@ class CustomApp<T extends ThemeBase, L extends LocaleBase,
     S extends SettingsBase> extends StatelessWidget {
   const CustomApp({
     super.key,
-    required this.darkTheme,
-    required this.lightTheme,
+    required this.themes,
     required this.locale,
     required this.settings,
     required this.child,
   });
 
-  final T darkTheme;
-  final T lightTheme;
+  final ThemeTween<T> themes;
   final L locale;
   final S settings;
 
@@ -38,8 +36,7 @@ class CustomApp<T extends ThemeBase, L extends LocaleBase,
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<T>('darkTheme', darkTheme))
-      ..add(DiagnosticsProperty<T>('lightTheme', lightTheme))
+      ..add(DiagnosticsProperty<ThemeTween<T>>('themes', themes))
       ..add(DiagnosticsProperty<L>('locale', locale))
       ..add(DiagnosticsProperty<S>('settings', settings));
   }

@@ -122,18 +122,26 @@ class _AdaptiveThemeState<T extends ThemeBase>
   }
 }
 
-class ThemeAdapter<T extends ThemeBase> {
+class ThemeAdapter<T extends ThemeBase> extends ThemeTween<T> {
   const ThemeAdapter({
     this.mode = ThemeMode.system,
+    required super.dark,
+    required super.light,
+  });
+
+  final ThemeMode mode;
+
+  T get adapt => mode.shouldDark ? dark : light;
+}
+
+class ThemeTween<T extends ThemeBase> {
+  const ThemeTween({
     required this.dark,
     required this.light,
   });
 
-  final ThemeMode mode;
   final T dark;
   final T light;
-
-  T get adapt => mode.shouldDark ? dark : light;
 }
 
 /// Define how to apply color themes.
