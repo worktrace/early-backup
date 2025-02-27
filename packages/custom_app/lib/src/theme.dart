@@ -94,8 +94,6 @@ extension WrapTheme on Widget {
   }
 }
 
-typedef _DataBuilder<T> = Widget Function(BuildContext context, T data);
-
 class AdaptiveTheme<T extends ThemeBase> extends StatefulWidget {
   const AdaptiveTheme({
     super.key,
@@ -116,7 +114,7 @@ class AdaptiveTheme<T extends ThemeBase> extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty<ThemeAdapter<T>>('adapter', adapter))
-      ..add(ObjectFlagProperty<_DataBuilder<T>?>.has('renderer', builder));
+      ..add(ObjectFlagProperty<DataBuilder<T>?>.has('renderer', builder));
   }
 }
 
