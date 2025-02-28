@@ -56,14 +56,24 @@
       "settings": { "foreground": "#aab5ad", "fontStyle": "" }
     },
     {
+      // Language keyword constants.
+      "scope": ["constant.language.json"],
+      "settings": { "foreground": "#cf8484", "fontStyle": "italic" }
+    },
+    {
       // Strings.
       "scope": ["string.quoted.double.json"],
-      "settings": { "foreground": "#72af80", "fontStyle": "" }
+      "settings": { "foreground": "#7ac08b", "fontStyle": "" }
+    },
+    {
+      // Numbers.
+      "scope": ["constant.numeric.json"],
+      "settings": { "foreground": "#51b2e3", "fontStyle": "" }
     },
     {
       // Configuration file keys.
       "scope": ["support.type.property-name.json"],
-      "settings": { "foreground": "#a376cd", "fontStyle": "italic" }
+      "settings": { "foreground": "#b081dc", "fontStyle": "italic" }
     }
   ]
 }
