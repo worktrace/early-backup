@@ -77,7 +77,12 @@
     {
       // Strings.
       "scope": ["string.quoted.double.json"],
-      "settings": { "foreground": "#7ac08b", "fontStyle": "" }
+      "settings": { "foreground": "#74af83", "fontStyle": "" }
+    },
+    {
+      // Documentation comments.
+      "scope": ["comment.block.documentation.json"],
+      "settings": { "foreground": "#7d986e", "fontStyle": "italic" }
     },
     {
       // Numbers.
