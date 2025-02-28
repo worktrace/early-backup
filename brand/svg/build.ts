@@ -1,7 +1,7 @@
-import { renderLogo } from "./src/graph"
+import { createLogo } from "./src/graph"
 
 function main() {
-  const full = renderLogo()
+  const full = createLogo()
 
   // oxlint-disable-next-line no-console
   console.log(full)
