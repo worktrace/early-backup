@@ -25,5 +25,45 @@
   },
   "semanticHighlighting": true,
   "semanticTokenColors": {},
-  "tokenColors": []
+  "tokenColors": [
+    {
+      // More dim punctuations, especially for comments.
+      "scope": ["punctuation.definition.comment.json"],
+      "settings": { "foreground": "#484242", "fontStyle": "" }
+    },
+    {
+      // Dim punctuations, such as string quotes.
+      "scope": [
+        "punctuation.support.type.property-name.begin.json",
+        "punctuation.support.type.property-name.end.json",
+        "punctuation.definition.string.begin.json",
+        "punctuation.definition.string.end.json"
+      ],
+      "settings": { "foreground": "#767f7a", "fontStyle": "" }
+    },
+    {
+      // Normal punctuations.
+      "scope": [
+        // Json.
+        "punctuation.separator.dictionary.key-value.json",
+        "punctuation.definition.array.begin.json",
+        "punctuation.definition.array.end.json",
+        "punctuation.separator.array.json",
+        "punctuation.definition.dictionary.begin.json",
+        "punctuation.definition.dictionary.end.json",
+        "punctuation.separator.dictionary.pair.json"
+      ],
+      "settings": { "foreground": "#aab5ad", "fontStyle": "" }
+    },
+    {
+      // Strings.
+      "scope": ["string.quoted.double.json"],
+      "settings": { "foreground": "#72af80", "fontStyle": "" }
+    },
+    {
+      // Configuration file keys.
+      "scope": ["support.type.property-name.json"],
+      "settings": { "foreground": "#a376cd", "fontStyle": "italic" }
+    }
+  ]
 }
