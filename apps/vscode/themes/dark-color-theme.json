@@ -61,6 +61,11 @@
       "settings": { "foreground": "#cf8484", "fontStyle": "italic" }
     },
     {
+      // Escape characters.
+      "scope": ["constant.character.escape.json"],
+      "settings": { "foreground": "#ef9c16", "fontStyle": "" }
+    },
+    {
       // Strings.
       "scope": ["string.quoted.double.json"],
       "settings": { "foreground": "#7ac08b", "fontStyle": "" }
