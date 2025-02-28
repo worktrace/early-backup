@@ -42,6 +42,15 @@
       "settings": { "foreground": "#767f7a", "fontStyle": "" }
     },
     {
+      // Inline and block comments (non-documentation comments).
+      "scope": [
+        "comment.block.json",
+        "comment.line.double-slash.js",
+        "comment.line.number-sign.yaml"
+      ],
+      "settings": { "foreground": "#696c6f", "fontStyle": "italic" }
+    },
+    {
       // Normal punctuations.
       "scope": [
         // Json.
