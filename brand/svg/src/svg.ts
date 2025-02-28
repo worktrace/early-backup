@@ -24,3 +24,20 @@ export function renderDom(dom: TemplateResult): string {
     .join(" ")
     .replaceAll(/>\s+</g, "><")
 }
+
+export interface SvgComponent {
+  element: string
+  defs?: string
+}
+
+export function group(components: SvgComponent[]): SvgComponent {
+  const elements = components.map((component) => component.element).join("")
+  const defs = components
+    .map((component) => component.defs)
+    .filter((defs) => defs)
+
+  return {
+    element: `<g>${elements}</g>`,
+    defs: defs.length > 0 ? defs.join("") : undefined,
+  }
+}

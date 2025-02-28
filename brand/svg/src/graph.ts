@@ -1,5 +1,5 @@
 import { html } from "lit"
-import { renderDom } from "./utils"
+import { renderDom } from "./svg"
 
 interface LogoOptions {
   size?: number
