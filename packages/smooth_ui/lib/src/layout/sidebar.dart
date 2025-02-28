@@ -8,6 +8,9 @@ import 'package:smooth_ui/src/utils.dart';
 import 'package:state_reuse/state_reuse.dart';
 import 'package:wrap/wrap.dart';
 
+/// Default sidebar width as placeholder.
+const double kSidebarWidth = 256;
+
 class SidebarContainer extends StatefulWidget {
   const SidebarContainer({
     super.key,
@@ -15,7 +18,7 @@ class SidebarContainer extends StatefulWidget {
     this.resizeCursor = SystemMouseCursors.resizeColumn,
     this.colors = const SidebarColors(),
     this.size = const SidebarSize(),
-    this.sidebarWidth = 256,
+    this.sidebarWidth = kSidebarWidth,
     this.primary = true,
     required this.sidebar,
     required this.child,

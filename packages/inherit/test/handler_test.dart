@@ -7,17 +7,11 @@ import 'package:wrap/debug.dart';
 import 'package:wrap/wrap.dart';
 
 void main() {
-  testWidgets('inherit data', (t) async {
-    const message = 'message';
-    await t.pumpWidget(inheritProbe.center().inherit(message).ensureText());
-    expect(find.text(message), findsOneWidget);
-  });
-
-  testWidgets('inherit update', (t) async {
+  testWidgets('handler update', (t) async {
     const before = 'before';
     const after = 'after';
     const button = 'button';
-    const widget = InheritUpdate(
+    const widget = HandlerUpdate(
       before: before,
       after: after,
       button: button,
@@ -32,14 +26,8 @@ void main() {
   });
 }
 
-final inheritProbe = Builder(
-  builder: (context) {
-    return context.find<String>()!.asText();
-  },
-);
-
-class InheritUpdate extends UpdateTester {
-  const InheritUpdate({
+class HandlerUpdate extends UpdateTester {
+  const HandlerUpdate({
     super.key,
     required super.before,
     required super.after,
@@ -47,23 +35,22 @@ class InheritUpdate extends UpdateTester {
   });
 
   @override
-  State<InheritUpdate> createState() => _InheritUpdateState();
+  State<HandlerUpdate> createState() => _HandlerUpdateState();
 }
 
-class _InheritUpdateState extends UpdateTesterState<InheritUpdate> {
+class _HandlerUpdateState extends UpdateTesterState<HandlerUpdate> {
   @override
   Widget buttonBuilder(BuildContext context) {
     return widget.button
         .asText()
-        .gesture(onTap: () => context.update<String>(widget.after));
+        .gesture(onTap: () => context.update(widget.after));
   }
 
   @override
   Widget build(BuildContext context) {
-    return [inheritProbe, button]
-        .asColumn()
-        .center
-        .inherit(message)
-        .inheritUpdate<String>((value) => message = value);
+    return Handler(
+      data: message,
+      builder: (context, data) => [data.asText(), button].asColumn().center,
+    );
   }
 }
