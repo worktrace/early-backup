@@ -96,7 +96,10 @@
     },
     {
       // Escape characters.
-      "scope": ["constant.character.escape.json"],
+      "scope": [
+        "constant.character.escape.json",
+        "constant.character.escape.yaml"
+      ],
       "settings": { "foreground": "#ef9c16", "fontStyle": "" }
     },
     {
