@@ -4,7 +4,7 @@ import 'package:worktrace/state.dart';
 
 import 'want.dart';
 
-GoRoute get loadingRoute {
+GoRoute loadingRoute() {
   return GoRoute(
     path: '/',
     builder: (context, state) {

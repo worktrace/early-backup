@@ -17,7 +17,7 @@ void main() {
 class AppRoot extends StatelessWidget {
   const AppRoot({super.key});
 
-  ShellRoute layout(BuildContext context) {
+  RouteBase layout(BuildContext context) {
     return ShellRoute(
       routes: [wantRoute, graphRoute],
       builder: (context, state, child) {
@@ -31,19 +31,17 @@ class AppRoot extends StatelessWidget {
     );
   }
 
+  RouterConfig<RouteMatchList> routes(BuildContext context) {
+    final loading = loadingRoute();
+    return GoRouter(
+      initialLocation: loading.path,
+      routes: [loading, layout(context)],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final routes = GoRouter(
-      initialLocation: loadingRoute.path,
-      routes: [loadingRoute, layout(context)],
-    );
-
-    return Router(
-      routerDelegate: routes.routerDelegate,
-      routeInformationParser: routes.routeInformationParser,
-      routeInformationProvider: routes.routeInformationProvider,
-      backButtonDispatcher: routes.backButtonDispatcher,
-    )
+    return Router.withConfig(config: routes(context))
         .adaptiveAnimatedTheme(Theme.adapter(), Theme.lerp)
         .adaptiveLocale(localesOf([]))
         .mediaAsView(context);
