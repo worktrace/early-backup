@@ -28,7 +28,10 @@
   "tokenColors": [
     {
       // More dim punctuations, especially for comments.
-      "scope": ["punctuation.definition.comment.json"],
+      "scope": [
+        "punctuation.definition.comment.json",
+        "punctuation.definition.comment.toml"
+      ],
       "settings": { "foreground": "#484242", "fontStyle": "" }
     },
     {
@@ -46,6 +49,7 @@
       "scope": [
         "comment.block.json",
         "comment.line.double-slash.js",
+        "comment.line.number-sign.toml",
         "comment.line.number-sign.yaml"
       ],
       "settings": { "foreground": "#696c6f", "fontStyle": "italic" }

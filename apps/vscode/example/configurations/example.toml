@@ -1,3 +1,4 @@
+# Toml comments.
 key = "value"
 "double quoted key" = "escape chars: \n\r\t\"\u4e2d\U0001f600"
 'single quote key' = 'singe line without escape chars ""\\\\'
