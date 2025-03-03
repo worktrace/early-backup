@@ -79,7 +79,12 @@
     },
     {
       // Language keyword constants.
-      "scope": ["constant.language.json"],
+      "scope": [
+        "constant.language.json",
+        "constant.language.boolean.toml",
+        "constant.language.boolean.yaml",
+        "constant.language.null.yaml"
+      ],
       "settings": { "foreground": "#cf8484", "fontStyle": "italic" }
     },
     {

@@ -17,3 +17,6 @@ escape characters: "\n\r\t\b\f\v\0\a\e\x01\u4e2d\U0001f600"
 integer: 123
 float: 123.456
 version: 1.2.3 # Recognized as float.
+boolean true: true
+boolean false: false
+null value: null
