@@ -60,7 +60,8 @@
         "punctuation.separator.array.json",
         "punctuation.definition.dictionary.begin.json",
         "punctuation.definition.dictionary.end.json",
-        "punctuation.separator.dictionary.pair.json"
+        "punctuation.separator.dictionary.pair.json",
+        "punctuation.eq.toml"
       ],
       "settings": { "foreground": "#aab5ad", "fontStyle": "" }
     },
@@ -76,7 +77,12 @@
     },
     {
       // Strings.
-      "scope": ["string.quoted.double.json"],
+      "scope": [
+        "string.quoted.double.json",
+        "string.quoted.single.basic.line.toml",
+        "string.quoted.single.literal.line.toml",
+        "string.quoted.triple.basic.block.toml"
+      ],
       "settings": { "foreground": "#74af83", "fontStyle": "" }
     },
     {
@@ -91,7 +97,12 @@
     },
     {
       // Configuration file keys.
-      "scope": ["support.type.property-name.json"],
+      "scope": [
+        "support.type.property-name.json",
+        "support.type.property-name.toml",
+        "support.type.property-name.table.toml",
+        "support.type.property-name.array.toml"
+      ],
       "settings": { "foreground": "#b081dc", "fontStyle": "italic" }
     }
   ]
