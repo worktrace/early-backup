@@ -1,0 +1,12 @@
+# Don't make prettier-ignore comment first line,
+# or it will ignore the whole file.
+placeholder: placeholder
+
+# prettier-ignore
+single quote string: 'single quote string'
+double quote string: "double quote string"
+unquoted string: unquoted string
+multiline string literal: |
+  multiline string
+multiline string folded: >-
+  multiline string folded
