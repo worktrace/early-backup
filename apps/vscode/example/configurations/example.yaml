@@ -30,3 +30,13 @@ sequence lines:
   - 123
   - true
   - null
+
+# Code reuse via anchor in yaml.
+anchor: &anchor
+  key: value
+  number: 123
+  sequence: [abc, 123, true, null]
+alias: *anchor
+reuse:
+  <<: *anchor
+  key: new value

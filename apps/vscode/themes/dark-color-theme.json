@@ -78,6 +78,16 @@
       "settings": { "foreground": "#aab5ad", "fontStyle": "" }
     },
     {
+      // Variables.
+      "scope": ["variable.other.alias.yaml"],
+      "settings": { "foreground": "#bfc9bd", "fontStyle": "" }
+    },
+    {
+      // Variable definitions.
+      "scope": ["entity.name.type.anchor.yaml"],
+      "settings": { "foreground": "#bfc9bd", "fontStyle": "underline" }
+    },
+    {
       // Language keyword constants.
       "scope": [
         "constant.language.json",
