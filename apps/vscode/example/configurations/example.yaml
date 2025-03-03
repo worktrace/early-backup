@@ -20,3 +20,13 @@ version: 1.2.3 # Recognized as float.
 boolean true: true
 boolean false: false
 null value: null
+
+# prettier-ignore
+sequence inline: [abc, 'abc', "abc", 123, true, false, null]
+map inline: { key: value, number: 123, sequence: [abc, 123, true, null] }
+sequence lines:
+  - { key: value, number: 123, sequence: [abc, 123, true, null] }
+  - abc
+  - 123
+  - true
+  - null
