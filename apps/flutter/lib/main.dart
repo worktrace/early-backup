@@ -1,7 +1,6 @@
 import 'package:auto_stories/kit.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:worktrace/views/graph.dart';
 
 import 'state.dart';
 import 'views.dart';
@@ -18,11 +17,25 @@ void main() {
 class AppRoot extends StatelessWidget {
   const AppRoot({super.key});
 
+  ShellRoute layout(BuildContext context) {
+    return ShellRoute(
+      routes: [wantRoute, graphRoute],
+      builder: (context, state, child) {
+        final theme = context.find<Theme>()!;
+        return SidebarContainer(
+          colors: theme.sidebar,
+          sidebar: 'sidebar'.asText().center(),
+          child: child,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final routes = GoRouter(
       initialLocation: loadingRoute.path,
-      routes: [loadingRoute, welcomeRoute, wantRoute, graphRoute],
+      routes: [loadingRoute, layout(context)],
     );
 
     return Router(
