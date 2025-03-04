@@ -28,7 +28,10 @@
   "tokenColors": [
     {
       // More dim punctuations, especially for comments.
-      "scope": ["punctuation.definition.comment.json"],
+      "scope": [
+        "punctuation.definition.comment.json",
+        "punctuation.definition.comment.yaml"
+      ],
       "settings": { "foreground": "#484242", "fontStyle": "" }
     },
     {
@@ -37,7 +40,9 @@
         "punctuation.support.type.property-name.begin.json",
         "punctuation.support.type.property-name.end.json",
         "punctuation.definition.string.begin.json",
-        "punctuation.definition.string.end.json"
+        "punctuation.definition.string.end.json",
+        "punctuation.definition.string.begin.yaml",
+        "punctuation.definition.string.end.yaml"
       ],
       "settings": { "foreground": "#767f7a", "fontStyle": "" }
     },
@@ -60,23 +65,68 @@
         "punctuation.separator.array.json",
         "punctuation.definition.dictionary.begin.json",
         "punctuation.definition.dictionary.end.json",
-        "punctuation.separator.dictionary.pair.json"
+        "punctuation.separator.dictionary.pair.json",
+        "punctuation.separator.key-value.mapping.yaml",
+        "punctuation.definition.sequence.begin.yaml",
+        "punctuation.definition.sequence.end.yaml",
+        "punctuation.separator.sequence.yaml",
+        "punctuation.definition.mapping.begin.yaml",
+        "punctuation.definition.mapping.end.yaml",
+        "punctuation.separator.mapping.yaml",
+        "punctuation.definition.block.sequence.item.yaml"
       ],
       "settings": { "foreground": "#aab5ad", "fontStyle": "" }
     },
     {
+      // Variables.
+      "scope": ["variable.other.alias.yaml"],
+      "settings": { "foreground": "#bfc9bd", "fontStyle": "" }
+    },
+    {
+      // Variable definitions.
+      "scope": ["entity.name.type.anchor.yaml"],
+      "settings": { "foreground": "#bfc9bd", "fontStyle": "underline" }
+    },
+    {
       // Language keyword constants.
-      "scope": ["constant.language.json"],
+      "scope": [
+        "constant.language.json",
+        "constant.language.boolean.toml",
+        "constant.language.boolean.yaml",
+        "constant.language.null.yaml"
+      ],
       "settings": { "foreground": "#cf8484", "fontStyle": "italic" }
     },
     {
+      // Special operators.
+      "scope": [
+        "keyword.control.flow.block-scalar.literal.yaml",
+        "keyword.control.flow.block-scalar.folded.yaml",
+        "storage.modifier.chomping-indicator.yaml",
+        "punctuation.definition.anchor.yaml",
+        "punctuation.definition.alias.yaml",
+        "constant.language.merge.yaml"
+      ],
+      "settings": { "foreground": "#cf8484", "fontStyle": "" }
+    },
+    {
       // Escape characters.
-      "scope": ["constant.character.escape.json"],
+      "scope": [
+        "constant.character.escape.json",
+        "constant.character.escape.yaml"
+      ],
       "settings": { "foreground": "#ef9c16", "fontStyle": "" }
     },
     {
       // Strings.
-      "scope": ["string.quoted.double.json"],
+      "scope": [
+        "string.quoted.double.json",
+        "string.unquoted.plain.out.yaml",
+        "string.quoted.single.yaml",
+        "string.quoted.double.yaml",
+        "string.unquoted.block.yaml",
+        "string.unquoted.plain.in.yaml"
+      ],
       "settings": { "foreground": "#74af83", "fontStyle": "" }
     },
     {
@@ -86,12 +136,16 @@
     },
     {
       // Numbers.
-      "scope": ["constant.numeric.json"],
+      "scope": [
+        "constant.numeric.json",
+        "constant.numeric.integer.yaml",
+        "constant.numeric.float.yaml"
+      ],
       "settings": { "foreground": "#51b2e3", "fontStyle": "" }
     },
     {
       // Configuration file keys.
-      "scope": ["support.type.property-name.json"],
+      "scope": ["support.type.property-name.json", "entity.name.tag.yaml"],
       "settings": { "foreground": "#b081dc", "fontStyle": "italic" }
     }
   ]
