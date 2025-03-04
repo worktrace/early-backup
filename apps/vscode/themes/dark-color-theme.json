@@ -30,6 +30,7 @@
       // More dim punctuations, especially for comments.
       "scope": [
         "punctuation.definition.comment.json",
+        "punctuation.definition.comment.toml",
         "punctuation.definition.comment.yaml"
       ],
       "settings": { "foreground": "#484242", "fontStyle": "" }
@@ -51,6 +52,7 @@
       "scope": [
         "comment.block.json",
         "comment.line.double-slash.js",
+        "comment.line.number-sign.toml",
         "comment.line.number-sign.yaml"
       ],
       "settings": { "foreground": "#696c6f", "fontStyle": "italic" }
@@ -66,6 +68,13 @@
         "punctuation.definition.dictionary.begin.json",
         "punctuation.definition.dictionary.end.json",
         "punctuation.separator.dictionary.pair.json",
+        "punctuation.eq.toml",
+        "punctuation.definition.table.toml",
+        "punctuation.definition.array.table.toml",
+        "punctuation.definition.array.toml",
+        "punctuation.definition.table.inline.toml",
+        "punctuation.separator.array.toml",
+        "punctuation.separator.table.inline.toml",
         "punctuation.separator.key-value.mapping.yaml",
         "punctuation.definition.sequence.begin.yaml",
         "punctuation.definition.sequence.end.yaml",
@@ -113,6 +122,7 @@
       // Escape characters.
       "scope": [
         "constant.character.escape.json",
+        "constant.character.escape.toml",
         "constant.character.escape.yaml"
       ],
       "settings": { "foreground": "#ef9c16", "fontStyle": "" }
@@ -121,6 +131,9 @@
       // Strings.
       "scope": [
         "string.quoted.double.json",
+        "string.quoted.single.basic.line.toml",
+        "string.quoted.single.literal.line.toml",
+        "string.quoted.triple.basic.block.toml",
         "string.unquoted.plain.out.yaml",
         "string.quoted.single.yaml",
         "string.quoted.double.yaml",
@@ -138,6 +151,8 @@
       // Numbers.
       "scope": [
         "constant.numeric.json",
+        "constant.numeric.integer.toml",
+        "constant.numeric.float.toml",
         "constant.numeric.integer.yaml",
         "constant.numeric.float.yaml"
       ],
@@ -145,7 +160,13 @@
     },
     {
       // Configuration file keys.
-      "scope": ["support.type.property-name.json", "entity.name.tag.yaml"],
+      "scope": [
+        "support.type.property-name.json",
+        "support.type.property-name.toml",
+        "support.type.property-name.table.toml",
+        "support.type.property-name.array.toml",
+        "entity.name.tag.yaml"
+      ],
       "settings": { "foreground": "#b081dc", "fontStyle": "italic" }
     }
   ]
