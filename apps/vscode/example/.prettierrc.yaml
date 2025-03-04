@@ -1,0 +1,5 @@
+semi: false
+
+# Special rules.
+overrides:
+  - { files: "*.jsonc", options: { trailingComma: "none" } }

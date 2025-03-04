@@ -4,3 +4,7 @@ semi: false
 # so that it's not installed inside node.
 plugins:
   - prettier-plugin-sh
+
+# Special rules.
+overrides:
+  - { files: "*.jsonc", options: { trailingComma: "none" } }

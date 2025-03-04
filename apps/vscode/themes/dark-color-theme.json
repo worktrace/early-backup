@@ -1,6 +1,173 @@
 {
-  "colors": {},
+  "colors": {
+    "activityBar.background": "#181818",
+    "activityBar.border": "#2b2a2a",
+    "activityBar.activeBorder": "#0e6ccb",
+    "activityBar.foreground": "#c7cdd0",
+    "activityBar.inactiveForeground": "#6e7171",
+    "editor.background": "#1c1d1d",
+    "editor.foreground": "#97938f",
+    "foreground": "#c5c3c1",
+    "minimap.background": "#171818",
+    "panel.background": "#181818",
+    "panel.border": "#2b2a2a",
+    "panelTitle.activeBorder": "#1684d8",
+    "sideBar.background": "#181818",
+    "sideBar.border": "#2b2a2a",
+    "sideBarSectionHeader.background": "#181818",
+    "sideBarSectionHeader.border": "#2b2a2a",
+    "sideBarSectionHeader.foreground": "#b4b3b0",
+    "statusBar.background": "#181717",
+    "statusBar.border": "#2b2a2a",
+    "titleBar.activeBackground": "#181717",
+    "titleBar.inactiveBackground": "#201f1f",
+    "titleBar.border": "#2b2a2a"
+  },
   "semanticHighlighting": true,
   "semanticTokenColors": {},
-  "tokenColors": []
+  "tokenColors": [
+    {
+      // More dim punctuations, especially for comments.
+      "scope": [
+        "punctuation.definition.comment.json",
+        "punctuation.definition.comment.toml",
+        "punctuation.definition.comment.yaml"
+      ],
+      "settings": { "foreground": "#484242", "fontStyle": "" }
+    },
+    {
+      // Dim punctuations, such as string quotes.
+      "scope": [
+        "punctuation.support.type.property-name.begin.json",
+        "punctuation.support.type.property-name.end.json",
+        "punctuation.definition.string.begin.json",
+        "punctuation.definition.string.end.json",
+        "punctuation.definition.string.begin.yaml",
+        "punctuation.definition.string.end.yaml"
+      ],
+      "settings": { "foreground": "#767f7a", "fontStyle": "" }
+    },
+    {
+      // Inline and block comments (non-documentation comments).
+      "scope": [
+        "comment.block.json",
+        "comment.line.double-slash.js",
+        "comment.line.number-sign.toml",
+        "comment.line.number-sign.yaml"
+      ],
+      "settings": { "foreground": "#696c6f", "fontStyle": "italic" }
+    },
+    {
+      // Normal punctuations.
+      "scope": [
+        // Json.
+        "punctuation.separator.dictionary.key-value.json",
+        "punctuation.definition.array.begin.json",
+        "punctuation.definition.array.end.json",
+        "punctuation.separator.array.json",
+        "punctuation.definition.dictionary.begin.json",
+        "punctuation.definition.dictionary.end.json",
+        "punctuation.separator.dictionary.pair.json",
+        "punctuation.eq.toml",
+        "punctuation.definition.table.toml",
+        "punctuation.definition.array.table.toml",
+        "punctuation.definition.array.toml",
+        "punctuation.definition.table.inline.toml",
+        "punctuation.separator.array.toml",
+        "punctuation.separator.table.inline.toml",
+        "punctuation.separator.key-value.mapping.yaml",
+        "punctuation.definition.sequence.begin.yaml",
+        "punctuation.definition.sequence.end.yaml",
+        "punctuation.separator.sequence.yaml",
+        "punctuation.definition.mapping.begin.yaml",
+        "punctuation.definition.mapping.end.yaml",
+        "punctuation.separator.mapping.yaml",
+        "punctuation.definition.block.sequence.item.yaml"
+      ],
+      "settings": { "foreground": "#aab5ad", "fontStyle": "" }
+    },
+    {
+      // Variables.
+      "scope": ["variable.other.alias.yaml"],
+      "settings": { "foreground": "#bfc9bd", "fontStyle": "" }
+    },
+    {
+      // Variable definitions.
+      "scope": ["entity.name.type.anchor.yaml"],
+      "settings": { "foreground": "#bfc9bd", "fontStyle": "underline" }
+    },
+    {
+      // Language keyword constants.
+      "scope": [
+        "constant.language.json",
+        "constant.language.boolean.toml",
+        "constant.language.boolean.yaml",
+        "constant.language.null.yaml"
+      ],
+      "settings": { "foreground": "#cf8484", "fontStyle": "italic" }
+    },
+    {
+      // Special operators.
+      "scope": [
+        "keyword.control.flow.block-scalar.literal.yaml",
+        "keyword.control.flow.block-scalar.folded.yaml",
+        "storage.modifier.chomping-indicator.yaml",
+        "punctuation.definition.anchor.yaml",
+        "punctuation.definition.alias.yaml",
+        "constant.language.merge.yaml"
+      ],
+      "settings": { "foreground": "#cf8484", "fontStyle": "" }
+    },
+    {
+      // Escape characters.
+      "scope": [
+        "constant.character.escape.json",
+        "constant.character.escape.toml",
+        "constant.character.escape.yaml"
+      ],
+      "settings": { "foreground": "#ef9c16", "fontStyle": "" }
+    },
+    {
+      // Strings.
+      "scope": [
+        "string.quoted.double.json",
+        "string.quoted.single.basic.line.toml",
+        "string.quoted.single.literal.line.toml",
+        "string.quoted.triple.basic.block.toml",
+        "string.unquoted.plain.out.yaml",
+        "string.quoted.single.yaml",
+        "string.quoted.double.yaml",
+        "string.unquoted.block.yaml",
+        "string.unquoted.plain.in.yaml"
+      ],
+      "settings": { "foreground": "#74af83", "fontStyle": "" }
+    },
+    {
+      // Documentation comments.
+      "scope": ["comment.block.documentation.json"],
+      "settings": { "foreground": "#7d986e", "fontStyle": "italic" }
+    },
+    {
+      // Numbers.
+      "scope": [
+        "constant.numeric.json",
+        "constant.numeric.integer.toml",
+        "constant.numeric.float.toml",
+        "constant.numeric.integer.yaml",
+        "constant.numeric.float.yaml"
+      ],
+      "settings": { "foreground": "#51b2e3", "fontStyle": "" }
+    },
+    {
+      // Configuration file keys.
+      "scope": [
+        "support.type.property-name.json",
+        "support.type.property-name.toml",
+        "support.type.property-name.table.toml",
+        "support.type.property-name.array.toml",
+        "entity.name.tag.yaml"
+      ],
+      "settings": { "foreground": "#b081dc", "fontStyle": "italic" }
+    }
+  ]
 }
