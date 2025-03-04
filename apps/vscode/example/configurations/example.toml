@@ -14,3 +14,13 @@ float = 123.456
 
 inline-array = [1, 2, 3]
 inline-table = { key = "value", number = 123, boolean = true }
+
+[table]
+key = "value"
+number = 123
+boolean = true
+
+[[array]]
+key = "value"
+number = 123
+boolean = true
