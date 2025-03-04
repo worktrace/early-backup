@@ -126,6 +126,7 @@ enum _DependenciesMode {
   String get asPubspecKey => name.snakeCase;
 }
 
+/// Exception about the structure of pubspec.yaml.
 class PubspecException implements Exception {
   const PubspecException({required this.message, required this.root});
 
