@@ -131,6 +131,38 @@ class DartPackage {
 
     return hasBuildRunner && hasBuildConfig;
   }
+
+  Future<void> build({
+    bool includeChildren = true,
+    bool recursive = false,
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+  }) async {
+    if (hasBuild) await buildCurrent(mode: mode);
+    for (final child in children) {
+      await child.build(
+        includeChildren: recursive,
+        recursive: recursive,
+        mode: mode,
+      );
+    }
+  }
+
+  Future<void> buildCurrent({
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+  }) async {
+    final process = await Process.start(
+      'dart',
+      ['run', 'build_runner', 'build'],
+      runInShell: true,
+      workingDirectory: root.path,
+      mode: mode,
+    );
+    if (await process.exitCode != 0) {
+      var message = 'build failed at: ${root.path}';
+      if (mode == ProcessStartMode.detached) message += stderr.toString();
+      throw Exception(message);
+    }
+  }
 }
 
 enum _DependenciesMode {
