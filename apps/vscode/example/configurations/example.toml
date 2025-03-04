@@ -6,3 +6,6 @@ indented_multi_line = """
   first line
   second line
 """
+
+integer = 123
+float = 123.456

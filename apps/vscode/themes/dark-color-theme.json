@@ -99,7 +99,11 @@
     },
     {
       // Numbers.
-      "scope": ["constant.numeric.json"],
+      "scope": [
+        "constant.numeric.json",
+        "constant.numeric.integer.toml",
+        "constant.numeric.float.toml"
+      ],
       "settings": { "foreground": "#51b2e3", "fontStyle": "" }
     },
     {
