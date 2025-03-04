@@ -5,6 +5,10 @@
   "boolean.true": true,
   "boolean.false": false,
   "null": null,
-  "array": ["string", 123, null, { "key": "value" }],
-  "escape characters": "code\"\\\b\f\n\r\t\u4e2d"
+  "escape characters": "code\"\\\b\f\n\r\t\u4e2d",
+  "array": ["abc", 123, true, null, { "key": "value" }],
+  "object": {
+    "key": "value",
+    "array": ["abc", 123, true, null]
+  }
 }
