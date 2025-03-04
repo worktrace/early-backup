@@ -2,6 +2,7 @@ semi: false
 
 # Toml plugin might incompatible with VSCode extension,
 # so that it's not installed inside node.
+# see: https://github.com/un-ts/prettier/tree/master/packages/toml#notice
 plugins:
   - prettier-plugin-sh
 
