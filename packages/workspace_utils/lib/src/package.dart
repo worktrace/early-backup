@@ -117,6 +117,20 @@ class DartPackage {
       throw Exception(message);
     }
   }
+
+  /// Whether the package has `build_runner` and `build.yaml`,
+  /// that it requires generated code and can be processed by `build_runner`.
+  bool get hasBuild {
+    const buildRunner = 'build_runner';
+    final hasBuildRunner = dependencies.containsKey(buildRunner) ||
+        devDependencies.containsKey(buildRunner);
+
+    final hasBuildConfig = root
+        .listSync()
+        .any((item) => item is File && basename(item.path) == 'build.yaml');
+
+    return hasBuildRunner && hasBuildConfig;
+  }
 }
 
 enum _DependenciesMode {
