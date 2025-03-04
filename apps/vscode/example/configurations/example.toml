@@ -9,3 +9,5 @@ indented_multi_line = """
 
 integer = 123
 float = 123.456
+"boolean true" = true
+"boolean false" = false
