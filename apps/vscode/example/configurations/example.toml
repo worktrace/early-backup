@@ -11,3 +11,6 @@ integer = 123
 float = 123.456
 "boolean true" = true
 "boolean false" = false
+
+inline-array = [1, 2, 3]
+inline-table = { key = "value", number = 123, boolean = true }

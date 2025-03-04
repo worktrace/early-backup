@@ -65,7 +65,13 @@
         "punctuation.definition.dictionary.begin.json",
         "punctuation.definition.dictionary.end.json",
         "punctuation.separator.dictionary.pair.json",
-        "punctuation.eq.toml"
+        "punctuation.eq.toml",
+        "punctuation.definition.table.toml",
+        "punctuation.definition.array.table.toml",
+        "punctuation.definition.array.toml",
+        "punctuation.definition.table.inline.toml",
+        "punctuation.separator.array.toml",
+        "punctuation.separator.table.inline.toml"
       ],
       "settings": { "foreground": "#aab5ad", "fontStyle": "" }
     },
