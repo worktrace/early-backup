@@ -7,3 +7,8 @@
 **/flutter/linux/**/*
 **/flutter/macos/**/*
 **/flutter/windows/**/*
+
+# Compiled output js and dts files.
+*.cjs
+*.js
+*.d.ts
