@@ -14,6 +14,9 @@ extension StringUtils on String {
     if (index == -1) return null;
     return (substring(0, index), substring(index + separator.length));
   }
+
+  String get firstCharacter => isNotEmpty ? this[0] : '';
+  String get firstCharacterLower => firstCharacter.toLowerCase();
 }
 
 extension StringBufferUtils on StringBuffer {

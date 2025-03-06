@@ -117,6 +117,54 @@ class DartPackage {
       throw Exception(message);
     }
   }
+
+  /// Whether the package has `build_runner` and `build.yaml`,
+  /// that it requires generated code and can be processed by `build_runner`.
+  bool get hasBuild {
+    const buildRunner = 'build_runner';
+    final hasBuildRunner = dependencies.containsKey(buildRunner) ||
+        devDependencies.containsKey(buildRunner);
+
+    final hasBuildConfig = root
+        .listSync()
+        .any((item) => item is File && basename(item.path) == 'build.yaml');
+
+    return hasBuildRunner && hasBuildConfig;
+  }
+
+  Future<void> build({
+    bool includeChildren = true,
+    bool recursive = false,
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+  }) async {
+    if (hasBuild) await buildCurrent(mode: mode);
+    for (final child in children) {
+      await child.build(
+        includeChildren: recursive,
+        recursive: recursive,
+        mode: mode,
+      );
+    }
+  }
+
+  Future<void> buildCurrent({
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+    bool deleteConflictingOutputs = true,
+  }) async {
+    final d = deleteConflictingOutputs;
+    final process = await Process.start(
+      'dart',
+      ['run', 'build_runner', 'build', if (d) '--delete-conflicting-outputs'],
+      runInShell: true,
+      workingDirectory: root.path,
+      mode: mode,
+    );
+    if (await process.exitCode != 0) {
+      var message = 'build failed at: ${root.path}';
+      if (mode == ProcessStartMode.detached) message += stderr.toString();
+      throw Exception(message);
+    }
+  }
 }
 
 enum _DependenciesMode {
@@ -126,6 +174,7 @@ enum _DependenciesMode {
   String get asPubspecKey => name.snakeCase;
 }
 
+/// Exception about the structure of pubspec.yaml.
 class PubspecException implements Exception {
   const PubspecException({required this.message, required this.root});
 

@@ -1,24 +1,27 @@
 import 'dart:async';
 
 import 'package:args/command_runner.dart';
+import 'package:compat_utils/command_line.dart';
 import 'package:workspace_utils/workspace_utils.dart';
 
 Future<void> main(List<String> arguments) async {
   const name = 'workspace_utils';
   const description = 'Dart workspace multiple packages operations.';
   final runner = CommandRunner<void>(name, description)
-    ..addCommand(TestCommand());
+    ..addCommand(TestCommand())
+    ..addCommand(BuildCommand());
 
   return runner.run(arguments);
 }
 
+final rootOption = CommandLineOption.from(
+  name: 'root',
+  help: 'Specify the root directory where workspace root locates.',
+);
+
 class TestCommand extends Command<void> {
-  TestCommand() {
-    argParser.addOption(
-      rootOption,
-      abbr: rootOption.substring(0, 1).toLowerCase(),
-      help: 'Specify the root directory where workspace root locates.',
-    );
+  TestCommand() : super() {
+    rootOption.apply(argParser);
   }
 
   @override
@@ -27,12 +30,29 @@ class TestCommand extends Command<void> {
   @override
   String get description => 'Test all packages inside the root workspace.';
 
-  static const rootOption = 'root';
+  @override
+  Future<void> run() async {
+    final root = argResults?.option(rootOption.name);
+    final package = DartPackage.resolve(path: root ?? '');
+    await package.test();
+  }
+}
+
+class BuildCommand extends Command<void> {
+  BuildCommand() : super() {
+    rootOption.apply(argParser);
+  }
+
+  @override
+  String get name => 'build';
+
+  @override
+  String get description => 'Build all packages inside the root workspace.';
 
   @override
   Future<void> run() async {
-    final root = argResults?.option(rootOption);
+    final root = argResults?.option(rootOption.name);
     final package = DartPackage.resolve(path: root ?? '');
-    await package.test();
+    await package.build();
   }
 }
