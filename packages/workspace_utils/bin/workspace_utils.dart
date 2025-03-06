@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
+import 'package:compat_utils/compat_utils.dart';
 import 'package:workspace_utils/workspace_utils.dart';
 
 Future<void> main(List<String> arguments) async {
@@ -19,7 +20,7 @@ const rootOptionName = 'root';
 void addRootOption(ArgParser argParser) {
   argParser.addOption(
     rootOptionName,
-    abbr: rootOptionName.substring(0, 1).toLowerCase(),
+    abbr: rootOptionName.firstCharacterLower,
     help: 'Specify the root directory where workspace root locates.',
   );
 }
