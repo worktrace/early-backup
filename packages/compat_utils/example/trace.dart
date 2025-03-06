@@ -1,4 +1,4 @@
-import 'package:compat_utils/compat_utils.dart';
+import 'package:compat_utils/command_line.dart';
 
 void main() => traceExample();
 
