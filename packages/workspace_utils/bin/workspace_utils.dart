@@ -4,7 +4,7 @@ import 'package:args/command_runner.dart';
 import 'package:compat_utils/command_line.dart';
 import 'package:workspace_utils/workspace_utils.dart';
 
-Future<void> main(List<String> arguments) async {
+Future<void> main(List<String> arguments) {
   const name = 'workspace_utils';
   const description = 'Dart workspace multiple packages operations.';
   final runner = CommandRunner<void>(name, description)
