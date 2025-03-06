@@ -1,8 +1,7 @@
 import 'dart:async';
 
-import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
-import 'package:compat_utils/compat_utils.dart';
+import 'package:compat_utils/command_line.dart';
 import 'package:workspace_utils/workspace_utils.dart';
 
 Future<void> main(List<String> arguments) async {
@@ -15,19 +14,14 @@ Future<void> main(List<String> arguments) async {
   return runner.run(arguments);
 }
 
-// Shared root option.
-const rootOptionName = 'root';
-void addRootOption(ArgParser argParser) {
-  argParser.addOption(
-    rootOptionName,
-    abbr: rootOptionName.firstCharacterLower,
-    help: 'Specify the root directory where workspace root locates.',
-  );
-}
+final rootOption = CommandLineOption.from(
+  name: 'root',
+  help: 'Specify the root directory where workspace root locates.',
+);
 
 class TestCommand extends Command<void> {
   TestCommand() : super() {
-    addRootOption(argParser);
+    rootOption.apply(argParser);
   }
 
   @override
@@ -38,7 +32,7 @@ class TestCommand extends Command<void> {
 
   @override
   Future<void> run() async {
-    final root = argResults?.option(rootOptionName);
+    final root = argResults?.option(rootOption.name);
     final package = DartPackage.resolve(path: root ?? '');
     await package.test();
   }
@@ -46,7 +40,7 @@ class TestCommand extends Command<void> {
 
 class BuildCommand extends Command<void> {
   BuildCommand() : super() {
-    addRootOption(argParser);
+    rootOption.apply(argParser);
   }
 
   @override
@@ -57,7 +51,7 @@ class BuildCommand extends Command<void> {
 
   @override
   Future<void> run() async {
-    final root = argResults?.option(rootOptionName);
+    final root = argResults?.option(rootOption.name);
     final package = DartPackage.resolve(path: root ?? '');
     await package.build();
   }
