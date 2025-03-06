@@ -149,10 +149,12 @@ class DartPackage {
 
   Future<void> buildCurrent({
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
+    bool deleteConflictingOutputs = true,
   }) async {
+    final d = deleteConflictingOutputs;
     final process = await Process.start(
       'dart',
-      ['run', 'build_runner', 'build'],
+      ['run', 'build_runner', 'build', if (d) '--delete-conflicting-outputs'],
       runInShell: true,
       workingDirectory: root.path,
       mode: mode,
