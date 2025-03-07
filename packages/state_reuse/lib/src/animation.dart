@@ -120,8 +120,11 @@ abstract class SingleAnimationStateBare<S extends StatefulWidget>
   }
 }
 
-class SingleAnimation<T> extends SingleAnimationWidget {
-  const SingleAnimation({
+typedef SingleAnimation<T> = _SingleAnimation<T, DataBuilder<T>, Lerp<T>>;
+
+class _SingleAnimation<T, U extends DataBuilder<T>, L extends Lerp<T>>
+    extends SingleAnimationWidget {
+  const _SingleAnimation({
     super.key,
     super.animation,
     required this.data,
@@ -130,11 +133,12 @@ class SingleAnimation<T> extends SingleAnimationWidget {
   });
 
   final T data;
-  final Lerp<T> lerp;
-  final DataBuilder<T> builder;
+  final L lerp;
+  final U builder;
 
   @override
-  State<SingleAnimation<T>> createState() => _SingleAnimationState<T>();
+  State<_SingleAnimation<T, U, L>> createState() =>
+      _SingleAnimationState<T, U, L>();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -146,8 +150,8 @@ class SingleAnimation<T> extends SingleAnimationWidget {
   }
 }
 
-class _SingleAnimationState<T>
-    extends SingleAnimationStateBare<SingleAnimation<T>> {
+class _SingleAnimationState<T, U extends DataBuilder<T>, L extends Lerp<T>>
+    extends SingleAnimationStateBare<_SingleAnimation<T, U, L>> {
   late AnimationTween<T> _tween = AnimationTween(
     begin: widget.data,
     end: widget.data,
@@ -174,7 +178,7 @@ class _SingleAnimationState<T>
   }
 
   @override
-  void didUpdateWidget(covariant SingleAnimation<T> oldWidget) {
+  void didUpdateWidget(covariant _SingleAnimation<T, U, L> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.data != oldWidget.data) {
       _tween = AnimationTween(begin: data, end: widget.data);
