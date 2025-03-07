@@ -4,8 +4,11 @@ import 'package:state_reuse/state_reuse.dart';
 
 import 'inherit.dart';
 
-class Handler<T> extends StatefulWidget {
-  const Handler({
+typedef Handler<T> = _Handler<T, DataBuilder<T>, ValueChanged<T>>;
+
+class _Handler<T, U extends DataBuilder<T>, V extends ValueChanged<T>>
+    extends StatefulWidget {
+  const _Handler({
     super.key,
     required this.data,
     this.onChange,
@@ -13,11 +16,11 @@ class Handler<T> extends StatefulWidget {
   });
 
   final T data;
-  final ValueChanged<T>? onChange;
-  final DataBuilder<T> builder;
+  final V? onChange;
+  final U builder;
 
   @override
-  State<Handler<T>> createState() => _HandlerState<T>();
+  State<_Handler<T, U, V>> createState() => _HandlerState<T, U, V>();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -29,7 +32,8 @@ class Handler<T> extends StatefulWidget {
   }
 }
 
-class _HandlerState<T> extends State<Handler<T>> {
+class _HandlerState<T, U extends DataBuilder<T>, V extends ValueChanged<T>>
+    extends State<_Handler<T, U, V>> {
   late T _data = widget.data;
   void updateData(T value) {
     if (value == _data) return;

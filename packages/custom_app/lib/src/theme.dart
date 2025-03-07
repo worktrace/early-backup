@@ -94,8 +94,11 @@ extension WrapTheme on Widget {
   }
 }
 
-class AdaptiveTheme<T extends ThemeBase> extends StatefulWidget {
-  const AdaptiveTheme({
+typedef AdaptiveTheme<T extends ThemeBase> = _AdaptiveTheme<T, DataBuilder<T>>;
+
+class _AdaptiveTheme<T extends ThemeBase, U extends DataBuilder<T>>
+    extends StatefulWidget {
+  const _AdaptiveTheme({
     super.key,
     required this.adapter,
     required this.builder,
@@ -103,11 +106,11 @@ class AdaptiveTheme<T extends ThemeBase> extends StatefulWidget {
   });
 
   final ThemeAdapter<T> adapter;
-  final Widget Function(BuildContext context, T data) builder;
+  final U builder;
   final Widget child;
 
   @override
-  State<AdaptiveTheme<T>> createState() => _AdaptiveThemeState<T>();
+  State<_AdaptiveTheme<T, U>> createState() => _AdaptiveThemeState<T, U>();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -118,8 +121,8 @@ class AdaptiveTheme<T extends ThemeBase> extends StatefulWidget {
   }
 }
 
-class _AdaptiveThemeState<T extends ThemeBase>
-    extends WidgetBindingState<AdaptiveTheme<T>> {
+class _AdaptiveThemeState<T extends ThemeBase, U extends DataBuilder<T>>
+    extends WidgetBindingState<_AdaptiveTheme<T, U>> {
   late T _theme = widget.adapter.adapt;
   T get theme => _theme;
   set theme(T value) {
@@ -127,7 +130,7 @@ class _AdaptiveThemeState<T extends ThemeBase>
   }
 
   @override
-  void didUpdateWidget(covariant AdaptiveTheme<T> oldWidget) {
+  void didUpdateWidget(covariant _AdaptiveTheme<T, U> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.adapter != oldWidget.adapter) theme = widget.adapter.adapt;
   }

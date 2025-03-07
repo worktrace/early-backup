@@ -43,14 +43,16 @@ class Inherit<T> extends InheritedWidget {
   }
 }
 
-class InheritUpdate<T> extends InheritedWidget {
-  const InheritUpdate({
+typedef InheritUpdate<T> = _InheritUpdate<T, ValueChanged<T>>;
+
+class _InheritUpdate<T, U extends ValueChanged<T>> extends InheritedWidget {
+  const _InheritUpdate({
     super.key,
     required this.onChange,
     required super.child,
   });
 
-  final ValueChanged<T> onChange;
+  final U onChange;
 
   @override
   bool updateShouldNotify(covariant InheritUpdate<T> oldWidget) {
