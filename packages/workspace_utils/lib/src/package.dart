@@ -67,6 +67,13 @@ class DartPackage {
   }
 }
 
+enum _DependenciesMode {
+  dependencies,
+  devDependencies;
+
+  String get asPubspecKey => name.snakeCase;
+}
+
 extension DartPackageTest on DartPackage {
   bool get hasFlutterTest {
     final manifest = this.manifest;
@@ -169,13 +176,6 @@ extension DartPackageBuild on DartPackage {
       throw Exception(message);
     }
   }
-}
-
-enum _DependenciesMode {
-  dependencies,
-  devDependencies;
-
-  String get asPubspecKey => name.snakeCase;
 }
 
 /// Exception about the structure of pubspec.yaml.
