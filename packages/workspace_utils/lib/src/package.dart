@@ -65,7 +65,9 @@ class DartPackage {
     }
     return handler;
   }
+}
 
+extension DartPackageTest on DartPackage {
   bool get hasFlutterTest {
     final manifest = this.manifest;
     for (final key in ['dependencies', 'dev_dependencies']) {
@@ -117,7 +119,9 @@ class DartPackage {
       throw Exception(message);
     }
   }
+}
 
+extension DartPackageBuild on DartPackage {
   /// Whether the package has `build_runner` and `build.yaml`,
   /// that it requires generated code and can be processed by `build_runner`.
   bool get hasBuild {
