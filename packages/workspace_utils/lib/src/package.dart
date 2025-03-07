@@ -4,6 +4,7 @@ import 'package:compat_utils/compat_utils.dart';
 import 'package:path/path.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
+import 'package:yaml_edit/yaml_edit.dart';
 
 class DartPackage {
   const DartPackage(this.root);
@@ -175,6 +176,20 @@ extension DartPackageBuild on DartPackage {
       if (mode == ProcessStartMode.detached) message += stderr.toString();
       throw Exception(message);
     }
+  }
+}
+
+extension DartPackageUpdateVersion on DartPackage {
+  /// Update Dart SDK and Flutter versions of current package.
+  void updateEnvironment({
+    VersionConstraint? sdk,
+    VersionConstraint? flutter,
+  }) {
+    if (sdk == null && flutter == null) return;
+    const e = 'environment';
+    final editor = YamlEditor(manifestFile.readAsStringSync());
+    if (sdk != null) editor.update([e, 'sdk'], sdk.toString());
+    if (flutter != null) editor.update([e, 'flutter'], flutter.toString());
   }
 }
 
