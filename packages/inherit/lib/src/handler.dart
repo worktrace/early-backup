@@ -38,7 +38,7 @@ class _HandlerState<T, U extends DataBuilder<T>, V extends ValueChanged<T>>
   void updateData(T value) {
     if (value == _data) return;
     setState(() => _data = value);
-    widget.onChange?.call(value);
+    (widget.onChange as ValueChanged<T>?)?.call(value);
   }
 
   @override
