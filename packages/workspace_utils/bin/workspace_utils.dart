@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:args/command_runner.dart';
 import 'package:compat_utils/command_line.dart';
+import 'package:compat_utils/compat_utils.dart';
+import 'package:pub_semver/pub_semver.dart';
 import 'package:workspace_utils/workspace_utils.dart';
 
 Future<void> main(List<String> arguments) {
@@ -9,7 +11,8 @@ Future<void> main(List<String> arguments) {
   const description = 'Dart workspace multiple packages operations.';
   final runner = CommandRunner<void>(name, description)
     ..addCommand(TestCommand())
-    ..addCommand(BuildCommand());
+    ..addCommand(BuildCommand())
+    ..addCommand(UpdateEnvironmentCommand());
 
   return runner.run(arguments);
 }
@@ -54,5 +57,40 @@ class BuildCommand extends Command<void> {
     final root = argResults?.option(rootOption.name);
     final package = DartPackage.resolve(path: root ?? '');
     await package.build();
+  }
+}
+
+class UpdateEnvironmentCommand extends Command<void> {
+  UpdateEnvironmentCommand() : super() {
+    rootOption.apply(argParser);
+  }
+
+  @override
+  String get name => 'environment';
+
+  @override
+  String get description => 'Update environment versions '
+      'of current workspace.\n\n'
+      'Example:\n\n    '
+      'dart run workspace_utils environment '
+      'sdk:^a.b.c '
+      'flutter:">=a.b.c <d.0.0"';
+
+  @override
+  void run() {
+    VersionConstraint? sdk;
+    VersionConstraint? flutter;
+    for (final arg in argResults?.arguments ?? []) {
+      final raw = arg.toString();
+      if (sdk == null && raw.startsWith('sdk:')) {
+        sdk = VersionConstraint.parse(raw.removePrefix('sdk:'));
+      }
+      if (flutter == null && raw.startsWith('flutter:')) {
+        flutter = VersionConstraint.parse(raw.removePrefix('flutter:'));
+      }
+    }
+
+    DartPackage.resolve(path: argResults?.option(rootOption.name) ?? '')
+        .updateEnvironment(sdk: sdk, flutter: flutter);
   }
 }
