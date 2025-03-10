@@ -215,6 +215,7 @@ extension DartPackageUpdateVersion on DartPackage {
     if (flutter != null && isFlutter) {
       editor.update([environment, 'flutter'], flutter.toString());
     }
+    manifestFile.writeAsStringSync(editor.toString());
   }
 }
 
