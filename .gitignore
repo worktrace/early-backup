@@ -23,6 +23,7 @@ Desktop.ini
 # Some of the lockfiles might contain information about the source,
 # which is different between mirrors.
 # So that the lockfiles are ignored for potential merge conflict troubles here.
+.metadata
 pnpm-lock.yaml
 pubspec.lock
 Cargo.lock

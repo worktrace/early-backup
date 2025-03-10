@@ -2,7 +2,10 @@ name: wrap
 description: Chain style programming syntax sugar utilities for flutter widgets.
 version: 1.0.0
 resolution: workspace
-environment: { sdk: ^3.6.0, flutter: "^3.27.0" }
+
+environment:
+  sdk: ^3.7.0
+  flutter: ">=3.29.0 <4.0.0"
 
 dependencies:
   flutter: { sdk: flutter }
