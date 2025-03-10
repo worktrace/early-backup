@@ -67,7 +67,10 @@ class DartPackage {
     return handler;
   }
 
-  bool get isFlutter => dependencies.containsKey('flutter');
+  bool get isFlutter {
+    final dependencies = manifest[_DependenciesMode.dependencies.asPubspecKey];
+    return dependencies is YamlMap && dependencies.containsKey('flutter');
+  }
 }
 
 enum _DependenciesMode {
@@ -80,7 +83,7 @@ enum _DependenciesMode {
 extension DartPackageTest on DartPackage {
   bool get hasFlutterTest {
     final manifest = this.manifest;
-    for (final key in ['dependencies', 'dev_dependencies']) {
+    for (final key in _DependenciesMode.values.map((k) => k.asPubspecKey)) {
       if (manifest.containsKey(key)) {
         final deps = manifest[key] as YamlMap;
         if (deps.containsKey('flutter_test')) return true;
