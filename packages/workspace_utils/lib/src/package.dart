@@ -104,6 +104,7 @@ extension DartPackageTest on DartPackage {
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
     if (hasTestFile) await testCurrent(mode: mode);
+    if (!includeChildren) return;
     for (final child in children) {
       await child.test(
         includeChildren: recursive,
@@ -152,6 +153,7 @@ extension DartPackageBuild on DartPackage {
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
     if (hasBuild) await buildCurrent(mode: mode);
+    if (!includeChildren) return;
     for (final child in children) {
       await child.build(
         includeChildren: recursive,
@@ -190,6 +192,7 @@ extension DartPackageUpdateVersion on DartPackage {
     bool recursive = false,
   }) {
     updateCurrentEnvironment(sdk: sdk, flutter: flutter);
+    if (!includeChildren) return;
     for (final child in children) {
       child.updateEnvironment(
         sdk: sdk,
