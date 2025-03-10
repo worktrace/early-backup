@@ -4,6 +4,7 @@ import 'package:compat_utils/compat_utils.dart';
 import 'package:path/path.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
+import 'package:yaml_edit/yaml_edit.dart';
 
 class DartPackage {
   const DartPackage(this.root);
@@ -66,6 +67,17 @@ class DartPackage {
     return handler;
   }
 
+  bool get isFlutter => dependencies.containsKey('flutter');
+}
+
+enum _DependenciesMode {
+  dependencies,
+  devDependencies;
+
+  String get asPubspecKey => name.snakeCase;
+}
+
+extension DartPackageTest on DartPackage {
   bool get hasFlutterTest {
     final manifest = this.manifest;
     for (final key in ['dependencies', 'dev_dependencies']) {
@@ -92,6 +104,7 @@ class DartPackage {
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
     if (hasTestFile) await testCurrent(mode: mode);
+    if (!includeChildren) return;
     for (final child in children) {
       await child.test(
         includeChildren: recursive,
@@ -117,7 +130,9 @@ class DartPackage {
       throw Exception(message);
     }
   }
+}
 
+extension DartPackageBuild on DartPackage {
   /// Whether the package has `build_runner` and `build.yaml`,
   /// that it requires generated code and can be processed by `build_runner`.
   bool get hasBuild {
@@ -138,6 +153,7 @@ class DartPackage {
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
     if (hasBuild) await buildCurrent(mode: mode);
+    if (!includeChildren) return;
     for (final child in children) {
       await child.build(
         includeChildren: recursive,
@@ -167,11 +183,39 @@ class DartPackage {
   }
 }
 
-enum _DependenciesMode {
-  dependencies,
-  devDependencies;
+extension DartPackageUpdateVersion on DartPackage {
+  /// Update Dart SDK and Flutter versions of current workspace.
+  void updateEnvironment({
+    VersionConstraint? sdk,
+    VersionConstraint? flutter,
+    bool includeChildren = true,
+    bool recursive = false,
+  }) {
+    updateCurrentEnvironment(sdk: sdk, flutter: flutter);
+    if (!includeChildren) return;
+    for (final child in children) {
+      child.updateEnvironment(
+        sdk: sdk,
+        flutter: flutter,
+        includeChildren: recursive,
+        recursive: recursive,
+      );
+    }
+  }
 
-  String get asPubspecKey => name.snakeCase;
+  /// Update Dart SDK and Flutter versions of current package.
+  void updateCurrentEnvironment({
+    VersionConstraint? sdk,
+    VersionConstraint? flutter,
+  }) {
+    if (sdk == null && flutter == null) return;
+    const environment = 'environment';
+    final editor = YamlEditor(manifestFile.readAsStringSync());
+    if (sdk != null) editor.update([environment, 'sdk'], sdk.toString());
+    if (flutter != null && isFlutter) {
+      editor.update([environment, 'flutter'], flutter.toString());
+    }
+  }
 }
 
 /// Exception about the structure of pubspec.yaml.
