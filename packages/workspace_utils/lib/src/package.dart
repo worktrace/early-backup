@@ -66,6 +66,8 @@ class DartPackage {
     }
     return handler;
   }
+
+  bool get isFlutter => dependencies.containsKey('flutter');
 }
 
 enum _DependenciesMode {
@@ -186,10 +188,12 @@ extension DartPackageUpdateVersion on DartPackage {
     VersionConstraint? flutter,
   }) {
     if (sdk == null && flutter == null) return;
-    const e = 'environment';
+    const environment = 'environment';
     final editor = YamlEditor(manifestFile.readAsStringSync());
-    if (sdk != null) editor.update([e, 'sdk'], sdk.toString());
-    if (flutter != null) editor.update([e, 'flutter'], flutter.toString());
+    if (sdk != null) editor.update([environment, 'sdk'], sdk.toString());
+    if (flutter != null && isFlutter) {
+      editor.update([environment, 'flutter'], flutter.toString());
+    }
   }
 }
 
