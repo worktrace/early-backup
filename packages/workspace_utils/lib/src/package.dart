@@ -182,8 +182,26 @@ extension DartPackageBuild on DartPackage {
 }
 
 extension DartPackageUpdateVersion on DartPackage {
-  /// Update Dart SDK and Flutter versions of current package.
+  /// Update Dart SDK and Flutter versions of current workspace.
   void updateEnvironment({
+    VersionConstraint? sdk,
+    VersionConstraint? flutter,
+    bool includeChildren = true,
+    bool recursive = false,
+  }) {
+    updateCurrentEnvironment(sdk: sdk, flutter: flutter);
+    for (final child in children) {
+      child.updateEnvironment(
+        sdk: sdk,
+        flutter: flutter,
+        includeChildren: recursive,
+        recursive: recursive,
+      );
+    }
+  }
+
+  /// Update Dart SDK and Flutter versions of current package.
+  void updateCurrentEnvironment({
     VersionConstraint? sdk,
     VersionConstraint? flutter,
   }) {
