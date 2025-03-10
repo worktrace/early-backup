@@ -2,7 +2,10 @@ name: worktrace
 version: 0.0.0+0
 publish_to: none
 resolution: workspace
-environment: { sdk: ^3.7.0, flutter: ">=3.29.0 <4.0.0" }
+
+environment:
+  sdk: ^3.7.0
+  flutter: ">=3.29.0 <4.0.0"
 
 dependencies:
   auto_stories: ^0.0.0

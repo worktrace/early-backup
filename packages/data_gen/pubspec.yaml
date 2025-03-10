@@ -2,7 +2,9 @@ name: data_gen
 description: Generate common boilerplates for data classes automatically.
 version: 0.0.0
 resolution: workspace
-environment: { sdk: ^3.7.0}
+
+environment:
+  sdk: ^3.7.0
 
 dependencies:
   analyzer: ^6.11.0

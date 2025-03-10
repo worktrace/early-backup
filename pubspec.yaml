@@ -1,7 +1,10 @@
 name: worktrace_monorepo
+description: Workspace management package at the root of the WorkTrace monorepo.
 version: 0.0.0
 publish_to: none
-environment: { sdk: ^3.7.0}
+
+environment:
+  sdk: ^3.7.0
 
 workspace:
   # Application components.

@@ -2,7 +2,10 @@ name: custom_app
 description: Customizable app framework without material or cupertino.
 version: 0.0.0
 resolution: workspace
-environment: { sdk: ^3.7.0, flutter: ">=3.29.0 <4.0.0" }
+
+environment:
+  sdk: ^3.7.0
+  flutter: ">=3.29.0 <4.0.0"
 
 dependencies:
   avoid_nullable: ^0.0.0
