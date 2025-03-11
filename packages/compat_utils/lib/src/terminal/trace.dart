@@ -1,8 +1,8 @@
 import 'dart:io';
 
+import 'package:compat_utils/compat_utils.dart';
 import 'package:path/path.dart';
 
-import 'format.dart';
 import 'terminal_wrap.dart';
 
 /// Global [Trace] instance as modifiable variable.
@@ -61,9 +61,10 @@ class Trace {
 
     // Level name.
     if (levelName) {
-      final content = decorate
-          ? level.decorate(pad: TraceLevel.width)
-          : level.name.padLeft(TraceLevel.width);
+      final content =
+          decorate
+              ? level.decorate(pad: TraceLevel.width)
+              : level.name.padLeft(TraceLevel.width);
       (buffer..adaptSpace).write(content);
     }
 
@@ -141,19 +142,21 @@ enum TraceLevel {
 }
 
 TracePosition? tracePosition({int depth = 2}) {
-  final lines = StackTrace.current
-      .toString()
-      .split('\n')
-      .map((line) => line.trim())
-      .where((line) => line.isNotEmpty)
-      .toList();
+  final lines =
+      StackTrace.current
+          .toString()
+          .split('\n')
+          .map((line) => line.trim())
+          .where((line) => line.isNotEmpty)
+          .toList();
 
   if (lines.length <= depth) return null;
-  final message = RegExp(r'\(([^)]+)\)$')
-      .firstMatch(lines[depth]) // Corresponding line according to depth.
-      ?.group(1)
-      ?.unwrapParenthesis
-      .trim();
+  final message =
+      RegExp(r'\(([^)]+)\)$')
+          .firstMatch(lines[depth]) // Corresponding line according to depth.
+          ?.group(1)
+          ?.unwrapParenthesis
+          .trim();
 
   if (message == null) return null;
   final index = RegExp(r':\d+:\d+$').firstMatch(message)?.start;
@@ -173,7 +176,7 @@ TracePosition? tracePosition({int depth = 2}) {
 
 class TracePosition {
   const TracePosition({required this.path, this.line = 0, this.column = 0})
-      : assert(line >= 0, column >= 0);
+    : assert(line >= 0, column >= 0);
 
   final String path;
   final int line;

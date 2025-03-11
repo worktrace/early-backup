@@ -1,18 +1,19 @@
 import 'dart:async';
 
 import 'package:args/command_runner.dart';
-import 'package:compat_utils/command_line.dart';
 import 'package:compat_utils/compat_utils.dart';
+import 'package:compat_utils/terminal.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:workspace_utils/workspace_utils.dart';
 
 Future<void> main(List<String> arguments) {
   const name = 'workspace_utils';
   const description = 'Dart workspace multiple packages operations.';
-  final runner = CommandRunner<void>(name, description)
-    ..addCommand(TestCommand())
-    ..addCommand(BuildCommand())
-    ..addCommand(UpdateEnvironmentCommand());
+  final runner =
+      CommandRunner<void>(name, description)
+        ..addCommand(TestCommand())
+        ..addCommand(BuildCommand())
+        ..addCommand(UpdateEnvironmentCommand());
 
   return runner.run(arguments);
 }
@@ -69,8 +70,8 @@ class UpdateEnvironmentCommand extends Command<void> {
   String get name => 'environment';
 
   @override
-  String get description => 'Update environment versions '
-      'of current workspace.\n\n'
+  String get description =>
+      'Update environment versions of current workspace.\n\n'
       'Example:\n\n    '
       'dart run workspace_utils environment '
       'sdk:^a.b.c '
@@ -90,7 +91,8 @@ class UpdateEnvironmentCommand extends Command<void> {
       }
     }
 
-    DartPackage.resolve(path: argResults?.option(rootOption.name) ?? '')
-        .updateEnvironment(sdk: sdk, flutter: flutter);
+    DartPackage.resolve(
+      path: argResults?.option(rootOption.name) ?? '',
+    ).updateEnvironment(sdk: sdk, flutter: flutter);
   }
 }

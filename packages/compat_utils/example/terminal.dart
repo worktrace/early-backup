@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:compat_utils/command_line.dart';
+import 'package:compat_utils/terminal.dart';
 
 void main(List<String> arguments) => terminalDecorateExample();
 

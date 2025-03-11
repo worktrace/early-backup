@@ -2,11 +2,7 @@ import 'package:args/args.dart';
 import 'package:compat_utils/compat_utils.dart';
 
 class CommandLineOption {
-  const CommandLineOption({
-    required this.name,
-    required this.help,
-    this.abbr,
-  });
+  const CommandLineOption({required this.name, required this.help, this.abbr});
 
   factory CommandLineOption.from({
     required String name,
@@ -26,10 +22,6 @@ class CommandLineOption {
   final String? abbr;
 
   void apply(ArgParser argParser) {
-    argParser.addOption(
-      name,
-      abbr: abbr,
-      help: help,
-    );
+    argParser.addOption(name, abbr: abbr, help: help);
   }
 }
