@@ -42,7 +42,7 @@ class DartPackage {
     if (!manifest.containsKey('workspace')) return [];
     if (manifest['workspace'] is! YamlList) return [];
     return (manifest['workspace'] as YamlList)
-        .whereType<String>()
+        .whereType<String>() //
         .map(DartPackage.from);
   }
 
@@ -140,11 +140,12 @@ extension DartPackageBuild on DartPackage {
   /// that it requires generated code and can be processed by `build_runner`.
   bool get hasBuild {
     const buildRunner = 'build_runner';
-    final hasBuildRunner = dependencies.containsKey(buildRunner) ||
+    final hasBuildRunner =
+        dependencies.containsKey(buildRunner) ||
         devDependencies.containsKey(buildRunner);
 
     final hasBuildConfig = root
-        .listSync()
+        .listSync() //
         .any((item) => item is File && basename(item.path) == 'build.yaml');
 
     return hasBuildRunner && hasBuildConfig;
