@@ -1,3 +1,3 @@
-export 'views/graph.dart';
-export 'views/loading.dart';
-export 'views/want.dart';
+export 'src/views/graph.dart';
+export 'src/views/loading.dart';
+export 'src/views/want.dart';

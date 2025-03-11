@@ -1,3 +1,3 @@
-export 'state/locale.dart';
-export 'state/locales.dart';
-export 'state/theme.dart';
+export 'src/state/locale.dart';
+export 'src/state/locales.dart';
+export 'src/state/theme.dart';
