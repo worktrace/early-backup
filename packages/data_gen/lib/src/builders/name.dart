@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
+import 'package:data_gen/annotation.dart';
 import 'package:path/path.dart';
 import 'package:source_gen/source_gen.dart';
-
-import 'annotation.dart';
 
 Builder nameBuilder(BuilderOptions options) {
   return LibraryBuilder(
@@ -49,7 +48,8 @@ class NameGenerator extends GeneratorForAnnotation<GenerateName> {
     final identifier = element.library?.identifier;
     if (identifier == null) throw Exception('cannot parse library identifier');
     const comment = '// ignore: unused_element may not be used.';
-    return '$comment\n' "const _\$libraryIdentifier = '$identifier';";
+    return '$comment\n'
+        "const _\$libraryIdentifier = '$identifier';";
   }
 
   String _generateClassName(ClassElement element) {

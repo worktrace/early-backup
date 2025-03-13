@@ -1,7 +1,7 @@
 class TerminalFont {
   const TerminalFont({required this.code, required this.resetCode})
-      : assert((code >= 1 && code <= 9) || code == 21),
-        assert(resetCode >= 22 && resetCode <= 29 && resetCode != 26);
+    : assert((code >= 1 && code <= 9) || code == 21),
+      assert(resetCode >= 22 && resetCode <= 29 && resetCode != 26);
 
   final int code;
   final int resetCode;
@@ -77,7 +77,7 @@ mixin TerminalColor {
 
 class BasicColor with TerminalColor {
   const BasicColor(this.code)
-      : assert((code >= 30 && code <= 37) || (code >= 90 && code <= 97));
+    : assert((code >= 30 && code <= 37) || (code >= 90 && code <= 97));
 
   final int code;
 
@@ -125,16 +125,16 @@ class CodeColor with TerminalColor {
 /// RGB means red, green and blue, all such values are integers from 0 to 255.
 class RGBColor with TerminalColor {
   const RGBColor(int value)
-      : this.from(
-          red: value >> 16,
-          green: (value >> 8) & 0xff,
-          blue: value & 0xff,
-        );
+    : this.from(
+        red: value >> 16,
+        green: (value >> 8) & 0xff,
+        blue: value & 0xff,
+      );
 
   const RGBColor.from({this.red = 0, this.green = 0, this.blue = 0})
-      : assert(red >= 0 && red <= 0xff),
-        assert(green >= 0 && green <= 0xff),
-        assert(blue >= 0 && blue <= 0xff);
+    : assert(red >= 0 && red <= 0xff),
+      assert(green >= 0 && green <= 0xff),
+      assert(blue >= 0 && blue <= 0xff);
 
   factory RGBColor.resolve({
     double red = 0,

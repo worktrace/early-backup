@@ -2,13 +2,11 @@ import 'package:avoid_nullable/avoid_nullable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:inherit/inherit.dart';
-import 'package:smooth_ui/smooth_ui.dart';
+import 'package:smooth_ui/utils.dart';
 import 'package:state_reuse/state_reuse.dart';
 import 'package:wrap/wrap.dart';
 
-const themeAnimation = AnimationData(
-  duration: Duration(milliseconds: 345),
-);
+const themeAnimation = AnimationData(duration: Duration(milliseconds: 345));
 
 extension WrapTheme on Widget {
   Widget themeAs<T extends ThemeBase>(BuildContext context, T theme) {
@@ -19,11 +17,7 @@ extension WrapTheme on Widget {
   }
 
   ThemeApply<T> theme<T extends ThemeBase>(T theme, {Key? key}) {
-    return ThemeApply(
-      key: key,
-      theme: theme,
-      child: this,
-    );
+    return ThemeApply(key: key, theme: theme, child: this);
   }
 
   AdaptiveTheme<T> adaptiveTheme<T extends ThemeBase>(
@@ -159,11 +153,7 @@ class ThemeAdapter<T extends ThemeBase> extends ThemeTween<T> {
   });
 
   factory ThemeAdapter.from(ThemeTween<T> tween, ThemeMode mode) {
-    return ThemeAdapter<T>(
-      mode: mode,
-      dark: tween.dark,
-      light: tween.light,
-    );
+    return ThemeAdapter<T>(mode: mode, dark: tween.dark, light: tween.light);
   }
 
   final ThemeMode mode;
@@ -172,10 +162,7 @@ class ThemeAdapter<T extends ThemeBase> extends ThemeTween<T> {
 }
 
 class ThemeTween<T extends ThemeBase> {
-  const ThemeTween({
-    required this.dark,
-    required this.light,
-  });
+  const ThemeTween({required this.dark, required this.light});
 
   final T dark;
   final T light;

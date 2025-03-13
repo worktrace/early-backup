@@ -3,8 +3,7 @@ import 'package:compat_utils/compat_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
-import 'package:smooth_ui/src/effect.dart';
-import 'package:smooth_ui/src/utils.dart';
+import 'package:smooth_ui/effect.dart';
 import 'package:state_reuse/state_reuse.dart';
 import 'package:wrap/wrap.dart';
 
@@ -163,7 +162,9 @@ class _SidebarContainerState extends State<SidebarContainer> with AdaptSize {
     final realDirection = Directionality.of(context);
     final left = (realDirection == TextDirection.ltr) == widget.primary;
 
-    final sidebar = this.sidebar(context, left: left).position(
+    final sidebar = this
+        .sidebar(context, left: left)
+        .position(
           top: 0,
           left: left ? 0 : null,
           right: left ? null : 0,
