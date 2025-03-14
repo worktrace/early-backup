@@ -15,13 +15,6 @@
       "cwd": "${workspaceFolder}/apps/flutter"
     },
     {
-      "name": "Flutter Stories",
-      "type": "dart",
-      "request": "launch",
-      "program": "${workspaceFolder}/apps/flutter/lib/stories.dart",
-      "cwd": "${workspaceFolder}/apps/flutter"
-    },
-    {
       // Launch VSCode extension in the output folder.
       // In this mode, hot update of themes are not available.
       //
