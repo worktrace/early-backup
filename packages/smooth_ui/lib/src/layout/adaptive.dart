@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:inherit/inherit.dart';
+import 'package:state_reuse/state_reuse.dart';
 
 import 'adaptive_data.dart';
 import 'adaptive_io.dart' if (kIsWeb) 'adaptive_web.dart';
@@ -14,11 +15,11 @@ class AdaptiveLayout extends StatefulWidget {
   State<AdaptiveLayout> createState() => _AdaptiveLayoutState();
 }
 
-class _AdaptiveLayoutState extends State<AdaptiveLayout> {
-  late final AdaptedLayout _layout = initLayout();
+class _AdaptiveLayoutState extends State<AdaptiveLayout> with AdaptSize {
+  late final LayoutAdapter _adapter = initLayout();
 
   @override
-  Widget build(BuildContext context) {
-    return widget.child.inherit(_layout);
+  Widget render(BuildContext context) {
+    return widget.child.inherit(_adapter);
   }
 }

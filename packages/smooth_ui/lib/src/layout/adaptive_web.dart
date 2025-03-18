@@ -1,9 +1,9 @@
 import 'adaptive_data.dart';
 
-AdaptedLayout initLayout() {
-  return const AdaptedLayout();
+LayoutAdapter initLayout() {
+  return const LayoutAdapter();
 }
 
-Future<AdaptedLayout> adaptLayout() async {
-  return const AdaptedLayout();
+Future<LayoutAdapter> adaptLayout() async {
+  return const LayoutAdapter();
 }

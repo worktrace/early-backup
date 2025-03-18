@@ -1,16 +1,9 @@
-import 'dart:io';
-
 import 'adaptive_data.dart';
 
-AdaptedLayout initLayout() {
-  return AdaptedLayout(
-    mode:
-        Platform.isAndroid || Platform.isIOS
-            ? WindowMode.portrait
-            : WindowMode.landscape,
-  );
+LayoutAdapter initLayout() {
+  return const LayoutAdapter();
 }
 
-Future<AdaptedLayout> adaptLayout() async {
-  return const AdaptedLayout();
+Future<LayoutAdapter> adaptLayout() async {
+  return const LayoutAdapter();
 }
