@@ -1,5 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:inherit/inherit.dart';
+
+import 'adaptive_data.dart';
+import 'adaptive_io.dart' if (kIsWeb) 'adaptive_web.dart';
 
 class AdaptiveLayout extends StatefulWidget {
   const AdaptiveLayout({super.key, required this.child});
@@ -11,18 +15,10 @@ class AdaptiveLayout extends StatefulWidget {
 }
 
 class _AdaptiveLayoutState extends State<AdaptiveLayout> {
-  late final _layout = const AdaptedLayout();
+  late final AdaptedLayout _layout = adaptLayout();
 
   @override
   Widget build(BuildContext context) {
     return widget.child.inherit(_layout);
   }
 }
-
-class AdaptedLayout {
-  const AdaptedLayout({this.mode = WindowMode.landscape});
-
-  final WindowMode mode;
-}
-
-enum WindowMode { landscape, medium, portrait }
