@@ -15,6 +15,16 @@
       "cwd": "${workspaceFolder}/apps/flutter"
     },
     {
+      // Debug Flutter web in wasm mode.
+      // see https://docs.flutter.dev/platform-integration/web/wasm
+      "name": "Flutter Wasm",
+      "type": "dart",
+      "request": "launch",
+      "program": "${workspaceFolder}/apps/flutter/lib/main.dart",
+      "cwd": "${workspaceFolder}/apps/flutter",
+      "args": ["--device-id", "chrome", "--wasm"]
+    },
+    {
       // Launch VSCode extension in the output folder.
       // In this mode, hot update of themes are not available.
       //
