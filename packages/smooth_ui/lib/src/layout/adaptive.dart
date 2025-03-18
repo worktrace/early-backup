@@ -2,9 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:inherit/inherit.dart';
 import 'package:state_reuse/state_reuse.dart';
 
-import 'adapt_layout.dart'
-    if (dart.library.io) 'adapt_layout_io.dart'
-    if (dart.library.js_interop) 'adapt_layout_web.dart';
+import 'adapt_layout.dart';
 import 'adaptive_data.dart';
 
 class AdaptiveLayout extends StatefulWidget {
