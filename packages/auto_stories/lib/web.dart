@@ -1,3 +1,1 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
-
-export 'src/web/route_io.dart' if (kIsWeb) 'src/web/route.dart';
+export 'src/web/route_io.dart' if (dart.library.html) 'src/web/route.dart';
