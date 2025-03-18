@@ -1,8 +1,10 @@
 import 'package:auto_stories/kit.dart';
+import 'package:auto_stories/web.dart';
 import 'package:flutter/widgets.dart';
 
 void autoStoriesRoot() {
   WidgetsFlutterBinding.ensureInitialized();
+  usePathUrlStrategy();
   runApp(const AutoStoriesRoot());
 }
 
