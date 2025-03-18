@@ -15,7 +15,7 @@ class AdaptiveLayout extends StatefulWidget {
 }
 
 class _AdaptiveLayoutState extends State<AdaptiveLayout> {
-  late final AdaptedLayout _layout = adaptLayout();
+  late final AdaptedLayout _layout = initLayout();
 
   @override
   Widget build(BuildContext context) {
