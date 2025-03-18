@@ -1,10 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:inherit/inherit.dart';
 import 'package:state_reuse/state_reuse.dart';
 
+import 'adapt_layout.dart'
+    if (dart.library.io) 'adapt_layout_io.dart'
+    if (dart.library.js_interop) 'adapt_layout_web.dart';
 import 'adaptive_data.dart';
-import 'adaptive_io.dart' if (kIsWeb) 'adaptive_web.dart';
 
 class AdaptiveLayout extends StatefulWidget {
   const AdaptiveLayout({super.key, required this.child});
