@@ -29,7 +29,10 @@ List<T> sortDependencies<T>(DependenciesGraph<T> nodes) {
     }
   }
 
-  if (sorted.length != nodes.length) throw Exception('cycle dependencies');
+  if (sorted.length != nodes.length) {
+    final nodesInCycle = nodes.keys.where((node) => !sorted.contains(node));
+    throw Exception('cycle dependencies detected between nodes: $nodesInCycle');
+  }
   return sorted;
 }
 
