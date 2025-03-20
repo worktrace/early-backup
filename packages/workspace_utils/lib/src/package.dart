@@ -57,6 +57,23 @@ extension DartPackageChildren on DartPackage {
     for (final child in children) handler[child.name] = child;
     return handler;
   }
+
+  /// Get sorted packages by dependencies that all packages will not depends
+  /// on any package before them.
+  /// The root package of the workspace is also included.
+  List<DartPackage> get sortedPackages {
+    final packages = {name: this, ...childPackages};
+    final nodes = packages.map((key, value) => MapEntry(key, <String>{}));
+    final names = nodes.keys;
+    packages.forEach((key, value) {
+      final p = value;
+      final dependencies = {...p.dependencies.keys, ...p.devDependencies.keys};
+      for (final name in dependencies) {
+        if (names.contains(name)) nodes[name]!.add(name);
+      }
+    });
+    return sortDependencies(nodes).map((name) => packages[name]!).toList();
+  }
 }
 
 extension DartPackageDependencies on DartPackage {
