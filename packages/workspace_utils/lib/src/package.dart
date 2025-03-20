@@ -138,7 +138,7 @@ extension DartPackageTest on DartPackage {
   }) async {
     if (hasTestFile) await testCurrent(mode: mode);
     if (workspace) {
-      for (final child in children) {
+      for (final child in sortedPackages) {
         await child.test(workspace: false, mode: mode);
       }
     }
@@ -184,7 +184,7 @@ extension DartPackageBuild on DartPackage {
   }) async {
     if (hasBuild) await buildCurrent(mode: mode);
     if (workspace) {
-      for (final child in children) {
+      for (final child in sortedPackages) {
         await child.build(workspace: false, mode: mode);
       }
     }
