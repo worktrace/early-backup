@@ -133,18 +133,14 @@ extension DartPackageTest on DartPackage {
   }
 
   Future<void> test({
-    bool includeChildren = true,
-    bool recursive = false,
+    bool workspace = true,
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
     if (hasTestFile) await testCurrent(mode: mode);
-    if (!includeChildren) return;
-    for (final child in children) {
-      await child.test(
-        includeChildren: recursive,
-        recursive: recursive,
-        mode: mode,
-      );
+    if (workspace) {
+      for (final child in children) {
+        await child.test(workspace: false, mode: mode);
+      }
     }
   }
 
@@ -183,18 +179,14 @@ extension DartPackageBuild on DartPackage {
   }
 
   Future<void> build({
-    bool includeChildren = true,
-    bool recursive = false,
+    bool workspace = true,
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
     if (hasBuild) await buildCurrent(mode: mode);
-    if (!includeChildren) return;
-    for (final child in children) {
-      await child.build(
-        includeChildren: recursive,
-        recursive: recursive,
-        mode: mode,
-      );
+    if (workspace) {
+      for (final child in children) {
+        await child.build(workspace: false, mode: mode);
+      }
     }
   }
 
@@ -223,18 +215,13 @@ extension DartPackageUpdateVersion on DartPackage {
   void updateEnvironment({
     VersionConstraint? sdk,
     VersionConstraint? flutter,
-    bool includeChildren = true,
-    bool recursive = false,
+    bool workspace = true,
   }) {
     updateCurrentEnvironment(sdk: sdk, flutter: flutter);
-    if (!includeChildren) return;
-    for (final child in children) {
-      child.updateEnvironment(
-        sdk: sdk,
-        flutter: flutter,
-        includeChildren: recursive,
-        recursive: recursive,
-      );
+    if (workspace) {
+      for (final child in children) {
+        child.updateEnvironment(sdk: sdk, flutter: flutter, workspace: false);
+      }
     }
   }
 
