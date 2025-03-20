@@ -21,7 +21,9 @@ class DartPackage {
   Directory get libDir => Directory(join(root.path, 'lib'));
   Directory get testDir => Directory(join(root.path, 'test'));
   Directory get exampleDir => Directory(join(root.path, 'example'));
+}
 
+extension DartPackageManifest on DartPackage {
   File get manifestFile => File(join(root.path, 'pubspec.yaml'));
   YamlMap get manifest => loadYaml(manifestFile.readAsStringSync()) as YamlMap;
 
@@ -36,7 +38,9 @@ class DartPackage {
     if (version is String) return Version.parse(version);
     throw PubspecException(message: 'cannot find version', root: root);
   }
+}
 
+extension DartPackageChildren on DartPackage {
   /// Get child packages iterable inside current workspace.
   Iterable<DartPackage> get children {
     final manifest = this.manifest;
@@ -53,7 +57,9 @@ class DartPackage {
     for (final child in children) handler[child.name] = child;
     return handler;
   }
+}
 
+extension DartPackageDependencies on DartPackage {
   Map<String, VersionConstraint> get dependencies {
     return _parseDependencies(_DependenciesMode.dependencies);
   }
