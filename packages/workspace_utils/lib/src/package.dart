@@ -37,6 +37,7 @@ class DartPackage {
     throw PubspecException(message: 'cannot find version', root: root);
   }
 
+  /// Get child packages iterable inside current workspace.
   Iterable<DartPackage> get children {
     final manifest = this.manifest;
     if (!manifest.containsKey('workspace')) return [];
@@ -44,6 +45,13 @@ class DartPackage {
     return (manifest['workspace'] as YamlList)
         .whereType<String>() //
         .map(DartPackage.from);
+  }
+
+  /// Get child packages map on their names inside current workspace.
+  Map<String, DartPackage> get childPackages {
+    final handler = <String, DartPackage>{};
+    for (final child in children) handler[child.name] = child;
+    return handler;
   }
 
   Map<String, VersionConstraint> get dependencies {
