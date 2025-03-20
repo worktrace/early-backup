@@ -3,6 +3,13 @@ import 'dart:collection';
 /// Sort [nodes] according to their dependencies,
 /// that all dependencies of a node must be sorted after the node itself.
 /// Once there's a cycle in the dependencies graph, an exception will be thrown.
+///
+/// # Nullable Attention
+///
+/// The [nodes] must be ensured that all dependencies are valid keys inside
+/// the map, or it will cause nullable exceptions.
+/// You may use [resolveDependencies] to ensure that before this function,
+/// which can be omitted when already ensured to improve performance.
 List<String> sortDependencies(Map<String, Set<String>> nodes) {
   final queue = Queue<String>();
   final sorted = <String>[];
@@ -34,4 +41,16 @@ Map<String, int> calculateInDegrees(Map<String, Set<String>> nodes) {
     }
   }
   return inDegrees;
+}
+
+/// Ensure that all dependencies inside the graph are valid key inside [nodes].
+/// Or it might cause nullable exception when running [sortDependencies].
+Map<String, Set<String>> resolveDependencies(Map<String, Set<String>> nodes) {
+  final resolved = {...nodes};
+  for (final dependencies in nodes.values) {
+    for (final dependency in dependencies) {
+      if (resolved[dependency] == null) resolved[dependency] = {};
+    }
+  }
+  return resolved;
 }

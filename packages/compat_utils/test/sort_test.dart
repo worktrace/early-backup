@@ -31,4 +31,14 @@ void main() {
     };
     expect(() => sortDependencies(dependencies), throwsException);
   });
+
+  test('sort dependencies ensure', () {
+    final dependencies = <String, Set<String>>{
+      'a': {'b'},
+      'b': {'c', 'd'},
+      'c': {},
+    };
+    final sorted = sortDependencies(resolveDependencies(dependencies));
+    expect(sorted, ['a', 'b', 'c', 'd']);
+  });
 }
