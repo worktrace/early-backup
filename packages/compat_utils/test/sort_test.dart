@@ -15,11 +15,12 @@ void main() {
   test('sort dependencies', () {
     final dependencies = <String, Set<String>>{
       'a': {'b', 'c'},
-      'b': {'c'},
-      'c': {},
+      'b': {'c', 'd'},
+      'c': {'d'},
+      'd': {},
     };
     final sorted = sortDependencies(dependencies);
-    expect(sorted, ['a', 'b', 'c']);
+    expect(sorted, ['a', 'b', 'c', 'd']);
   });
 
   test('sort dependencies cycle exception', () {
