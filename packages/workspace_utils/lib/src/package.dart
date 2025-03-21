@@ -63,13 +63,13 @@ extension DartPackageChildren on DartPackage {
   /// The root package of the workspace is also included.
   List<DartPackage> get sortedPackages {
     final packages = {name: this, ...childPackages};
-    final nodes = packages.map((key, value) => MapEntry(key, <String>{}));
+    final nodes = packages.map((name, package) => MapEntry(name, <String>{}));
     final names = nodes.keys;
-    packages.forEach((key, value) {
-      final p = value;
+    packages.forEach((name, package) {
+      final p = package;
       final dependencies = {...p.dependencies.keys, ...p.devDependencies.keys};
-      for (final name in dependencies) {
-        if (names.contains(name)) nodes[name]!.add(name);
+      for (final dependency in dependencies) {
+        if (names.contains(dependency)) nodes[name]!.add(dependency);
       }
     });
     return sortDependencies(nodes).map((name) => packages[name]!).toList();
