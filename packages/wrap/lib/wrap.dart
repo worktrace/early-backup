@@ -42,9 +42,9 @@
 /// in performance sensitive cases such as long loops.
 library;
 
-export 'src/decorate.dart';
-export 'src/environment.dart';
-export 'src/geometry.dart';
-export 'src/interact.dart';
-export 'src/paint.dart';
-export 'src/style.dart';
+export 'src/wrap/decorate.dart';
+export 'src/wrap/environment.dart';
+export 'src/wrap/geometry.dart';
+export 'src/wrap/interact.dart';
+export 'src/wrap/paint.dart';
+export 'src/wrap/style.dart';
