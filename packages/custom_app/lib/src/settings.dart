@@ -1,4 +1,5 @@
-import 'locale.dart';
+import 'package:custom_app/locale.dart';
+
 import 'theme.dart';
 
 class SettingsBase {
