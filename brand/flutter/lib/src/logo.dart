@@ -1,0 +1,3 @@
+class WorkTraceLogo {
+  const WorkTraceLogo();
+}
