@@ -1,4 +1,4 @@
-import 'package:custom_app/custom_app.dart';
+import 'package:custom_app/app.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
