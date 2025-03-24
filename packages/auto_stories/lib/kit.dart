@@ -11,4 +11,5 @@ export 'package:smooth_ui/layout.dart';
 export 'package:smooth_ui/utils.dart';
 export 'package:state_reuse/state_reuse.dart';
 export 'package:syntax_sugar/syntax_sugar.dart';
+export 'package:wrap/utils.dart';
 export 'package:wrap/wrap.dart';

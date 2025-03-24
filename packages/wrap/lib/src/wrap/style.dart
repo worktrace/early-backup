@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:wrap/utils.dart';
 
-extension WrapColors on Widget {
+extension WrapColor on Widget {
   Widget maybeBackground(Color color) {
     return color == transparent ? this : background(color);
   }
