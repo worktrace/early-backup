@@ -1,2 +1,2 @@
-export 'src/utils/color.dart';
+export 'src/utils/colors.dart';
 export 'src/utils/size.dart';

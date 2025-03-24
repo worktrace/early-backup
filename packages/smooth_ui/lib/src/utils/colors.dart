@@ -1,15 +1,9 @@
 import 'package:avoid_nullable/avoid_nullable.dart';
 import 'package:flutter/widgets.dart';
-import 'package:wrap/wrap.dart';
-
-const white = Color(0xFFFFFFFF);
-const black = Color(0xFF000000);
+import 'package:wrap/utils.dart';
 
 class AreaColors {
-  const AreaColors({
-    this.background = transparent,
-    this.foreground,
-  });
+  const AreaColors({this.background = transparent, this.foreground});
 
   factory AreaColors.background(Color color) => AreaColors(background: color);
   factory AreaColors.foreground(Color color) => AreaColors(foreground: color);

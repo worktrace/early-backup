@@ -1,6 +1,6 @@
 import 'package:avoid_nullable/avoid_nullable.dart';
 import 'package:flutter/widgets.dart';
-import 'package:wrap/wrap.dart';
+import 'package:wrap/utils.dart';
 
 class BorderSize {
   const BorderSize({this.width = 1, this.radius = BorderRadius.zero});

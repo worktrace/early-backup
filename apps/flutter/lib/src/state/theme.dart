@@ -4,16 +4,16 @@ import 'package:flutter/widgets.dart';
 class Theme extends ThemeBase {
   const Theme.light({
     super.brightness,
-    super.foreground = Colors.ink,
-    super.background = Colors.snow,
-    this.sidebar = const SidebarColors(background: Colors.paper),
+    super.foreground = MonoColors.ink,
+    super.background = MonoColors.snow,
+    this.sidebar = const SidebarColors(background: MonoColors.paper),
   }) : super.light();
 
   const Theme.dark({
     super.brightness,
-    super.foreground = Colors.lunar,
-    super.background = Colors.coal,
-    this.sidebar = const SidebarColors(background: Colors.night),
+    super.foreground = MonoColors.lunar,
+    super.background = MonoColors.coal,
+    this.sidebar = const SidebarColors(background: MonoColors.night),
   }) : super.dark();
 
   factory Theme.lerp(Theme a, Theme b, double t) {
@@ -27,9 +27,7 @@ class Theme extends ThemeBase {
 
   final SidebarColors sidebar;
 
-  static ThemeAdapter<Theme> adapter({
-    ThemeMode mode = ThemeMode.system,
-  }) {
+  static ThemeAdapter<Theme> adapter({ThemeMode mode = ThemeMode.system}) {
     return ThemeAdapter(
       light: const Theme.light(),
       dark: const Theme.dark(),
@@ -38,12 +36,7 @@ class Theme extends ThemeBase {
   }
 }
 
-abstract class Colors {
-  // Transparent colors.
-  static const transparent = Color(0x00000000);
-
-  // Mono colors.
-  static const white = Color.fromARGB(255, 255, 255, 255);
+abstract class MonoColors {
   static const snow = Color.fromARGB(255, 245, 247, 248);
   static const paper = Color.fromARGB(255, 241, 239, 238);
   static const lunar = Color.fromARGB(255, 189, 188, 187);
