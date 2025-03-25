@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:custom_app/src/size/adapt_size_data.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:inherit/inherit.dart';
 import 'package:state_reuse/state_reuse.dart';
@@ -8,12 +9,22 @@ import 'package:state_reuse/state_reuse.dart';
 import 'adapt_size.dart';
 
 class AdaptiveSize extends StatefulWidget {
-  const AdaptiveSize({super.key, required this.child});
+  const AdaptiveSize({super.key, this.ratio = 1, required this.child})
+    : assert(ratio > 0);
 
+  /// Additional ratio applied to the size scale,
+  /// which is usually configured by local user settings.
+  final double ratio;
   final Widget child;
 
   @override
   State<AdaptiveSize> createState() => _AdaptiveSizeState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('ratio', ratio));
+  }
 }
 
 class _AdaptiveSizeState extends State<AdaptiveSize> with AdaptSize {
@@ -29,8 +40,6 @@ class _AdaptiveSizeState extends State<AdaptiveSize> with AdaptSize {
 
   @override
   Widget render(BuildContext context) {
-    return widget.child.inherit(
-      AdaptedSize.adapt(_adapter, size ?? const Size(1000, 800)),
-    );
+    return widget.child.inherit(AdaptedSize.adapt(_adapter, size ?? initSize));
   }
 }

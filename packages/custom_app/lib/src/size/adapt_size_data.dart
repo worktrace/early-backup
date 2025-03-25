@@ -52,3 +52,6 @@ class MobileSizeAdapter extends SizeAdapter {
 }
 
 enum WindowMode { landscape, medium, portrait }
+
+const kDesktopWindowSize = Size(1000, 800);
+const kMobileScreenSize = Size(430, 932);

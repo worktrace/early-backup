@@ -1,4 +1,9 @@
+import 'package:flutter/widgets.dart';
+
 import 'adapt_size_data.dart';
+
+/// Encapsulate init size to avoid invalid `io` or `js_interop` calls.
+Size get initSize => kDesktopWindowSize;
 
 /// Init size adapter once setup.
 /// This getter might not accurate enough in some cases.
