@@ -34,12 +34,16 @@ class _AdaptiveSizeState extends State<AdaptiveSize> with AdaptSize {
   void initState() {
     super.initState();
     unawaited(
-      adaptPlatformSize.then((adapter) => setState(() => _adapter = adapter)),
+      adaptPlatformSize.then((adapter) {
+        setState(() => _adapter = adapter);
+      }),
     );
   }
 
   @override
   Widget render(BuildContext context) {
-    return widget.child.inherit(AdaptedSize.adapt(_adapter, size ?? initSize));
+    final adapter = _adapter * widget.ratio;
+    final size = this.size ?? initSize;
+    return widget.child.inherit(AdaptedSize.adapt(adapter, size));
   }
 }

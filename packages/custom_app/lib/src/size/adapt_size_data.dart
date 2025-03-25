@@ -1,3 +1,4 @@
+import 'package:compat_utils/compat_utils.dart';
 import 'package:flutter/widgets.dart';
 
 class AdaptedSize {
@@ -12,7 +13,7 @@ class AdaptedSize {
   final double ratio;
 }
 
-abstract class SizeAdapter {
+abstract class SizeAdapter with Times<SizeAdapter>, Copy<SizeAdapter> {
   const SizeAdapter({this.ratio = 1}) : assert(ratio > 0);
 
   final double ratio;
@@ -36,6 +37,20 @@ class DesktopSizeAdapter extends SizeAdapter {
     if (size.width >= portraitWidth * ratio) return WindowMode.medium;
     return WindowMode.portrait;
   }
+
+  @override
+  DesktopSizeAdapter operator *(double times) => copyWith(ratio: ratio * times);
+
+  @override
+  DesktopSizeAdapter copyWith({
+    double? ratio,
+    double? landscapeWidth,
+    double? portraitWidth,
+  }) => DesktopSizeAdapter(
+    ratio: ratio ?? this.ratio,
+    landscapeWidth: landscapeWidth ?? this.landscapeWidth,
+    portraitWidth: portraitWidth ?? this.portraitWidth,
+  );
 }
 
 class MobileSizeAdapter extends SizeAdapter {
@@ -48,6 +63,17 @@ class MobileSizeAdapter extends SizeAdapter {
     if (size.height >= size.width) return WindowMode.portrait;
     if (size.width >= landscapeWidth * ratio) return WindowMode.landscape;
     return WindowMode.medium;
+  }
+
+  @override
+  MobileSizeAdapter operator *(double times) => copyWith(ratio: ratio * times);
+
+  @override
+  MobileSizeAdapter copyWith({double? ratio, double? landscapeWidth}) {
+    return MobileSizeAdapter(
+      ratio: ratio ?? this.ratio,
+      landscapeWidth: landscapeWidth ?? this.landscapeWidth,
+    );
   }
 }
 

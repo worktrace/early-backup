@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   avoid_nullable: ^0.0.0
+  compat_utils: ^0.0.0
   flutter: { sdk: flutter }
   inherit: ^0.0.0
   smooth_ui: ^0.0.0
