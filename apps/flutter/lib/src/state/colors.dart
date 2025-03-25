@@ -1,23 +1,23 @@
 import 'package:auto_stories/kit.dart';
 import 'package:flutter/widgets.dart';
 
-class Theme extends ThemeBase {
-  const Theme.light({
+class Colors extends ColorsBase {
+  const Colors.light({
     super.brightness,
-    super.foreground = Colors.ink,
-    super.background = Colors.snow,
-    this.sidebar = const SidebarColors(background: Colors.paper),
+    super.foreground = MonoColors.ink,
+    super.background = MonoColors.snow,
+    this.sidebar = const SidebarColors(background: MonoColors.paper),
   }) : super.light();
 
-  const Theme.dark({
+  const Colors.dark({
     super.brightness,
-    super.foreground = Colors.lunar,
-    super.background = Colors.coal,
-    this.sidebar = const SidebarColors(background: Colors.night),
+    super.foreground = MonoColors.lunar,
+    super.background = MonoColors.coal,
+    this.sidebar = const SidebarColors(background: MonoColors.night),
   }) : super.dark();
 
-  factory Theme.lerp(Theme a, Theme b, double t) {
-    return Theme.light(
+  factory Colors.lerp(Colors a, Colors b, double t) {
+    return Colors.light(
       brightness: t < 0.5 ? a.brightness : b.brightness,
       foreground: Color.lerp(a.foreground, b.foreground, t),
       background: lerpColor(a.background, b.background, t),
@@ -27,23 +27,16 @@ class Theme extends ThemeBase {
 
   final SidebarColors sidebar;
 
-  static ThemeAdapter<Theme> adapter({
-    ThemeMode mode = ThemeMode.system,
-  }) {
-    return ThemeAdapter(
-      light: const Theme.light(),
-      dark: const Theme.dark(),
+  static ColorsAdapter<Colors> adapter({ColorsMode mode = ColorsMode.system}) {
+    return ColorsAdapter(
+      light: const Colors.light(),
+      dark: const Colors.dark(),
       mode: mode,
     );
   }
 }
 
-abstract class Colors {
-  // Transparent colors.
-  static const transparent = Color(0x00000000);
-
-  // Mono colors.
-  static const white = Color.fromARGB(255, 255, 255, 255);
+abstract class MonoColors {
   static const snow = Color.fromARGB(255, 245, 247, 248);
   static const paper = Color.fromARGB(255, 241, 239, 238);
   static const lunar = Color.fromARGB(255, 189, 188, 187);

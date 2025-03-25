@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:state_reuse/state_reuse.dart';
+import 'package:wrap/utils.dart';
 import 'package:wrap/wrap.dart';
 
 const kRippleColor = Color.fromARGB(255, 8, 140, 222);
@@ -97,14 +98,15 @@ abstract class RippleBaseState<S extends RippleBase>
 
   @override
   @mustCallSuper
-  Widget build(BuildContext context) =>
-      widget.child.paint(painter: painter).mouse(
-            onEnter: _mouseEnter,
-            onExit: _mouseExit,
-            onHover: widget.onHover,
-            opaque: widget.opaque,
-            hitTestBehavior: widget.hitTestBehavior,
-          );
+  Widget build(BuildContext context) => widget.child
+      .paint(painter: painter)
+      .mouse(
+        onEnter: _mouseEnter,
+        onExit: _mouseExit,
+        onHover: widget.onHover,
+        opaque: widget.opaque,
+        hitTestBehavior: widget.hitTestBehavior,
+      );
 
   @override
   @mustCallSuper
