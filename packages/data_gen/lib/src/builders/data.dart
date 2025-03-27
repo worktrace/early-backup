@@ -10,7 +10,7 @@ Builder dataBuilder(BuilderOptions options) {
   );
 }
 
-class DataGenerator extends GeneratorForAnnotation<AnnotationToParse> {
+class DataGenerator extends GeneratorForAnnotation<DataAnnotation> {
   const DataGenerator();
 
   @override

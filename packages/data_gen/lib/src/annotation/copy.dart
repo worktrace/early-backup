@@ -12,7 +12,6 @@ part 'copy.name.dart';
 /// it will throw exception when building (generating code).
 @name
 const copy = GenerateCopy();
-const String copyAnnotationName = _$copy$topLevelVariableName;
 
 /// See the [copy] annotation.
 @Target({TargetKind.constructor})
@@ -20,9 +19,7 @@ const String copyAnnotationName = _$copy$topLevelVariableName;
 class GenerateCopy extends DataAnnotation {
   const GenerateCopy();
 
-  @override
-  String get name => _$GenerateCopy$className;
-
-  @override
-  String get libraryIdentifier => _$libraryIdentifier;
+  static const String name = _$GenerateCopy$className;
+  static const String shortcut = _$copy$topLevelVariableName;
+  static const String libraryIdentifier = _$libraryIdentifier;
 }
