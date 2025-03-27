@@ -10,6 +10,7 @@ environment:
 dependencies:
   args: ^2.6.0
   avoid_nullable: ^0.0.0
+  compat_utils: ^0.0.0
   custom_app: ^0.0.0
   flutter: { sdk: flutter }
   flutter_web_plugins: { sdk: flutter }
@@ -17,7 +18,6 @@ dependencies:
   modifier: ^0.0.0
   smooth_ui: ^0.0.0
   state_reuse: ^0.0.0
-  syntax_sugar: ^0.0.0
   wrap: ^1.0.0
 
 dev_dependencies:

@@ -23,9 +23,9 @@ class AppRoot extends StatelessWidget {
     return ShellRoute(
       routes: [wantRoute, graphRoute],
       builder: (context, state, child) {
-        final theme = context.find<Theme>()!;
+        final colors = context.find<Colors>()!;
         return SidebarContainer(
-          colors: theme.sidebar,
+          colors: colors.sidebar,
           sidebar: 'sidebar'.asText().center(),
           child: child,
         );
@@ -44,7 +44,7 @@ class AppRoot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Router.withConfig(config: routes(context))
-        .adaptiveAnimatedTheme(Theme.adapter(), Theme.lerp)
+        .adaptiveAnimatedColors(Colors.adapter(), Colors.lerp)
         .adaptiveLocale(localesOf([]))
         .mediaAsView(context);
   }

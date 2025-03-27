@@ -1,7 +1,7 @@
 import 'package:avoid_nullable/avoid_nullable.dart';
 import 'package:compat_utils/compat_utils.dart';
 import 'package:flutter/widgets.dart';
-import 'package:smooth_ui/utils.dart';
+import 'package:wrap/utils.dart';
 import 'package:wrap/wrap.dart';
 
 extension WrapSquircle on Widget {

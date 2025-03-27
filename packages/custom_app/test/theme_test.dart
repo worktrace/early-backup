@@ -1,4 +1,4 @@
-import 'package:custom_app/custom_app.dart';
+import 'package:custom_app/app.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,19 +9,19 @@ import 'package:wrap/wrap.dart';
 void main() {
   testWidgets('adapt theme mode', (t) async {
     t.binding.platformDispatcher.platformBrightnessTestValue = Brightness.light;
-    expect(ThemeMode.system.shouldDark, false);
-    expect(ThemeMode.light.shouldDark, false);
-    expect(ThemeMode.dark.shouldDark, true);
+    expect(ColorsMode.system.shouldDark, false);
+    expect(ColorsMode.light.shouldDark, false);
+    expect(ColorsMode.dark.shouldDark, true);
 
     t.binding.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
-    expect(ThemeMode.system.shouldDark, true);
-    expect(ThemeMode.light.shouldDark, false);
-    expect(ThemeMode.dark.shouldDark, true);
+    expect(ColorsMode.system.shouldDark, true);
+    expect(ColorsMode.light.shouldDark, false);
+    expect(ColorsMode.dark.shouldDark, true);
 
     t.binding.platformDispatcher.platformBrightnessTestValue = Brightness.light;
-    expect(ThemeMode.system.shouldDark, false);
-    expect(ThemeMode.light.shouldDark, false);
-    expect(ThemeMode.dark.shouldDark, true);
+    expect(ColorsMode.system.shouldDark, false);
+    expect(ColorsMode.light.shouldDark, false);
+    expect(ColorsMode.dark.shouldDark, true);
   });
 
   testWidgets('adaptive theme', (t) async {
@@ -31,7 +31,7 @@ void main() {
       },
     );
     t.binding.platformDispatcher.platformBrightnessTestValue = Brightness.light;
-    final widget = probe.adaptiveTheme(Theme.adapter());
+    final widget = probe.adaptiveColors(Theme.adapter());
     await t.pumpWidget(widget.ensureText());
     expect(find.text(Brightness.light.name), findsOneWidget);
 
@@ -45,7 +45,7 @@ void main() {
   });
 }
 
-class Theme extends ThemeBase {
+class Theme extends ColorsBase {
   const Theme.light({
     super.background = const Color(0xfffefdfa),
     super.foreground = const Color(0xff232426),
@@ -56,10 +56,8 @@ class Theme extends ThemeBase {
     super.foreground = const Color(0xffdedede),
   }) : super.dark();
 
-  static ThemeAdapter<Theme> adapter({
-    ThemeMode mode = ThemeMode.system,
-  }) {
-    return ThemeAdapter(
+  static ColorsAdapter<Theme> adapter({ColorsMode mode = ColorsMode.system}) {
+    return ColorsAdapter(
       light: const Theme.light(),
       dark: const Theme.dark(),
       mode: mode,

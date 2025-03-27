@@ -1,12 +1,13 @@
-import 'locale.dart';
-import 'theme.dart';
+import 'package:custom_app/locale.dart';
+
+import 'colors.dart';
 
 class SettingsBase {
   const SettingsBase({
-    this.themeMode = ThemeMode.system,
+    this.themeMode = ColorsMode.system,
     this.locales = const [],
   });
 
-  final ThemeMode themeMode;
+  final ColorsMode themeMode;
   final List<LocaleID> locales;
 }
