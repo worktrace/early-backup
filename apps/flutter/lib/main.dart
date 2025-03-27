@@ -1,4 +1,5 @@
 import 'package:auto_stories/kit.dart';
+import 'package:auto_stories/web.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
@@ -6,6 +7,7 @@ import 'state.dart';
 import 'views.dart';
 
 void main() {
+  usePathUrlStrategy();
   runApp(const AppRoot());
 }
 
