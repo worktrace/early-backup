@@ -1,3 +1,3 @@
 export 'package:wrap/debug.dart';
 
-export 'src/root.dart';
+export 'src/debug/root.dart';
