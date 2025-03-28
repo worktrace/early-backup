@@ -5,8 +5,11 @@ import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/file_system/file_system.dart' show ResourceProvider;
+import 'package:path/path.dart';
 
 class Builder {
+  /// All [includedPaths] must be absolute and normalized,
+  /// which is required by the encapsulated [AnalysisContextCollection].
   Builder({
     required List<String> includedPaths,
     List<String>? excludedPaths,
@@ -20,6 +23,30 @@ class Builder {
          resourceProvider: resourceProvider,
          sdkPath: sdkPath,
        );
+
+  /// Construct a builder instance from a Dart package.
+  ///
+  /// This path will be ensured to be absolute and normalized
+  /// inside the constructor. But the specified [root] directory must exist,
+  /// or it will throw an exception inside the constructor.
+  factory Builder.package(
+    Directory root, {
+    List<String>? excludedPaths,
+    ResourceProvider? resourceProvider,
+    String? sdkPath,
+    Iterable<FileBuilder> builders = const [],
+  }) {
+    if (!root.existsSync()) throw Exception('package not exist: ${root.path}');
+    final path = normalize(root.isAbsolute ? root.path : root.absolute.path);
+    final includes = ['lib', 'bin', 'test', 'example'];
+    return Builder(
+      includedPaths: includes.map((name) => join(path, name)).toList(),
+      excludedPaths: excludedPaths,
+      resourceProvider: resourceProvider,
+      sdkPath: sdkPath,
+      builders: builders,
+    );
+  }
 
   final AnalysisContextCollection _contexts;
   final Iterable<FileBuilder> builders;
