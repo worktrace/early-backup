@@ -5,6 +5,7 @@ import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/file_system/file_system.dart' show ResourceProvider;
+import 'package:compat_utils/compat_utils.dart';
 import 'package:path/path.dart';
 
 class Builder {
@@ -23,30 +24,6 @@ class Builder {
          resourceProvider: resourceProvider,
          sdkPath: sdkPath,
        );
-
-  /// Construct a builder instance from a Dart package.
-  ///
-  /// This path will be ensured to be absolute and normalized
-  /// inside the constructor. But the specified [root] directory must exist,
-  /// or it will throw an exception inside the constructor.
-  factory Builder.package(
-    Directory root, {
-    List<String>? excludedPaths,
-    ResourceProvider? resourceProvider,
-    String? sdkPath,
-    Iterable<FileBuilder> builders = const [],
-  }) {
-    if (!root.existsSync()) throw Exception('package not exist: ${root.path}');
-    final path = normalize(root.isAbsolute ? root.path : root.absolute.path);
-    final includes = ['lib', 'bin', 'test', 'example'];
-    return Builder(
-      includedPaths: includes.map((name) => join(path, name)).toList(),
-      excludedPaths: excludedPaths,
-      resourceProvider: resourceProvider,
-      sdkPath: sdkPath,
-      builders: builders,
-    );
-  }
 
   final AnalysisContextCollection _contexts;
   final Iterable<FileBuilder> builders;
@@ -67,6 +44,41 @@ class Builder {
       }
     }
   }
+}
+
+class PackageBuilder extends Builder {
+  /// Construct a builder instance from a Dart package.
+  ///
+  /// This path will be ensured to be absolute and normalized
+  /// inside the constructor. But the specified [root] directory must exist,
+  /// or it will throw an exception inside the constructor.
+  PackageBuilder(
+    this.root, {
+    super.excludedPaths,
+    super.resourceProvider,
+    super.sdkPath,
+    super.builders,
+  }) : assert(root.existsSync()),
+       assert(root.isAbsolute),
+       super(includedPaths: _codes.map((p) => join(root.path, p)).toList());
+
+  factory PackageBuilder.resolve({
+    String root = '',
+    List<String>? excludedPaths,
+    ResourceProvider? resourceProvider,
+    String? sdkPath,
+    Iterable<FileBuilder> builders = const [],
+  }) => PackageBuilder(
+    root.isEmpty ? Directory.current : Directory(root).absolute.normalized,
+    excludedPaths: excludedPaths,
+    resourceProvider: resourceProvider,
+    sdkPath: sdkPath,
+    builders: builders,
+  );
+
+  static const _codes = ['lib', 'bin', 'test', 'example'];
+
+  final Directory root;
 }
 
 typedef FileBuilder = BuildOutput? Function(String path, CompilationUnit unit);
