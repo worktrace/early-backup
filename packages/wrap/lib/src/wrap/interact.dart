@@ -11,18 +11,16 @@ extension WrapInteract on Widget {
     MouseCursor cursor = MouseCursor.defer,
     bool opaque = true,
     HitTestBehavior? hitTestBehavior,
-  }) {
-    return MouseRegion(
-      key: key,
-      onEnter: onEnter,
-      onExit: onExit,
-      onHover: onHover,
-      cursor: cursor,
-      opaque: opaque,
-      hitTestBehavior: hitTestBehavior,
-      child: this,
-    );
-  }
+  }) => MouseRegion(
+    key: key,
+    onEnter: onEnter,
+    onExit: onExit,
+    onHover: onHover,
+    cursor: cursor,
+    opaque: opaque,
+    hitTestBehavior: hitTestBehavior,
+    child: this,
+  );
 
   GestureDetector gesture({
     Key? key,
@@ -115,100 +113,98 @@ extension WrapInteract on Widget {
     bool trackpadScrollCausesScale = false,
     Offset trackpadScrollToScaleFactor = kDefaultTrackpadScrollToScaleFactor,
     Set<PointerDeviceKind>? supportedDevices,
-  }) {
-    return GestureDetector(
-      key: key,
+  }) => GestureDetector(
+    key: key,
 
-      // Tap.
-      onTapDown: onTapDown,
-      onTapUp: onTapUp,
-      onTap: onTap,
-      onTapCancel: onTapCancel,
+    // Tap.
+    onTapDown: onTapDown,
+    onTapUp: onTapUp,
+    onTap: onTap,
+    onTapCancel: onTapCancel,
 
-      // Secondary Tap.
-      onSecondaryTap: onSecondaryTap,
-      onSecondaryTapDown: onSecondaryTapDown,
-      onSecondaryTapUp: onSecondaryTapUp,
-      onSecondaryTapCancel: onSecondaryTapCancel,
+    // Secondary Tap.
+    onSecondaryTap: onSecondaryTap,
+    onSecondaryTapDown: onSecondaryTapDown,
+    onSecondaryTapUp: onSecondaryTapUp,
+    onSecondaryTapCancel: onSecondaryTapCancel,
 
-      // Tertiary Tap.
-      onTertiaryTapDown: onTertiaryTapDown,
-      onTertiaryTapUp: onTertiaryTapUp,
-      onTertiaryTapCancel: onTertiaryTapCancel,
+    // Tertiary Tap.
+    onTertiaryTapDown: onTertiaryTapDown,
+    onTertiaryTapUp: onTertiaryTapUp,
+    onTertiaryTapCancel: onTertiaryTapCancel,
 
-      // Double Tap.
-      onDoubleTapDown: onDoubleTapDown,
-      onDoubleTap: onDoubleTap,
-      onDoubleTapCancel: onDoubleTapCancel,
+    // Double Tap.
+    onDoubleTapDown: onDoubleTapDown,
+    onDoubleTap: onDoubleTap,
+    onDoubleTapCancel: onDoubleTapCancel,
 
-      // Long press.
-      onLongPressDown: onLongPressDown,
-      onLongPressCancel: onLongPressCancel,
-      onLongPress: onLongPress,
-      onLongPressStart: onLongPressStart,
-      onLongPressMoveUpdate: onLongPressMoveUpdate,
-      onLongPressUp: onLongPressUp,
-      onLongPressEnd: onLongPressEnd,
+    // Long press.
+    onLongPressDown: onLongPressDown,
+    onLongPressCancel: onLongPressCancel,
+    onLongPress: onLongPress,
+    onLongPressStart: onLongPressStart,
+    onLongPressMoveUpdate: onLongPressMoveUpdate,
+    onLongPressUp: onLongPressUp,
+    onLongPressEnd: onLongPressEnd,
 
-      // Secondary long press.
-      onSecondaryLongPressDown: onSecondaryLongPressDown,
-      onSecondaryLongPressCancel: onSecondaryLongPressCancel,
-      onSecondaryLongPress: onSecondaryLongPress,
-      onSecondaryLongPressStart: onSecondaryLongPressStart,
-      onSecondaryLongPressMoveUpdate: onSecondaryLongPressMoveUpdate,
-      onSecondaryLongPressUp: onSecondaryLongPressUp,
-      onSecondaryLongPressEnd: onSecondaryLongPressEnd,
+    // Secondary long press.
+    onSecondaryLongPressDown: onSecondaryLongPressDown,
+    onSecondaryLongPressCancel: onSecondaryLongPressCancel,
+    onSecondaryLongPress: onSecondaryLongPress,
+    onSecondaryLongPressStart: onSecondaryLongPressStart,
+    onSecondaryLongPressMoveUpdate: onSecondaryLongPressMoveUpdate,
+    onSecondaryLongPressUp: onSecondaryLongPressUp,
+    onSecondaryLongPressEnd: onSecondaryLongPressEnd,
 
-      // Tertiary long press.
-      onTertiaryLongPressDown: onTertiaryLongPressDown,
-      onTertiaryLongPressCancel: onTertiaryLongPressCancel,
-      onTertiaryLongPress: onTertiaryLongPress,
-      onTertiaryLongPressStart: onTertiaryLongPressStart,
-      onTertiaryLongPressMoveUpdate: onTertiaryLongPressMoveUpdate,
-      onTertiaryLongPressUp: onTertiaryLongPressUp,
-      onTertiaryLongPressEnd: onTertiaryLongPressEnd,
+    // Tertiary long press.
+    onTertiaryLongPressDown: onTertiaryLongPressDown,
+    onTertiaryLongPressCancel: onTertiaryLongPressCancel,
+    onTertiaryLongPress: onTertiaryLongPress,
+    onTertiaryLongPressStart: onTertiaryLongPressStart,
+    onTertiaryLongPressMoveUpdate: onTertiaryLongPressMoveUpdate,
+    onTertiaryLongPressUp: onTertiaryLongPressUp,
+    onTertiaryLongPressEnd: onTertiaryLongPressEnd,
 
-      // Vertical drag.
-      onVerticalDragDown: onVerticalDragDown,
-      onVerticalDragStart: onVerticalDragStart,
-      onVerticalDragUpdate: onVerticalDragUpdate,
-      onVerticalDragEnd: onVerticalDragEnd,
-      onVerticalDragCancel: onVerticalDragCancel,
+    // Vertical drag.
+    onVerticalDragDown: onVerticalDragDown,
+    onVerticalDragStart: onVerticalDragStart,
+    onVerticalDragUpdate: onVerticalDragUpdate,
+    onVerticalDragEnd: onVerticalDragEnd,
+    onVerticalDragCancel: onVerticalDragCancel,
 
-      // Horizontal drag.
-      onHorizontalDragDown: onHorizontalDragDown,
-      onHorizontalDragStart: onHorizontalDragStart,
-      onHorizontalDragUpdate: onHorizontalDragUpdate,
-      onHorizontalDragEnd: onHorizontalDragEnd,
-      onHorizontalDragCancel: onHorizontalDragCancel,
+    // Horizontal drag.
+    onHorizontalDragDown: onHorizontalDragDown,
+    onHorizontalDragStart: onHorizontalDragStart,
+    onHorizontalDragUpdate: onHorizontalDragUpdate,
+    onHorizontalDragEnd: onHorizontalDragEnd,
+    onHorizontalDragCancel: onHorizontalDragCancel,
 
-      // Force press.
-      onForcePressStart: onForcePressStart,
-      onForcePressPeak: onForcePressPeak,
-      onForcePressUpdate: onForcePressUpdate,
-      onForcePressEnd: onForcePressEnd,
+    // Force press.
+    onForcePressStart: onForcePressStart,
+    onForcePressPeak: onForcePressPeak,
+    onForcePressUpdate: onForcePressUpdate,
+    onForcePressEnd: onForcePressEnd,
 
-      // Pan.
-      onPanDown: onPanDown,
-      onPanStart: onPanStart,
-      onPanUpdate: onPanUpdate,
-      onPanEnd: onPanEnd,
-      onPanCancel: onPanCancel,
+    // Pan.
+    onPanDown: onPanDown,
+    onPanStart: onPanStart,
+    onPanUpdate: onPanUpdate,
+    onPanEnd: onPanEnd,
+    onPanCancel: onPanCancel,
 
-      // Scale.
-      onScaleStart: onScaleStart,
-      onScaleUpdate: onScaleUpdate,
-      onScaleEnd: onScaleEnd,
+    // Scale.
+    onScaleStart: onScaleStart,
+    onScaleUpdate: onScaleUpdate,
+    onScaleEnd: onScaleEnd,
 
-      // Configurations.
-      behavior: behavior,
-      excludeFromSemantics: excludeFromSemantics,
-      dragStartBehavior: dragStartBehavior,
-      trackpadScrollCausesScale: trackpadScrollCausesScale,
-      trackpadScrollToScaleFactor: trackpadScrollToScaleFactor,
-      supportedDevices: supportedDevices,
+    // Configurations.
+    behavior: behavior,
+    excludeFromSemantics: excludeFromSemantics,
+    dragStartBehavior: dragStartBehavior,
+    trackpadScrollCausesScale: trackpadScrollCausesScale,
+    trackpadScrollToScaleFactor: trackpadScrollToScaleFactor,
+    supportedDevices: supportedDevices,
 
-      child: this,
-    );
-  }
+    child: this,
+  );
 }
