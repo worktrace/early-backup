@@ -17,7 +17,7 @@ workspace:
   - packages/avoid_nullable
   - packages/compat_utils
   - packages/custom_app
-  - packages/data_gen
+  - packages/data_build
   - packages/inherit
   - packages/modifier
   - packages/smooth_ui
