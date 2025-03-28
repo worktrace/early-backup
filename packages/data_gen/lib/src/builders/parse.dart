@@ -3,15 +3,15 @@ import 'package:build/build.dart';
 import 'package:data_gen/annotation.dart';
 import 'package:source_gen/source_gen.dart';
 
-Builder dataBuilder(BuilderOptions options) {
+Builder parseBuilder(BuilderOptions options) {
   return LibraryBuilder(
-    const DataGenerator(),
-    generatedExtension: '.data.dart',
+    const ParseGenerator(),
+    generatedExtension: '.parse.dart',
   );
 }
 
-class DataGenerator extends GeneratorForAnnotation<DataAnnotation> {
-  const DataGenerator();
+class ParseGenerator extends GeneratorForAnnotation<GenerateParse> {
+  const ParseGenerator();
 
   @override
   String generateForAnnotatedElement(
@@ -19,6 +19,6 @@ class DataGenerator extends GeneratorForAnnotation<DataAnnotation> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    return '';
+    return '// it works';
   }
 }
