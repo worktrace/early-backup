@@ -1,6 +1,6 @@
 import 'package:meta/meta_meta.dart';
 
-import 'abstraction.dart';
+import 'assist.dart';
 import 'name.dart';
 
 part 'map.name.dart';

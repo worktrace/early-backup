@@ -20,6 +20,7 @@ class NameGenerator extends GeneratorForAnnotation<GenerateName> {
   /// The generate code file should beside the source library file.
   @override
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) async {
+    print(library);
     final result = await super.generate(library, buildStep);
     return [
       "part of '${basename(library.element.identifier)}';",

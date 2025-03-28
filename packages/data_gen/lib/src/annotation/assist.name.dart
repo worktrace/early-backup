@@ -5,7 +5,7 @@
 // NameGenerator
 // **************************************************************************
 
-part of 'copy.dart';
+part of 'assist.dart';
 
 // ignore: unused_element may not be used.
-const _$libraryIdentifier = 'package:data_gen/src/annotation/copy.dart';
+const _$libraryIdentifier = 'package:data_gen/src/annotation/assist.dart';

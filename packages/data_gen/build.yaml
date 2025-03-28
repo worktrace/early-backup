@@ -5,3 +5,10 @@ builders:
     build_extensions: { ".dart": [".name.dart"] }
     auto_apply: root_package
     build_to: source
+
+  parser_generator:
+    import: package:data_gen/builders.dart
+    builder_factories: [parseBuilder]
+    build_extensions: { ".dart": [".parse.dart"] }
+    auto_apply: root_package
+    build_to: source
