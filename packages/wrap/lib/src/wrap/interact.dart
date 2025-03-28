@@ -3,6 +3,35 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 extension WrapInteract on Widget {
+  Focus focus({
+    Key? key,
+    FocusNode? focusNode,
+    FocusNode? parentNode,
+    bool autofocus = false,
+    ValueChanged<bool>? onFocusChange,
+    FocusOnKeyEventCallback? onKeyEvent,
+    bool? canRequestFocus,
+    bool? skipTraversal,
+    bool? descendantsAreFocusable,
+    bool? descendantsAreTraversable,
+    bool includeSemantics = true,
+    String? debugLabel,
+  }) => Focus(
+    key: key,
+    focusNode: focusNode,
+    parentNode: parentNode,
+    autofocus: autofocus,
+    onFocusChange: onFocusChange,
+    onKeyEvent: onKeyEvent,
+    canRequestFocus: canRequestFocus,
+    skipTraversal: skipTraversal,
+    descendantsAreFocusable: descendantsAreFocusable,
+    descendantsAreTraversable: descendantsAreTraversable,
+    includeSemantics: includeSemantics,
+    debugLabel: debugLabel,
+    child: this,
+  );
+
   MouseRegion mouse({
     Key? key,
     PointerEnterEventListener? onEnter,
