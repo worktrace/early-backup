@@ -2,7 +2,6 @@
 library;
 
 export 'package:custom_app/app.dart';
-export 'package:inherit/inherit.dart';
 export 'package:smooth_ui/effect.dart';
 export 'package:smooth_ui/icons.dart';
 export 'package:smooth_ui/layout.dart';

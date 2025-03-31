@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:state_reuse/binding.dart';
 
+import 'binding.dart';
 import 'inherit.dart';
 
 typedef Handler<T> = _Handler<T, DataBuilder<T>, ValueChanged<T>>;

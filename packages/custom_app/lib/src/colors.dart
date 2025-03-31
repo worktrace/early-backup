@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:inherit/inherit.dart';
 import 'package:smooth_ui/themes.dart';
 import 'package:state_reuse/animation.dart';
 import 'package:state_reuse/binding.dart';

@@ -17,7 +17,6 @@ workspace:
   - packages/compat_utils
   - packages/custom_app
   - packages/data_build
-  - packages/inherit
   - packages/smooth_ui
   - packages/state_reuse
   - packages/wrap
