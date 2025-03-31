@@ -5,7 +5,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smooth_ui/effect.dart';
 import 'package:smooth_ui/utils.dart';
-import 'package:state_reuse/state_reuse.dart';
+import 'package:state_reuse/animation.dart';
+import 'package:state_reuse/size.dart';
 import 'package:wrap/wrap.dart';
 
 /// Default sidebar width as placeholder.

@@ -10,19 +10,11 @@ extension FindContext on BuildContext {
 
 extension WrapInherit on Widget {
   Inherit<T> inherit<T>(T data, {Key? key}) {
-    return Inherit<T>(
-      key: key,
-      data: data,
-      child: this,
-    );
+    return Inherit<T>(key: key, data: data, child: this);
   }
 
   InheritUpdate<T> inheritUpdate<T>(ValueChanged<T> onChange, {Key? key}) {
-    return InheritUpdate<T>(
-      key: key,
-      onChange: onChange,
-      child: this,
-    );
+    return InheritUpdate<T>(key: key, onChange: onChange, child: this);
   }
 }
 
