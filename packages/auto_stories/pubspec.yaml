@@ -1,7 +1,7 @@
 name: auto_stories
 description: Auto generate widget preview with minimal configurations.
-version: 0.0.0
 resolution: workspace
+version: 0.0.0
 
 environment:
   sdk: ^3.7.0
@@ -9,14 +9,12 @@ environment:
 
 dependencies:
   args: ^2.6.0
-  avoid_nullable: ^0.0.0
   compat_utils: ^0.0.0
   custom_app: ^0.0.0
   data_build: ^0.0.0
   flutter: { sdk: flutter }
   flutter_web_plugins: { sdk: flutter }
   inherit: ^0.0.0
-  modifier: ^0.0.0
   smooth_ui: ^0.0.0
   state_reuse: ^0.0.0
   wrap: ^1.0.0

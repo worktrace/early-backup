@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:state_reuse/state_reuse.dart';
+import 'package:state_reuse/animation.dart';
 import 'package:wrap/wrap.dart';
 
 import 'ripple.dart';

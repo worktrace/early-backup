@@ -1,3 +1,3 @@
-import 'package:auto_stories/debug.dart';
+import 'package:auto_stories/preview.dart';
 
 void main() => autoStoriesRoot();

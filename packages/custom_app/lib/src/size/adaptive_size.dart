@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:custom_app/src/size/adapt_size_data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:inherit/inherit.dart';
-import 'package:state_reuse/state_reuse.dart';
+import 'package:state_reuse/binding.dart';
+import 'package:state_reuse/size.dart';
 
 import 'adapt_size.dart';
 

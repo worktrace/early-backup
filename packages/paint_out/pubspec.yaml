@@ -1,0 +1,14 @@
+name: paint_out
+description: Support Flutter paint and output of svg with a single codebase.
+resolution: workspace
+version: 0.0.0
+
+environment:
+  sdk: ^3.7.0
+  flutter: ">=3.29.0 <4.0.0"
+
+dependencies:
+  flutter: { sdk: flutter }
+
+dev_dependencies:
+  flutter_test: { sdk: flutter }

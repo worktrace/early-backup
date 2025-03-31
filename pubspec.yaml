@@ -14,17 +14,17 @@ workspace:
 
   # Shared libraries for code reuse.
   - packages/auto_stories
-  - packages/avoid_nullable
   - packages/compat_utils
   - packages/custom_app
   - packages/data_build
-  - packages/inherit
-  - packages/modifier
+  - packages/paint_out
   - packages/smooth_ui
   - packages/state_reuse
-  - packages/workspace_utils
   - packages/wrap
+
+  # Workspace management scripts.
+  - scripts/workspace_dart
 
 dependencies:
   auto_stories: ^0.0.0
-  workspace_utils: ^0.0.0
+  workspace: ^0.0.0

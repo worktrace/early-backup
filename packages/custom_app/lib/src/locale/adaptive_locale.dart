@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:state_reuse/state_reuse.dart';
+import 'package:state_reuse/binding.dart';
 
 import 'locale_data.dart';
 import 'locale_id.dart';

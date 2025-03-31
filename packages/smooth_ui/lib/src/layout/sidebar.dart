@@ -1,11 +1,11 @@
-import 'package:avoid_nullable/avoid_nullable.dart';
-import 'package:compat_utils/compat_utils.dart';
+import 'package:compat_utils/number.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smooth_ui/effect.dart';
-import 'package:smooth_ui/utils.dart';
-import 'package:state_reuse/state_reuse.dart';
+import 'package:smooth_ui/themes.dart';
+import 'package:state_reuse/animation.dart';
+import 'package:state_reuse/size.dart';
 import 'package:wrap/wrap.dart';
 
 /// Default sidebar width as placeholder.

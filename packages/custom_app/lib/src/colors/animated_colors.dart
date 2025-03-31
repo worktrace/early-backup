@@ -1,7 +1,6 @@
-import 'package:avoid_nullable/avoid_nullable.dart';
 import 'package:custom_app/app.dart';
 import 'package:flutter/widgets.dart';
-import 'package:state_reuse/state_reuse.dart';
+import 'package:state_reuse/animation.dart';
 
 const colorsAnimation = AnimationData(duration: Duration(milliseconds: 345));
 

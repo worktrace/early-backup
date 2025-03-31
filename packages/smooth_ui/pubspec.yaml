@@ -1,14 +1,13 @@
 name: smooth_ui
 description: Animated layout and effects to make Flutter app smooth and elegant.
-version: 0.0.0
 resolution: workspace
+version: 0.0.0
 
 environment:
   sdk: ^3.7.0
   flutter: ">=3.29.0 <4.0.0"
 
 dependencies:
-  avoid_nullable: ^0.0.0
   compat_utils: ^0.0.0
   flutter: { sdk: flutter }
   inherit: ^0.0.0

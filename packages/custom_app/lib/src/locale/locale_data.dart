@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:inherit/inherit.dart';
+import 'package:state_reuse/binding.dart';
 import 'package:wrap/wrap.dart';
 
 import 'locale_id.dart';
