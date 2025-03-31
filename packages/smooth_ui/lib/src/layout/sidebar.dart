@@ -1,5 +1,5 @@
 import 'package:avoid_nullable/avoid_nullable.dart';
-import 'package:compat_utils/compat_utils.dart';
+import 'package:compat_utils/number.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';

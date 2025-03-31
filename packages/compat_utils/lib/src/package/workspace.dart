@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:compat_utils/compat_utils.dart';
+import 'package:compat_utils/graph.dart';
 import 'package:path/path.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';

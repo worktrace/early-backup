@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:compat_utils/compat_utils.dart';
+import 'package:compat_utils/format/string.dart';
+import 'package:compat_utils/format/time.dart';
 import 'package:path/path.dart';
 
 import 'terminal_wrap.dart';

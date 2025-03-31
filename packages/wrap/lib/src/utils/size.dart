@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:compat_utils/compat_utils.dart';
+import 'package:compat_utils/number.dart';
 import 'package:flutter/widgets.dart';
 
 extension SizeUtils on Size {

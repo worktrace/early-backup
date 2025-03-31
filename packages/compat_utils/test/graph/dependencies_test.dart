@@ -1,4 +1,4 @@
-import 'package:compat_utils/compat_utils.dart';
+import 'package:compat_utils/graph.dart';
 import 'package:test/test.dart';
 
 void main() {

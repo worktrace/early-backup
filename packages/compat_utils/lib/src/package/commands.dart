@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:args/command_runner.dart';
-import 'package:compat_utils/compat_utils.dart';
+import 'package:compat_utils/format/string.dart';
 import 'package:compat_utils/terminal.dart';
 import 'package:pub_semver/pub_semver.dart';
 

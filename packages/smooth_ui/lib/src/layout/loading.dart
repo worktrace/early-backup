@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:compat_utils/compat_utils.dart';
+import 'package:compat_utils/types.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -37,9 +37,9 @@ class _LoadingContainerState extends State<LoadingContainer> {
   void initState() {
     super.initState();
     unawaited(
-      Future.wait(widget.process.map((process) => process()))
-          .then((_) => widget.onFinish())
-          .onError(widget.onError),
+      Future.wait(
+        widget.process.map((process) => process()),
+      ).then((_) => widget.onFinish()).onError(widget.onError),
     );
   }
 

@@ -1,5 +1,5 @@
 import 'package:args/args.dart';
-import 'package:compat_utils/compat_utils.dart';
+import 'package:compat_utils/format/string.dart';
 
 class CommandLineOption {
   const CommandLineOption({required this.name, required this.help, this.abbr});

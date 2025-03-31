@@ -1,4 +1,4 @@
-import 'package:compat_utils/compat_utils.dart';
+import 'package:compat_utils/types.dart';
 import 'package:flutter/widgets.dart';
 
 class AdaptedSize {
