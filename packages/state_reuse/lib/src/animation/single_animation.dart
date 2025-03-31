@@ -1,10 +1,10 @@
-import 'package:avoid_nullable/avoid_nullable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:state_reuse/binding.dart';
 
 import 'animation_data.dart';
 import 'animation_reuse.dart';
+import 'lerp.dart';
 
 typedef SingleAnimation<T> = _SingleAnimation<T, DataBuilder<T>, Lerp<T>>;
 

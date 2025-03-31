@@ -1,13 +1,12 @@
 /// A collection of tools for Flutter development.
 library;
 
-export 'package:avoid_nullable/avoid_nullable.dart';
 export 'package:custom_app/app.dart';
 export 'package:inherit/inherit.dart';
 export 'package:smooth_ui/effect.dart';
 export 'package:smooth_ui/icons.dart';
 export 'package:smooth_ui/layout.dart';
-export 'package:smooth_ui/utils.dart';
+export 'package:smooth_ui/themes.dart';
 export 'package:state_reuse/animation.dart';
 export 'package:state_reuse/binding.dart';
 export 'package:state_reuse/interact.dart';

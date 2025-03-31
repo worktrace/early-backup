@@ -9,7 +9,6 @@ environment:
 
 dependencies:
   args: ^2.6.0
-  avoid_nullable: ^0.0.0
   compat_utils: ^0.0.0
   custom_app: ^0.0.0
   data_build: ^0.0.0
