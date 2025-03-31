@@ -21,9 +21,11 @@ workspace:
   - packages/inherit
   - packages/smooth_ui
   - packages/state_reuse
-  - packages/workspace_utils
   - packages/wrap
+
+  # Workspace management scripts.
+  - scripts/workspace_dart
 
 dependencies:
   auto_stories: ^0.0.0
-  workspace_utils: ^0.0.0
+  workspace: ^0.0.0

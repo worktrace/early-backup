@@ -4,13 +4,17 @@ import 'package:args/command_runner.dart';
 import 'package:compat_utils/compat_utils.dart';
 import 'package:compat_utils/terminal.dart';
 import 'package:pub_semver/pub_semver.dart';
-import 'package:workspace_utils/workspace_utils.dart';
 
-Future<void> main(List<String> arguments) {
-  const name = 'workspace_utils';
+import 'package.dart';
+import 'workspace.dart';
+
+Future<void> workspaceExecutable(
+  List<String> arguments, {
+  String executableName = 'workspace',
+}) {
   const description = 'Dart workspace multiple packages operations.';
   final runner =
-      CommandRunner<void>(name, description)
+      CommandRunner<void>(executableName, description)
         ..addCommand(TestCommand())
         ..addCommand(BuildCommand())
         ..addCommand(UpdateEnvironmentCommand());
