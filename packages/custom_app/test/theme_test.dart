@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:inherit/inherit.dart';
-import 'package:wrap/debug.dart';
+import 'package:wrap/test.dart';
 import 'package:wrap/wrap.dart';
 
 void main() {

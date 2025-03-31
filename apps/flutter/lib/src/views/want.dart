@@ -1,4 +1,4 @@
-import 'package:auto_stories/kit.dart';
+import 'package:auto_stories/utils.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 

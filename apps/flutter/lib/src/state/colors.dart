@@ -1,4 +1,4 @@
-import 'package:auto_stories/kit.dart';
+import 'package:auto_stories/utils.dart';
 import 'package:flutter/widgets.dart';
 
 class Colors extends ColorsBase {

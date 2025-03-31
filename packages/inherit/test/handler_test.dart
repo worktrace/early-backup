@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:inherit/debug.dart';
 import 'package:inherit/inherit.dart';
-import 'package:wrap/debug.dart';
 import 'package:wrap/modifier.dart';
+import 'package:wrap/test.dart';
 import 'package:wrap/wrap.dart';
 
 void main() {
