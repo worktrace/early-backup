@@ -9,13 +9,11 @@ class CommandLineOption {
     required String help,
     String? abbr,
     bool autoAbbr = true,
-  }) {
-    return CommandLineOption(
-      name: name,
-      help: help,
-      abbr: abbr ?? (autoAbbr ? name.firstCharacterLower : null),
-    );
-  }
+  }) => CommandLineOption(
+    name: name,
+    help: help,
+    abbr: abbr ?? (autoAbbr ? name.firstCharacterLower : null),
+  );
 
   final String name;
   final String help;

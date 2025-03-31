@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:compat_utils/format/case.dart';
-import 'package:compat_utils/format/path.dart';
+import 'package:compat_utils/path.dart';
 import 'package:path/path.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
