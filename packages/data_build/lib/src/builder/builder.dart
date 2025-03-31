@@ -5,7 +5,7 @@ import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/file_system/file_system.dart' show ResourceProvider;
-import 'package:compat_utils/compat_utils.dart';
+import 'package:compat_utils/path.dart';
 import 'package:path/path.dart';
 
 class Builder {
