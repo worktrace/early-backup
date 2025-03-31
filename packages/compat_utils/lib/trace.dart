@@ -1,2 +1,2 @@
-export 'src/terminal/trace.dart';
-export 'terminal.dart';
+export 'src/trace/trace_code.dart';
+export 'src/trace/trace_logger.dart';
