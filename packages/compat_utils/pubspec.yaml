@@ -1,7 +1,7 @@
 name: compat_utils
 description: Compatible utilities between package:flutter and package:analyzer.
-version: 0.0.0
 resolution: workspace
+version: 0.0.0
 
 environment:
   sdk: ^3.7.0
