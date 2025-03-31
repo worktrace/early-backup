@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:inherit/debug.dart';
 import 'package:inherit/inherit.dart';
-import 'package:modifier/modifier.dart';
 import 'package:wrap/debug.dart';
+import 'package:wrap/modifier.dart';
 import 'package:wrap/wrap.dart';
 
 void main() {
@@ -11,11 +11,7 @@ void main() {
     const before = 'before';
     const after = 'after';
     const button = 'button';
-    const widget = HandlerUpdate(
-      before: before,
-      after: after,
-      button: button,
-    );
+    const widget = HandlerUpdate(before: before, after: after, button: button);
     await t.pumpWidget(widget.ensureText());
     expect(find.text(before), findsOneWidget);
     expect(find.text(button), findsOneWidget);
@@ -41,9 +37,9 @@ class HandlerUpdate extends UpdateTester {
 class _HandlerUpdateState extends UpdateTesterState<HandlerUpdate> {
   @override
   Widget buttonBuilder(BuildContext context) {
-    return widget.button
-        .asText()
-        .gesture(onTap: () => context.update(widget.after));
+    return widget.button.asText().gesture(
+      onTap: () => context.update(widget.after),
+    );
   }
 
   @override

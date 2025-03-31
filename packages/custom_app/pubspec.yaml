@@ -18,4 +18,3 @@ dependencies:
 
 dev_dependencies:
   flutter_test: { sdk: flutter }
-  modifier: ^0.0.0

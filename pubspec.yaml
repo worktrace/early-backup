@@ -19,7 +19,6 @@ workspace:
   - packages/custom_app
   - packages/data_build
   - packages/inherit
-  - packages/modifier
   - packages/smooth_ui
   - packages/state_reuse
   - packages/workspace_utils
