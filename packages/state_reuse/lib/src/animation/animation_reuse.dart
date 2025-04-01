@@ -1,84 +1,72 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:state_reuse/binding.dart';
 
-import 'animation.dart';
-import 'lerp.dart';
+import 'animation_data.dart';
 
-typedef SingleAnimation<T> = _SingleAnimation<T, DataBuilder<T>, Lerp<T>>;
-
-class _SingleAnimation<T, U extends DataBuilder<T>, L extends Lerp<T>>
-    extends SingleAnimationWidget {
-  const _SingleAnimation({
+abstract class SingleAnimationWidget extends StatefulWidget {
+  const SingleAnimationWidget({
     super.key,
-    super.animation,
-    required this.data,
-    required this.lerp,
-    required this.builder,
+    this.animation = const AnimationData(),
   });
 
-  final T data;
-  final L lerp;
-  final U builder;
-
-  @override
-  State<_SingleAnimation<T, U, L>> createState() =>
-      _SingleAnimationState<T, U, L>();
+  final AnimationData animation;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty<T>('data', data))
-      ..add(ObjectFlagProperty<Lerp<T>>.has('lerp', lerp))
-      ..add(ObjectFlagProperty<DataBuilder<T>>.has('builder', builder));
+    properties.add(DiagnosticsProperty<AnimationData>('animation', animation));
   }
 }
 
-class _SingleAnimationState<T, U extends DataBuilder<T>, L extends Lerp<T>>
-    extends SingleAnimationStateBare<_SingleAnimation<T, U, L>> {
-  late AnimationTween<T> _tween = AnimationTween(
-    begin: widget.data,
-    end: widget.data,
-  );
-
-  late T _data = widget.data;
-  T get data => _data;
-  set data(T value) {
-    if (value != _data) setState(() => _data = value);
-  }
-
-  void updateData() => data = _tween.of(controller, widget.lerp);
+/// The animation [controller] had been bind with [setState] callback here.
+/// You may consider [SingleAnimationStateBare] instead.
+abstract class SingleAnimationState<S extends StatefulWidget>
+    extends SingleAnimationStateBare<S> {
+  /// Encapsulate [setState] for [dispose] to call the same one.
+  void _setState() => setState(() {});
 
   @override
+  @mustCallSuper
   void initState() {
     super.initState();
-    controller.addListener(updateData);
+    controller.addListener(_setState);
   }
 
   @override
+  @mustCallSuper
   void dispose() {
-    controller.removeListener(updateData);
+    controller.removeListener(_setState);
+    super.dispose();
+  }
+}
+
+/// The animation [controller] had not been bind with [setState] callback here.
+/// You may consider [SingleAnimationState] instead.
+abstract class SingleAnimationStateBare<S extends StatefulWidget>
+    extends State<S>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController controller = setupController();
+
+  AnimationController setupController() => AnimationController(vsync: this);
+
+  @override
+  @mustCallSuper
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  @mustCallSuper
+  void dispose() {
+    controller.dispose();
     super.dispose();
   }
 
   @override
-  void didUpdateWidget(covariant _SingleAnimation<T, U, L> oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.data != oldWidget.data) {
-      _tween = AnimationTween(begin: data, end: widget.data);
-      controller
-        ..reset()
-        ..animateAs(widget.animation, 1);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) => widget.builder(context, data);
-
-  @override
+  @mustCallSuper
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<T>('data', data));
+    final c = controller;
+    properties.add(DiagnosticsProperty<AnimationController>('controller', c));
   }
 }
