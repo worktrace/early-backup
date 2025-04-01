@@ -24,4 +24,11 @@ extension ModifyPath on String {
     if (result == null) return dirname.join('$basename.$subname').normalized;
     return dirname.join('${result.$1}.$subname.${result.$2}').normalized;
   }
+
+  String replaceExtension(String extension) {
+    final basename = this.basename;
+    final result = basename.splitLastOnce('.');
+    if (result == null) return dirname.join('$basename.$extension').normalized;
+    return dirname.join('${result.$1}.$extension').normalized;
+  }
 }

@@ -11,4 +11,13 @@ void main() {
       'path${separator}example.g.dart',
     );
   });
+
+  test('replace extension', () {
+    expect('example'.replaceExtension('dart'), 'example.dart');
+    expect('example.part'.replaceExtension('dart'), 'example.dart');
+    expect(
+      'path${separator}example.part'.replaceExtension('dart'),
+      'path${separator}example.dart',
+    );
+  });
 }
