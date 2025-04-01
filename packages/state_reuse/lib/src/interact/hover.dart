@@ -22,7 +22,7 @@ class HoverDefibrillation extends MouseWidget {
   final Duration defibrillation;
 
   @override
-  State<HoverDefibrillation> createState() => _HoverDefibrillationState();
+  State<HoverDefibrillation> createState() => HoverDefibrillationState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -32,11 +32,14 @@ class HoverDefibrillation extends MouseWidget {
   }
 }
 
-class _HoverDefibrillationState extends State<HoverDefibrillation> {
+class HoverDefibrillationState extends State<HoverDefibrillation> {
   var _hover = false;
   var _resolvedHover = false;
 
-  Future<void> _mouseEnter(PointerEnterEvent event) async {
+  bool get exactHover => _hover;
+  bool get resolvedHover => _resolvedHover;
+
+  Future<void> mouseEnter(PointerEnterEvent event) async {
     _hover = true;
     await Future<void>.delayed(widget.defibrillation);
     if (!_hover) return;
@@ -44,7 +47,7 @@ class _HoverDefibrillationState extends State<HoverDefibrillation> {
     widget.onEnter?.call(event);
   }
 
-  Future<void> _mouseExit(PointerExitEvent event) async {
+  Future<void> mouseExit(PointerExitEvent event) async {
     _hover = false;
     await Future<void>.delayed(widget.defibrillation);
     if (_hover) return;
@@ -54,11 +57,19 @@ class _HoverDefibrillationState extends State<HoverDefibrillation> {
 
   @override
   Widget build(BuildContext context) => widget.child!.mouse(
-    onEnter: _mouseEnter,
-    onExit: _mouseExit,
+    onEnter: mouseEnter,
+    onExit: mouseExit,
     onHover: widget.onHover,
     cursor: _resolvedHover ? widget.cursor : MouseCursor.defer,
     opaque: widget.opaque,
     hitTestBehavior: widget.hitTestBehavior,
   );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<bool>('exactHover', exactHover))
+      ..add(DiagnosticsProperty<bool>('resolvedHover', resolvedHover));
+  }
 }
