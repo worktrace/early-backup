@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
+import 'package:smooth_ui/colors.dart';
 import 'package:state_reuse/animation.dart';
-import 'package:wrap/utils.dart';
 
 class AreaColors {
   const AreaColors({this.background = transparent, this.foreground});

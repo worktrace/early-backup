@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
+import 'package:smooth_ui/colors.dart';
 import 'package:state_reuse/animation.dart';
-import 'package:wrap/utils.dart';
 
 class BorderSize {
   const BorderSize({this.width = 1, this.radius = BorderRadius.zero});
