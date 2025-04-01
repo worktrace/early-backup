@@ -3,30 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:state_reuse/animation.dart';
 
-abstract class AnimatedMouseWidget extends MouseWidget {
-  const AnimatedMouseWidget({
-    super.key,
-    this.animation = const AnimationDefibrillation(),
-    super.onEnter,
-    super.onExit,
-    super.onHover,
-    super.cursor,
-    super.opaque,
-    super.hitTestBehavior,
-    super.child,
-  });
-
-  final AnimationDefibrillation animation;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(
-      DiagnosticsProperty<AnimationDefibrillation>('animation', animation),
-    );
-  }
-}
-
 abstract class MouseWidgetBase extends StatefulWidget {
   const MouseWidgetBase({
     super.key,
@@ -73,4 +49,28 @@ abstract class MouseWidget extends MouseWidgetBase {
   });
 
   final Widget? child;
+}
+
+abstract class AnimatedMouseWidget extends MouseWidget {
+  const AnimatedMouseWidget({
+    super.key,
+    this.animation = const AnimationDefibrillation(),
+    super.onEnter,
+    super.onExit,
+    super.onHover,
+    super.cursor,
+    super.opaque,
+    super.hitTestBehavior,
+    super.child,
+  });
+
+  final AnimationDefibrillation animation;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      DiagnosticsProperty<AnimationDefibrillation>('animation', animation),
+    );
+  }
 }

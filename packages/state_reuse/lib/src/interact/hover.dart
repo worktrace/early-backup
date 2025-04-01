@@ -28,8 +28,10 @@ abstract class HoverDefibrillationBase extends MouseWidgetBase {
   }
 }
 
-abstract class HoverDefibrillationState<T extends HoverDefibrillationBase>
+abstract class HoverDefibrillationState<T extends MouseWidgetBase>
     extends State<T> {
+  Duration get defibrillation;
+
   var _hover = false;
   var _resolvedHover = false;
 
@@ -38,7 +40,7 @@ abstract class HoverDefibrillationState<T extends HoverDefibrillationBase>
 
   Future<void> mouseEnter(PointerEnterEvent event) async {
     _hover = true;
-    await Future<void>.delayed(widget.defibrillation);
+    await Future<void>.delayed(defibrillation);
     if (!_hover) return;
     _resolvedHover = true;
     widget.onEnter?.call(event);
@@ -46,7 +48,7 @@ abstract class HoverDefibrillationState<T extends HoverDefibrillationBase>
 
   Future<void> mouseExit(PointerExitEvent event) async {
     _hover = false;
-    await Future<void>.delayed(widget.defibrillation);
+    await Future<void>.delayed(defibrillation);
     if (_hover) return;
     _resolvedHover = false;
     widget.onExit?.call(event);
@@ -56,34 +58,46 @@ abstract class HoverDefibrillationState<T extends HoverDefibrillationBase>
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty<Duration>('defibrillation', defibrillation))
       ..add(DiagnosticsProperty<bool>('exactHover', exactHover))
       ..add(DiagnosticsProperty<bool>('resolvedHover', resolvedHover));
   }
 }
 
-class HoverDefibrillation extends HoverDefibrillationBase {
+class HoverDefibrillation extends MouseWidget {
   const HoverDefibrillation({
     super.key,
-    super.defibrillation,
+    this.defibrillation = kHoverDefibrillation,
     super.onEnter,
     super.onExit,
     super.onHover,
     super.cursor,
     super.hitTestBehavior,
     super.opaque,
-    this.child,
+    super.child,
   });
 
-  final Widget? child;
+  final Duration defibrillation;
 
   @override
   State<HoverDefibrillation> createState() => _HoverDefibrillationState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      DiagnosticsProperty<Duration>('defibrillation', defibrillation),
+    );
+  }
 }
 
 class _HoverDefibrillationState
     extends HoverDefibrillationState<HoverDefibrillation> {
   @override
-  Widget build(BuildContext context) => widget.child!.mouse(
+  Duration get defibrillation => widget.defibrillation;
+
+  @override
+  Widget build(BuildContext context) => widget.child.mouse(
     onEnter: mouseEnter,
     onExit: mouseExit,
     onHover: widget.onHover,
