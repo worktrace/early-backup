@@ -15,6 +15,12 @@ extension StringUtils on String {
     return (substring(0, index), substring(index + separator.length));
   }
 
+  (String, String)? splitLastOnce(String separator) {
+    final index = lastIndexOf(separator);
+    if (index == -1) return null;
+    return (substring(0, index), substring(index + separator.length));
+  }
+
   String get firstCharacter => isNotEmpty ? this[0] : '';
   String get firstCharacterLower => firstCharacter.toLowerCase();
 }
