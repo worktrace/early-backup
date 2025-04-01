@@ -13,6 +13,7 @@ abstract class AnimatedMouseWidget extends MouseWidget {
     super.cursor,
     super.opaque,
     super.hitTestBehavior,
+    super.child,
   });
 
   final AnimationDefibrillation animation;
@@ -35,6 +36,7 @@ abstract class MouseWidget extends StatefulWidget {
     this.cursor = MouseCursor.defer,
     this.opaque = true,
     this.hitTestBehavior,
+    this.child,
   });
 
   final PointerEnterEventListener? onEnter;
@@ -43,6 +45,8 @@ abstract class MouseWidget extends StatefulWidget {
   final MouseCursor cursor;
   final bool opaque;
   final HitTestBehavior? hitTestBehavior;
+
+  final Widget? child;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

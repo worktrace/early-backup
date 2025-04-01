@@ -23,11 +23,10 @@ abstract class RippleBase extends AnimatedMouseWidget {
     super.onHover,
     super.opaque,
     super.hitTestBehavior,
-    this.child,
+    super.child,
   });
 
   final bool hold;
-  final Widget? child;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
