@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-extension WrapInteract on Widget {
+extension WrapFocus on Widget {
   Focus focus({
     Key? key,
     FocusNode? focusNode,
@@ -31,7 +31,9 @@ extension WrapInteract on Widget {
     debugLabel: debugLabel,
     child: this,
   );
+}
 
+extension WrapInteract on Widget? {
   MouseRegion mouse({
     Key? key,
     PointerEnterEventListener? onEnter,
