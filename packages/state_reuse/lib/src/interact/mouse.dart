@@ -27,8 +27,8 @@ abstract class AnimatedMouseWidget extends MouseWidget {
   }
 }
 
-abstract class MouseWidget extends StatefulWidget {
-  const MouseWidget({
+abstract class MouseWidgetBase extends StatefulWidget {
+  const MouseWidgetBase({
     super.key,
     this.onEnter,
     this.onExit,
@@ -36,7 +36,6 @@ abstract class MouseWidget extends StatefulWidget {
     this.cursor = MouseCursor.defer,
     this.opaque = true,
     this.hitTestBehavior,
-    this.child,
   });
 
   final PointerEnterEventListener? onEnter;
@@ -45,8 +44,6 @@ abstract class MouseWidget extends StatefulWidget {
   final MouseCursor cursor;
   final bool opaque;
   final HitTestBehavior? hitTestBehavior;
-
-  final Widget? child;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -61,4 +58,19 @@ abstract class MouseWidget extends StatefulWidget {
       ..add(DiagnosticsProperty<bool>('opaque', opaque))
       ..add(EnumProperty<HitTestBehavior?>('hitTestBehavior', hitTestBehavior));
   }
+}
+
+abstract class MouseWidget extends MouseWidgetBase {
+  const MouseWidget({
+    super.key,
+    super.onEnter,
+    super.onExit,
+    super.onHover,
+    super.cursor = MouseCursor.defer,
+    super.opaque = true,
+    super.hitTestBehavior,
+    this.child,
+  });
+
+  final Widget? child;
 }
