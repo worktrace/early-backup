@@ -97,10 +97,13 @@ typedef AnnotationBuilder<T> = String Function(Element2 element, T annotation);
 typedef AnnotationParser<T> = T? Function(Annotation annotation);
 
 FileBuilder builderOf({
-  required Compiler<String> outFilename,
+  required Compiler<String> path,
   Iterable<ContentBuilder> prefixes = const [],
   Iterable<AnnotationParser<dynamic>> parsers = const [],
   Iterable<AnnotationBuilder<dynamic>> builders = const [],
-}) => (path, unit) {
+}) => (sourcePath, unit) {
+  final outPath = path(sourcePath);
+  if (outPath == sourcePath) throw Exception('output to raw file: $outPath');
+
   return null;
 };
