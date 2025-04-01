@@ -1,5 +1,7 @@
 import 'dart:async';
 
+typedef Compiler<T> = T Function(T source);
+
 typedef FutureCallback = Future<void> Function();
 typedef FutureOrCallback = FutureOr<void> Function();
 typedef ErrorCallback = void Function(Object? error, StackTrace? stackTrace);
