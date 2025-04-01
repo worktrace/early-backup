@@ -6,8 +6,8 @@ import 'package:wrap/wrap.dart';
 
 import 'mouse.dart';
 
-class HoverDefibrillation extends MouseWidget {
-  const HoverDefibrillation({
+abstract class HoverDefibrillationBase extends MouseWidgetBase {
+  const HoverDefibrillationBase({
     super.key,
     this.defibrillation = kHoverDefibrillation,
     super.onEnter,
@@ -16,13 +16,9 @@ class HoverDefibrillation extends MouseWidget {
     super.cursor,
     super.hitTestBehavior,
     super.opaque,
-    super.child,
   });
 
   final Duration defibrillation;
-
-  @override
-  State<HoverDefibrillation> createState() => HoverDefibrillationState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -32,7 +28,8 @@ class HoverDefibrillation extends MouseWidget {
   }
 }
 
-class HoverDefibrillationState extends State<HoverDefibrillation> {
+abstract class HoverDefibrillationState<T extends HoverDefibrillationBase>
+    extends State<T> {
   var _hover = false;
   var _resolvedHover = false;
 
@@ -56,6 +53,36 @@ class HoverDefibrillationState extends State<HoverDefibrillation> {
   }
 
   @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<bool>('exactHover', exactHover))
+      ..add(DiagnosticsProperty<bool>('resolvedHover', resolvedHover));
+  }
+}
+
+class HoverDefibrillation extends HoverDefibrillationBase {
+  const HoverDefibrillation({
+    super.key,
+    super.defibrillation,
+    super.onEnter,
+    super.onExit,
+    super.onHover,
+    super.cursor,
+    super.hitTestBehavior,
+    super.opaque,
+    this.child,
+  });
+
+  final Widget? child;
+
+  @override
+  State<HoverDefibrillation> createState() => _HoverDefibrillationState();
+}
+
+class _HoverDefibrillationState
+    extends HoverDefibrillationState<HoverDefibrillation> {
+  @override
   Widget build(BuildContext context) => widget.child!.mouse(
     onEnter: mouseEnter,
     onExit: mouseExit,
@@ -64,12 +91,4 @@ class HoverDefibrillationState extends State<HoverDefibrillation> {
     opaque: widget.opaque,
     hitTestBehavior: widget.hitTestBehavior,
   );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty<bool>('exactHover', exactHover))
-      ..add(DiagnosticsProperty<bool>('resolvedHover', resolvedHover));
-  }
 }
