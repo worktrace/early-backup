@@ -8,3 +8,8 @@ extension NullableIterable<T> on Iterable<T> {
   T get firstNotNull => firstWhere((i) => i != null);
   T? get firstMaybeNotNull => firstWhereOrNull((i) => i != null);
 }
+
+extension IterableConvertShortcut<T> on Iterable<T> {
+  List<T> get list => toList();
+  Set<T> get asSet => toSet();
+}

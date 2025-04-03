@@ -4,6 +4,7 @@ import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/file_system/file_system.dart' show ResourceProvider;
+import 'package:compat_utils/iterable.dart';
 import 'package:compat_utils/package.dart';
 import 'package:compat_utils/path.dart';
 
@@ -45,7 +46,7 @@ class Builder {
   }
 }
 
-class PackageBuilder extends Builder with DartPackageDirs {
+class PackageBuilder extends Builder with DartPackageFiles {
   /// Construct a builder instance from a Dart package.
   ///
   /// This path will be ensured to be absolute and normalized
@@ -59,7 +60,7 @@ class PackageBuilder extends Builder with DartPackageDirs {
     super.builders,
   }) : assert(root.existsSync()),
        assert(root.isAbsolute),
-       super(includedPaths: DartPackageDirs.names.map(root.path.join).toList());
+       super(includedPaths: DartPackageFiles.dirnames.map(root.path.join).list);
 
   factory PackageBuilder.resolve({
     String root = '',
