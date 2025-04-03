@@ -3,10 +3,8 @@ import 'dart:io';
 import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/file_system/file_system.dart' show ResourceProvider;
 import 'package:compat_utils/path.dart';
-import 'package:compat_utils/types.dart';
 import 'package:path/path.dart';
 
 class Builder {
@@ -91,19 +89,3 @@ class BuildOutput {
   final String path;
   final String content;
 }
-
-/// How to build based on an annotation and its annotated element.
-typedef AnnotationBuilder<T> = String Function(Element2 element, T annotation);
-typedef AnnotationParser<T> = T? Function(Annotation annotation);
-
-FileBuilder builderOf({
-  required Compiler<String> path,
-  Iterable<ContentBuilder> prefixes = const [],
-  Iterable<AnnotationParser<dynamic>> parsers = const [],
-  Iterable<AnnotationBuilder<dynamic>> builders = const [],
-}) => (sourcePath, unit) {
-  final outPath = path(sourcePath);
-  if (outPath == sourcePath) throw Exception('output to raw file: $outPath');
-
-  return null;
-};
