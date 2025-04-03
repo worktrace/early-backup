@@ -79,12 +79,14 @@ class PackageBuilder extends Builder with DartPackageFiles {
   @override
   final Directory root;
 
-  Future<void> build() async {
-    for (final file in allDartFiles) await buildFile(file.path);
+  Future<void> build({bool libOnly = true}) async {
+    final entries = libOnly ? libDir.allDartFiles : allDartFiles;
+    for (final file in entries) await buildFile(file.path);
   }
 
-  Future<void> buildConcurrent() {
-    return Future.wait(allDartFiles.map((file) => buildFile(file.path)));
+  Future<void> buildConcurrent({bool libOnly = true}) {
+    final entries = libOnly ? libDir.allDartFiles : allDartFiles;
+    return Future.wait(entries.map((file) => buildFile(file.path)));
   }
 }
 
