@@ -17,10 +17,10 @@ mixin DartPackageFiles {
     exampleDirname,
   ];
 
-  Directory get binDir => Directory(join(root.path, 'bin'));
-  Directory get libDir => Directory(join(root.path, 'lib'));
-  Directory get testDir => Directory(join(root.path, 'test'));
-  Directory get exampleDir => Directory(join(root.path, 'example'));
+  Directory get binDir => Directory(join(root.path, binDirname));
+  Directory get libDir => Directory(join(root.path, libDirname));
+  Directory get testDir => Directory(join(root.path, testDirname));
+  Directory get exampleDir => Directory(join(root.path, exampleDirname));
 
   Iterable<Directory> get dirs => [binDir, libDir, testDir, exampleDir];
 }
