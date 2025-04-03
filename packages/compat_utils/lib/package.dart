@@ -23,6 +23,33 @@ mixin DartPackageFiles {
   Directory get exampleDir => Directory(join(root.path, exampleDirname));
 
   Iterable<Directory> get dirs => [binDir, libDir, testDir, exampleDir];
+
+  Iterable<File> get allDartFiles => dirs
+      .map((dir) => dir.allDartFiles) //
+      .expand((file) => file);
+
+  Iterable<File> get allDartTestFiles => dirs
+      .map((dir) => dir.allDartTestFiles) //
+      .expand((file) => file);
+}
+
+extension DartFile on File {
+  bool get isDart => path.endsWith('.dart');
+  bool get isDartTest => path.endsWith('_test.dart');
+}
+
+extension DartFiles on Directory {
+  // ignore: unnecessary_this readabilities.
+  Iterable<File> get allDartFiles => this
+      .listSync(recursive: true) //
+      .whereType<File>()
+      .where((file) => file.isDart);
+
+  // ignore: unnecessary_this readabilities.
+  Iterable<File> get allDartTestFiles => this
+      .listSync(recursive: true) //
+      .whereType<File>()
+      .where((file) => file.isDartTest);
 }
 
 class DartPackage with DartPackageFiles {
