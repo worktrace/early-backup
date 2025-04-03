@@ -4,8 +4,8 @@ import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/file_system/file_system.dart' show ResourceProvider;
+import 'package:compat_utils/package.dart';
 import 'package:compat_utils/path.dart';
-import 'package:path/path.dart';
 
 class Builder {
   /// All [includedPaths] must be absolute and normalized,
@@ -45,7 +45,7 @@ class Builder {
   }
 }
 
-class PackageBuilder extends Builder {
+class PackageBuilder extends Builder with DartPackageDirs {
   /// Construct a builder instance from a Dart package.
   ///
   /// This path will be ensured to be absolute and normalized
@@ -59,7 +59,7 @@ class PackageBuilder extends Builder {
     super.builders,
   }) : assert(root.existsSync()),
        assert(root.isAbsolute),
-       super(includedPaths: _codes.map((p) => join(root.path, p)).toList());
+       super(includedPaths: DartPackageDirs.names.map(root.path.join).toList());
 
   factory PackageBuilder.resolve({
     String root = '',
@@ -75,8 +75,7 @@ class PackageBuilder extends Builder {
     builders: builders,
   );
 
-  static const _codes = ['lib', 'bin', 'test', 'example'];
-
+  @override
   final Directory root;
 
   Future<void> build() async {}
