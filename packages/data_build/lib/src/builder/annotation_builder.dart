@@ -27,6 +27,7 @@ FileBuilder annotationBuilder({
     builders: builders,
   );
   unit.visitChildren(visitor);
+  if (buffer.isEmpty) return null;
   return BuildOutput(path: outPath, content: buffer.join('\n\n'));
 };
 
