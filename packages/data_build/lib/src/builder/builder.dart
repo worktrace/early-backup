@@ -78,6 +78,8 @@ class PackageBuilder extends Builder {
   static const _codes = ['lib', 'bin', 'test', 'example'];
 
   final Directory root;
+
+  Future<void> build() async {}
 }
 
 typedef FileBuilder = BuildOutput? Function(String path, CompilationUnit unit);
