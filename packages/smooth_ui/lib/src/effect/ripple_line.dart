@@ -17,24 +17,24 @@ extension WrapRippleLine on Widget? {
     PointerEnterEventListener? onEnter,
     PointerExitEventListener? onExit,
     PointerHoverEventListener? onHover,
-    bool opaque = true,
+    MouseCursor cursor = MouseCursor.defer,
     HitTestBehavior hitTestBehavior = HitTestBehavior.opaque,
+    bool opaque = true,
     EdgeInsets padding = EdgeInsets.zero,
-  }) {
-    return RippleLine(
-      key: key,
-      animation: animation,
-      color: color,
-      hold: hold,
-      onEnter: onEnter,
-      onExit: onExit,
-      onHover: onHover,
-      opaque: opaque,
-      hitTestBehavior: hitTestBehavior,
-      padding: padding,
-      child: this,
-    );
-  }
+  }) => RippleLine(
+    key: key,
+    animation: animation,
+    color: color,
+    hold: hold,
+    onEnter: onEnter,
+    onExit: onExit,
+    onHover: onHover,
+    cursor: cursor,
+    hitTestBehavior: hitTestBehavior,
+    opaque: opaque,
+    padding: padding,
+    child: this,
+  );
 }
 
 class RippleLine extends RippleBase {
@@ -46,8 +46,9 @@ class RippleLine extends RippleBase {
     super.onEnter,
     super.onExit,
     super.onHover,
-    super.opaque = true,
+    super.cursor,
     super.hitTestBehavior = HitTestBehavior.opaque,
+    super.opaque = true,
     this.padding = EdgeInsets.zero,
     super.child,
   });
@@ -69,14 +70,12 @@ class RippleLine extends RippleBase {
 
 class _RippleHoverLineState extends RippleBaseState<RippleLine> {
   @override
-  CustomPainter get painter {
-    return RippleLinePainter(
-      color: widget.color,
-      center: center,
-      ratio: controller.value,
-      padding: widget.padding,
-    );
-  }
+  CustomPainter get painter => RippleLinePainter(
+    color: widget.color,
+    center: center,
+    ratio: controller.value,
+    padding: widget.padding,
+  );
 }
 
 class RippleLinePainter extends RipplePainter {

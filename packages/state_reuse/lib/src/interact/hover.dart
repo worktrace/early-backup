@@ -68,8 +68,8 @@ mixin HoverDefibrillationMixin<W extends MouseWidgetBase> on State<W> {
     onExit: mouseExit,
     onHover: widget.onHover,
     cursor: _resolvedHover ? widget.cursor : MouseCursor.defer,
-    opaque: widget.opaque,
     hitTestBehavior: widget.hitTestBehavior,
+    opaque: widget.opaque,
   );
 
   @override
