@@ -28,8 +28,7 @@ abstract class HoverDefibrillationBase extends MouseWidgetBase {
   }
 }
 
-abstract class HoverDefibrillationState<T extends MouseWidgetBase>
-    extends State<T> {
+mixin HoverDefibrillationMixin<W extends MouseWidgetBase> on State<W> {
   Duration get defibrillation;
 
   var _hover = false;
@@ -91,8 +90,8 @@ class HoverDefibrillation extends MouseWidget {
   }
 }
 
-class _HoverDefibrillationState
-    extends HoverDefibrillationState<HoverDefibrillation> {
+class _HoverDefibrillationState extends State<HoverDefibrillation>
+    with HoverDefibrillationMixin {
   @override
   Duration get defibrillation => widget.defibrillation;
 
