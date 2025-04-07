@@ -66,8 +66,6 @@ class _SidebarContainerState extends State<SidebarContainer> with AdaptSize {
   var _resizeHover = false;
   var _resizing = false;
 
-  bool get _showResize => _resizeHover || _resizing;
-
   double _delta = 0;
 
   double _computeSide(Offset localPosition) {
@@ -115,7 +113,7 @@ class _SidebarContainerState extends State<SidebarContainer> with AdaptSize {
     final resize = null
         .rippleLine(
           animation: widget.resizeAnimation,
-          hold: _showResize,
+          hold: _resizing,
           onEnter: (event) => setState(() => _resizeHover = true),
           onExit: (event) => setState(() => _resizeHover = false),
           opaque: false,
@@ -156,9 +154,10 @@ class _SidebarContainerState extends State<SidebarContainer> with AdaptSize {
       right: left ? 0 : _sidebarWidth,
     );
 
+    final showResize = _resizeHover || _resizing;
     return [content, sidebar]
         .asStack(clipBehavior: Clip.antiAlias)
-        .mouse(cursor: _showResize ? widget.resizeCursor : MouseCursor.defer)
+        .mouse(cursor: showResize ? widget.resizeCursor : MouseCursor.defer)
         .gesture(
           onHorizontalDragStart: _horizontalDragStart,
           onHorizontalDragUpdate: _horizontalDragUpdate,
