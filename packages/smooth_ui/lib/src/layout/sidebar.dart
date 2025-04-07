@@ -81,7 +81,7 @@ class _SidebarContainerState extends State<SidebarContainer> with AdaptSize {
   void _tapDown(TapDownDetails details) {
     if (_resizeHover) {
       _delta = _sidebarWidth - _computeSide(details.localPosition);
-      setState(() => _tapOnResizeBar = true);
+      _tapOnResizeBar = true;
     }
   }
 
@@ -103,10 +103,8 @@ class _SidebarContainerState extends State<SidebarContainer> with AdaptSize {
 
   void _horizontalDragEnd(DragEndDetails details) {
     _delta = 0;
-    setState(() {
-      _resizing = false;
-      _tapOnResizeBar = false;
-    });
+    _tapOnResizeBar = false;
+    setState(() => _resizing = false);
   }
 
   Widget sidebar(BuildContext context, {bool left = true}) {
