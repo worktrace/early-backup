@@ -83,3 +83,45 @@ class _SingleAnimationState<T, U extends DataBuilder<T>, L extends Lerp<T>>
     properties.add(DiagnosticsProperty<T>('data', data));
   }
 }
+
+class SimpleAnimation extends SingleAnimationWidget {
+  const SimpleAnimation({
+    super.key,
+    required this.value,
+    required this.builder,
+  });
+
+  final double value;
+  final DataBuilder<double> builder;
+
+  @override
+  State<SimpleAnimation> createState() => _SimpleAnimationState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty('value', value))
+      ..add(ObjectFlagProperty<DataBuilder<double>>.has('builder', builder));
+  }
+}
+
+class _SimpleAnimationState extends SingleAnimationState<SimpleAnimation> {
+  @override
+  AnimationController setupController() {
+    return AnimationController(vsync: this, value: widget.value);
+  }
+
+  @override
+  void didUpdateWidget(covariant SimpleAnimation oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.value != controller.value) {
+      controller.animateAs(widget.animation, widget.value);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.builder(context, controller.value);
+  }
+}

@@ -3,9 +3,8 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:smooth_ui/colors.dart';
 import 'package:state_reuse/animation.dart';
-import 'package:state_reuse/interact.dart';
-import 'package:wrap/utils.dart';
 import 'package:wrap/wrap.dart';
 
 const kRippleColor = Color.fromARGB(255, 8, 140, 222);
@@ -13,7 +12,7 @@ const kDimRippleColor = Color.fromARGB(24, 145, 145, 145);
 const kRippleDuration = Duration(milliseconds: 245);
 const kRippleAnimation = AnimationDefibrillation(duration: kRippleDuration);
 
-abstract class RippleBase extends AnimatedMouseWidget {
+abstract class RippleBase extends AnimatedHoverBase {
   const RippleBase({
     super.key,
     super.animation = kRippleAnimation,

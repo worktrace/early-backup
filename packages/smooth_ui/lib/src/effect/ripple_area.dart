@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:smooth_ui/colors.dart';
 import 'package:smooth_ui/themes.dart';
 import 'package:state_reuse/animation.dart';
-import 'package:wrap/utils.dart';
+import 'package:wrap/calculate.dart';
+import 'package:wrap/convert.dart';
 import 'package:wrap/wrap.dart';
 
 import 'ripple.dart';

@@ -5,9 +5,6 @@ import 'package:wrap/wrap.dart';
 import 'animation_data.dart';
 import 'animation_reuse.dart';
 
-// paint icon.
-// animated paint icon.
-
 class AnimatedPaint extends StatefulWidget {
   const AnimatedPaint({
     super.key,
