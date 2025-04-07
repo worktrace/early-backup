@@ -9,12 +9,10 @@ class AnimationData {
   final Duration duration;
   final Curve curve;
 
-  AnimationData copyWith({Duration? duration, Curve? curve}) {
-    return AnimationData(
-      duration: duration ?? this.duration,
-      curve: curve ?? this.curve,
-    );
-  }
+  AnimationData copyWith({Duration? duration, Curve? curve}) => AnimationData(
+    duration: duration ?? this.duration,
+    curve: curve ?? this.curve,
+  );
 }
 
 const kHoverDefibrillation = Duration(milliseconds: 35);

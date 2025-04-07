@@ -22,29 +22,25 @@ extension WrapColors on Widget {
   AdaptiveColors<T> adaptiveColors<T extends ColorsBase>(
     ColorsAdapter<T> adapter, {
     Key? key,
-  }) {
-    return AdaptiveColors<T>(
-      key: key,
-      adapter: adapter,
-      builder: colorsAs<T>,
-      child: this,
-    );
-  }
+  }) => AdaptiveColors<T>(
+    key: key,
+    adapter: adapter,
+    builder: colorsAs<T>,
+    child: this,
+  );
 
   SingleAnimation<T> animatedColors<T extends ColorsBase>(
     T colors,
     Lerp<T> lerp, {
     Key? key,
     AnimationData animation = const AnimationData(),
-  }) {
-    return SingleAnimation(
-      key: key,
-      animation: animation,
-      data: colors,
-      lerp: lerp,
-      builder: colorsAs<T>,
-    );
-  }
+  }) => SingleAnimation(
+    key: key,
+    animation: animation,
+    data: colors,
+    lerp: lerp,
+    builder: colorsAs<T>,
+  );
 
   Widget maybeAnimatedColors<T extends ColorsBase>(
     T colors, {
@@ -62,14 +58,12 @@ extension WrapColors on Widget {
     Lerp<T> lerp, {
     Key? key,
     AnimationData animation = colorsAnimation,
-  }) {
-    return AdaptiveColors<T>(
-      key: key,
-      adapter: adapter,
-      builder: (_, t) => animatedColors<T>(t, lerp, animation: animation),
-      child: this,
-    );
-  }
+  }) => AdaptiveColors<T>(
+    key: key,
+    adapter: adapter,
+    builder: (_, t) => animatedColors<T>(t, lerp, animation: animation),
+    child: this,
+  );
 
   AdaptiveColors<T> adaptiveMaybeAnimatedColors<T extends ColorsBase>(
     ColorsAdapter<T> adapter, {

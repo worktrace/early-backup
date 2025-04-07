@@ -41,7 +41,7 @@ mixin HoverDefibrillationMixin<W extends MouseWidgetBase> on State<W> {
     _hover = true;
     await Future<void>.delayed(defibrillation);
     if (!_hover) return;
-    _resolvedHover = true;
+    setState(() => _resolvedHover = true);
     widget.onEnter?.call(event);
   }
 
@@ -49,7 +49,7 @@ mixin HoverDefibrillationMixin<W extends MouseWidgetBase> on State<W> {
     _hover = false;
     await Future<void>.delayed(defibrillation);
     if (_hover) return;
-    _resolvedHover = false;
+    setState(() => _resolvedHover = false);
     widget.onExit?.call(event);
   }
 

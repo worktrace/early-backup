@@ -5,12 +5,10 @@ import 'package:state_reuse/animation.dart';
 class BorderSize {
   const BorderSize({this.width = 1, this.radius = BorderRadius.zero});
 
-  factory BorderSize.lerp(BorderSize a, BorderSize b, double t) {
-    return BorderSize(
-      width: lerpDouble(a.width, b.width, t),
-      radius: lerpBorderRadius(a.radius, b.radius, t),
-    );
-  }
+  factory BorderSize.lerp(BorderSize a, BorderSize b, double t) => BorderSize(
+    width: lerpDouble(a.width, b.width, t),
+    radius: lerpBorderRadius(a.radius, b.radius, t),
+  );
 
   static const zero = BorderSize(width: 0);
 
@@ -70,13 +68,11 @@ class CardSize {
     this.shadow = BoxShadowSize.zero,
   });
 
-  factory CardSize.lerp(CardSize a, CardSize b, double t) {
-    return CardSize(
-      strokeAlign: lerpDouble(a.strokeAlign, b.strokeAlign, t),
-      border: BorderSize.lerp(a.border, b.border, t),
-      shadow: BoxShadowSize.lerp(a.shadow, b.shadow, t),
-    );
-  }
+  factory CardSize.lerp(CardSize a, CardSize b, double t) => CardSize(
+    strokeAlign: lerpDouble(a.strokeAlign, b.strokeAlign, t),
+    border: BorderSize.lerp(a.border, b.border, t),
+    shadow: BoxShadowSize.lerp(a.shadow, b.shadow, t),
+  );
 
   final double strokeAlign;
   final BorderSize border;

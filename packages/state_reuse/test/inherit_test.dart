@@ -29,9 +29,7 @@ void main() {
 }
 
 final inheritProbe = Builder(
-  builder: (context) {
-    return context.find<String>()!.asText();
-  },
+  builder: (context) => context.find<String>()!.asText(),
 );
 
 class InheritUpdate extends UpdateTester {

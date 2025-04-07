@@ -20,13 +20,11 @@ LocaleAdapter<Locale> localesOf(
   List<LocaleID> settings, {
   List<Locale> locales = buildInLocales,
   Locale defaultLocale = zhHansCN,
-}) {
-  return LocaleAdapter<Locale>(
-    settings: settings,
-    locales: locales,
-    defaultLocale: defaultLocale,
-  );
-}
+}) => LocaleAdapter<Locale>(
+  settings: settings,
+  locales: locales,
+  defaultLocale: defaultLocale,
+);
 
 const List<Locale> buildInLocales = [
   arEG,

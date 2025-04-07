@@ -9,13 +9,11 @@ extension WrapSquircle on Widget {
     Key? key,
     required BorderRadius radius,
     Clip clipBehavior = Clip.antiAlias,
-  }) {
-    return clipPath(
-      key: key,
-      clipper: SquircleClipper(radius: radius),
-      clipBehavior: clipBehavior,
-    );
-  }
+  }) => clipPath(
+    key: key,
+    clipper: SquircleClipper(radius: radius),
+    clipBehavior: clipBehavior,
+  );
 
   Widget squircle({
     Key? key,
@@ -100,9 +98,7 @@ class SquircleClipper extends CustomClipper<Path> {
   final BorderRadius radius;
 
   @override
-  Path getClip(Size size) {
-    return drawSquircle(size.toRectFill, radius);
-  }
+  Path getClip(Size size) => drawSquircle(size.toRectFill, radius);
 
   @override
   bool shouldReclip(covariant SquircleClipper oldClipper) {

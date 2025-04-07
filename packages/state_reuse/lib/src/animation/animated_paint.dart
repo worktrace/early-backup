@@ -42,9 +42,7 @@ class AnimatedPaint extends StatefulWidget {
 
 class _AnimatedPaintState extends SingleAnimationState<AnimatedPaint> {
   @override
-  Widget build(BuildContext context) {
-    return widget.child.paint();
-  }
+  Widget build(BuildContext context) => widget.child.paint();
 }
 
 abstract class AnimatedPainter extends CustomPainter {

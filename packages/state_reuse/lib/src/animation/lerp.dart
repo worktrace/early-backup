@@ -25,14 +25,12 @@ int lerpInt(int a, int b, double t) => a + ((b - a) * t).round();
 
 /// Optimization over the raw nullable lerp functions:
 /// There's no null check, which is more efficient.
-Color lerpColor(Color a, Color b, double t) {
-  return Color.from(
-    alpha: lerpDouble(a.a, b.b, t),
-    red: lerpDouble(a.r, b.r, t),
-    green: lerpDouble(a.g, b.g, t),
-    blue: lerpDouble(a.b, b.b, t),
-  );
-}
+Color lerpColor(Color a, Color b, double t) => Color.from(
+  alpha: lerpDouble(a.a, b.b, t),
+  red: lerpDouble(a.r, b.r, t),
+  green: lerpDouble(a.g, b.g, t),
+  blue: lerpDouble(a.b, b.b, t),
+);
 
 Offset lerpOffset(Offset a, Offset b, double t) {
   return Offset(lerpDouble(a.dx, b.dx, t), lerpDouble(a.dy, b.dy, t));
@@ -64,11 +62,9 @@ EdgeInsetsDirectional lerpEdgeInsetsDirectional(
   EdgeInsetsDirectional a,
   EdgeInsetsDirectional b,
   double t,
-) {
-  return EdgeInsetsDirectional.only(
-    top: lerpDouble(a.top, b.top, t),
-    start: lerpDouble(a.start, b.start, t),
-    end: lerpDouble(a.end, b.end, t),
-    bottom: lerpDouble(a.bottom, b.bottom, t),
-  );
-}
+) => EdgeInsetsDirectional.only(
+  top: lerpDouble(a.top, b.top, t),
+  start: lerpDouble(a.start, b.start, t),
+  end: lerpDouble(a.end, b.end, t),
+  bottom: lerpDouble(a.bottom, b.bottom, t),
+);
