@@ -53,8 +53,15 @@ mixin HoverDefibrillationMixin<W extends MouseWidgetBase> on State<W> {
     widget.onExit?.call(event);
   }
 
+  /// Override this method to define how to build the widget.
+  /// This method is like the [build] method in most [State]s,
+  /// but here the [build] method is used to wrap mouse bindings,
+  /// so that it's supposed to override this method to define how to build.
   Widget? render(BuildContext context);
 
+  /// Use [render] instead,
+  /// it's strongly not recommended to override this method here.
+  @protected
   @override
   Widget build(BuildContext context) => render(context).mouse(
     onEnter: mouseEnter,
