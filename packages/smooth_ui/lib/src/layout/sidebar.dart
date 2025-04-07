@@ -64,8 +64,8 @@ class _SidebarContainerState extends State<SidebarContainer> with AdaptSize {
   late double _sidebarWidth = widget.sidebarWidth;
 
   var _resizeHover = false;
-
   var _resizing = false;
+
   bool get _showResize => _resizeHover || _resizing;
 
   double _delta = 0;

@@ -20,8 +20,9 @@ abstract class RippleBase extends AnimatedHoverBase {
     super.onEnter,
     super.onExit,
     super.onHover,
-    super.opaque,
+    super.cursor,
     super.hitTestBehavior,
+    super.opaque,
     this.child,
   });
 

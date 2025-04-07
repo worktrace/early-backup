@@ -19,24 +19,24 @@ extension WrapRippleArea on Widget? {
     PointerEnterEventListener? onEnter,
     PointerExitEventListener? onExit,
     PointerHoverEventListener? onHover,
-    bool opaque = true,
+    MouseCursor cursor = MouseCursor.defer,
     HitTestBehavior hitTestBehavior = HitTestBehavior.opaque,
+    bool opaque = true,
     BorderRadius radius = BorderRadius.zero,
-  }) {
-    return RippleArea(
-      key: key,
-      animation: animation,
-      colors: colors,
-      hold: hold,
-      onEnter: onEnter,
-      onExit: onExit,
-      onHover: onHover,
-      opaque: opaque,
-      hitTestBehavior: hitTestBehavior,
-      radius: radius,
-      child: this,
-    );
-  }
+  }) => RippleArea(
+    key: key,
+    animation: animation,
+    colors: colors,
+    hold: hold,
+    onEnter: onEnter,
+    onExit: onExit,
+    onHover: onHover,
+    cursor: cursor,
+    hitTestBehavior: hitTestBehavior,
+    opaque: opaque,
+    radius: radius,
+    child: this,
+  );
 }
 
 const kRippleAreaColors = AreaColors(
@@ -53,8 +53,9 @@ class RippleArea extends RippleBase {
     super.onEnter,
     super.onExit,
     super.onHover,
-    super.opaque = true,
+    super.cursor,
     super.hitTestBehavior = HitTestBehavior.opaque,
+    super.opaque = true,
     this.radius = BorderRadius.zero,
     super.child,
   });
@@ -76,13 +77,11 @@ class RippleArea extends RippleBase {
 
 class _RippleHoverState extends RippleBaseState<RippleArea> {
   @override
-  CustomPainter get painter {
-    return RippleAreaPainter(
-      center: center,
-      ratio: controller.value,
-      color: widget.colors.background,
-    );
-  }
+  CustomPainter get painter => RippleAreaPainter(
+    center: center,
+    ratio: controller.value,
+    color: widget.colors.background,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -125,15 +124,13 @@ class RippleCardColors extends CardColors {
     RippleCardColors a,
     RippleCardColors b,
     double t,
-  ) {
-    return RippleCardColors(
-      foreground: Color.lerp(a.foreground, b.foreground, t),
-      background: lerpColor(a.background, b.background, t),
-      border: lerpColor(a.border, b.border, t),
-      shadow: lerpColor(a.shadow, b.shadow, t),
-      ripple: AreaColors.lerp(a.ripple, b.ripple, t),
-    );
-  }
+  ) => RippleCardColors(
+    foreground: Color.lerp(a.foreground, b.foreground, t),
+    background: lerpColor(a.background, b.background, t),
+    border: lerpColor(a.border, b.border, t),
+    shadow: lerpColor(a.shadow, b.shadow, t),
+    ripple: AreaColors.lerp(a.ripple, b.ripple, t),
+  );
 
   final AreaColors ripple;
 }
