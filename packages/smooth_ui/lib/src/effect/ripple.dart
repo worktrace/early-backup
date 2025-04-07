@@ -12,7 +12,7 @@ const kDimRippleColor = Color.fromARGB(24, 145, 145, 145);
 const kRippleDuration = Duration(milliseconds: 245);
 const kRippleAnimation = AnimationDefibrillation(duration: kRippleDuration);
 
-abstract class RippleBase extends AnimatedMouseWidget {
+abstract class RippleBase extends AnimatedHoverBase {
   const RippleBase({
     super.key,
     super.animation = kRippleAnimation,
@@ -22,10 +22,11 @@ abstract class RippleBase extends AnimatedMouseWidget {
     super.onHover,
     super.opaque,
     super.hitTestBehavior,
-    super.child,
+    this.child,
   });
 
   final bool hold;
+  final Widget? child;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

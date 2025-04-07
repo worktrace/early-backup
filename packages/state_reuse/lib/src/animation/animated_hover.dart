@@ -6,10 +6,33 @@ import 'package:state_reuse/interact.dart';
 import 'animation_data.dart';
 import 'animation_reuse.dart';
 
-class AnimatedHover extends MouseWidgetBase {
-  const AnimatedHover({
+abstract class AnimatedHoverBase extends MouseWidgetBase {
+  const AnimatedHoverBase({
     super.key,
     this.animation = const AnimationDefibrillation(),
+    super.onEnter,
+    super.onExit,
+    super.onHover,
+    super.cursor,
+    super.hitTestBehavior,
+    super.opaque,
+  });
+
+  final AnimationDefibrillation animation;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      DiagnosticsProperty<AnimationDefibrillation>('animation', animation),
+    );
+  }
+}
+
+class AnimatedHover extends AnimatedHoverBase {
+  const AnimatedHover({
+    super.key,
+    super.animation,
     super.onEnter,
     super.onExit,
     super.onHover,
@@ -19,7 +42,6 @@ class AnimatedHover extends MouseWidgetBase {
     required this.builder,
   });
 
-  final AnimationDefibrillation animation;
   final DataBuilder<double> builder;
 
   @override
@@ -28,10 +50,9 @@ class AnimatedHover extends MouseWidgetBase {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    final a = animation;
-    properties
-      ..add(DiagnosticsProperty<AnimationDefibrillation>('animation', a))
-      ..add(ObjectFlagProperty<DataBuilder<double>>.has('builder', builder));
+    properties.add(
+      ObjectFlagProperty<DataBuilder<double>>.has('builder', builder),
+    );
   }
 }
 
@@ -47,29 +68,5 @@ class _AnimatedHoverState extends State<AnimatedHover>
   @override
   Widget render(BuildContext context) {
     return widget.builder(context, controller.value);
-  }
-}
-
-abstract class AnimatedMouseWidget extends MouseWidget {
-  const AnimatedMouseWidget({
-    super.key,
-    this.animation = const AnimationDefibrillation(),
-    super.onEnter,
-    super.onExit,
-    super.onHover,
-    super.cursor,
-    super.opaque,
-    super.hitTestBehavior,
-    super.child,
-  });
-
-  final AnimationDefibrillation animation;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(
-      DiagnosticsProperty<AnimationDefibrillation>('animation', animation),
-    );
   }
 }
