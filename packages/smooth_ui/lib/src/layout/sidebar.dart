@@ -64,24 +64,9 @@ class _SidebarContainerState extends State<SidebarContainer> with AdaptSize {
   late double _sidebarWidth = widget.sidebarWidth;
 
   var _resizeHover = false;
-  var _resolvedResizeHover = false;
-
-  Future<void> _enterResize(PointerEnterEvent event) async {
-    _resizeHover = true;
-    await Future<void>.delayed(widget.resizeAnimation.defibrillation);
-    if (!_resizeHover) return;
-    setState(() => _resolvedResizeHover = true);
-  }
-
-  Future<void> _exitResize(PointerExitEvent event) async {
-    _resizeHover = false;
-    await Future<void>.delayed(widget.resizeAnimation.defibrillation);
-    if (_resizeHover) return;
-    setState(() => _resolvedResizeHover = false);
-  }
 
   var _resizing = false;
-  bool get _showResize => _resolvedResizeHover || _resizing;
+  bool get _showResize => _resizeHover || _resizing;
 
   double _delta = 0;
 
@@ -101,12 +86,7 @@ class _SidebarContainerState extends State<SidebarContainer> with AdaptSize {
   }
 
   void _horizontalDragStart(DragStartDetails details) {
-    if (_tapOnResizeBar) {
-      setState(() {
-        _resolvedResizeHover = false;
-        _resizing = true;
-      });
-    }
+    if (_tapOnResizeBar) setState(() => _resizing = true);
   }
 
   void _horizontalDragUpdate(DragUpdateDetails details) {
@@ -137,9 +117,9 @@ class _SidebarContainerState extends State<SidebarContainer> with AdaptSize {
     final resize = null
         .rippleLine(
           animation: widget.resizeAnimation,
-          hold: _resolvedResizeHover,
-          onEnter: _enterResize,
-          onExit: _exitResize,
+          hold: _showResize,
+          onEnter: (event) => setState(() => _resizeHover = true),
+          onExit: (event) => setState(() => _resizeHover = false),
           opaque: false,
           color: colors.resize,
           padding: size.resizePadding.resolve(mockDirection),
