@@ -7,6 +7,7 @@ import 'package:analyzer/file_system/file_system.dart' show ResourceProvider;
 import 'package:compat_utils/iterable.dart';
 import 'package:compat_utils/package.dart';
 import 'package:compat_utils/path.dart';
+import 'package:compat_utils/trace.dart';
 
 class Builder {
   /// All [includedPaths] must be absolute and normalized,
@@ -33,6 +34,7 @@ class Builder {
   }
 
   Future<void> buildFile(String path) async {
+    trace.trace('analyzing file: $path');
     final result = await resolve(path);
     if (result is! ResolvedUnitResult) return;
     for (final builder in builders) {
@@ -41,6 +43,7 @@ class Builder {
         File(output.path)
           ..createSync(recursive: true)
           ..writeAsStringSync(output.content);
+        trace.debug('update file: ${output.path}');
       }
     }
   }
