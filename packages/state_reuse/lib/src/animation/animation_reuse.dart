@@ -20,8 +20,18 @@ abstract class SingleAnimationWidget extends StatefulWidget {
 
 /// The animation [controller] had been bind with [setState] callback here.
 /// You may consider [SingleAnimationStateBare] instead.
-abstract class SingleAnimationState<S extends StatefulWidget>
-    extends SingleAnimationStateBare<S> {
+abstract class SingleAnimationState<W extends StatefulWidget>
+    extends SingleAnimationStateBare<W>
+    with SingleAnimationDefault {}
+
+/// The animation [controller] had not been bind with [setState] callback here.
+/// You may consider [SingleAnimationState] instead.
+abstract class SingleAnimationStateBare<W extends StatefulWidget>
+    extends State<W>
+    with SingleTickerProviderStateMixin, SingleAnimationMixin {}
+
+mixin SingleAnimationDefault<W extends StatefulWidget>
+    on SingleAnimationMixin<W> {
   /// Encapsulate [setState] for [dispose] to call the same one.
   void _setState() => setState(() {});
 
@@ -40,11 +50,8 @@ abstract class SingleAnimationState<S extends StatefulWidget>
   }
 }
 
-/// The animation [controller] had not been bind with [setState] callback here.
-/// You may consider [SingleAnimationState] instead.
-abstract class SingleAnimationStateBare<S extends StatefulWidget>
-    extends State<S>
-    with SingleTickerProviderStateMixin {
+mixin SingleAnimationMixin<W extends StatefulWidget>
+    on SingleTickerProviderStateMixin<W> {
   late final AnimationController controller = setupController();
 
   AnimationController setupController() => AnimationController(vsync: this);

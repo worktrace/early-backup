@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smooth_ui/colors.dart';
 import 'package:state_reuse/animation.dart';
-import 'package:state_reuse/interact.dart';
 import 'package:wrap/wrap.dart';
 
 const kRippleColor = Color.fromARGB(255, 8, 140, 222);
