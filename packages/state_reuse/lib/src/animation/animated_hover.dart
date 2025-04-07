@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:state_reuse/binding.dart';
 import 'package:state_reuse/interact.dart';
-import 'package:wrap/wrap.dart';
 
 import 'animation_data.dart';
+import 'animation_reuse.dart';
 
-class AnimatedHover extends MouseWidget {
+class AnimatedHover extends MouseWidgetBase {
   const AnimatedHover({
     super.key,
     this.animation = const AnimationDefibrillation(),
@@ -15,10 +16,11 @@ class AnimatedHover extends MouseWidget {
     super.cursor,
     super.hitTestBehavior,
     super.opaque,
-    super.child,
+    required this.builder,
   });
 
   final AnimationDefibrillation animation;
+  final DataBuilder<double> builder;
 
   @override
   State<AnimatedHover> createState() => _AnimatedHoverState();
@@ -27,14 +29,24 @@ class AnimatedHover extends MouseWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     final a = animation;
-    properties.add(DiagnosticsProperty<AnimationDefibrillation>('anim', a));
+    properties
+      ..add(DiagnosticsProperty<AnimationDefibrillation>('animation', a))
+      ..add(ObjectFlagProperty<DataBuilder<double>>.has('builder', builder));
   }
 }
 
-class _AnimatedHoverState extends State<AnimatedHover> {
+class _AnimatedHoverState extends State<AnimatedHover>
+    with
+        HoverDefibrillationMixin,
+        SingleTickerProviderStateMixin,
+        SingleAnimationMixin,
+        SingleAnimationDefault {
   @override
-  Widget build(BuildContext context) {
-    return widget.child.mouse();
+  Duration get defibrillation => widget.animation.defibrillation;
+
+  @override
+  Widget render(BuildContext context) {
+    return widget.builder(context, controller.value);
   }
 }
 

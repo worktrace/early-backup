@@ -53,6 +53,18 @@ mixin HoverDefibrillationMixin<W extends MouseWidgetBase> on State<W> {
     widget.onExit?.call(event);
   }
 
+  Widget? render(BuildContext context);
+
+  @override
+  Widget build(BuildContext context) => render(context).mouse(
+    onEnter: mouseEnter,
+    onExit: mouseExit,
+    onHover: widget.onHover,
+    cursor: _resolvedHover ? widget.cursor : MouseCursor.defer,
+    opaque: widget.opaque,
+    hitTestBehavior: widget.hitTestBehavior,
+  );
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -96,12 +108,5 @@ class _HoverDefibrillationState extends State<HoverDefibrillation>
   Duration get defibrillation => widget.defibrillation;
 
   @override
-  Widget build(BuildContext context) => widget.child.mouse(
-    onEnter: mouseEnter,
-    onExit: mouseExit,
-    onHover: widget.onHover,
-    cursor: _resolvedHover ? widget.cursor : MouseCursor.defer,
-    opaque: widget.opaque,
-    hitTestBehavior: widget.hitTestBehavior,
-  );
+  Widget? render(BuildContext context) => widget.child;
 }
