@@ -104,13 +104,11 @@ class RGBColor with TerminalColor {
     double red = 0,
     double green = 0,
     double blue = 0,
-  }) {
-    return RGBColor.from(
-      red: (red * 0xff).round(),
-      green: (green * 0xff).round(),
-      blue: (blue * 0xff).round(),
-    );
-  }
+  }) => RGBColor.from(
+    red: (red * 0xff).round(),
+    green: (green * 0xff).round(),
+    blue: (blue * 0xff).round(),
+  );
 
   factory RGBColor.fromHSL({
     double hue = 0,

@@ -19,19 +19,17 @@ void main() {
 class AppRoot extends StatelessWidget {
   const AppRoot({super.key});
 
-  RouteBase layout(BuildContext context) {
-    return ShellRoute(
-      routes: [wantRoute, graphRoute],
-      builder: (context, state, child) {
-        final colors = context.find<Colors>()!;
-        return SidebarContainer(
-          colors: colors.sidebar,
-          sidebar: 'sidebar'.asText().center(),
-          child: child,
-        );
-      },
-    );
-  }
+  RouteBase layout(BuildContext context) => ShellRoute(
+    routes: [wantRoute, graphRoute],
+    builder: (context, state, child) {
+      final colors = context.find<Colors>()!;
+      return SidebarContainer(
+        colors: colors.sidebar,
+        sidebar: 'sidebar'.asText().center(),
+        child: child,
+      );
+    },
+  );
 
   RouterConfig<RouteMatchList> routes(BuildContext context) {
     final loading = loadingRoute();

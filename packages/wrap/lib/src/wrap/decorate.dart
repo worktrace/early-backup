@@ -7,27 +7,23 @@ extension WrapDecoration on Widget {
     Key? key,
     CustomClipper<Path>? clipper,
     Clip clipBehavior = Clip.antiAlias,
-  }) {
-    return ClipPath(
-      key: key,
-      clipper: clipper,
-      clipBehavior: clipBehavior,
-      child: this,
-    );
-  }
+  }) => ClipPath(
+    key: key,
+    clipper: clipper,
+    clipBehavior: clipBehavior,
+    child: this,
+  );
 
   DecoratedBox decorate({
     Key? key,
     required Decoration decoration,
     DecorationPosition position = DecorationPosition.background,
-  }) {
-    return DecoratedBox(
-      key: key,
-      decoration: decoration,
-      position: position,
-      child: this,
-    );
-  }
+  }) => DecoratedBox(
+    key: key,
+    decoration: decoration,
+    position: position,
+    child: this,
+  );
 }
 
 extension WrapFilter on Widget? {
@@ -35,29 +31,25 @@ extension WrapFilter on Widget? {
     double opacity, {
     Key? key,
     bool alwaysIncludeSemantics = false,
-  }) {
-    return Opacity(
-      key: key,
-      opacity: opacity,
-      alwaysIncludeSemantics: alwaysIncludeSemantics,
-      child: this,
-    );
-  }
+  }) => Opacity(
+    key: key,
+    opacity: opacity,
+    alwaysIncludeSemantics: alwaysIncludeSemantics,
+    child: this,
+  );
 
   BackdropFilter filter({
     Key? key,
     required ImageFilter filter,
     BlendMode blendMode = BlendMode.srcOver,
     bool enabled = true,
-  }) {
-    return BackdropFilter(
-      key: key,
-      filter: filter,
-      blendMode: blendMode,
-      enabled: enabled,
-      child: this,
-    );
-  }
+  }) => BackdropFilter(
+    key: key,
+    filter: filter,
+    blendMode: blendMode,
+    enabled: enabled,
+    child: this,
+  );
 
   BackdropFilter blur(
     double sigma, {
@@ -65,16 +57,10 @@ extension WrapFilter on Widget? {
     TileMode tileMode = TileMode.clamp,
     BlendMode blendMode = BlendMode.srcOver,
     bool enabled = true,
-  }) {
-    return filter(
-      key: key,
-      filter: ImageFilter.blur(
-        sigmaX: sigma,
-        sigmaY: sigma,
-        tileMode: tileMode,
-      ),
-      blendMode: blendMode,
-      enabled: enabled,
-    );
-  }
+  }) => filter(
+    key: key,
+    filter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma, tileMode: tileMode),
+    blendMode: blendMode,
+    enabled: enabled,
+  );
 }

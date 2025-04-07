@@ -8,17 +8,15 @@ extension WrapPaint on Widget? {
     Size size = Size.zero,
     bool isComplex = false,
     bool willChange = false,
-  }) {
-    return CustomPaint(
-      key: key,
-      painter: painter,
-      foregroundPainter: foregroundPainter,
-      size: size,
-      isComplex: isComplex,
-      willChange: willChange,
-      child: this,
-    );
-  }
+  }) => CustomPaint(
+    key: key,
+    painter: painter,
+    foregroundPainter: foregroundPainter,
+    size: size,
+    isComplex: isComplex,
+    willChange: willChange,
+    child: this,
+  );
 }
 
 extension RectUtils on Rect {

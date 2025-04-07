@@ -18,18 +18,16 @@ extension WrapAlign on Widget {
     double? bottom,
     double? width,
     double? height,
-  }) {
-    return Positioned(
-      key: key,
-      left: left,
-      top: top,
-      right: right,
-      bottom: bottom,
-      width: width,
-      height: height,
-      child: this,
-    );
-  }
+  }) => Positioned(
+    key: key,
+    left: left,
+    top: top,
+    right: right,
+    bottom: bottom,
+    width: width,
+    height: height,
+    child: this,
+  );
 
   Positioned positionFill({
     Key? key,
@@ -37,16 +35,14 @@ extension WrapAlign on Widget {
     double? top = 0.0,
     double? right = 0.0,
     double? bottom = 0.0,
-  }) {
-    return Positioned.fill(
-      key: key,
-      top: top,
-      left: left,
-      right: right,
-      bottom: bottom,
-      child: this,
-    );
-  }
+  }) => Positioned.fill(
+    key: key,
+    top: top,
+    left: left,
+    right: right,
+    bottom: bottom,
+    child: this,
+  );
 }
 
 extension WrapDisplay on List<Widget> {
@@ -59,19 +55,17 @@ extension WrapDisplay on List<Widget> {
     VerticalDirection verticalDirection = VerticalDirection.down,
     TextBaseline? textBaseline,
     double spacing = 0.0,
-  }) {
-    return Column(
-      key: key,
-      mainAxisAlignment: mainAxisAlignment,
-      mainAxisSize: mainAxisSize,
-      crossAxisAlignment: crossAxisAlignment,
-      textDirection: textDirection,
-      verticalDirection: verticalDirection,
-      textBaseline: textBaseline,
-      spacing: spacing,
-      children: this,
-    );
-  }
+  }) => Column(
+    key: key,
+    mainAxisAlignment: mainAxisAlignment,
+    mainAxisSize: mainAxisSize,
+    crossAxisAlignment: crossAxisAlignment,
+    textDirection: textDirection,
+    verticalDirection: verticalDirection,
+    textBaseline: textBaseline,
+    spacing: spacing,
+    children: this,
+  );
 
   Stack asStack({
     Key? key,
@@ -79,16 +73,14 @@ extension WrapDisplay on List<Widget> {
     TextDirection? textDirection,
     StackFit fit = StackFit.loose,
     Clip clipBehavior = Clip.hardEdge,
-  }) {
-    return Stack(
-      key: key,
-      alignment: alignment,
-      textDirection: textDirection,
-      fit: fit,
-      clipBehavior: clipBehavior,
-      children: this,
-    );
-  }
+  }) => Stack(
+    key: key,
+    alignment: alignment,
+    textDirection: textDirection,
+    fit: fit,
+    clipBehavior: clipBehavior,
+    children: this,
+  );
 }
 
 extension WrapConstraint on Widget? {

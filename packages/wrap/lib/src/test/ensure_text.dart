@@ -6,13 +6,7 @@ extension WrapEnsureText on Widget {
   EnsureText ensureText({
     Key? key,
     TextDirection defaultDirection = TextDirection.ltr,
-  }) {
-    return EnsureText(
-      key: key,
-      defaultDirection: defaultDirection,
-      child: this,
-    );
-  }
+  }) => EnsureText(key: key, defaultDirection: defaultDirection, child: this);
 }
 
 class EnsureText extends StatelessWidget {

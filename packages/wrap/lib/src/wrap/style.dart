@@ -32,13 +32,11 @@ extension WrapColor on Widget {
     BuildContext context,
     Color color, {
     Key? key,
-  }) {
-    return DefaultTextStyle(
-      key: key,
-      style: DefaultTextStyle.of(context).style.copyWith(color: color),
-      child: this,
-    );
-  }
+  }) => DefaultTextStyle(
+    key: key,
+    style: DefaultTextStyle.of(context).style.copyWith(color: color),
+    child: this,
+  );
 
   IconTheme iconForeground(BuildContext context, Color color, {Key? key}) {
     return IconTheme(

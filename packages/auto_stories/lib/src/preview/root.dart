@@ -12,7 +12,5 @@ class AutoStoriesRoot extends StatelessWidget {
   const AutoStoriesRoot({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return 'auto stories'.asText().center();
-  }
+  Widget build(BuildContext context) => 'auto stories'.asText().center();
 }

@@ -40,7 +40,5 @@ class _UpdateDataState extends SingleValueNotifierState<UpdateData, String> {
   ValueNotifier<String> get notifier => widget.message;
 
   @override
-  Widget build(BuildContext context) {
-    return notifier.value.asText().center();
-  }
+  Widget build(BuildContext context) => notifier.value.asText().center();
 }
