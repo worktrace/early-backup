@@ -4,8 +4,9 @@ import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/file_system/file_system.dart' show ResourceProvider;
+import 'package:compat_utils/iterable.dart';
+import 'package:compat_utils/package.dart';
 import 'package:compat_utils/path.dart';
-import 'package:path/path.dart';
 
 class Builder {
   /// All [includedPaths] must be absolute and normalized,
@@ -45,7 +46,7 @@ class Builder {
   }
 }
 
-class PackageBuilder extends Builder {
+class PackageBuilder extends Builder with DartPackageFiles {
   /// Construct a builder instance from a Dart package.
   ///
   /// This path will be ensured to be absolute and normalized
@@ -59,7 +60,7 @@ class PackageBuilder extends Builder {
     super.builders,
   }) : assert(root.existsSync()),
        assert(root.isAbsolute),
-       super(includedPaths: _codes.map((p) => join(root.path, p)).toList());
+       super(includedPaths: DartPackageFiles.dirnames.map(root.path.join).list);
 
   factory PackageBuilder.resolve({
     String root = '',
@@ -75,9 +76,18 @@ class PackageBuilder extends Builder {
     builders: builders,
   );
 
-  static const _codes = ['lib', 'bin', 'test', 'example'];
-
+  @override
   final Directory root;
+
+  Future<void> build({bool libOnly = true}) async {
+    final entries = libOnly ? libDir.allDartFiles : allDartFiles;
+    for (final file in entries) await buildFile(file.path);
+  }
+
+  Future<void> buildConcurrent({bool libOnly = true}) {
+    final entries = libOnly ? libDir.allDartFiles : allDartFiles;
+    return Future.wait(entries.map((file) => buildFile(file.path)));
+  }
 }
 
 typedef FileBuilder = BuildOutput? Function(String path, CompilationUnit unit);
