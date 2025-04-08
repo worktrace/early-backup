@@ -2,39 +2,30 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 
-abstract class SingleAnnotationGenerator {
-  const SingleAnnotationGenerator({required this.typeChecker});
+typedef AnnotationBuilder =
+    String Function(
+      Element element,
+      ConstantReader annotation,
+      BuildStep buildStep,
+    );
 
-  SingleAnnotationGenerator.from(Type runtimeType)
-    : typeChecker = TypeChecker.fromRuntime(runtimeType);
+class AnnotationGenerator {
+  const AnnotationGenerator({required this.typeChecker, required this.builder});
 
   final TypeChecker typeChecker;
+  final AnnotationBuilder builder;
 
-  String? generate(
+  String? maybeBuild(
     Element element,
-    ConstantReader annotation,
-    BuildStep buildStep,
-  );
-}
-
-extension RecursiveAnnotatedElements on Element {
-  /// Parse annotated element recursively.
-  ///
-  /// Parse all element annotated with corresponding annotation satisfies
-  /// the [typeChecker] and return as [AnnotatedElement].
-  /// It will parse all elements recursively, which might cost performance.
-  Iterable<AnnotatedElement> recursiveAnnotatedWith(
-    TypeChecker typeChecker, {
+    BuildStep buildStep, {
     bool throwOnUnresolved = true,
-  }) sync* {
-    for (final child in children) {
-      final result = typeChecker.firstAnnotationOf(
-        child,
-        throwOnUnresolved: throwOnUnresolved,
-      );
-      if (result != null) yield AnnotatedElement(ConstantReader(result), child);
-      yield* child.recursiveAnnotatedWith(typeChecker);
-    }
+  }) {
+    final result = typeChecker.firstAnnotationOf(
+      element,
+      throwOnUnresolved: throwOnUnresolved,
+    );
+    if (result == null) return null;
+    return builder(element, ConstantReader(result), buildStep);
   }
 }
 
@@ -44,17 +35,36 @@ class RecursiveAnnotationGenerator extends Generator {
     this.throwOnUnresolved = true,
   });
 
-  final Iterable<SingleAnnotationGenerator> generators;
+  final Iterable<AnnotationGenerator> generators;
   final bool throwOnUnresolved;
 
   @override
   String? generate(LibraryReader library, BuildStep buildStep) {
-    // ignore: unused_local_variable temp
-    final annotatedElements = library.element.recursiveAnnotatedWith(
-      TypeChecker.any(generators.map((g) => g.typeChecker)),
+    final result = _generate(
+      library.element,
+      buildStep,
       throwOnUnresolved: throwOnUnresolved,
     );
+    return result.isEmpty ? null : result.join('\n\n');
+  }
 
-    return null;
+  /// The annotation of the [element] itself will not be recognized here.
+  /// It will only process the children layer, and recursive when necessary.
+  Iterable<String> _generate(
+    Element element,
+    BuildStep buildStep, {
+    bool throwOnUnresolved = true,
+  }) sync* {
+    for (final child in element.children) {
+      for (final generator in generators) {
+        final result = generator.maybeBuild(
+          child,
+          buildStep,
+          throwOnUnresolved: throwOnUnresolved,
+        );
+        if (result != null) yield result;
+      }
+      yield* _generate(child, buildStep, throwOnUnresolved: throwOnUnresolved);
+    }
   }
 }
