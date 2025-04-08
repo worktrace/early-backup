@@ -1,5 +1,5 @@
 name: data_build
-description: Generate common boilerplates for data classes automatically.
+description: Code generator for data classes and boilerplates.
 resolution: workspace
 version: 0.0.0
 

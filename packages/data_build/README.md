@@ -1,3 +1,3 @@
 # Data Build
 
-Generate common boilerplates for data classes automatically.
+Code generator for data classes and boilerplates.
