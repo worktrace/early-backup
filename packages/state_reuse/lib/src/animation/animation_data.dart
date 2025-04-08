@@ -1,6 +1,8 @@
+import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
 
 class AnimationData {
+  @copy
   const AnimationData({
     this.duration = const Duration(milliseconds: 300),
     this.curve = Curves.easeInOut,
@@ -9,12 +11,10 @@ class AnimationData {
   final Duration duration;
   final Curve curve;
 
-  AnimationData copyWith({Duration? duration, Curve? curve}) {
-    return AnimationData(
-      duration: duration ?? this.duration,
-      curve: curve ?? this.curve,
-    );
-  }
+  AnimationData copyWith({Duration? duration, Curve? curve}) => AnimationData(
+    duration: duration ?? this.duration,
+    curve: curve ?? this.curve,
+  );
 }
 
 const kHoverDefibrillation = Duration(milliseconds: 35);
