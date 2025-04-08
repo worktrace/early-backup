@@ -3,6 +3,6 @@ import 'package:data_build/generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 Builder dataBuilder(BuilderOptions options) => LibraryBuilder(
-  RecursiveAnnotationGenerator([copyGenerator]),
+  const RecursiveAnnotationGenerator([CopyGenerator()]),
   generatedExtension: '.data.g.dart',
 );

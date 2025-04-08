@@ -9,11 +9,12 @@ typedef AnnotationBuilder =
       BuildStep buildStep,
     );
 
-class AnnotationGenerator {
-  const AnnotationGenerator({required this.typeChecker, required this.builder});
+abstract class AnnotationGenerator<T> {
+  const AnnotationGenerator();
 
-  final TypeChecker typeChecker;
-  final AnnotationBuilder builder;
+  TypeChecker get typeChecker => TypeChecker.fromRuntime(T);
+
+  String build(Element element, ConstantReader annotation, BuildStep buildStep);
 
   String? maybeBuild(
     Element element,
@@ -25,7 +26,7 @@ class AnnotationGenerator {
       throwOnUnresolved: throwOnUnresolved,
     );
     if (result == null) return null;
-    return builder(element, ConstantReader(result), buildStep);
+    return build(element, ConstantReader(result), buildStep);
   }
 }
 
@@ -35,7 +36,7 @@ class RecursiveAnnotationGenerator extends Generator {
     this.throwOnUnresolved = true,
   });
 
-  final Iterable<AnnotationGenerator> generators;
+  final Iterable<AnnotationGenerator<dynamic>> generators;
   final bool throwOnUnresolved;
 
   @override
