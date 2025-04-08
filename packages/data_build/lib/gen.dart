@@ -5,6 +5,9 @@ import 'package:source_gen/source_gen.dart';
 abstract class SingleAnnotationGenerator {
   const SingleAnnotationGenerator({required this.typeChecker});
 
+  SingleAnnotationGenerator.from(Type runtimeType)
+    : typeChecker = TypeChecker.fromRuntime(runtimeType);
+
   final TypeChecker typeChecker;
 
   String? generate(
