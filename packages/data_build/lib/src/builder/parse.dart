@@ -13,6 +13,11 @@ final FileBuilder parseBuilder = annotationBuilder(
 );
 
 GenerateParse? parseGenerateParse(Annotation annotation) {
+  final element = annotation.element2;
+  switch (element?.kind) {
+    case ElementKind.CONSTRUCTOR:
+    case ElementKind.GETTER:
+  }
   return null;
 }
 
