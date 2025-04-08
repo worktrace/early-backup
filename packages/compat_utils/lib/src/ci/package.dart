@@ -1,27 +1,10 @@
 import 'dart:io';
 
 import 'package:compat_utils/format/case.dart';
-import 'package:compat_utils/path.dart';
+import 'package:compat_utils/package.dart';
 import 'package:path/path.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
-
-class DartPackage {
-  const DartPackage(this.root);
-
-  DartPackage.from(String path) : root = Directory(path);
-
-  factory DartPackage.resolve({String path = ''}) {
-    return DartPackage(Directory(path).absolute.normalized);
-  }
-
-  final Directory root;
-
-  Directory get binDir => Directory(join(root.path, 'bin'));
-  Directory get libDir => Directory(join(root.path, 'lib'));
-  Directory get testDir => Directory(join(root.path, 'test'));
-  Directory get exampleDir => Directory(join(root.path, 'example'));
-}
 
 extension DartPackageManifest on DartPackage {
   File get manifestFile => File(join(root.path, 'pubspec.yaml'));

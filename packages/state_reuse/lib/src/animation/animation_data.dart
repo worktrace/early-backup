@@ -1,6 +1,8 @@
+import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
 
 class AnimationData {
+  @copy
   const AnimationData({
     this.duration = const Duration(milliseconds: 300),
     this.curve = Curves.easeInOut,
