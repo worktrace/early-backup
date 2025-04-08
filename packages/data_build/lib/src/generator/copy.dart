@@ -6,6 +6,6 @@ import 'abstraction.dart';
 final copyGenerator = AnnotationGenerator(
   typeChecker: const TypeChecker.fromRuntime(Copy),
   builder: (element, annotation, buildStep) {
-    return '';
+    return '// it works';
   },
 );
