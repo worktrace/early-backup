@@ -1,7 +1,7 @@
 builders:
   parse_builder:
     import: package:data_build/builders.dart
-    builder_factories: [parseBuilder]
-    build_extensions: { ".dart": [".parse.g.dart"] }
+    builder_factories: [dataBuilder]
+    build_extensions: { ".dart": [".data.g.dart"] }
     auto_apply: root_package
     build_to: source
