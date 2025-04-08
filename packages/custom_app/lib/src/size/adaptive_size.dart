@@ -42,7 +42,7 @@ class _AdaptiveSizeState extends State<AdaptiveSize> with AdaptSize {
 
   @override
   Widget render(BuildContext context) {
-    final adapter = _adapter * widget.ratio;
+    final adapter = _adapter.scale(widget.ratio);
     final size = this.size ?? initSize;
     return widget.child.inherit(AdaptedSize.adapt(adapter, size));
   }

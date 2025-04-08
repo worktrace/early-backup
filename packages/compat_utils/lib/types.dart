@@ -7,11 +7,14 @@ typedef FutureOrCallback = FutureOr<void> Function();
 typedef ErrorCallback = void Function(Object? error, StackTrace? stackTrace);
 
 /// Mark that a type can be multiplied by a double.
-mixin Times<T> {
-  T operator *(double times);
+// ignore: one_member_abstracts interface define.
+abstract interface class Scalable<T> {
+  T scale(double times);
 }
 
 /// Mark that a type has `copyWith` method.
-mixin Copy<T> {
+// ignore: one_member_abstracts interface define.
+abstract interface class Copyable<T> {
+  /// Generate a new instance from current one with specified fields updated.
   T copyWith();
 }

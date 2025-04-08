@@ -13,7 +13,8 @@ class AdaptedSize {
   final double ratio;
 }
 
-abstract class SizeAdapter with Times<SizeAdapter>, Copy<SizeAdapter> {
+abstract class SizeAdapter
+    implements Scalable<SizeAdapter>, Copyable<SizeAdapter> {
   const SizeAdapter({this.ratio = 1}) : assert(ratio > 0);
 
   final double ratio;
@@ -39,7 +40,7 @@ class DesktopSizeAdapter extends SizeAdapter {
   }
 
   @override
-  DesktopSizeAdapter operator *(double times) => copyWith(ratio: ratio * times);
+  DesktopSizeAdapter scale(double times) => copyWith(ratio: ratio * times);
 
   @override
   DesktopSizeAdapter copyWith({
@@ -66,7 +67,7 @@ class MobileSizeAdapter extends SizeAdapter {
   }
 
   @override
-  MobileSizeAdapter operator *(double times) => copyWith(ratio: ratio * times);
+  MobileSizeAdapter scale(double times) => copyWith(ratio: ratio * times);
 
   @override
   MobileSizeAdapter copyWith({double? ratio, double? landscapeWidth}) {
