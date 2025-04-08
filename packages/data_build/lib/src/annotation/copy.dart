@@ -2,7 +2,7 @@ import 'package:meta/meta_meta.dart';
 
 const copy = GenerateCopy();
 
-@Target({TargetKind.constructor, TargetKind.topLevelVariable})
+@Target({TargetKind.constructor})
 class GenerateCopy {
   const GenerateCopy();
 }
