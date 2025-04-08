@@ -4,23 +4,19 @@ extension WrapAdaptSize on Widget {
   NotificationListener<SizeChangedLayoutNotification> listenSize({
     Key? key,
     required VoidCallback onResize,
-  }) {
-    return NotificationListener(
-      key: key,
-      child: SizeChangedLayoutNotifier(child: this),
-      onNotification: (notification) {
-        onResize();
-        return true;
-      },
-    );
-  }
+  }) => NotificationListener(
+    key: key,
+    child: SizeChangedLayoutNotifier(child: this),
+    onNotification: (notification) {
+      onResize();
+      return true;
+    },
+  );
 
   NotificationListener<SizeChangedLayoutNotification> adaptSize(
     AdaptSize state, {
     Key? key,
-  }) {
-    return listenSize(key: key, onResize: state._onResize);
-  }
+  }) => listenSize(key: key, onResize: state._onResize);
 }
 
 mixin AdaptSize<S extends StatefulWidget> on State<S> {
@@ -63,7 +59,5 @@ mixin AdaptSize<S extends StatefulWidget> on State<S> {
   /// it's strongly not recommended to override this method here.
   @override
   @protected
-  Widget build(BuildContext context) {
-    return render(context).adaptSize(this);
-  }
+  Widget build(BuildContext context) => render(context).adaptSize(this);
 }
