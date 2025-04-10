@@ -9,7 +9,6 @@ part of 'adapt_size_data.dart';
 
 mixin _$Copy$AdaptedSize {
   AdaptedSize get _template => this as AdaptedSize;
-
   AdaptedSize copyWith({WindowMode? mode, double? ratio}) => AdaptedSize(
     mode: mode ?? _template.mode,
     ratio: ratio ?? _template.ratio,
@@ -18,7 +17,6 @@ mixin _$Copy$AdaptedSize {
 
 mixin _$Copy$DesktopSizeAdapter {
   DesktopSizeAdapter get _template => this as DesktopSizeAdapter;
-
   DesktopSizeAdapter copyWith({
     double? landscapeWidth,
     double? portraitWidth,
@@ -32,7 +30,6 @@ mixin _$Copy$DesktopSizeAdapter {
 
 mixin _$Copy$MobileSizeAdapter {
   MobileSizeAdapter get _template => this as MobileSizeAdapter;
-
   MobileSizeAdapter copyWith({double? ratio, double? landscapeWidth}) =>
       MobileSizeAdapter(
         ratio: ratio ?? _template.ratio,
