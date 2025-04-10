@@ -1,1 +1,1 @@
-export 'src/annotation/copy.gen.dart';
+export 'src/copy.gen.dart';
