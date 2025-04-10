@@ -1,9 +1,12 @@
+import 'package:compat_utils/types.dart';
 import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
 
 part 'animation.data.g.dart';
 
-class AnimationData with _$Copy$AnimationData {
+class AnimationData
+    with _$Copy$AnimationData
+    implements Copyable<AnimationData> {
   @copy
   const AnimationData({
     this.duration = const Duration(milliseconds: 300),
