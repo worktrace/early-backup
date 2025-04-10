@@ -21,7 +21,7 @@ class CopyGenerator extends AnnotationGenerator<GenerateCopy> {
     final constructorName = name.isEmpty ? '' : '.$name';
 
     final parameters = element.declaration.parameters
-        .where((p) => p.isInitializingFormal)
+        .where((p) => p.isInitializingFormal || p.isSuperFormal)
         .map((p) => (p.name, p.type.toString()));
 
     const template = '_template';
