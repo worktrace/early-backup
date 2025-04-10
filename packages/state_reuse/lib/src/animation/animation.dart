@@ -1,6 +1,8 @@
 import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
 
+part 'animation.data.g.dart';
+
 class AnimationData {
   @copy
   const AnimationData({

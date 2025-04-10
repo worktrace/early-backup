@@ -2,7 +2,9 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// RecursiveAnnotationGenerator
+// Generator: DataBuilder
 // **************************************************************************
+
+part of 'animation.dart';
 
 // it works

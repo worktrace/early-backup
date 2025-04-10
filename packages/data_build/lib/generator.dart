@@ -24,14 +24,12 @@ abstract class AnnotationGenerator<T> {
   }
 }
 
-class RecursiveAnnotationGenerator extends Generator {
-  const RecursiveAnnotationGenerator(
-    this.generators, {
-    this.throwOnUnresolved = true,
-  });
+abstract class RecursiveAnnotationGenerator extends Generator {
+  const RecursiveAnnotationGenerator({this.throwOnUnresolved = true});
 
-  final Iterable<AnnotationGenerator<dynamic>> generators;
   final bool throwOnUnresolved;
+
+  Iterable<AnnotationGenerator<dynamic>> get generators;
 
   @override
   String? generate(LibraryReader library, BuildStep buildStep) {

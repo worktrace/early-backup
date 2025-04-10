@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:state_reuse/binding.dart';
 import 'package:state_reuse/interact.dart';
 
-import 'animation_data.dart';
+import 'animation.dart';
 import 'animation_reuse.dart';
 
 abstract class AnimatedHoverBase extends MouseWidgetBase {
