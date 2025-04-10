@@ -1,7 +1,11 @@
 import 'package:compat_utils/types.dart';
+import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
 
-class AdaptedSize {
+part 'adapt_size_data.data.g.dart';
+
+class AdaptedSize with _$Copy$AdaptedSize implements Copyable<AdaptedSize> {
+  @copy
   const AdaptedSize({this.mode = WindowMode.landscape, this.ratio = 1})
     : assert(ratio > 0);
 

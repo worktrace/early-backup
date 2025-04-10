@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   compat_utils: ^0.0.0
+  data_build: ^0.0.0
   flutter: { sdk: flutter }
   inherit: ^0.0.0
   smooth_ui: ^0.0.0
@@ -16,4 +17,5 @@ dependencies:
   wrap: ^1.0.0
 
 dev_dependencies:
+  build_runner: ^2.4.15
   flutter_test: { sdk: flutter }
