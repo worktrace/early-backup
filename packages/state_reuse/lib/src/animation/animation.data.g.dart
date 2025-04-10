@@ -7,4 +7,4 @@
 
 part of 'animation.dart';
 
-// it works
+AnimationData _$copy_AnimationData() => AnimationData();

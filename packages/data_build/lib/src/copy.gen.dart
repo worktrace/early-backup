@@ -15,6 +15,10 @@ class CopyGenerator extends AnnotationGenerator<GenerateCopy> {
     BuildStep buildStep,
   ) {
     if (element is! ConstructorElement) throw const AnnoPosException();
-    return '// it works';
+    final type = element.returnType.toString();
+    final name = element.isDefaultConstructor ? '' : element.name;
+    final functionName = name.isEmpty ? '' : '_$name';
+    final constructorName = name.isEmpty ? '' : '.$name';
+    return '$type _\$copy_$type$functionName() => $type$constructorName();';
   }
 }
