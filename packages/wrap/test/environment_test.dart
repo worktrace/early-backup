@@ -6,11 +6,13 @@ void main() {
   testWidgets('wrap media', (t) async {
     const message = 'message';
     final probe = Builder(
-      builder: (context) => message
-          .asText()
-          .center()
-          .textDirection(TextDirection.ltr)
-          .mediaAsView(context),
+      builder: (context) {
+        return message
+            .asText()
+            .center()
+            .textDirection(TextDirection.ltr)
+            .mediaAsView(context);
+      },
     );
     await t.pumpWidget(probe);
     expect(find.text(message), findsOneWidget);
