@@ -7,4 +7,10 @@
 
 part of 'animation.dart';
 
-// it works
+mixin _$Copy$AnimationData {
+  AnimationData get _template => this as AnimationData;
+  AnimationData copyWith({Duration? duration, Curve? curve}) => AnimationData(
+    duration: duration ?? _template.duration,
+    curve: curve ?? _template.curve,
+  );
+}
