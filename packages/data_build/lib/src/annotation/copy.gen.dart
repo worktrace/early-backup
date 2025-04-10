@@ -14,6 +14,7 @@ class CopyGenerator extends AnnotationGenerator<GenerateCopy> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
+    if (element is! ConstructorElement) throw const AnnoPosException();
     return '// it works';
   }
 }

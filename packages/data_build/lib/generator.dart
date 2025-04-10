@@ -1,13 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
+import 'package:meta/meta_meta.dart';
 import 'package:source_gen/source_gen.dart';
-
-typedef AnnotationBuilder =
-    String Function(
-      Element element,
-      ConstantReader annotation,
-      BuildStep buildStep,
-    );
 
 abstract class AnnotationGenerator<T> {
   const AnnotationGenerator();
@@ -68,4 +62,17 @@ class RecursiveAnnotationGenerator extends Generator {
       yield* _generate(child, buildStep, throwOnUnresolved: throwOnUnresolved);
     }
   }
+}
+
+/// Throw when the annotation position is invalid.
+///
+/// The valid position of an annotation should be indicated by the [Target]
+/// annotation provided by `package:meta`.
+/// And it is supposed to be check before using the parsed [Element]
+/// and assert the type of the source element.
+class AnnoPosException implements Exception {
+  const AnnoPosException();
+
+  @override
+  String toString() => 'invalid annotation position';
 }
