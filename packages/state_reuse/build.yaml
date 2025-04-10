@@ -1,5 +1,5 @@
 builders:
-  parse_builder:
+  copy_builder:
     import: package:data_build/builders.dart
     builder_factories: [dataBuilder]
     build_extensions: { ".dart": [".data.g.dart"] }
