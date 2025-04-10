@@ -24,12 +24,14 @@ class CopyGenerator extends AnnotationGenerator<GenerateCopy> {
         .where((p) => p.isInitializingFormal)
         .map((p) => (p.name, p.type.toString()));
 
+    const template = '_template';
     final inputs = parameters.map((p) => '${p.$2}? ${p.$1},').join('\n');
     final outputs = parameters
-        .map((p) => '${p.$1}: ${p.$1} ?? this.${p.$1},')
+        .map((p) => '${p.$1}: ${p.$1} ?? $template.${p.$1},')
         .join('\n');
 
+    final t = '$type get $template => this as $type;';
     final m = '$type copyWith({$inputs}) => $type$constructorName($outputs);';
-    return 'extension Copy$type on $type {$m}';
+    return 'mixin _\$Copy\$$type { $t\n\n$m }';
   }
 }
