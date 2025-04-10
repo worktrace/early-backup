@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:compat_utils/graph.dart';
 import 'package:compat_utils/package.dart';
+import 'package:compat_utils/trace.dart';
 import 'package:path/path.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
@@ -81,6 +82,7 @@ extension DartPackageTest on DartPackage {
   Future<void> testCurrent({
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
+    trace.debug('testing package: $name');
     final process = await Process.start(
       hasFlutterTest ? 'flutter' : 'dart',
       ['test'],
@@ -128,6 +130,7 @@ extension DartPackageBuild on DartPackage {
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
     bool deleteConflictingOutputs = true,
   }) async {
+    trace.debug('building package: $name');
     final d = deleteConflictingOutputs;
     final process = await Process.start(
       'dart',
