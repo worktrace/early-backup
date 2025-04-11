@@ -4,7 +4,7 @@ import 'package:data_build/generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 Builder dataBuilder(BuilderOptions options) => LibraryBuilder(
-  const DataBuilder([CopyGenerator()]),
+  const DataBuilder([CopyGenerator(), LerpGenerator()]),
   generatedExtension: '.data.g.dart',
 );
 
