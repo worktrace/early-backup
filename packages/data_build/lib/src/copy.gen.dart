@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
+import 'package:compat_utils/format/string.dart';
 import 'package:data_build/generator.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -24,8 +25,11 @@ class CopyGenerator extends AnnotationGenerator<GenerateCopy> {
         .where((p) => p.isInitializingFormal || p.isSuperFormal)
         .map((p) => (p.name, p.type.toString()));
 
+    final inputs = parameters
+        .map((p) => '${p.$2.ensureSuffix('?')} ${p.$1},')
+        .join('\n');
+
     const template = '_template';
-    final inputs = parameters.map((p) => '${p.$2}? ${p.$1},').join('\n');
     final outputs = parameters
         .map((p) => '${p.$1}: ${p.$1} ?? $template.${p.$1},')
         .join('\n');
