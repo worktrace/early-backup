@@ -1,6 +1,5 @@
+import 'package:custom_app/colors.dart';
 import 'package:custom_app/locale.dart';
-
-import 'colors.dart';
 
 class SettingsBase {
   const SettingsBase({
