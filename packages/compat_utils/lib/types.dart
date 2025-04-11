@@ -11,10 +11,3 @@ typedef ErrorCallback = void Function(Object? error, StackTrace? stackTrace);
 abstract interface class Scalable<T> {
   T scale(double times);
 }
-
-/// Mark that a type has `copyWith` method.
-// ignore: one_member_abstracts interface define.
-abstract interface class Copyable<T> {
-  /// Generate a new instance from current one with specified fields updated.
-  T copyWith();
-}

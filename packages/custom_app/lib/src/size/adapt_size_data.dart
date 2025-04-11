@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 
 part 'adapt_size_data.data.g.dart';
 
-class AdaptedSize with _$Copy$AdaptedSize implements Copyable<AdaptedSize> {
+class AdaptedSize with _$Copy$AdaptedSize {
   @copy
   const AdaptedSize({this.mode = WindowMode.landscape, this.ratio = 1})
     : assert(ratio > 0);
@@ -17,8 +17,7 @@ class AdaptedSize with _$Copy$AdaptedSize implements Copyable<AdaptedSize> {
   final double ratio;
 }
 
-abstract class SizeAdapter
-    implements Scalable<SizeAdapter>, Copyable<SizeAdapter> {
+abstract class SizeAdapter implements Scalable<SizeAdapter>, Copyable {
   const SizeAdapter({this.ratio = 1}) : assert(ratio > 0);
 
   final double ratio;

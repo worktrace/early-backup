@@ -36,6 +36,6 @@ class CopyGenerator extends AnnotationGenerator<GenerateCopy> {
 
     final t = '$type get $template => this as $type;';
     final m = '$type copyWith({$inputs}) => $type$constructorName($outputs);';
-    return 'mixin _\$Copy\$$type { $t $m }';
+    return 'mixin _\$Copy\$$type implements Copyable {$t \n\n @override $m}';
   }
 }
