@@ -6,6 +6,14 @@ extension PrefixAndSuffix on String {
   String removeSuffix(String suffix) {
     return endsWith(suffix) ? substring(0, length - suffix.length) : this;
   }
+
+  String ensurePrefix(String prefix) {
+    return startsWith(prefix) ? this : '$prefix$this';
+  }
+
+  String ensureSuffix(String suffix) {
+    return endsWith(suffix) ? this : '$this$suffix';
+  }
 }
 
 extension SplitString on String {
