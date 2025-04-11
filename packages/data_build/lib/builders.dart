@@ -1,5 +1,5 @@
 import 'package:build/build.dart';
-import 'package:data_build/annotation.gen.dart';
+import 'package:data_build/annotation_gen.dart';
 import 'package:data_build/generator.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -21,3 +21,8 @@ class DataBuilder extends RecursiveAnnotationGenerator {
     return "part of '${buildStep.inputId.pathSegments.last}';\n\n$result";
   }
 }
+
+Builder nameBuilder(BuilderOptions options) => LibraryBuilder(
+  const DataBuilder([NameGenerator()]),
+  generatedExtension: '.name.g.dart',
+);

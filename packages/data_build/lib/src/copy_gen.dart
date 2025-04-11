@@ -5,6 +5,7 @@ import 'package:data_build/generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'copy.dart';
+import 'copy_deps.dart';
 
 class CopyGenerator extends AnnotationGenerator<GenerateCopy> {
   const CopyGenerator();
@@ -36,6 +37,7 @@ class CopyGenerator extends AnnotationGenerator<GenerateCopy> {
 
     final t = '$type get $template => this as $type;';
     final m = '$type copyWith({$inputs}) => $type$constructorName($outputs);';
-    return 'mixin _\$Copy\$$type implements Copyable {$t \n\n @override $m}';
+    const c = Copyable.name;
+    return 'mixin _\$Copy\$$type implements $c {$t \n\n @override $m}';
   }
 }

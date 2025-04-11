@@ -1,8 +1,22 @@
+targets:
+  $default:
+    builders:
+      data_build|name_builder:
+        enabled: true
+
 builders:
   data_builder:
     import: package:data_build/builders.dart
     builder_factories: [dataBuilder]
     build_extensions: { ".dart": [".data.g.dart"] }
-    auto_apply: root_package
+    auto_apply: none
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]
+
+  name_builder:
+    import: package:data_build/builders.dart
+    builder_factories: [nameBuilder]
+    build_extensions: { ".dart": [".data.g.dart"] }
+    auto_apply: none
     build_to: source
     applies_builders: ["source_gen|combining_builder"]
