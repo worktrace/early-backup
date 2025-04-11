@@ -6,3 +6,19 @@ builders:
     auto_apply: root_package
     build_to: source
     applies_builders: ["source_gen|combining_builder"]
+
+  copy_builder:
+    import: package:data_build/builders.dart
+    builder_factories: [copyBuilder]
+    build_extensions: { ".dart": [".copy.g.dart"] }
+    auto_apply: none
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]
+
+  lerp_builder:
+    import: package:data_build/builders.dart
+    builder_factories: [lerpBuilder]
+    build_extensions: { ".dart": [".lerp.g.dart"] }
+    auto_apply: none
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]

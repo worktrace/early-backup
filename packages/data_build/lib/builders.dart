@@ -21,3 +21,13 @@ class DataBuilder extends RecursiveAnnotationGenerator {
     return "part of '${buildStep.inputId.pathSegments.last}';\n\n$result";
   }
 }
+
+Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
+  const DataBuilder([CopyGenerator()]),
+  generatedExtension: '.copy.g.dart',
+);
+
+Builder lerpBuilder(BuilderOptions options) => LibraryBuilder(
+  const DataBuilder([LerpGenerator()]),
+  generatedExtension: '.lerp.g.dart',
+);
