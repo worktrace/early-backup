@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:compat_utils/graph.dart';
-import 'package:compat_utils/package.dart';
 import 'package:compat_utils/trace.dart';
 import 'package:path/path.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
 import 'package:yaml_edit/yaml_edit.dart';
 
-import 'package.dart';
+import 'package_files.dart';
+import 'package_meta.dart';
 
 extension DartPackageChildren on DartPackage {
   /// Get child packages iterable inside current workspace.

@@ -1,12 +1,11 @@
 import 'dart:async';
 
 import 'package:args/command_runner.dart';
-import 'package:compat_utils/args.dart';
 import 'package:compat_utils/format/string.dart';
 import 'package:compat_utils/package.dart';
 import 'package:pub_semver/pub_semver.dart';
 
-import 'workspace.dart';
+import 'command_line.dart';
 
 Future<void> workspaceExecutable(
   List<String> arguments, {
