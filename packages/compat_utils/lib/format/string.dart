@@ -1,4 +1,4 @@
-extension StringUtils on String {
+extension PrefixAndSuffix on String {
   String removePrefix(String prefix) {
     return startsWith(prefix) ? substring(prefix.length) : this;
   }
@@ -6,9 +6,9 @@ extension StringUtils on String {
   String removeSuffix(String suffix) {
     return endsWith(suffix) ? substring(0, length - suffix.length) : this;
   }
+}
 
-  String get unwrapParenthesis => removePrefix('(').removeSuffix(')');
-
+extension SplitString on String {
   (String, String)? splitOnce(String separator) {
     final index = indexOf(separator);
     if (index == -1) return null;
@@ -20,6 +20,10 @@ extension StringUtils on String {
     if (index == -1) return null;
     return (substring(0, index), substring(index + separator.length));
   }
+}
+
+extension StringUtils on String {
+  String get unwrapParenthesis => removePrefix('(').removeSuffix(')');
 
   String get firstCharacter => isNotEmpty ? this[0] : '';
   String get firstCharacterLower => firstCharacter.toLowerCase();
