@@ -1,8 +1,12 @@
+import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smooth_ui/colors.dart';
 import 'package:state_reuse/animation.dart';
 
-class BorderSize {
+part 'size.data.g.dart';
+
+class BorderSize with _$Copy$BorderSize {
+  @copy
   const BorderSize({this.width = 1, this.radius = BorderRadius.zero});
 
   factory BorderSize.lerp(BorderSize a, BorderSize b, double t) => BorderSize(
@@ -16,7 +20,8 @@ class BorderSize {
   final BorderRadius radius;
 }
 
-class BoxShadowSize {
+class BoxShadowSize with _$Copy$BoxShadowSize {
+  @copy
   const BoxShadowSize({
     this.offset = Offset.zero,
     this.blurRadius = 0,
@@ -61,7 +66,8 @@ class BoxShadowSize {
   }
 }
 
-class CardSize {
+class CardSize with _$Copy$CardSize {
+  @copy
   const CardSize({
     this.strokeAlign = BorderSide.strokeAlignOutside,
     this.border = BorderSize.zero,

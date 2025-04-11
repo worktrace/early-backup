@@ -1,8 +1,12 @@
+import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smooth_ui/colors.dart';
 import 'package:state_reuse/animation.dart';
 
-class AreaColors {
+part 'colors.data.g.dart';
+
+class AreaColors with _$Copy$AreaColors implements Copyable {
+  @copy
   const AreaColors({this.background = transparent, this.foreground});
 
   factory AreaColors.background(Color color) => AreaColors(background: color);
@@ -17,7 +21,8 @@ class AreaColors {
   final Color? foreground;
 }
 
-class CardColors extends AreaColors {
+class CardColors extends AreaColors with _$Copy$CardColors {
+  @copy
   const CardColors({
     super.background,
     super.foreground,
