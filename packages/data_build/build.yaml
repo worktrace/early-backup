@@ -1,3 +1,4 @@
+# Yaml anchor syntax is unsupported in build.yaml.
 builders:
   data_builder:
     import: package:data_build/builders.dart
