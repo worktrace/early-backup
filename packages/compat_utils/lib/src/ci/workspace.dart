@@ -69,19 +69,28 @@ extension DartPackageTest on DartPackage {
 
   Future<void> test({
     bool workspace = true,
+    bool concurrent = false,
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
     if (hasTestFile) await testCurrent(mode: mode);
-    if (workspace) {
-      for (final child in sortedPackages.reversed) {
-        await child.test(workspace: false, mode: mode);
-      }
+    if (!workspace) return;
+    final all = sortedPackages.reversed.map((p) => p.testCurrent(mode: mode));
+    if (concurrent) {
+      await Future.wait(all);
+    } else {
+      for (final one in all) await one;
     }
+    trace.info('all tests passed at workspace: $name');
+    return;
   }
 
   Future<void> testCurrent({
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
+    if (!hasTestFile) {
+      trace.trace('not test in package: $name');
+      return;
+    }
     trace.debug('testing package: $name');
     final process = await Process.start(
       hasFlutterTest ? 'flutter' : 'dart',
