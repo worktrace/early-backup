@@ -164,11 +164,11 @@ extension DartPackageBuild on DartPackage {
   }) async {
     if (!workspace) {
       await watchCurrent(mode: mode);
-      trace.warn('quit watch build at: $name');
+      return;
     }
     final packages = [...sortedPackages.reversed, this];
     final all = packages.map((p) => p.watchCurrent(mode: mode));
-    await Future.any(all);
+    await Future.wait(all);
     trace.warn('quit watch build at workspace: $name');
   }
 
@@ -179,7 +179,7 @@ extension DartPackageBuild on DartPackage {
       trace.trace('no build in package: $name');
       return;
     }
-    trace.debug('building package: $name');
+    trace.debug('watch building package: $name');
     final process = await Process.start(
       'dart',
       ['run', 'build_runner', 'watch'],
@@ -190,6 +190,7 @@ extension DartPackageBuild on DartPackage {
     if (await process.exitCode != 0) {
       var message = 'watch build failed at: ${root.path}';
       if (mode == ProcessStartMode.detached) message += stderr.toString();
+      trace.warn('watch build failed at: $name');
       throw Exception(message);
     }
   }
