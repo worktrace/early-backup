@@ -48,3 +48,15 @@ extension AnimationUtils on AnimationController {
     return animateAs(animation, lowerBound);
   }
 }
+
+/// Similar to [Tween], but not nullable, and conciser.
+class AnimationTween<T> {
+  const AnimationTween({required this.begin, required this.end});
+
+  final T begin;
+  final T end;
+
+  T of(AnimationController controller, Lerp<T> lerp) {
+    return lerp(begin, end, controller.value);
+  }
+}

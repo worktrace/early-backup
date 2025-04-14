@@ -1,7 +1,6 @@
 import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smooth_ui/colors.dart';
-import 'package:state_reuse/animation.dart';
 
 part 'colors.data.g.dart';
 
