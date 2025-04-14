@@ -16,7 +16,10 @@ class AnimationData with _$Copy$AnimationData implements Copyable {
 
 const kHoverDefibrillation = Duration(milliseconds: 35);
 
-class AnimationDefibrillation extends AnimationData {
+class AnimationDefibrillation extends AnimationData
+    with _$Copy$AnimationDefibrillation
+    implements Copyable {
+  @copy
   const AnimationDefibrillation({
     super.duration,
     super.curve,
