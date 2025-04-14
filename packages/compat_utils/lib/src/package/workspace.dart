@@ -159,11 +159,14 @@ extension DartPackageBuild on DartPackage {
     bool workspace = true,
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
-    if (hasBuild) await buildCurrent(mode: mode);
-    if (!workspace) return;
-    final all = sortedPackages.reversed.map((p) => p.buildCurrent(mode: mode));
+    if (!workspace) {
+      await watchCurrent(mode: mode);
+      trace.warn('quit watch build at: $name');
+    }
+    final packages = [...sortedPackages.reversed, this];
+    final all = packages.map((p) => p.watchCurrent(mode: mode));
     await Future.any(all);
-    trace.warn('quit watch build: $name');
+    trace.warn('quit watch build at workspace: $name');
   }
 
   Future<void> watchCurrent({
