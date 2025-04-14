@@ -31,9 +31,14 @@ const watchFlag = CommandLineFlag(
   help: 'Watch for changes and rebuild automatically once changed.',
 );
 
+const concurrentFlag = CommandLineFlag(
+  name: 'concurrent',
+  help: 'Run all tasks concurrently.',
+);
+
 class TestCommand extends Command<void> {
   TestCommand() : super() {
-    argParser.addAll([rootOption]);
+    argParser.addAll([rootOption, concurrentFlag]);
   }
 
   @override
@@ -45,8 +50,9 @@ class TestCommand extends Command<void> {
   @override
   Future<void> run() async {
     final root = argResults?.option(rootOption.name);
+    final concurrent = argResults?.flag(concurrentFlag.name);
     final package = DartPackage.resolve(path: root ?? '');
-    await package.test();
+    await package.test(concurrent: concurrent ?? false);
   }
 }
 
