@@ -26,9 +26,14 @@ const rootOption = CommandLineOption(
   help: 'Specify the root directory where workspace root locates.',
 );
 
+const watchFlag = CommandLineFlag(
+  name: 'watch',
+  help: 'Watch for changes and rebuild automatically once changed.',
+);
+
 class TestCommand extends Command<void> {
   TestCommand() : super() {
-    rootOption.apply(argParser);
+    argParser.addAll([rootOption]);
   }
 
   @override
@@ -47,7 +52,7 @@ class TestCommand extends Command<void> {
 
 class BuildCommand extends Command<void> {
   BuildCommand() : super() {
-    rootOption.apply(argParser);
+    argParser.addAll([rootOption, watchFlag]);
   }
 
   @override
