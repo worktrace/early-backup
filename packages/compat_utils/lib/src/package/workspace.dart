@@ -75,11 +75,7 @@ extension DartPackageTest on DartPackage {
     if (hasTestFile) await testCurrent(mode: mode);
     if (!workspace) return;
     final all = sortedPackages.reversed.map((p) => p.testCurrent(mode: mode));
-    if (concurrent) {
-      await Future.wait(all);
-    } else {
-      for (final one in all) await one;
-    }
+    await (concurrent ? Future.wait(all) : Future.forEach(all, (one) => one));
     trace.info('all tests passed at workspace: $name');
     return;
   }
