@@ -5,6 +5,7 @@ import 'package:state_reuse/animation.dart';
 
 part 'colors.data.g.dart';
 
+@lerp
 class AreaColors with _$Copy$AreaColors implements Copyable {
   @copy
   const AreaColors({this.background = transparent, this.foreground});
@@ -21,6 +22,7 @@ class AreaColors with _$Copy$AreaColors implements Copyable {
   final Color? foreground;
 }
 
+@lerp
 class CardColors extends AreaColors with _$Copy$CardColors {
   @copy
   const CardColors({

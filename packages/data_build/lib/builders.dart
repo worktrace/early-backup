@@ -4,7 +4,7 @@ import 'package:data_build/generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 Builder dataBuilder(BuilderOptions options) => LibraryBuilder(
-  const DataBuilder([CopyGenerator()]),
+  const DataBuilder([CopyGenerator(), LerpGenerator()]),
   generatedExtension: '.data.g.dart',
 );
 
@@ -25,4 +25,14 @@ class DataBuilder extends RecursiveAnnotationGenerator {
 Builder nameBuilder(BuilderOptions options) => LibraryBuilder(
   const DataBuilder([NameGenerator()]),
   generatedExtension: '.name.g.dart',
+);
+
+Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
+  const DataBuilder([CopyGenerator()]),
+  generatedExtension: '.copy.g.dart',
+);
+
+Builder lerpBuilder(BuilderOptions options) => LibraryBuilder(
+  const DataBuilder([LerpGenerator()]),
+  generatedExtension: '.lerp.g.dart',
 );

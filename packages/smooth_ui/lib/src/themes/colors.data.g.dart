@@ -7,6 +7,8 @@
 
 part of 'colors.dart';
 
+// generate lerp.
+
 mixin _$Copy$AreaColors implements Copyable {
   AreaColors get _template => this as AreaColors;
 
@@ -16,6 +18,8 @@ mixin _$Copy$AreaColors implements Copyable {
     foreground: foreground ?? _template.foreground,
   );
 }
+
+// generate lerp.
 
 mixin _$Copy$CardColors implements Copyable {
   CardColors get _template => this as CardColors;
