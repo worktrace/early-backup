@@ -22,6 +22,12 @@ abstract class CommandLineApplicable {
   void apply(ArgParser argParser);
 }
 
+extension AddCommandLineArgs on ArgParser {
+  void addAll(Iterable<CommandLineApplicable> arguments) {
+    for (final argument in arguments) argument.apply(this);
+  }
+}
+
 class CommandLineOption extends CommandLineApplicable {
   const CommandLineOption({
     required super.name,
@@ -33,5 +39,19 @@ class CommandLineOption extends CommandLineApplicable {
   @override
   void apply(ArgParser argParser) {
     argParser.addOption(name, abbr: abbreviation, help: help);
+  }
+}
+
+class CommandLineFlag extends CommandLineApplicable {
+  const CommandLineFlag({
+    required super.name,
+    required super.help,
+    super.abbr,
+    super.autoAbbr,
+  });
+
+  @override
+  void apply(ArgParser argParser) {
+    argParser.addFlag(name, abbr: abbreviation, help: help);
   }
 }
