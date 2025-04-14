@@ -21,7 +21,7 @@ Future<void> workspaceExecutable(
   return runner.run(arguments);
 }
 
-final rootOption = CommandLineOption.from(
+const rootOption = CommandLineOption(
   name: 'root',
   help: 'Specify the root directory where workspace root locates.',
 );
