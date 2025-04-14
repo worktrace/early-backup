@@ -16,3 +16,18 @@ mixin _$Copy$AnimationData implements Copyable {
     curve: curve ?? _template.curve,
   );
 }
+
+mixin _$Copy$AnimationDefibrillation implements Copyable {
+  AnimationDefibrillation get _template => this as AnimationDefibrillation;
+
+  @override
+  AnimationDefibrillation copyWith({
+    Duration? duration,
+    Curve? curve,
+    Duration? defibrillation,
+  }) => AnimationDefibrillation(
+    duration: duration ?? _template.duration,
+    curve: curve ?? _template.curve,
+    defibrillation: defibrillation ?? _template.defibrillation,
+  );
+}

@@ -154,6 +154,39 @@ extension DartPackageBuild on DartPackage {
     }
     trace.info('built package: $name');
   }
+
+  Future<void> watch({
+    bool workspace = true,
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+  }) async {
+    if (hasBuild) await buildCurrent(mode: mode);
+    if (!workspace) return;
+    final all = sortedPackages.reversed.map((p) => p.buildCurrent(mode: mode));
+    await Future.any(all);
+    trace.warn('quit watch build: $name');
+  }
+
+  Future<void> watchCurrent({
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+  }) async {
+    if (!hasBuild) {
+      trace.trace('no build in package: $name');
+      return;
+    }
+    trace.debug('building package: $name');
+    final process = await Process.start(
+      'dart',
+      ['run', 'build_runner', 'watch'],
+      runInShell: true,
+      workingDirectory: root.path,
+      mode: mode,
+    );
+    if (await process.exitCode != 0) {
+      var message = 'watch build failed at: ${root.path}';
+      if (mode == ProcessStartMode.detached) message += stderr.toString();
+      throw Exception(message);
+    }
+  }
 }
 
 extension DartPackageUpdateVersion on DartPackage {
