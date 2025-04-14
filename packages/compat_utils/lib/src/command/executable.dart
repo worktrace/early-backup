@@ -58,7 +58,7 @@ class TestCommand extends Command<void> {
 
 class BuildCommand extends Command<void> {
   BuildCommand() : super() {
-    argParser.addAll([rootOption, watchFlag]);
+    argParser.addAll([rootOption, concurrentFlag, watchFlag]);
   }
 
   @override
@@ -70,8 +70,9 @@ class BuildCommand extends Command<void> {
   @override
   Future<void> run() async {
     final root = argResults?.option(rootOption.name);
+    final concurrent = argResults?.flag(concurrentFlag.name);
     final package = DartPackage.resolve(path: root ?? '');
-    await package.build();
+    await package.build(concurrent: concurrent ?? false);
   }
 }
 

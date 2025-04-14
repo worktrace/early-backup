@@ -77,14 +77,13 @@ extension DartPackageTest on DartPackage {
     final all = sortedPackages.reversed.map((p) => p.testCurrent(mode: mode));
     await (concurrent ? Future.wait(all) : Future.forEach(all, (one) => one));
     trace.info('all tests passed at workspace: $name');
-    return;
   }
 
   Future<void> testCurrent({
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
     if (!hasTestFile) {
-      trace.trace('not test in package: $name');
+      trace.trace('no test in package: $name');
       return;
     }
     trace.debug('testing package: $name');
@@ -121,20 +120,24 @@ extension DartPackageBuild on DartPackage {
 
   Future<void> build({
     bool workspace = true,
+    bool concurrent = false,
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
     if (hasBuild) await buildCurrent(mode: mode);
-    if (workspace) {
-      for (final child in sortedPackages.reversed) {
-        await child.build(workspace: false, mode: mode);
-      }
-    }
+    if (!workspace) return;
+    final all = sortedPackages.reversed.map((p) => p.buildCurrent(mode: mode));
+    await (concurrent ? Future.wait(all) : Future.forEach(all, (one) => one));
+    trace.info('all packages built at workspace: $name');
   }
 
   Future<void> buildCurrent({
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
     bool deleteConflictingOutputs = true,
   }) async {
+    if (!hasBuild) {
+      trace.trace('no build in package: $name');
+      return;
+    }
     trace.debug('building package: $name');
     final d = deleteConflictingOutputs;
     final process = await Process.start(
@@ -149,6 +152,7 @@ extension DartPackageBuild on DartPackage {
       if (mode == ProcessStartMode.detached) message += stderr.toString();
       throw Exception(message);
     }
+    trace.info('built package: $name');
   }
 }
 
