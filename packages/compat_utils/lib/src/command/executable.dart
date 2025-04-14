@@ -16,6 +16,7 @@ Future<void> workspaceExecutable(
       CommandRunner<void>(executableName, description)
         ..addCommand(TestCommand())
         ..addCommand(BuildCommand())
+        ..addCommand(WatchCommand())
         ..addCommand(UpdateEnvironmentCommand());
 
   return runner.run(arguments);
@@ -24,11 +25,6 @@ Future<void> workspaceExecutable(
 const rootOption = CommandLineOption(
   name: 'root',
   help: 'Specify the root directory where workspace root locates.',
-);
-
-const watchFlag = CommandLineFlag(
-  name: 'watch',
-  help: 'Watch for changes and rebuild automatically once changed.',
 );
 
 const concurrentFlag = CommandLineFlag(
@@ -58,7 +54,7 @@ class TestCommand extends Command<void> {
 
 class BuildCommand extends Command<void> {
   BuildCommand() : super() {
-    argParser.addAll([rootOption, concurrentFlag, watchFlag]);
+    argParser.addAll([rootOption, concurrentFlag]);
   }
 
   @override
@@ -73,6 +69,25 @@ class BuildCommand extends Command<void> {
     final concurrent = argResults?.flag(concurrentFlag.name);
     final package = DartPackage.resolve(path: root ?? '');
     await package.build(concurrent: concurrent ?? false);
+  }
+}
+
+class WatchCommand extends Command<void> {
+  WatchCommand() : super() {
+    argParser.addAll([rootOption]);
+  }
+
+  @override
+  String get name => 'watch';
+
+  @override
+  String get description => 'Watch build all packages in the root workspace.';
+
+  @override
+  Future<void> run() async {
+    final root = argResults?.option(rootOption.name);
+    final package = DartPackage.resolve(path: root ?? '');
+    await package.watch();
   }
 }
 
