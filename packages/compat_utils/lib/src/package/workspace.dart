@@ -123,11 +123,10 @@ extension DartPackageBuild on DartPackage {
     bool concurrent = false,
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
-    if (hasBuild) {
+    if (!workspace) {
       await buildCurrent(mode: mode);
-      trace.info('package built at: $name');
+      return;
     }
-    if (!workspace) return;
     final packages = [...sortedPackages.reversed, this];
     final all = packages.map((p) => p.buildCurrent(mode: mode));
     await (concurrent ? Future.wait(all) : Future.forEach(all, (one) => one));
