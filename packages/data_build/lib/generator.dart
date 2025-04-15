@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
+import 'package:meta/meta.dart';
 import 'package:meta/meta_meta.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -33,7 +34,7 @@ abstract class RecursiveAnnotationGenerator extends Generator {
 
   @override
   String? generate(LibraryReader library, BuildStep buildStep) {
-    final result = _generate(
+    final result = generateRootElement(
       library.element,
       buildStep,
       throwOnUnresolved: throwOnUnresolved,
@@ -41,9 +42,14 @@ abstract class RecursiveAnnotationGenerator extends Generator {
     return result.isEmpty ? null : result.join('\n\n');
   }
 
+  /// Generate code recursively based on the root [element] of a library.
+  ///
+  /// The root [element] is supposed to be at the root of a library
+  /// (from a [LibraryReader]).
   /// The annotation of the [element] itself will not be recognized here.
   /// It will only process the children layer, and recursive when necessary.
-  Iterable<String> _generate(
+  @protected
+  Iterable<String> generateRootElement(
     Element element,
     BuildStep buildStep, {
     bool throwOnUnresolved = true,
@@ -57,7 +63,11 @@ abstract class RecursiveAnnotationGenerator extends Generator {
         );
         if (result != null) yield result;
       }
-      yield* _generate(child, buildStep, throwOnUnresolved: throwOnUnresolved);
+      yield* generateRootElement(
+        child,
+        buildStep,
+        throwOnUnresolved: throwOnUnresolved,
+      );
     }
   }
 }
