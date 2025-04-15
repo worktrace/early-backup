@@ -7,5 +7,4 @@
 library;
 
 export 'annotation_compat.dart';
-export 'src/copy_deps.dart';
 export 'src/lerp_deps.dart';

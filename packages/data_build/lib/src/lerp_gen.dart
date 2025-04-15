@@ -21,3 +21,40 @@ class LerpGenerator extends AnnotationGenerator<GenerateLerp> {
     return '$type _\$lerp\$$type($type a, $type b, double t) => $type();';
   }
 }
+
+/// Generate type annotation for all build in lerp functions
+/// for further lerp method generating with methods overrides.
+class BuildInLerpGenerator
+    extends TopLevelAnnotationGenerator<GenerateBuildInLerp> {
+  const BuildInLerpGenerator();
+
+  @override
+  String joinResults(
+    Iterable<String> results,
+    LibraryReader library,
+    BuildStep buildStep,
+  ) =>
+      "import 'package:data_build/annotation.dart';\n\n"
+      'const buildInLerp = <String, TypeID>{${results.join(',')}};';
+
+  @override
+  String generateForAnnotatedElement(
+    Element element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) {
+    if (element is! FunctionElement) throw const AnnoPosException();
+
+    final name = element.name;
+    final type = element.returnType.toString();
+    final returnTypeID = element.returnType.element?.library?.identifier;
+
+    final paramType = "${TypeID.fieldTypeName}: '$type'";
+    final paramLibID =
+        returnTypeID != null
+            ? "${TypeID.fieldLibraryIdentifier}: '$returnTypeID'"
+            : '';
+
+    return "'$name': TypeID($paramType, $paramLibID)";
+  }
+}
