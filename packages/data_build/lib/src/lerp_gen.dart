@@ -14,7 +14,10 @@ class LerpGenerator extends AnnotationGenerator<GenerateLerp> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    if (element is! ClassElement) throw const AnnoPosException();
-    return '// generate lerp.';
+    if (element is! ConstructorElement) throw const AnnoPosException();
+
+    final type = element.returnType.toString();
+
+    return '$type _\$lerp\$$type($type a, $type b, double t) => $type();';
   }
 }

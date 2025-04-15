@@ -2,7 +2,7 @@ import 'package:meta/meta_meta.dart';
 
 const lerp = GenerateLerp();
 
-@Target({TargetKind.classType})
+@Target({TargetKind.constructor})
 class GenerateLerp {
   const GenerateLerp();
 }

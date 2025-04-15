@@ -4,9 +4,9 @@ import 'package:smooth_ui/colors.dart';
 
 part 'colors.data.g.dart';
 
-@lerp
 class AreaColors with _$Copy$AreaColors implements Copyable {
   @copy
+  @lerp
   const AreaColors({this.background = transparent, this.foreground});
 
   factory AreaColors.background(Color color) => AreaColors(background: color);
@@ -21,9 +21,9 @@ class AreaColors with _$Copy$AreaColors implements Copyable {
   final Color? foreground;
 }
 
-@lerp
 class CardColors extends AreaColors with _$Copy$CardColors {
   @copy
+  @lerp
   const CardColors({
     super.background,
     super.foreground,
