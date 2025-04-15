@@ -4,7 +4,7 @@ import 'package:data_build/generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'lerp.dart';
-import 'type_id.dart';
+import 'type.dart';
 
 const buildInLerp = <String, TypeID>{};
 

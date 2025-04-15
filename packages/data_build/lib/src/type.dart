@@ -11,3 +11,10 @@ class TypeID {
   final String name;
   final String? libraryIdentifier;
 }
+
+/// Generate public name exports in libraries rather than part files.
+const pubName = GeneratePubName();
+
+class GeneratePubName {
+  const GeneratePubName();
+}
