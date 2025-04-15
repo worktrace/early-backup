@@ -2,7 +2,7 @@ targets:
   $default:
     builders:
       data_build|name_builder: { enabled: true }
-      data_build|type_builder: { enabled: true }
+      data_build|build_in_lerp_builder: { enabled: true }
 
 # Yaml anchor syntax is unsupported in build.yaml.
 builders:
@@ -22,10 +22,10 @@ builders:
     build_to: source
     applies_builders: ["source_gen|combining_builder"]
 
-  type_builder:
+  build_in_lerp_builder:
     import: package:data_build/builders.dart
-    builder_factories: [typeBuilder]
-    build_extensions: { ".dart": [".type.g.dart"] }
+    builder_factories: [buildInLerpBuilder]
+    build_extensions: { ".dart": [".bil.g.dart"] }
     auto_apply: none
     build_to: source
     applies_builders: ["source_gen|combining_builder"]

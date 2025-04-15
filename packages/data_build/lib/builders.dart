@@ -1,7 +1,6 @@
 import 'package:build/build.dart';
 import 'package:data_build/annotation_gen.dart';
 import 'package:data_build/generator.dart';
-import 'package:data_build/src/type_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
 Builder dataBuilder(BuilderOptions options) => LibraryBuilder(
@@ -24,22 +23,15 @@ class PartDataBuilder extends LibDataBuilder {
   const PartDataBuilder(super.generators, {super.throwOnUnresolved});
 
   @override
-  String? generate(LibraryReader library, BuildStep buildStep) {
-    final result = super.generate(library, buildStep);
-    if (result == null) return null;
-    return "part of '${buildStep.inputId.pathSegments.last}';\n\n$result";
+  String joinResults(
+    Iterable<String> results,
+    LibraryReader library,
+    BuildStep buildStep,
+  ) {
+    final prefix = "part of '${buildStep.inputId.pathSegments.last}';";
+    return '$prefix\n\n${results.join('\n\n')}';
   }
 }
-
-Builder nameBuilder(BuilderOptions options) => LibraryBuilder(
-  const PartDataBuilder([NameGenerator()]),
-  generatedExtension: '.name.g.dart',
-);
-
-Builder typeBuilder(BuilderOptions options) => LibraryBuilder(
-  const LibDataBuilder([PubNameGenerator()]),
-  generatedExtension: '.type.g.dart',
-);
 
 Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
   const PartDataBuilder([CopyGenerator()]),
@@ -49,4 +41,14 @@ Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
 Builder lerpBuilder(BuilderOptions options) => LibraryBuilder(
   const PartDataBuilder([LerpGenerator()]),
   generatedExtension: '.lerp.g.dart',
+);
+
+Builder nameBuilder(BuilderOptions options) => LibraryBuilder(
+  const PartDataBuilder([NameGenerator()]),
+  generatedExtension: '.name.g.dart',
+);
+
+Builder buildInLerpBuilder(BuilderOptions options) => LibraryBuilder(
+  const BuildInLerpGenerator(),
+  generatedExtension: '.bil.g.dart',
 );
