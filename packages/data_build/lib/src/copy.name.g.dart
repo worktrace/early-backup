@@ -5,6 +5,6 @@
 // Generator: DataBuilder
 // **************************************************************************
 
-part of 'copy_deps.dart';
+part of 'copy.dart';
 
 const _$name$Copyable = 'Copyable';
