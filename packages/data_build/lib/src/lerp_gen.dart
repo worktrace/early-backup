@@ -22,6 +22,8 @@ class LerpGenerator extends AnnotationGenerator<GenerateLerp> {
   }
 }
 
+/// Generate type annotation for all build in lerp functions
+/// for further lerp method generating with methods overrides.
 class BuildInLerpGenerator
     extends TopLevelAnnotationGenerator<GenerateBuildInLerp> {
   const BuildInLerpGenerator();
