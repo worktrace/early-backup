@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// Generator: DataBuilder
+// Generator: PartDataBuilder
 // **************************************************************************
 
 part of 'colors.dart';
@@ -18,7 +18,10 @@ mixin _$Copy$AreaColors implements Copyable {
 }
 
 AreaColors _$lerp$AreaColors(AreaColors a, AreaColors b, double t) =>
-    AreaColors();
+    AreaColors(
+      background: Color.lerp(a.background, b.background, t)!,
+      foreground: Color.lerp(a.foreground, b.foreground, t),
+    );
 
 mixin _$Copy$CardColors implements Copyable {
   CardColors get _template => this as CardColors;
@@ -38,4 +41,9 @@ mixin _$Copy$CardColors implements Copyable {
 }
 
 CardColors _$lerp$CardColors(CardColors a, CardColors b, double t) =>
-    CardColors();
+    CardColors(
+      background: Color.lerp(a.background, b.background, t)!,
+      foreground: Color.lerp(a.foreground, b.foreground, t),
+      border: Color.lerp(a.border, b.border, t)!,
+      shadow: Color.lerp(a.shadow, b.shadow, t)!,
+    );

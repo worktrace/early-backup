@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
+import 'package:compat_utils/format/string.dart';
 import 'package:data_build/generator.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -15,10 +16,19 @@ class LerpGenerator extends AnnotationGenerator<GenerateLerp> {
     BuildStep buildStep,
   ) {
     if (element is! ConstructorElement) throw const AnnoPosException();
-
     final type = element.returnType.toString();
+    final params = element.parameters.map(buildLerpParameter).join(',');
+    return '$type _\$lerp\$$type($type a, $type b, double t)=>$type($params);';
+  }
 
-    return '$type _\$lerp\$$type($type a, $type b, double t) => $type();';
+  String buildLerpParameter(ParameterElement element) {
+    final name = element.name;
+    final typeName = element.type.toString();
+    if (typeName.endsWith('?')) {
+      return '$name: ${typeName.removeSuffix('?')}.lerp(a.$name, b.$name, t)';
+    }
+    // final typeLibID = element.type.element?.library?.identifier;
+    return '$name: $typeName.lerp(a.$name, b.$name, t)!';
   }
 }
 

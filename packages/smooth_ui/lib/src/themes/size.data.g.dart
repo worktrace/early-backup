@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// Generator: DataBuilder
+// Generator: PartDataBuilder
 // **************************************************************************
 
 part of 'size.dart';

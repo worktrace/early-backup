@@ -12,10 +12,9 @@ class AreaColors with _$Copy$AreaColors implements Copyable {
   factory AreaColors.background(Color color) => AreaColors(background: color);
   factory AreaColors.foreground(Color color) => AreaColors(foreground: color);
 
-  factory AreaColors.lerp(AreaColors a, AreaColors b, double t) => AreaColors(
-    background: lerpColor(a.background, b.background, t),
-    foreground: Color.lerp(a.foreground, b.foreground, t),
-  );
+  factory AreaColors.lerp(AreaColors a, AreaColors b, double t) {
+    return _$lerp$AreaColors(a, b, t);
+  }
 
   final Color background;
   final Color? foreground;
@@ -31,12 +30,9 @@ class CardColors extends AreaColors with _$Copy$CardColors {
     this.shadow = transparent,
   });
 
-  factory CardColors.lerp(CardColors a, CardColors b, double t) => CardColors(
-    background: lerpColor(a.background, b.background, t),
-    foreground: Color.lerp(a.foreground, b.foreground, t),
-    border: lerpColor(a.border, b.border, t),
-    shadow: lerpColor(a.shadow, b.shadow, t),
-  );
+  factory CardColors.lerp(CardColors a, CardColors b, double t) {
+    return _$lerp$CardColors(a, b, t);
+  }
 
   final Color border;
   final Color shadow;
