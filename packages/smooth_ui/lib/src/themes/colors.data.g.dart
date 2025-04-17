@@ -19,7 +19,7 @@ mixin _$Copy$AreaColors implements Copyable {
 
 AreaColors _$lerp$AreaColors(AreaColors a, AreaColors b, double t) =>
     AreaColors(
-      background: Color.lerp(a.background, b.background, t)!,
+      background: lerpColor(a.background, b.background, t),
       foreground: Color.lerp(a.foreground, b.foreground, t),
     );
 
@@ -42,8 +42,8 @@ mixin _$Copy$CardColors implements Copyable {
 
 CardColors _$lerp$CardColors(CardColors a, CardColors b, double t) =>
     CardColors(
-      background: Color.lerp(a.background, b.background, t)!,
+      background: lerpColor(a.background, b.background, t),
       foreground: Color.lerp(a.foreground, b.foreground, t),
-      border: Color.lerp(a.border, b.border, t)!,
-      shadow: Color.lerp(a.shadow, b.shadow, t)!,
+      border: lerpColor(a.border, b.border, t),
+      shadow: lerpColor(a.shadow, b.shadow, t),
     );

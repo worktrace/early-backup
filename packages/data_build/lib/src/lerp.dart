@@ -40,3 +40,15 @@ class TypeID {
   static String fieldTypeName = _$name$typeName;
   static String fieldLibraryIdentifier = _$name$libraryIdentifier;
 }
+
+extension TypeIDMatch on Map<String, TypeID> {
+  String? match(String typeName, String? libraryIdentifier) {
+    for (final entry in entries) {
+      final typeID = entry.value;
+      if (typeID.typeName != typeName) continue;
+      if (typeID.libraryIdentifier != libraryIdentifier) continue;
+      return entry.key;
+    }
+    return null;
+  }
+}

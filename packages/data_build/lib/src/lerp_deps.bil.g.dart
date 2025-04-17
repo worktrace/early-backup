@@ -5,9 +5,9 @@
 // BuildInLerpGenerator
 // **************************************************************************
 
-import 'package:data_build/annotation.dart';
+import 'package:data_build/annotation_compat.dart';
 
-const buildInLerp = <String, TypeID>{
+const buildInLerpFunctions = <String, TypeID>{
   'lerpDouble': TypeID(typeName: 'double', libraryIdentifier: 'dart:core'),
   'lerpInt': TypeID(typeName: 'int', libraryIdentifier: 'dart:core'),
   'lerpColor': TypeID(typeName: 'Color', libraryIdentifier: 'dart:ui'),

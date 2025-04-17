@@ -17,6 +17,12 @@ mixin _$Copy$BorderSize implements Copyable {
   );
 }
 
+BorderSize _$lerp$BorderSize(BorderSize a, BorderSize b, double t) =>
+    BorderSize(
+      width: lerpDouble(a.width, b.width, t),
+      radius: lerpBorderRadius(a.radius, b.radius, t),
+    );
+
 mixin _$Copy$BoxShadowSize implements Copyable {
   BoxShadowSize get _template => this as BoxShadowSize;
 
@@ -32,6 +38,16 @@ mixin _$Copy$BoxShadowSize implements Copyable {
   );
 }
 
+BoxShadowSize _$lerp$BoxShadowSize(
+  BoxShadowSize a,
+  BoxShadowSize b,
+  double t,
+) => BoxShadowSize(
+  offset: lerpOffset(a.offset, b.offset, t),
+  blurRadius: lerpDouble(a.blurRadius, b.blurRadius, t),
+  blurSpread: lerpDouble(a.blurSpread, b.blurSpread, t),
+);
+
 mixin _$Copy$CardSize implements Copyable {
   CardSize get _template => this as CardSize;
 
@@ -46,3 +62,9 @@ mixin _$Copy$CardSize implements Copyable {
     shadow: shadow ?? _template.shadow,
   );
 }
+
+CardSize _$lerp$CardSize(CardSize a, CardSize b, double t) => CardSize(
+  strokeAlign: lerpDouble(a.strokeAlign, b.strokeAlign, t),
+  border: BorderSize.lerp(a.border, b.border, t)!,
+  shadow: BoxShadowSize.lerp(a.shadow, b.shadow, t)!,
+);

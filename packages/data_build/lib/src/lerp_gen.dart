@@ -1,10 +1,12 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:build/build.dart';
 import 'package:compat_utils/format/string.dart';
 import 'package:data_build/generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'lerp.dart';
+import 'lerp_deps.bil.g.dart';
 
 class LerpGenerator extends AnnotationGenerator<GenerateLerp> {
   const LerpGenerator();
@@ -23,12 +25,20 @@ class LerpGenerator extends AnnotationGenerator<GenerateLerp> {
 
   String buildLerpParameter(ParameterElement element) {
     final name = element.name;
-    final typeName = element.type.toString();
-    if (typeName.endsWith('?')) {
-      return '$name: ${typeName.removeSuffix('?')}.lerp(a.$name, b.$name, t)';
-    }
-    // final typeLibID = element.type.element?.library?.identifier;
-    return '$name: $typeName.lerp(a.$name, b.$name, t)!';
+    final type = element.type;
+    final typeName = type.toString();
+    final typeLibID = type.element?.library?.identifier;
+    // if (typeLibID == null) throw Exception('cannot parse type lib: $element');
+
+    // Maybe apply build in lerp functions.
+    final match = buildInLerpFunctions.match(typeName, typeLibID);
+    if (match != null) return '$name: $match(a.$name, b.$name, t)';
+
+    // Use default lerp provided by dart:ui or package:flutter.
+    final nullable = type.nullabilitySuffix == NullabilitySuffix.question;
+    final className = nullable ? typeName.removeSuffix('?') : typeName;
+    final suffix = nullable ? '' : '!';
+    return '$name: $className.lerp(a.$name, b.$name, t)$suffix';
   }
 }
 
@@ -44,8 +54,8 @@ class BuildInLerpGenerator
     LibraryReader library,
     BuildStep buildStep,
   ) =>
-      "import 'package:data_build/annotation.dart';\n\n"
-      'const buildInLerp = <String, TypeID>{${results.join(',')}};';
+      "import 'package:data_build/annotation_compat.dart';\n\n"
+      'const buildInLerpFunctions = <String, TypeID>{${results.join(',')}};';
 
   @override
   String generateForAnnotatedElement(
