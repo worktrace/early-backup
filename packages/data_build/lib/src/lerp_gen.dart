@@ -7,14 +7,13 @@ import 'package:meta/meta.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'lerp.dart';
-import 'lerp_deps.bil.g.dart';
+import 'lerp_deps.bil.g.dart' as gen;
 
 class LerpGenerator extends AnnotationGenerator<GenerateLerp> {
-  const LerpGenerator();
+  const LerpGenerator({this.buildInLerpFunctions = gen.buildInLerpFunctions});
 
   /// Registered build-in lerp functions.
-  @protected
-  Map<String, TypeID> get buildIns => buildInLerpFunctions;
+  final Map<String, TypeID> buildInLerpFunctions;
 
   @override
   String build(
@@ -35,7 +34,8 @@ class LerpGenerator extends AnnotationGenerator<GenerateLerp> {
 
   /// Build a single lerp parameter.
   ///
-  /// 1. Apply build in lerp functions ([buildIns]) if there's registered one.
+  /// 1. Apply build in lerp functions ([buildInLerpFunctions])
+  /// if there's registered one.
   /// 2. When the type is not defined in `dart:ui` or `package:flutter`,
   /// it will the lerp factory constructor use directly
   /// wither nullable assertion.
@@ -49,7 +49,7 @@ class LerpGenerator extends AnnotationGenerator<GenerateLerp> {
     final typeLibID = type.element?.library?.identifier;
 
     // Maybe apply build in lerp functions.
-    final match = buildIns.match(typeName, typeLibID);
+    final match = buildInLerpFunctions.match(typeName, typeLibID);
     if (match != null) return '$name: $match(a.$name, b.$name, t)';
 
     // Use default lerp provided by dart:ui or package:flutter.
