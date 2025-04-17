@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   auto_stories: ^0.0.0
+  data_build: ^0.0.0
   flutter: { sdk: flutter }
   go_router: ^14.6.3
   path_provider: ^2.1.5

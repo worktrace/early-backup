@@ -1,0 +1,5 @@
+targets:
+  $default:
+    builders:
+      data_build|data_builder:
+        enabled: true

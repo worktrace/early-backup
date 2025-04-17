@@ -5,7 +5,6 @@ import 'package:data_build/generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'copy.dart';
-import 'copy_deps.dart';
 
 class CopyGenerator extends AnnotationGenerator<GenerateCopy> {
   const CopyGenerator();

@@ -16,6 +16,23 @@ extension PrefixAndSuffix on String {
   }
 }
 
+extension StringBeforeAndAfter on String {
+  String? before(String separator) {
+    final index = indexOf(separator);
+    if (index == -1) return null;
+    return substring(0, index);
+  }
+
+  String? after(String separator) {
+    final index = indexOf(separator);
+    if (index == -1) return null;
+    return substring(index + separator.length);
+  }
+
+  String beforeOrAll(String separator) => before(separator) ?? this;
+  String afterOrAll(String separator) => after(separator) ?? this;
+}
+
 extension SplitString on String {
   (String, String)? splitOnce(String separator) {
     final index = indexOf(separator);
