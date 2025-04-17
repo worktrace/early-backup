@@ -65,6 +65,6 @@ mixin _$Copy$CardSize implements Copyable {
 
 CardSize _$lerp$CardSize(CardSize a, CardSize b, double t) => CardSize(
   strokeAlign: lerpDouble(a.strokeAlign, b.strokeAlign, t),
-  border: BorderSize.lerp(a.border, b.border, t)!,
-  shadow: BoxShadowSize.lerp(a.shadow, b.shadow, t)!,
+  border: BorderSize.lerp(a.border, b.border, t),
+  shadow: BoxShadowSize.lerp(a.shadow, b.shadow, t),
 );
