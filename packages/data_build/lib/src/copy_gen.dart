@@ -21,22 +21,30 @@ class CopyGenerator extends AnnotationGenerator<GenerateCopy> {
     final name = element.isDefaultConstructor ? '' : element.name;
     final constructorName = name.isEmpty ? '' : '.$name';
 
-    final parameters = element.declaration.parameters
-        .where((p) => p.isInitializingFormal || p.isSuperFormal)
-        .map((p) => (p.name, p.type.toString()));
-
-    final inputs = parameters
-        .map((p) => '${p.$2.ensureSuffix('?')} ${p.$1},')
-        .join('\n');
-
     const template = '_template';
-    final outputs = parameters
-        .map((p) => '${p.$1}: ${p.$1} ?? $template.${p.$1},')
-        .join('\n');
+    final inputs = element.declaration.parameters.map(_generateInput).join(',');
+    final outputs = element.declaration.parameters
+        .map((parameter) => _generateOutput(parameter, template))
+        .join(',');
 
-    final t = '$type get $template => this as $type;';
-    final m = '$type copyWith({$inputs}) => $type$constructorName($outputs);';
-    const c = Copyable.name;
-    return 'mixin _\$Copy\$$type implements $c {$t \n\n @override $m}';
+    return 'mixin _\$Copy\$$type implements ${Copyable.name} {\n'
+        '  $type get $template => this as $type;\n'
+        '  \n'
+        '  @override $type copyWith({$inputs}) {\n'
+        '    return $type$constructorName($outputs);\n'
+        '  }\n'
+        '}';
+  }
+
+  String _generateInput(ParameterElement parameter) {
+    final name = parameter.name;
+    final type = parameter.type.toString();
+    return '${type.ensureSuffix('?')} $name';
+  }
+
+  String _generateOutput(ParameterElement parameter, String template) {
+    final name = parameter.name;
+    final prefix = parameter.isNamed ? '$name: ' : '';
+    return '$prefix$name ?? $template.$name';
   }
 }
