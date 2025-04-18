@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// Generator: DataBuilder
+// Generator: PartDataBuilder
 // **************************************************************************
 
 part of 'animation.dart';
@@ -11,10 +11,12 @@ mixin _$Copy$AnimationData implements Copyable {
   AnimationData get _template => this as AnimationData;
 
   @override
-  AnimationData copyWith({Duration? duration, Curve? curve}) => AnimationData(
-    duration: duration ?? _template.duration,
-    curve: curve ?? _template.curve,
-  );
+  AnimationData copyWith({Duration? duration, Curve? curve}) {
+    return AnimationData(
+      duration: duration ?? _template.duration,
+      curve: curve ?? _template.curve,
+    );
+  }
 }
 
 mixin _$Copy$AnimationDefibrillation implements Copyable {
@@ -25,9 +27,11 @@ mixin _$Copy$AnimationDefibrillation implements Copyable {
     Duration? duration,
     Curve? curve,
     Duration? defibrillation,
-  }) => AnimationDefibrillation(
-    duration: duration ?? _template.duration,
-    curve: curve ?? _template.curve,
-    defibrillation: defibrillation ?? _template.defibrillation,
-  );
+  }) {
+    return AnimationDefibrillation(
+      duration: duration ?? _template.duration,
+      curve: curve ?? _template.curve,
+      defibrillation: defibrillation ?? _template.defibrillation,
+    );
+  }
 }

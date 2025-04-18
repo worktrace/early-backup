@@ -29,7 +29,9 @@ class LerpGenerator extends AnnotationGenerator<GenerateLerp> {
         .map((parameter) => buildLerpParameter(parameter, typeLibID))
         .join(',');
 
-    return '$type _\$lerp\$$type($type a, $type b, double t)=>$type($params);';
+    return '$type _\$lerp\$$type($type a, $type b, double t) {\n'
+        'return $type($params);\n'
+        '}';
   }
 
   /// Build a single lerp parameter.

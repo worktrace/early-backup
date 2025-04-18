@@ -27,10 +27,13 @@ class CopyGenerator extends AnnotationGenerator<GenerateCopy> {
         .map((parameter) => _generateOutput(parameter, template))
         .join(',');
 
-    final t = '$type get $template => this as $type;';
-    final m = '$type copyWith({$inputs}) => $type$constructorName($outputs);';
-    const c = Copyable.name;
-    return 'mixin _\$Copy\$$type implements $c {$t \n\n @override $m}';
+    return 'mixin _\$Copy\$$type implements ${Copyable.name} {\n'
+        '  $type get $template => this as $type;\n'
+        '  \n'
+        '  @override $type copyWith({$inputs}) {\n'
+        '    return $type$constructorName($outputs);\n'
+        '  }\n'
+        '}';
   }
 
   String _generateInput(ParameterElement parameter) {

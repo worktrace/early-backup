@@ -15,9 +15,11 @@ mixin _$Copy$LocaleID implements Copyable {
     String? languageCode,
     String? scriptCode,
     String? areaCode,
-  }) => LocaleID(
-    languageCode ?? _template.languageCode,
-    scriptCode: scriptCode ?? _template.scriptCode,
-    areaCode: areaCode ?? _template.areaCode,
-  );
+  }) {
+    return LocaleID(
+      languageCode ?? _template.languageCode,
+      scriptCode: scriptCode ?? _template.scriptCode,
+      areaCode: areaCode ?? _template.areaCode,
+    );
+  }
 }

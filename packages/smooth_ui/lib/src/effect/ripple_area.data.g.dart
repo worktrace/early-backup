@@ -17,23 +17,27 @@ mixin _$Copy$RippleCardColors implements Copyable {
     Color? border,
     Color? shadow,
     AreaColors? ripple,
-  }) => RippleCardColors(
-    foreground: foreground ?? _template.foreground,
-    background: background ?? _template.background,
-    border: border ?? _template.border,
-    shadow: shadow ?? _template.shadow,
-    ripple: ripple ?? _template.ripple,
-  );
+  }) {
+    return RippleCardColors(
+      foreground: foreground ?? _template.foreground,
+      background: background ?? _template.background,
+      border: border ?? _template.border,
+      shadow: shadow ?? _template.shadow,
+      ripple: ripple ?? _template.ripple,
+    );
+  }
 }
 
 RippleCardColors _$lerp$RippleCardColors(
   RippleCardColors a,
   RippleCardColors b,
   double t,
-) => RippleCardColors(
-  foreground: Color.lerp(a.foreground, b.foreground, t),
-  background: lerpColor(a.background, b.background, t),
-  border: lerpColor(a.border, b.border, t),
-  shadow: lerpColor(a.shadow, b.shadow, t),
-  ripple: AreaColors.lerp(a.ripple, b.ripple, t),
-);
+) {
+  return RippleCardColors(
+    foreground: Color.lerp(a.foreground, b.foreground, t),
+    background: lerpColor(a.background, b.background, t),
+    border: lerpColor(a.border, b.border, t),
+    shadow: lerpColor(a.shadow, b.shadow, t),
+    ripple: AreaColors.lerp(a.ripple, b.ripple, t),
+  );
+}
