@@ -1,9 +1,13 @@
+import 'package:auto_stories/annotation.dart';
 import 'package:auto_stories/helpers.dart';
 import 'package:flutter/widgets.dart' hide Locale;
 
 import 'locales.dart';
 
-class Locale extends LocaleBase {
+part 'locale.data.g.dart';
+
+class Locale extends LocaleBase with _$Copy$Locale {
+  @copy
   const Locale({
     required super.name,
     required super.id,

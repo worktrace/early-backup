@@ -1,8 +1,12 @@
+import 'package:auto_stories/annotation.dart';
 import 'package:auto_stories/helpers.dart';
-import 'package:data_build/annotation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-class Colors extends ColorsBase {
+part 'colors.data.g.dart';
+
+class Colors extends ColorsBase with _$Copy$Colors {
+  @copy
   const Colors.light({
     super.brightness,
     super.foreground = MonoColors.ink,
