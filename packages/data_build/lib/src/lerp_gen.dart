@@ -74,9 +74,11 @@ class BuildInLerpGenerator
     Iterable<String> results,
     LibraryReader library,
     BuildStep buildStep,
-  ) =>
-      "import 'package:data_build/annotation_compat.dart';\n\n"
-      'const buildInLerpFunctions = <String, TypeID>{${results.join(',')}};';
+  ) {
+    return '// ignore: implementation_imports generated.\n'
+        "import '${TypeID.classLibrary}';\n\n"
+        'const buildInLerpFunctions = <String, TypeID>{${results.join(',')}};';
+  }
 
   @override
   String generateForAnnotatedElement(

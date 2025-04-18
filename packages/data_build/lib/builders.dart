@@ -3,11 +3,6 @@ import 'package:data_build/annotation_gen.dart';
 import 'package:data_build/generator.dart';
 import 'package:source_gen/source_gen.dart';
 
-Builder dataBuilder(BuilderOptions options) => LibraryBuilder(
-  const PartDataBuilder([CopyGenerator(), LerpGenerator()]),
-  generatedExtension: '.data.g.dart',
-);
-
 /// Build generated data code in a Dart library file.
 /// You may consider [PartDataBuilder] in most cases rather than this one.
 class LibDataBuilder extends RecursiveAnnotationGenerator {
@@ -33,6 +28,21 @@ class PartDataBuilder extends LibDataBuilder {
   }
 }
 
+Builder dataBuilder(BuilderOptions options) => LibraryBuilder(
+  const PartDataBuilder([CopyGenerator(), LerpGenerator()]),
+  generatedExtension: '.data.g.dart',
+);
+
+Builder nameBuilder(BuilderOptions options) => LibraryBuilder(
+  const PartDataBuilder([NameGenerator(), LibGenerator()]),
+  generatedExtension: '.name.g.dart',
+);
+
+Builder buildInLerpBuilder(BuilderOptions options) => LibraryBuilder(
+  const BuildInLerpGenerator(),
+  generatedExtension: '.bil.g.dart',
+);
+
 Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
   const PartDataBuilder([CopyGenerator()]),
   generatedExtension: '.copy.g.dart',
@@ -41,14 +51,4 @@ Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
 Builder lerpBuilder(BuilderOptions options) => LibraryBuilder(
   const PartDataBuilder([LerpGenerator()]),
   generatedExtension: '.lerp.g.dart',
-);
-
-Builder nameBuilder(BuilderOptions options) => LibraryBuilder(
-  const PartDataBuilder([NameGenerator()]),
-  generatedExtension: '.name.g.dart',
-);
-
-Builder buildInLerpBuilder(BuilderOptions options) => LibraryBuilder(
-  const BuildInLerpGenerator(),
-  generatedExtension: '.bil.g.dart',
 );

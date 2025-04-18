@@ -27,6 +27,7 @@ class GenerateBuildInLerp {
 /// Once import both `package:analyzer` and `package:flutter`,
 /// the program will crash.
 @name
+@lib
 class TypeID {
   const TypeID({required this.typeName, this.libraryIdentifier});
 
@@ -37,6 +38,7 @@ class TypeID {
   final String? libraryIdentifier;
 
   static String className = _$name$TypeID;
+  static String classLibrary = _$lib$TypeID;
   static String fieldTypeName = _$name$typeName;
   static String fieldLibraryIdentifier = _$name$libraryIdentifier;
 }
