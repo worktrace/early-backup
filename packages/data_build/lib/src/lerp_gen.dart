@@ -59,7 +59,8 @@ class LerpGenerator extends AnnotationGenerator<GenerateLerp> {
     final nullable = type.nullabilitySuffix == NullabilitySuffix.question;
     final className = nullable ? typeName.removeSuffix('?') : typeName;
     final suffix = !nullable && raw ? '!' : '';
-    return '$name: $className.lerp(a.$name, b.$name, t)$suffix';
+    final prefix = element.isNamed ? '$name:' : '';
+    return '$prefix$className.lerp(a.$name, b.$name, t)$suffix';
   }
 }
 
