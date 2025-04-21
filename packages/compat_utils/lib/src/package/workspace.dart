@@ -1,13 +1,14 @@
 import 'dart:io';
 
 import 'package:compat_utils/graph.dart';
-import 'package:compat_utils/package.dart';
+import 'package:compat_utils/trace.dart';
 import 'package:path/path.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
 import 'package:yaml_edit/yaml_edit.dart';
 
-import 'package.dart';
+import 'package_files.dart';
+import 'package_meta.dart';
 
 extension DartPackageChildren on DartPackage {
   /// Get child packages iterable inside current workspace.
@@ -68,19 +69,24 @@ extension DartPackageTest on DartPackage {
 
   Future<void> test({
     bool workspace = true,
+    bool concurrent = false,
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
     if (hasTestFile) await testCurrent(mode: mode);
-    if (workspace) {
-      for (final child in sortedPackages) {
-        await child.test(workspace: false, mode: mode);
-      }
-    }
+    if (!workspace) return;
+    final all = sortedPackages.reversed.map((p) => p.testCurrent(mode: mode));
+    await (concurrent ? Future.wait(all) : Future.forEach(all, (one) => one));
+    trace.info('all tests passed at workspace: $name');
   }
 
   Future<void> testCurrent({
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
+    if (!hasTestFile) {
+      trace.trace('no test in package: $name');
+      return;
+    }
+    trace.debug('testing package: $name');
     final process = await Process.start(
       hasFlutterTest ? 'flutter' : 'dart',
       ['test'],
@@ -114,20 +120,28 @@ extension DartPackageBuild on DartPackage {
 
   Future<void> build({
     bool workspace = true,
+    bool concurrent = false,
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
   }) async {
-    if (hasBuild) await buildCurrent(mode: mode);
-    if (workspace) {
-      for (final child in sortedPackages) {
-        await child.build(workspace: false, mode: mode);
-      }
+    if (!workspace) {
+      await buildCurrent(mode: mode);
+      return;
     }
+    final packages = [...sortedPackages.reversed, this];
+    final all = packages.map((p) => p.buildCurrent(mode: mode));
+    await (concurrent ? Future.wait(all) : Future.forEach(all, (one) => one));
+    trace.info('all packages built at workspace: $name');
   }
 
   Future<void> buildCurrent({
     ProcessStartMode mode = ProcessStartMode.inheritStdio,
     bool deleteConflictingOutputs = true,
   }) async {
+    if (!hasBuild) {
+      trace.trace('no build in package: $name');
+      return;
+    }
+    trace.debug('building package: $name');
     final d = deleteConflictingOutputs;
     final process = await Process.start(
       'dart',
@@ -139,6 +153,44 @@ extension DartPackageBuild on DartPackage {
     if (await process.exitCode != 0) {
       var message = 'build failed at: ${root.path}';
       if (mode == ProcessStartMode.detached) message += stderr.toString();
+      throw Exception(message);
+    }
+    trace.info('built package: $name');
+  }
+
+  Future<void> watch({
+    bool workspace = true,
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+  }) async {
+    if (!workspace) {
+      await watchCurrent(mode: mode);
+      return;
+    }
+    final packages = [...sortedPackages.reversed, this];
+    final all = packages.map((p) => p.watchCurrent(mode: mode));
+    await Future.wait(all);
+    trace.warn('quit watch build at workspace: $name');
+  }
+
+  Future<void> watchCurrent({
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+  }) async {
+    if (!hasBuild) {
+      trace.trace('no build in package: $name');
+      return;
+    }
+    trace.debug('watch building package: $name');
+    final process = await Process.start(
+      'dart',
+      ['run', 'build_runner', 'watch'],
+      runInShell: true,
+      workingDirectory: root.path,
+      mode: mode,
+    );
+    if (await process.exitCode != 0) {
+      var message = 'watch build failed at: ${root.path}';
+      if (mode == ProcessStartMode.detached) message += stderr.toString();
+      trace.warn('watch build failed at: $name');
       throw Exception(message);
     }
   }

@@ -1,10 +1,10 @@
+import 'package:data_build/annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:state_reuse/binding.dart';
 
-import 'animation_data.dart';
+import 'animation.dart';
 import 'animation_reuse.dart';
-import 'lerp.dart';
 
 typedef SingleAnimation<T> = _SingleAnimation<T, DataBuilder<T>, Lerp<T>>;
 

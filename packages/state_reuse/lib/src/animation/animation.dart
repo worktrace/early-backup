@@ -1,7 +1,9 @@
 import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
 
-class AnimationData {
+part 'animation.data.g.dart';
+
+class AnimationData with _$Copy$AnimationData implements Copyable {
   @copy
   const AnimationData({
     this.duration = const Duration(milliseconds: 300),
@@ -10,16 +12,14 @@ class AnimationData {
 
   final Duration duration;
   final Curve curve;
-
-  AnimationData copyWith({Duration? duration, Curve? curve}) => AnimationData(
-    duration: duration ?? this.duration,
-    curve: curve ?? this.curve,
-  );
 }
 
 const kHoverDefibrillation = Duration(milliseconds: 35);
 
-class AnimationDefibrillation extends AnimationData {
+class AnimationDefibrillation extends AnimationData
+    with _$Copy$AnimationDefibrillation
+    implements Copyable {
+  @copy
   const AnimationDefibrillation({
     super.duration,
     super.curve,
@@ -46,5 +46,17 @@ extension AnimationUtils on AnimationController {
   TickerFuture animateToStart(AnimationData animation) {
     if (value == lowerBound) return TickerFuture.complete();
     return animateAs(animation, lowerBound);
+  }
+}
+
+/// Similar to [Tween], but not nullable, and conciser.
+class AnimationTween<T> {
+  const AnimationTween({required this.begin, required this.end});
+
+  final T begin;
+  final T end;
+
+  T of(AnimationController controller, Lerp<T> lerp) {
+    return lerp(begin, end, controller.value);
   }
 }

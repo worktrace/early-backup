@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'animation_data.dart';
+import 'animation.dart';
 
 abstract class SingleAnimationWidget extends StatefulWidget {
   const SingleAnimationWidget({

@@ -1,14 +1,17 @@
+import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smooth_ui/colors.dart';
-import 'package:state_reuse/animation.dart';
 
-class BorderSize {
+part 'size.data.g.dart';
+
+class BorderSize with _$Copy$BorderSize {
+  @copy
+  @lerp
   const BorderSize({this.width = 1, this.radius = BorderRadius.zero});
 
-  factory BorderSize.lerp(BorderSize a, BorderSize b, double t) => BorderSize(
-    width: lerpDouble(a.width, b.width, t),
-    radius: lerpBorderRadius(a.radius, b.radius, t),
-  );
+  factory BorderSize.lerp(BorderSize a, BorderSize b, double t) {
+    return _$lerp$BorderSize(a, b, t);
+  }
 
   static const zero = BorderSize(width: 0);
 
@@ -16,7 +19,9 @@ class BorderSize {
   final BorderRadius radius;
 }
 
-class BoxShadowSize {
+class BoxShadowSize with _$Copy$BoxShadowSize {
+  @copy
+  @lerp
   const BoxShadowSize({
     this.offset = Offset.zero,
     this.blurRadius = 0,
@@ -24,11 +29,7 @@ class BoxShadowSize {
   });
 
   factory BoxShadowSize.lerp(BoxShadowSize a, BoxShadowSize b, double t) {
-    return BoxShadowSize(
-      offset: lerpOffset(a.offset, b.offset, t),
-      blurRadius: lerpDouble(a.blurRadius, b.blurRadius, t),
-      blurSpread: lerpDouble(a.blurSpread, b.blurSpread, t),
-    );
+    return _$lerp$BoxShadowSize(a, b, t);
   }
 
   static const zero = BoxShadowSize();
@@ -61,18 +62,18 @@ class BoxShadowSize {
   }
 }
 
-class CardSize {
+class CardSize with _$Copy$CardSize {
+  @copy
+  @lerp
   const CardSize({
     this.strokeAlign = BorderSide.strokeAlignOutside,
     this.border = BorderSize.zero,
     this.shadow = BoxShadowSize.zero,
   });
 
-  factory CardSize.lerp(CardSize a, CardSize b, double t) => CardSize(
-    strokeAlign: lerpDouble(a.strokeAlign, b.strokeAlign, t),
-    border: BorderSize.lerp(a.border, b.border, t),
-    shadow: BoxShadowSize.lerp(a.shadow, b.shadow, t),
-  );
+  factory CardSize.lerp(CardSize a, CardSize b, double t) {
+    return _$lerp$CardSize(a, b, t);
+  }
 
   final double strokeAlign;
   final BorderSize border;

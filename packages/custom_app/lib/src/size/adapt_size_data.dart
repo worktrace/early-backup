@@ -1,7 +1,11 @@
 import 'package:compat_utils/types.dart';
+import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
 
-class AdaptedSize {
+part 'adapt_size_data.data.g.dart';
+
+class AdaptedSize with _$Copy$AdaptedSize {
+  @copy
   const AdaptedSize({this.mode = WindowMode.landscape, this.ratio = 1})
     : assert(ratio > 0);
 
@@ -13,7 +17,7 @@ class AdaptedSize {
   final double ratio;
 }
 
-abstract class SizeAdapter with Times<SizeAdapter>, Copy<SizeAdapter> {
+abstract class SizeAdapter implements Scalable<SizeAdapter>, Copyable {
   const SizeAdapter({this.ratio = 1}) : assert(ratio > 0);
 
   final double ratio;
@@ -21,7 +25,8 @@ abstract class SizeAdapter with Times<SizeAdapter>, Copy<SizeAdapter> {
   WindowMode adapt(Size size);
 }
 
-class DesktopSizeAdapter extends SizeAdapter {
+class DesktopSizeAdapter extends SizeAdapter with _$Copy$DesktopSizeAdapter {
+  @copy
   const DesktopSizeAdapter({
     this.landscapeWidth = 1000,
     this.portraitWidth = 600,
@@ -39,21 +44,11 @@ class DesktopSizeAdapter extends SizeAdapter {
   }
 
   @override
-  DesktopSizeAdapter operator *(double times) => copyWith(ratio: ratio * times);
-
-  @override
-  DesktopSizeAdapter copyWith({
-    double? ratio,
-    double? landscapeWidth,
-    double? portraitWidth,
-  }) => DesktopSizeAdapter(
-    ratio: ratio ?? this.ratio,
-    landscapeWidth: landscapeWidth ?? this.landscapeWidth,
-    portraitWidth: portraitWidth ?? this.portraitWidth,
-  );
+  DesktopSizeAdapter scale(double times) => copyWith(ratio: ratio * times);
 }
 
-class MobileSizeAdapter extends SizeAdapter {
+class MobileSizeAdapter extends SizeAdapter with _$Copy$MobileSizeAdapter {
+  @copy
   const MobileSizeAdapter({super.ratio, this.landscapeWidth = 1200});
 
   final double landscapeWidth;
@@ -66,15 +61,7 @@ class MobileSizeAdapter extends SizeAdapter {
   }
 
   @override
-  MobileSizeAdapter operator *(double times) => copyWith(ratio: ratio * times);
-
-  @override
-  MobileSizeAdapter copyWith({double? ratio, double? landscapeWidth}) {
-    return MobileSizeAdapter(
-      ratio: ratio ?? this.ratio,
-      landscapeWidth: landscapeWidth ?? this.landscapeWidth,
-    );
-  }
+  MobileSizeAdapter scale(double times) => copyWith(ratio: ratio * times);
 }
 
 enum WindowMode { landscape, medium, portrait }

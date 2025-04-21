@@ -1,4 +1,5 @@
 import 'package:compat_utils/number.dart';
+import 'package:data_build/annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
@@ -7,6 +8,8 @@ import 'package:smooth_ui/themes.dart';
 import 'package:state_reuse/animation.dart';
 import 'package:state_reuse/size.dart';
 import 'package:wrap/wrap.dart';
+
+part 'sidebar.data.g.dart';
 
 /// Default sidebar width as placeholder.
 const double kSidebarWidth = 256;
@@ -168,7 +171,9 @@ class _SidebarContainerState extends State<SidebarContainer> with AdaptSize {
   }
 }
 
-class SidebarColors extends RippleCardColors {
+class SidebarColors extends RippleCardColors with _$Copy$SidebarColors {
+  @copy
+  @lerp
   const SidebarColors({
     super.background,
     super.foreground,
@@ -179,20 +184,15 @@ class SidebarColors extends RippleCardColors {
   });
 
   factory SidebarColors.lerp(SidebarColors a, SidebarColors b, double t) {
-    return SidebarColors(
-      background: lerpColor(a.background, b.background, t),
-      foreground: Color.lerp(a.foreground, b.foreground, t),
-      border: lerpColor(a.border, b.border, t),
-      shadow: lerpColor(a.shadow, b.shadow, t),
-      resize: lerpColor(a.resize, b.resize, t),
-      ripple: AreaColors.lerp(a.ripple, b.ripple, t),
-    );
+    return _$lerp$SidebarColors(a, b, t);
   }
 
   final Color resize;
 }
 
-class SidebarSize extends CardSize {
+class SidebarSize extends CardSize with _$Copy$SidebarSize {
+  @copy
+  @lerp
   const SidebarSize({
     this.padding = const EdgeInsetsDirectional.only(
       top: 16,
@@ -213,20 +213,7 @@ class SidebarSize extends CardSize {
   }) : assert(resizeWidth > 0);
 
   factory SidebarSize.lerp(SidebarSize a, SidebarSize b, double t) {
-    return SidebarSize(
-      padding: lerpEdgeInsetsDirectional(a.padding, b.padding, t),
-      strokeAlign: lerpDouble(a.strokeAlign, b.strokeAlign, t),
-      border: BorderSize.lerp(a.border, b.border, t),
-      shadow: BoxShadowSize.lerp(a.shadow, b.shadow, t),
-      sidebarMinWidth: lerpDouble(a.sidebarMinWidth, b.sidebarMinWidth, t),
-      contentMinWidth: lerpDouble(a.contentMinWidth, b.contentMinWidth, t),
-      resizeWidth: lerpDouble(a.resizeWidth, b.resizeWidth, t),
-      resizePadding: lerpEdgeInsetsDirectional(
-        a.resizePadding,
-        b.resizePadding,
-        t,
-      ),
-    );
+    return _$lerp$SidebarSize(a, b, t);
   }
 
   final EdgeInsetsDirectional padding;

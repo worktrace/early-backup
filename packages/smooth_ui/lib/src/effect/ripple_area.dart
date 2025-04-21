@@ -1,7 +1,7 @@
+import 'package:data_build/annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:smooth_ui/colors.dart';
 import 'package:smooth_ui/themes.dart';
 import 'package:state_reuse/animation.dart';
 import 'package:wrap/calculate.dart';
@@ -9,6 +9,8 @@ import 'package:wrap/convert.dart';
 import 'package:wrap/wrap.dart';
 
 import 'ripple.dart';
+
+part 'ripple_area.data.g.dart';
 
 extension WrapRippleArea on Widget? {
   RippleArea ripple({
@@ -111,7 +113,9 @@ class RippleAreaPainter extends RipplePainter {
   }
 }
 
-class RippleCardColors extends CardColors {
+class RippleCardColors extends CardColors with _$Copy$RippleCardColors {
+  @copy
+  @lerp
   const RippleCardColors({
     super.foreground,
     super.background,
@@ -124,13 +128,7 @@ class RippleCardColors extends CardColors {
     RippleCardColors a,
     RippleCardColors b,
     double t,
-  ) => RippleCardColors(
-    foreground: Color.lerp(a.foreground, b.foreground, t),
-    background: lerpColor(a.background, b.background, t),
-    border: lerpColor(a.border, b.border, t),
-    shadow: lerpColor(a.shadow, b.shadow, t),
-    ripple: AreaColors.lerp(a.ripple, b.ripple, t),
-  );
+  ) => _$lerp$RippleCardColors(a, b, t);
 
   final AreaColors ripple;
 }

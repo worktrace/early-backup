@@ -1,12 +1,11 @@
 import 'dart:async';
 
 import 'package:args/command_runner.dart';
-import 'package:compat_utils/args.dart';
 import 'package:compat_utils/format/string.dart';
 import 'package:compat_utils/package.dart';
 import 'package:pub_semver/pub_semver.dart';
 
-import 'workspace.dart';
+import 'command_line.dart';
 
 Future<void> workspaceExecutable(
   List<String> arguments, {
@@ -17,19 +16,25 @@ Future<void> workspaceExecutable(
       CommandRunner<void>(executableName, description)
         ..addCommand(TestCommand())
         ..addCommand(BuildCommand())
+        ..addCommand(WatchCommand())
         ..addCommand(UpdateEnvironmentCommand());
 
   return runner.run(arguments);
 }
 
-final rootOption = CommandLineOption.from(
+const rootOption = CommandLineOption(
   name: 'root',
   help: 'Specify the root directory where workspace root locates.',
 );
 
+const concurrentFlag = CommandLineFlag(
+  name: 'concurrent',
+  help: 'Run all tasks concurrently.',
+);
+
 class TestCommand extends Command<void> {
   TestCommand() : super() {
-    rootOption.apply(argParser);
+    argParser.addAll([rootOption, concurrentFlag]);
   }
 
   @override
@@ -41,14 +46,15 @@ class TestCommand extends Command<void> {
   @override
   Future<void> run() async {
     final root = argResults?.option(rootOption.name);
+    final concurrent = argResults?.flag(concurrentFlag.name);
     final package = DartPackage.resolve(path: root ?? '');
-    await package.test();
+    await package.test(concurrent: concurrent ?? false);
   }
 }
 
 class BuildCommand extends Command<void> {
   BuildCommand() : super() {
-    rootOption.apply(argParser);
+    argParser.addAll([rootOption, concurrentFlag]);
   }
 
   @override
@@ -60,8 +66,28 @@ class BuildCommand extends Command<void> {
   @override
   Future<void> run() async {
     final root = argResults?.option(rootOption.name);
+    final concurrent = argResults?.flag(concurrentFlag.name);
     final package = DartPackage.resolve(path: root ?? '');
-    await package.build();
+    await package.build(concurrent: concurrent ?? false);
+  }
+}
+
+class WatchCommand extends Command<void> {
+  WatchCommand() : super() {
+    argParser.addAll([rootOption]);
+  }
+
+  @override
+  String get name => 'watch';
+
+  @override
+  String get description => 'Watch build all packages in the root workspace.';
+
+  @override
+  Future<void> run() async {
+    final root = argResults?.option(rootOption.name);
+    final package = DartPackage.resolve(path: root ?? '');
+    await package.watch();
   }
 }
 

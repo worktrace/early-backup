@@ -1,7 +1,11 @@
+import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
 
+part 'locale_id.data.g.dart';
+
 @immutable
-class LocaleID {
+class LocaleID with _$Copy$LocaleID {
+  @copy
   const LocaleID(this.languageCode, {this.scriptCode, this.areaCode});
 
   final String languageCode;

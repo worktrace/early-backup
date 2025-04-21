@@ -1,27 +1,28 @@
+import 'package:auto_stories/annotation.dart';
 import 'package:auto_stories/helpers.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-class Colors extends ColorsBase {
+part 'colors.data.g.dart';
+
+class Colors extends ColorsBase with _$Copy$Colors {
+  @copy
+  @lerp
   const Colors.light({
     super.brightness,
-    super.foreground = MonoColors.ink,
-    super.background = MonoColors.snow,
-    this.sidebar = const SidebarColors(background: MonoColors.paper),
+    super.foreground = BuildInColors.ink,
+    super.background = BuildInColors.snow,
+    this.sidebar = const SidebarColors(background: BuildInColors.paper),
   }) : super.light();
 
   const Colors.dark({
     super.brightness,
-    super.foreground = MonoColors.lunar,
-    super.background = MonoColors.coal,
-    this.sidebar = const SidebarColors(background: MonoColors.night),
+    super.foreground = BuildInColors.lunar,
+    super.background = BuildInColors.coal,
+    this.sidebar = const SidebarColors(background: BuildInColors.night),
   }) : super.dark();
 
-  factory Colors.lerp(Colors a, Colors b, double t) => Colors.light(
-    brightness: t < 0.5 ? a.brightness : b.brightness,
-    foreground: Color.lerp(a.foreground, b.foreground, t),
-    background: lerpColor(a.background, b.background, t),
-    sidebar: SidebarColors.lerp(a.sidebar, b.sidebar, t),
-  );
+  factory Colors.lerp(Colors a, Colors b, double t) => _$lerp$Colors(a, b, t);
 
   final SidebarColors sidebar;
 
@@ -34,7 +35,7 @@ class Colors extends ColorsBase {
   }
 }
 
-abstract class MonoColors {
+abstract class BuildInColors {
   static const snow = Color.fromARGB(255, 245, 247, 248);
   static const paper = Color.fromARGB(255, 241, 239, 238);
   static const lunar = Color.fromARGB(255, 189, 188, 187);
