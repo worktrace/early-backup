@@ -12,8 +12,8 @@ dependencies:
   build: ^2.4.2
   compat_utils: ^0.0.0
   flutter: { sdk: flutter }
-  meta: ^1.15.0
-  path: ^1.9.0
+  meta: ^1.16.0
+  path: ^1.9.1
   source_gen: ^2.0.0
 
 dev_dependencies:
