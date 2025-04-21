@@ -41,3 +41,21 @@ class _HoverFollowAreaState extends State<HoverFollowArea> {
     return widget.child;
   }
 }
+
+class HoverFollowPainter extends CustomPainter {
+  const HoverFollowPainter({
+    required this.rect,
+    this.radius = BorderRadius.zero,
+  });
+
+  final Rect rect;
+  final BorderRadius radius;
+
+  @override
+  void paint(Canvas canvas, Size size) {}
+
+  @override
+  bool shouldRepaint(covariant HoverFollowPainter oldDelegate) {
+    return rect != oldDelegate.rect || radius != oldDelegate.radius;
+  }
+}
