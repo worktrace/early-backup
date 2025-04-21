@@ -38,6 +38,14 @@ builders:
     build_to: source
     applies_builders: ["source_gen|combining_builder"]
 
+  equals_builder:
+    import: package:data_build/builders.dart
+    builder_factories: [equalsBuilder]
+    build_extensions: { ".dart": [".equals.g.dart"] }
+    auto_apply: none
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]
+
   lerp_builder:
     import: package:data_build/builders.dart
     builder_factories: [lerpBuilder]

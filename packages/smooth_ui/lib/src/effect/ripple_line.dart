@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:data_build/annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -7,6 +8,8 @@ import 'package:state_reuse/animation.dart';
 import 'package:wrap/wrap.dart';
 
 import 'ripple.dart';
+
+part 'ripple_line.data.g.dart';
 
 extension WrapRippleLine on Widget? {
   RippleLine rippleLine({
@@ -78,6 +81,7 @@ class _RippleHoverLineState extends RippleBaseState<RippleLine> {
   );
 }
 
+@equals
 class RippleLinePainter extends RipplePainter {
   const RippleLinePainter({
     required super.color,
@@ -95,6 +99,11 @@ class RippleLinePainter extends RipplePainter {
       lineAreaOf(size, padding, center, ratio).capsule,
       Paint()..color = color,
     );
+  }
+
+  @override
+  bool shouldRepaint(covariant RippleLinePainter oldDelegate) {
+    return _$equals$RippleLinePainter(this, oldDelegate);
   }
 }
 
