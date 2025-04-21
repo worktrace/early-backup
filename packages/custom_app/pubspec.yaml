@@ -4,14 +4,13 @@ resolution: workspace
 version: 0.0.0
 
 environment:
-  sdk: ^3.7.0
-  flutter: ">=3.29.0 <4.0.0"
+  sdk: ^3.8.0-278.1.beta
+  flutter: ">=3.32.0-0.2.pre <4.0.0"
 
 dependencies:
   compat_utils: ^0.0.0
   data_build: ^0.0.0
   flutter: { sdk: flutter }
-  inherit: ^0.0.0
   smooth_ui: ^0.0.0
   state_reuse: ^0.0.0
   wrap: ^1.0.0
