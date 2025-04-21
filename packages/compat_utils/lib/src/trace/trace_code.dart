@@ -1,21 +1,19 @@
 import 'package:compat_utils/format/string.dart';
 
 TracePosition? tracePosition({int depth = 2}) {
-  final lines =
-      StackTrace.current
-          .toString()
-          .split('\n')
-          .map((line) => line.trim())
-          .where((line) => line.isNotEmpty)
-          .toList();
+  final lines = StackTrace.current
+      .toString()
+      .split('\n')
+      .map((line) => line.trim())
+      .where((line) => line.isNotEmpty)
+      .toList();
 
   if (lines.length <= depth) return null;
-  final message =
-      RegExp(r'\(([^)]+)\)$')
-          .firstMatch(lines[depth]) // Corresponding line according to depth.
-          ?.group(1)
-          ?.unwrapParenthesis
-          .trim();
+  final message = RegExp(r'\(([^)]+)\)$')
+      .firstMatch(lines[depth]) // Corresponding line according to depth.
+      ?.group(1)
+      ?.unwrapParenthesis
+      .trim();
 
   if (message == null) return null;
   final index = RegExp(r':\d+:\d+$').firstMatch(message)?.start;

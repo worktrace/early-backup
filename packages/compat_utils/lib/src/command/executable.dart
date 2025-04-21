@@ -12,12 +12,11 @@ Future<void> workspaceExecutable(
   String executableName = 'workspace',
 }) {
   const description = 'Dart workspace multiple packages operations.';
-  final runner =
-      CommandRunner<void>(executableName, description)
-        ..addCommand(TestCommand())
-        ..addCommand(BuildCommand())
-        ..addCommand(WatchCommand())
-        ..addCommand(UpdateEnvironmentCommand());
+  final runner = CommandRunner<void>(executableName, description)
+    ..addCommand(TestCommand())
+    ..addCommand(BuildCommand())
+    ..addCommand(WatchCommand())
+    ..addCommand(UpdateEnvironmentCommand());
 
   return runner.run(arguments);
 }

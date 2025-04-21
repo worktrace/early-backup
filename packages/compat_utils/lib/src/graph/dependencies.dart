@@ -16,9 +16,10 @@ typedef InDegrees<T> = Map<T, int>;
 List<T> sortDependencies<T>(DependenciesGraph<T> nodes) {
   final queue = Queue<T>();
   final sorted = <T>[];
-  final inDegrees = calculateInDegrees(nodes)..forEach((node, inDegree) {
-    if (inDegree == 0) queue.addLast(node);
-  });
+  final inDegrees = calculateInDegrees(nodes)
+    ..forEach((node, inDegree) {
+      if (inDegree == 0) queue.addLast(node);
+    });
 
   while (queue.isNotEmpty) {
     final current = queue.removeFirst();

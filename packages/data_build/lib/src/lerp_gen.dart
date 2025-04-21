@@ -104,10 +104,9 @@ class BuildInLerpGenerator
     final returnTypeID = element.returnType.element?.library?.identifier;
 
     final paramType = "${TypeID.fieldTypeName}: '$type'";
-    final paramLibID =
-        returnTypeID != null
-            ? "${TypeID.fieldLibraryIdentifier}: '$returnTypeID'"
-            : '';
+    final paramLibID = returnTypeID != null
+        ? "${TypeID.fieldLibraryIdentifier}: '$returnTypeID'"
+        : '';
 
     return "'$name': TypeID($paramType, $paramLibID)";
   }

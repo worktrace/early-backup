@@ -5,11 +5,10 @@ extension CaseConvert on String {
   /// 2. It will split by non-alphabet-and-digit characters,
   /// including whitespace and hyphen.
   /// 3. About the case change without separator, see [splitCamelCase].
-  List<String> get parts =>
-      split(RegExp('[^a-zA-Z0-9]'))
-          .map((part) => part.splitCamelCase)
-          .expand((nestedPart) => nestedPart)
-          .toList();
+  List<String> get parts => split(RegExp('[^a-zA-Z0-9]'))
+      .map((part) => part.splitCamelCase)
+      .expand((nestedPart) => nestedPart)
+      .toList();
 
   /// Split camel case.
   ///

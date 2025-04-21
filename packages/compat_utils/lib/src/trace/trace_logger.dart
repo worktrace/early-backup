@@ -63,10 +63,9 @@ class Trace {
 
     // Level name.
     if (levelName) {
-      final content =
-          decorate
-              ? level.decorate(pad: TraceLevel.width)
-              : level.name.padLeft(TraceLevel.width);
+      final content = decorate
+          ? level.decorate(pad: TraceLevel.width)
+          : level.name.padLeft(TraceLevel.width);
       (buffer..adaptSpace).write(content);
     }
 

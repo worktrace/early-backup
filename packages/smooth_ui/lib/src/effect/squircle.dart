@@ -78,11 +78,10 @@ class SquircleBorder extends OutlinedBorder {
   void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
     if (border.style == BorderStyle.none) return;
     final path = drawSquircle(rect.inflate(border.strokeAlign), radius);
-    final paint =
-        Paint()
-          ..style = PaintingStyle.stroke
-          ..color = border.color
-          ..strokeWidth = border.width;
+    final paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..color = border.color
+      ..strokeWidth = border.width;
     canvas.drawPath(path, paint);
   }
 
@@ -116,16 +115,14 @@ const double squircleArmRatio = goldenRatio;
 
 extension SquircleRadius on Radius {
   double get squircleCornerX => x * squircleRatioComplement;
-  double get squircleArmpitX =>
-      isSquare
-          ? squircleCornerX + squircleCornerX
-          : squircleCornerX * (1 + ratioInverse.square);
+  double get squircleArmpitX => isSquare
+      ? squircleCornerX + squircleCornerX
+      : squircleCornerX * (1 + ratioInverse.square);
 
   double get squircleCornerY => y * squircleRatioComplement;
-  double get squircleArmpitY =>
-      isSquare
-          ? squircleCornerY + squircleCornerY
-          : squircleCornerY * (1 + ratio.square);
+  double get squircleArmpitY => isSquare
+      ? squircleCornerY + squircleCornerY
+      : squircleCornerY * (1 + ratio.square);
 
   double get squircleArmX => x - (x - squircleArmpitX) * squircleArmRatio;
   double get squircleArmY => y - (y - squircleArmpitY) * squircleArmRatio;
@@ -150,10 +147,9 @@ Path drawSquircle(Rect rect, BorderRadius radius) {
   final left = rect.left;
   final right = rect.right;
   final bottom = rect.bottom;
-  final path =
-      Path()
-        ..moveTo(left + radius.topLeft.x, top)
-        ..lineTo(right - radius.topRight.x, top);
+  final path = Path()
+    ..moveTo(left + radius.topLeft.x, top)
+    ..lineTo(right - radius.topRight.x, top);
 
   if (radius.topRight != Radius.zero) {
     final corner = radius.topRight;

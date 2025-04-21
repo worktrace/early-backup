@@ -83,17 +83,15 @@ class _RouteAnimationState extends SingleAnimationState<RouteAnimation> {
   static Widget defaultRenderer(double value, Widget child, Widget oldChild) {
     const double blurSigma = 16;
 
-    final current =
-        child
-            .blur(blurSigma * (1 - value)) //
-            .opacity(value)
-            .positionFill();
+    final current = child
+        .blur(blurSigma * (1 - value))
+        .opacity(value)
+        .positionFill();
 
-    final old =
-        oldChild
-            .blur(blurSigma * value) //
-            .opacity(1 - value)
-            .positionFill();
+    final old = oldChild
+        .blur(blurSigma * value)
+        .opacity(1 - value)
+        .positionFill();
 
     return [old, current].asStack();
   }
@@ -113,10 +111,9 @@ class _RouteAnimationState extends SingleAnimationState<RouteAnimation> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      controller.isAnimating
-          ? renderer(controller.value, _child, _oldChild!)
-          : widget.child;
+  Widget build(BuildContext context) => controller.isAnimating
+      ? renderer(controller.value, _child, _oldChild!)
+      : widget.child;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
