@@ -40,7 +40,13 @@
 /// And thanks to the compiler optimization, it's not a problem in most cases.
 /// However, it's not recommended to use such encapsulations
 /// in performance sensitive cases such as long loops.
+
+// ignore_for_file: unused_element generate wrapper for `package:flutter`.
+
 library;
+
+import 'package:flutter/widgets.dart';
+import 'package:wrap/annotation.dart';
 
 export 'src/wrap/decorate.dart';
 export 'src/wrap/environment.dart';
@@ -48,3 +54,14 @@ export 'src/wrap/geometry.dart';
 export 'src/wrap/interact.dart';
 export 'src/wrap/paint.dart';
 export 'src/wrap/style.dart';
+
+@wrap
+const Function _mouse = MouseRegion.new;
+
+@wrap
+const Set<Function> _align = {
+  Center.new,
+  Align.new,
+  Positioned.new,
+  Positioned.fill,
+};
