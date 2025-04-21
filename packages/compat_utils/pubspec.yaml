@@ -4,7 +4,7 @@ resolution: workspace
 version: 0.0.0
 
 environment:
-  sdk: ^3.7.0
+  sdk: ^3.8.0-278.1.beta
 
 dependencies:
   args: ^2.6.0
