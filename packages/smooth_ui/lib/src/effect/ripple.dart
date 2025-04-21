@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:data_build/annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smooth_ui/colors.dart';
 import 'package:state_reuse/animation.dart';
 import 'package:wrap/wrap.dart';
+
+part 'ripple.data.g.dart';
 
 const kRippleColor = Color.fromARGB(255, 8, 140, 222);
 const kDimRippleColor = Color.fromARGB(24, 145, 145, 145);
@@ -120,6 +123,7 @@ abstract class RippleBaseState<S extends RippleBase>
   }
 }
 
+@equals
 abstract class RipplePainter extends CustomPainter {
   const RipplePainter({
     required this.color,
@@ -132,8 +136,7 @@ abstract class RipplePainter extends CustomPainter {
   final Color color;
 
   @override
-  bool shouldRepaint(covariant RipplePainter oldDelegate) =>
-      center != oldDelegate.center ||
-      ratio != oldDelegate.ratio ||
-      color != oldDelegate.color;
+  bool shouldRepaint(covariant RipplePainter oldDelegate) {
+    return _$equals$RipplePainter(this, oldDelegate);
+  }
 }
