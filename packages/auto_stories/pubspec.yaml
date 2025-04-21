@@ -14,7 +14,6 @@ dependencies:
   data_build: ^0.0.0
   flutter: { sdk: flutter }
   flutter_web_plugins: { sdk: flutter }
-  inherit: ^0.0.0
   smooth_ui: ^0.0.0
   state_reuse: ^0.0.0
   wrap: ^1.0.0
