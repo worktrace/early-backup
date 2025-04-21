@@ -1,4 +1,7 @@
+import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
+
+part 'hover_follow.data.g.dart';
 
 /// Enable hover follow effect onto this widget.
 ///
@@ -42,6 +45,7 @@ class _HoverFollowAreaState extends State<HoverFollowArea> {
   }
 }
 
+@equals
 class HoverFollowPainter extends CustomPainter {
   const HoverFollowPainter({
     required this.rect,
@@ -56,6 +60,6 @@ class HoverFollowPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant HoverFollowPainter oldDelegate) {
-    return rect != oldDelegate.rect || radius != oldDelegate.radius;
+    return _$equals$HoverFollowPainter(this, oldDelegate);
   }
 }
