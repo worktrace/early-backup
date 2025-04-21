@@ -25,3 +25,12 @@ mixin _$Copy$Colors implements Copyable {
     );
   }
 }
+
+Colors _$lerp$Colors(Colors a, Colors b, double t) {
+  return Colors.light(
+    brightness: t < 0.5 ? a.brightness : b.brightness,
+    foreground: Color.lerp(a.foreground, b.foreground, t),
+    background: lerpColor(a.background, b.background, t),
+    sidebar: SidebarColors.lerp(a.sidebar, b.sidebar, t),
+  );
+}

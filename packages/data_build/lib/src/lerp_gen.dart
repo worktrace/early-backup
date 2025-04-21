@@ -25,12 +25,14 @@ class LerpGenerator extends AnnotationGenerator<GenerateLerp> {
     final classType = element.returnType;
     final typeLibID = classType.element.library.identifier;
     final type = classType.toString();
+    final name = element.isDefaultConstructor ? '' : element.name;
+    final constructorName = name.isEmpty ? '' : '.$name';
     final params = element.parameters
         .map((parameter) => buildLerpParameter(parameter, typeLibID))
         .join(',');
 
     return '$type _\$lerp\$$type($type a, $type b, double t) {\n'
-        'return $type($params);\n'
+        'return $type$constructorName($params);\n'
         '}';
   }
 
@@ -38,19 +40,25 @@ class LerpGenerator extends AnnotationGenerator<GenerateLerp> {
   ///
   /// 1. Apply build in lerp functions ([buildInLerpFunctions])
   /// if there's registered one.
-  /// 2. When the type is not defined in `dart:ui` or `package:flutter`,
-  /// it will the lerp factory constructor use directly
-  /// wither nullable assertion.
-  /// 3. When the type is defined in `dart:ui` or `package:flutter`,
-  /// it will use the default lerp factory constructor with nullable assertion.
+  /// 2. When the type is not defined in `dart:ui` or `package:flutter`, it'll
+  /// use the lerp factory constructor directly without nullable assertion.
+  /// 3. When lerp `String`, `bool`, `Function` or `Enum`,
+  /// it will change at `0.5`.
   @protected
   String buildLerpParameter(ParameterElement element, String currentLibID) {
     final name = element.name;
     final type = element.type;
     final typeName = type.toString();
-    final typeLibID = type.element?.library?.identifier;
+
+    if (type.isDartCoreString ||
+        type.isDartCoreBool ||
+        type.isDartCoreFunction ||
+        type.element?.kind == ElementKind.ENUM) {
+      return '$name: t < 0.5 ? a.$name : b.$name';
+    }
 
     // Maybe apply build in lerp functions.
+    final typeLibID = type.element?.library?.identifier;
     final match = buildInLerpFunctions.match(typeName, typeLibID);
     if (match != null) return '$name: $match(a.$name, b.$name, t)';
 
