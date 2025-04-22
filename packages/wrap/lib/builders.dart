@@ -22,7 +22,15 @@ class WrapGenerator extends AnnotationGenerator<GenerateWrap> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    if (element is! TopLevelVariableElement) throw const AnnoPosException();
-    return '// build wrap';
+    switch (element) {
+      case final TopLevelVariableElement element:
+        return buildTopLevelVariable(element);
+      default:
+        throw const AnnoPosException();
+    }
+  }
+
+  String buildTopLevelVariable(TopLevelVariableElement element) {
+    return '// build top level variable';
   }
 }
