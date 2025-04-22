@@ -7,6 +7,8 @@ extension NullableIterable<T> on Iterable<T> {
   /// Usually used on dynamic types, when [whereType] is not convenient.
   T get firstNotNull => firstWhere((i) => i != null);
   T? get firstMaybeNotNull => firstWhereOrNull((i) => i != null);
+
+  Iterable<T>? get nullIfEmpty => isEmpty ? null : this;
 }
 
 extension IterableConvertShortcut<T> on Iterable<T> {
