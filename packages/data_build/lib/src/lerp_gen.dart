@@ -3,7 +3,7 @@ import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:build/build.dart';
 import 'package:compat_utils/format/string.dart';
 import 'package:meta/meta.dart';
-import 'package:nest_gen/generator.dart';
+import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'lerp.dart';
