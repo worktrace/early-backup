@@ -1,6 +1,6 @@
 builders:
   name_builder:
-    import: package:data_build/builders.dart
+    import: package:build_name/builders.dart
     builder_factories: [nameBuilder]
     build_extensions: { ".dart": [".name.g.dart"] }
     auto_apply: none

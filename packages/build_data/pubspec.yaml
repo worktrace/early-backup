@@ -1,4 +1,4 @@
-name: data_build
+name: build_data
 description: Code generator for data classes and boilerplates.
 resolution: workspace
 version: 0.0.0

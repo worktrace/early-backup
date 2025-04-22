@@ -1,5 +1,5 @@
+import 'package:build_data/annotation.dart';
 import 'package:compat_utils/types.dart';
-import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
 
 part 'adapt_size_data.data.g.dart';

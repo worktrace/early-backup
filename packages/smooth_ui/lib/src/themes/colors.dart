@@ -1,4 +1,4 @@
-import 'package:data_build/annotation.dart';
+import 'package:build_data/annotation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smooth_ui/colors.dart';
 
