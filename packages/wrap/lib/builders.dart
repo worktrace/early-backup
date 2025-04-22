@@ -40,21 +40,36 @@ class WrapGenerator extends AnnotationGenerator<GenerateWrap> {
     return '';
   }
 
-  String? buildVConstructor(DartObject raw) {
+  String buildConstructorBaseMethod(ConstructorElement element) {
+    return '';
+  }
+
+  String? buildVirtualConstructor(DartObject raw) {
     final element = raw.toFunctionValue();
     return element is ConstructorElement ? buildConstructor(element) : null;
   }
 
-  String? buildVConstructors(DartObject raw) => raw
-      .toSetValue() //
-      ?.map(buildVConstructor)
+  String? buildVConstructorBaseMethod(DartObject raw) {
+    final element = raw.toFunctionValue();
+    return element is ConstructorElement ? buildConstructor(element) : null;
+  }
+
+  String? buildVConstructorSet(DartObject raw) {
+    final method = buildVConstructorSetBaseMethods(raw);
+    if (method == null) return null;
+    return method;
+  }
+
+  String? buildVConstructorSetBaseMethods(DartObject raw) => raw
+      .toSetValue()
+      ?.map(buildVConstructorBaseMethod)
       .nullIfEmpty
       ?.join('\n\n');
 
   String buildTopLevelVariable(TopLevelVariableElement element) {
     final raw = element.computeConstantValue();
     if (raw == null) throw WrapAnnoException(element);
-    final result = buildVConstructor(raw) ?? buildVConstructors(raw);
+    final result = buildVirtualConstructor(raw) ?? buildVConstructorSet(raw);
     if (result != null) throw WrapAnnoException(element);
     return result!;
   }
