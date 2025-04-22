@@ -37,19 +37,27 @@ mixin HoverDefibrillationMixin<W extends MouseWidgetBase> on State<W> {
   bool get exactHover => _hover;
   bool get resolvedHover => _resolvedHover;
 
-  Future<void> mouseEnter(PointerEnterEvent event) async {
+  /// Called when defibrillation-resolved mouse enter.
+  void mouseEnter(PointerEnterEvent event) {}
+
+  /// Called when defibrillation-resolved mouse exit.
+  void mouseExit(PointerExitEvent event) {}
+
+  Future<void> _mouseEnter(PointerEnterEvent event) async {
     _hover = true;
     await Future<void>.delayed(defibrillation);
     if (!_hover) return;
     setState(() => _resolvedHover = true);
+    mouseEnter(event);
     widget.onEnter?.call(event);
   }
 
-  Future<void> mouseExit(PointerExitEvent event) async {
+  Future<void> _mouseExit(PointerExitEvent event) async {
     _hover = false;
     await Future<void>.delayed(defibrillation);
     if (_hover) return;
     setState(() => _resolvedHover = false);
+    mouseExit(event);
     widget.onExit?.call(event);
   }
 
@@ -64,8 +72,8 @@ mixin HoverDefibrillationMixin<W extends MouseWidgetBase> on State<W> {
   @protected
   @override
   Widget build(BuildContext context) => render(context).mouse(
-    onEnter: mouseEnter,
-    onExit: mouseExit,
+    onEnter: _mouseEnter,
+    onExit: _mouseExit,
     onHover: widget.onHover,
     cursor: _resolvedHover ? widget.cursor : MouseCursor.defer,
     hitTestBehavior: widget.hitTestBehavior,
