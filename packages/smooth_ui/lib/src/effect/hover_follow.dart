@@ -1,5 +1,7 @@
 import 'package:data_build/annotation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:state_reuse/binding.dart';
+import 'package:state_reuse/interact.dart';
 
 part 'hover_follow.data.g.dart';
 
@@ -9,20 +11,30 @@ part 'hover_follow.data.g.dart';
 /// Current widget itself will only get the position and size to hover,
 /// passing the state to the [HoverFollowArea] to ancestor to render the effect.
 /// The exact effect is not rendered inside this widget exactly.
-class HoverFollow extends StatefulWidget {
-  const HoverFollow({super.key, required this.child});
-
-  final Widget child;
+class HoverFollow extends HoverDefibrillation {
+  const HoverFollow({
+    super.key,
+    super.defibrillation,
+    super.onEnter,
+    super.onExit,
+    super.onHover,
+    super.cursor,
+    super.hitTestBehavior,
+    super.opaque,
+    super.child,
+  });
 
   @override
   State<HoverFollow> createState() => _HoverFollowState();
 }
 
-class _HoverFollowState extends State<HoverFollow> {
+class _HoverFollowState extends State<HoverFollow>
+    with HoverDefibrillationMixin {
   @override
-  Widget build(BuildContext context) {
-    return widget.child;
-  }
+  Duration get defibrillation => widget.defibrillation;
+
+  @override
+  Widget? render(BuildContext context) => widget.child;
 }
 
 /// Display the hover follow effect in this area.
@@ -39,9 +51,11 @@ class HoverFollowArea extends StatefulWidget {
 }
 
 class _HoverFollowAreaState extends State<HoverFollowArea> {
+  void _updateHoverRect(Rect rect) {}
+
   @override
   Widget build(BuildContext context) {
-    return widget.child;
+    return widget.child.inheritUpdate(_updateHoverRect);
   }
 }
 
