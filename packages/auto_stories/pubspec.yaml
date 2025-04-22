@@ -9,9 +9,10 @@ environment:
 
 dependencies:
   args: ^2.6.0
+  build_data: ^0.0.0
+  build_name: ^0.0.0
   compat_utils: ^0.0.0
   custom_app: ^0.0.0
-  data_build: ^0.0.0
   flutter: { sdk: flutter }
   flutter_web_plugins: { sdk: flutter }
   smooth_ui: ^0.0.0

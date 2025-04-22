@@ -1,1 +1,1 @@
-export 'package:data_build/annotation.dart';
+export 'package:build_data/annotation.dart';

@@ -1,7 +1,7 @@
-name: wrap
-description: Chain style programming syntax sugar utilities for flutter widgets.
+name: nest_gen
+description: Generator abstraction helpers for non-top-level annotations.
 resolution: workspace
-version: 1.0.0
+version: 0.0.0
 
 environment:
   sdk: ^3.8.0-278.1.beta
@@ -10,12 +10,10 @@ environment:
 dependencies:
   analyzer: ^6.11.0
   build: ^2.4.2
-  build_data: ^0.0.0
-  compat_utils: ^0.0.0
   flutter: { sdk: flutter }
   meta: ^1.16.0
   path: ^1.9.1
   source_gen: ^2.0.0
 
 dev_dependencies:
-  flutter_test: { sdk: flutter }
+  test: ^1.24.0

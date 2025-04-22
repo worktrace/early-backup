@@ -6,5 +6,5 @@
 /// please use `annotation_compat.dart` instead.
 library;
 
-export 'annotation_compat.dart';
+export '_annotation.dart';
 export 'src/lerp_deps.dart';

@@ -1,7 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:compat_utils/format/string.dart';
-import 'package:data_build/generator.dart';
+import 'package:nest_gen/generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'copy.dart';

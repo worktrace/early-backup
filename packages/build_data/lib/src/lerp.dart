@@ -1,6 +1,5 @@
+import 'package:build_name/annotation.dart';
 import 'package:meta/meta_meta.dart';
-
-import 'name.dart';
 
 part 'lerp.name.g.dart';
 

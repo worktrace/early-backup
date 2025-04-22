@@ -1,5 +1,4 @@
 targets:
   $default:
     builders:
-      data_build|data_builder:
-        enabled: true
+      build_data|data_builder: { enabled: true }
