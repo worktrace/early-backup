@@ -14,6 +14,7 @@ workspace:
 
   # Shared libraries for code reuse.
   - packages/auto_stories
+  - packages/build_name
   - packages/compat_utils
   - packages/custom_app
   - packages/data_build
