@@ -1,0 +1,14 @@
+targets:
+  $default:
+    builders:
+      wrap|wrap_builder: { enabled: true }
+
+# Yaml anchor syntax is unsupported in build.yaml.
+builders:
+  wrap_builder:
+    import: package:wrap/builders.dart
+    builder_factories: [wrapBuilder]
+    build_extensions: { ".dart": [".wrap.g.dart"] }
+    auto_apply: none
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]
