@@ -17,6 +17,7 @@ workspace:
   - packages/build_data
   - packages/build_name
   - packages/compat_utils
+  - packages/concise_cli
   - packages/custom_app
   - packages/nest_gen
   - packages/paint_out
