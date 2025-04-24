@@ -20,6 +20,7 @@ workspace:
   - packages/concise_cli
   - packages/custom_app
   - packages/nest_gen
+  - packages/nest_run
   - packages/paint_out
   - packages/smooth_ui
   - packages/state_reuse
