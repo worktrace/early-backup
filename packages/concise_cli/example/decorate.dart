@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:compat_utils/terminal.dart';
+import 'package:concise_cli/decorate.dart';
 
 void main(List<String> arguments) => terminalDecorateExample();
 

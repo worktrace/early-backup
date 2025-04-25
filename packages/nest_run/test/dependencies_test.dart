@@ -1,4 +1,4 @@
-import 'package:compat_utils/graph.dart';
+import 'package:nest_run/dependencies.dart';
 import 'package:test/test.dart';
 
 void main() {

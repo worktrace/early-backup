@@ -1,4 +1,4 @@
-import 'package:compat_utils/trace.dart';
+import 'package:concise_cli/trace.dart';
 
 void main() => traceExample();
 
