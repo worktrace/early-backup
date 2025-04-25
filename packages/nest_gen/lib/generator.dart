@@ -30,7 +30,7 @@ abstract class AnnotationGeneratorBase extends Generator {
 
   final bool throwOnUnresolved;
 
-  /// Define to generate from a [library].
+  /// Define how to generate from a [library].
   ///
   /// 1. Return `null` to indicate there's nothing to generate,
   /// that it will not output any file.
