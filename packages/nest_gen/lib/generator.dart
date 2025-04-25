@@ -32,9 +32,9 @@ abstract class AnnotationGeneratorBase extends Generator {
 
   /// Define how to generate from a [library].
   ///
-  /// 1. Return `null` to indicate there's nothing to generate,
-  /// that it will not output any file.
-  /// 2. This method is just a shell for encapsulation.
+  /// 1. Return `null` to indicate there's nothing to generate.
+  /// 2. When the returned value is not null, it will generate such file.
+  /// 3. This method is just a shell for encapsulation.
   /// You may consider override [joinResults] or [generateAll].
   @protected
   @override
