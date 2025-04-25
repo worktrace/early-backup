@@ -17,16 +17,15 @@ workspace:
   - packages/build_data
   - packages/build_name
   - packages/compat_utils
+  - packages/concise_cli
   - packages/custom_app
   - packages/nest_gen
+  - packages/nest_run
   - packages/paint_out
   - packages/smooth_ui
   - packages/state_reuse
   - packages/wrap
 
-  # Workspace management scripts.
-  - scripts/workspace_dart
-
 dependencies:
   auto_stories: ^0.0.0
-  workspace: ^0.0.0
+  nest_run: ^0.0.0

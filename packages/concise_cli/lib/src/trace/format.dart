@@ -26,3 +26,10 @@ extension PadNumber on int {
   String get pad2 => toString().padLeft(2, '0');
   String get pad3 => toString().padLeft(3, '0');
 }
+
+extension StringBufferUtils on StringBuffer {
+  /// When not empty, add a space, to split between the following contents.
+  void get adaptSpace {
+    if (isNotEmpty) write(' ');
+  }
+}

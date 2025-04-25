@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:args/command_runner.dart';
-import 'package:compat_utils/format/string.dart';
-import 'package:compat_utils/package.dart';
+import 'package:compat_utils/string.dart';
+import 'package:concise_cli/arguments.dart';
 import 'package:pub_semver/pub_semver.dart';
 
-import 'command_line.dart';
+import 'package.dart';
 
-Future<void> workspaceExecutable(
+Future<void> nestRunExecutable(
   List<String> arguments, {
-  String executableName = 'workspace',
+  String executableName = 'nest_run',
 }) {
   const description = 'Dart workspace multiple packages operations.';
   final runner = CommandRunner<void>(executableName, description)

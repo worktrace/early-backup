@@ -1,4 +1,4 @@
-import 'package:compat_utils/format/string.dart';
+import 'package:compat_utils/string.dart';
 
 TracePosition? tracePosition({int depth = 2}) {
   final lines = StackTrace.current

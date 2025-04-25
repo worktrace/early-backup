@@ -1,0 +1,14 @@
+name: concise_cli
+description: Simple command line utilities for style decorate and interact.
+resolution: workspace
+version: 0.0.0
+
+environment:
+  sdk: ^3.8.0-278.1.beta
+
+dependencies:
+  args: ^2.6.0
+  path: ^1.9.1
+
+dev_dependencies:
+  test: ^1.24.0

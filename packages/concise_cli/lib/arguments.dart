@@ -1,5 +1,4 @@
 import 'package:args/args.dart';
-import 'package:compat_utils/format/string.dart';
 
 abstract class CommandLineApplicable {
   const CommandLineApplicable({
@@ -16,7 +15,7 @@ abstract class CommandLineApplicable {
 
   /// Resolved abbreviation as configuration.
   String? get abbreviation {
-    return abbr ?? (autoAbbr ? name.firstCharacterLower : null);
+    return abbr ?? (autoAbbr ? name[0].toLowerCase() : null);
   }
 
   void apply(ArgParser argParser);

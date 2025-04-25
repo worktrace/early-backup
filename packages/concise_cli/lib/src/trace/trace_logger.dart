@@ -1,10 +1,9 @@
 import 'dart:io';
 
-import 'package:compat_utils/format/string.dart';
-import 'package:compat_utils/format/time.dart';
-import 'package:compat_utils/terminal.dart';
+import 'package:concise_cli/decorate.dart';
 import 'package:path/path.dart';
 
+import 'format.dart';
 import 'trace_code.dart';
 
 /// Global [Trace] instance as modifiable variable.

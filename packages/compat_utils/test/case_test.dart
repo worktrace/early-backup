@@ -1,4 +1,4 @@
-import 'package:compat_utils/format/case.dart';
+import 'package:compat_utils/case.dart';
 import 'package:test/test.dart';
 
 void main() {

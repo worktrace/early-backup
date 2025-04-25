@@ -14,6 +14,8 @@ extension PrefixAndSuffix on String {
   String ensureSuffix(String suffix) {
     return endsWith(suffix) ? this : '$this$suffix';
   }
+
+  String get unwrapParenthesis => removePrefix('(').removeSuffix(')');
 }
 
 extension StringBeforeAndAfter on String {
@@ -44,19 +46,5 @@ extension SplitString on String {
     final index = lastIndexOf(separator);
     if (index == -1) return null;
     return (substring(0, index), substring(index + separator.length));
-  }
-}
-
-extension StringUtils on String {
-  String get unwrapParenthesis => removePrefix('(').removeSuffix(')');
-
-  String get firstCharacter => isNotEmpty ? this[0] : '';
-  String get firstCharacterLower => firstCharacter.toLowerCase();
-}
-
-extension StringBufferUtils on StringBuffer {
-  /// When not empty, add a space, to split between the following contents.
-  void get adaptSpace {
-    if (isNotEmpty) write(' ');
   }
 }
