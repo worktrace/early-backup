@@ -7,14 +7,17 @@ import 'package:smooth_ui/effect.dart';
 import 'package:smooth_ui/themes.dart';
 import 'package:state_reuse/animation.dart';
 import 'package:state_reuse/size.dart';
+import 'package:wrap/annotation.dart';
 import 'package:wrap/wrap.dart';
 
 part 'sidebar.data.g.dart';
+part 'sidebar.wrap.g.dart';
 
 /// Default sidebar width as placeholder.
 const double kSidebarWidth = 256;
 
 class SidebarContainer extends StatefulWidget {
+  @wrap
   const SidebarContainer({
     super.key,
     this.resizeAnimation = const AnimationDefibrillation(),

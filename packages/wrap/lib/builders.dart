@@ -41,7 +41,7 @@ class WrapGenerator extends AnnotationGenerator<GenerateWrap> {
     final name = element.name;
     final nameSuffix = name.isEmpty ? '' : '\$$name';
 
-    return 'extension $type$nameSuffix on Widget {}';
+    return 'extension Wrap$type$nameSuffix on Widget {}';
   }
 
   String buildWrapMethod(ConstructorElement element) {
