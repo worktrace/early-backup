@@ -9,7 +9,7 @@ import 'package:source_gen/source_gen.dart';
 import 'lerp.dart';
 import 'lerp_deps.bil.g.dart' as gen;
 
-class LerpGenerator extends AnnotationGenerator<GenerateLerp> {
+class LerpGenerator extends GeneratorOnAnnotation<GenerateLerp> {
   const LerpGenerator({this.buildInLerpFunctions = gen.buildInLerpFunctions});
 
   /// Registered build-in lerp functions.

@@ -8,7 +8,7 @@ class LibDataBuilder extends RecursiveAnnotationGenerator {
   const LibDataBuilder(this.generators, {super.throwOnUnresolved});
 
   @override
-  final Iterable<AnnotationGenerator<dynamic>> generators;
+  final Iterable<GeneratorOnAnnotation<dynamic>> generators;
 }
 
 /// Build generated data code into a part file,
