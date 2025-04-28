@@ -1,9 +1,12 @@
+/// @docImport 'dart:async';
+library;
+
 import 'package:build/build.dart';
 import 'package:meta/meta.dart';
 import 'package:source_gen/source_gen.dart';
 
 /// A generator that will generate according to multiple components.
-abstract class ComposedGenerator extends Generator {
+abstract class ComposedGenerator extends DirectGenerator {
   const ComposedGenerator();
 
   /// Define how to generate from a [library].
@@ -42,4 +45,24 @@ abstract class ComposedGenerator extends Generator {
     LibraryReader library,
     BuildStep buildStep,
   );
+}
+
+/// A generator that avoid any future operations.
+///
+/// Future operations, and corresponding wrapping over [FutureOr],
+/// might slow down the generating process, especially in recursive cases,
+/// and it's not commonly used.
+/// This abstract class constrain the return type of [generate] method
+/// to avoid future operations in all its descendants,
+/// which will also simplify the further implementations.
+abstract class DirectGenerator extends Generator {
+  const DirectGenerator();
+
+  /// Generates Dart code for an input Dart library.
+  ///
+  /// When returning `null`, it means there's nothing to generate,
+  /// and it will not create corresponding output file.
+  /// Otherwise, the generated file will be created.
+  @override
+  String? generate(LibraryReader library, BuildStep buildStep);
 }
