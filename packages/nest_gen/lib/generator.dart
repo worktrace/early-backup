@@ -4,13 +4,29 @@ import 'package:meta/meta.dart';
 import 'package:meta/meta_meta.dart';
 import 'package:source_gen/source_gen.dart';
 
-abstract class AnnotationGenerator<T> {
-  const AnnotationGenerator();
+/// Define how to generate data from an annotation of specified type [T].
+///
+/// This abstract class is usually used as a parameter of certain [Generator]
+/// extends [AnnotationGeneratorBase]. It's not a [Generator] itself,
+/// or something like the [GeneratorForAnnotation] abstract class.
+/// And it works on a single parsed annotated element rather than a library.
+abstract class GeneratorOnAnnotation<T> {
+  const GeneratorOnAnnotation();
 
+  /// Define how to check the type [T].
   TypeChecker get typeChecker => TypeChecker.fromRuntime(T);
 
+  /// How to build on a single annotation of type [T].
   String build(Element element, ConstantReader annotation, BuildStep buildStep);
 
+  /// Check type and build when necessary.
+  ///
+  /// 1. When there's multiple annotation with the same specified type [T],
+  /// or match the override [typeChecker] rule, it will only use the first one.
+  /// 2. When there's nothing to build, it will return null.
+  /// 3. It's strongly not recommended to override this method directly.
+  /// You may consider override the [build] method or the [typeChecker] getter.
+  @protected
   String? maybeBuild(
     Element element,
     BuildStep buildStep, {
@@ -30,11 +46,11 @@ abstract class AnnotationGeneratorBase extends Generator {
 
   final bool throwOnUnresolved;
 
-  /// Define to generate from a [library].
+  /// Define how to generate from a [library].
   ///
-  /// 1. Return `null` to indicate there's nothing to generate,
-  /// that it will not output any file.
-  /// 2. This method is just a shell for encapsulation.
+  /// 1. Return `null` to indicate there's nothing to generate.
+  /// 2. When the returned value is not null, it will generate such file.
+  /// 3. This method is just a shell for encapsulation.
   /// You may consider override [joinResults] or [generateAll].
   @protected
   @override
@@ -92,7 +108,7 @@ abstract class TopLevelAnnotationGenerator<T> extends AnnotationGeneratorBase {
   );
 }
 
-/// Generate recursively from multiple [AnnotationGenerator]s.
+/// Generate recursively from multiple [GeneratorOnAnnotation]s.
 ///
 /// If your generating strategy is simple enough and works like
 /// the raw [GeneratorForAnnotation],
@@ -101,7 +117,7 @@ abstract class TopLevelAnnotationGenerator<T> extends AnnotationGeneratorBase {
 abstract class RecursiveAnnotationGenerator extends AnnotationGeneratorBase {
   const RecursiveAnnotationGenerator({super.throwOnUnresolved});
 
-  Iterable<AnnotationGenerator<dynamic>> get generators;
+  Iterable<GeneratorOnAnnotation<dynamic>> get generators;
 
   @override
   Iterable<String> generateAll(LibraryReader library, BuildStep buildStep) {
