@@ -66,3 +66,17 @@ abstract class DirectGenerator extends Generator {
   @override
   String? generate(LibraryReader library, BuildStep buildStep);
 }
+
+mixin PartGenerator on DirectGenerator {
+  /// Add part of statement as the prefix of the generated result if necessary.
+  @override
+  String? generate(LibraryReader library, BuildStep buildStep) {
+    final result = super.generate(library, buildStep);
+    return result == null ? null : '${generatePartOf(buildStep)}\n\n$result';
+  }
+
+  /// Generate part of statement according to current [buildStep].
+  String generatePartOf(BuildStep buildStep) {
+    return "part of '${buildStep.inputId.pathSegments.last}';";
+  }
+}
