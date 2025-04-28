@@ -1,2 +1,2 @@
-export 'src/generate_annotation.dart';
-export 'src/generate_library.dart';
+export 'src/annotation_generator.dart';
+export 'src/composed_generator.dart';
