@@ -8,8 +8,8 @@ import 'package:source_gen/source_gen.dart';
 /// Override the [build] method to define
 /// how to build on an parsed element annotated with annotation of type [T].
 
-abstract class GeneratorOnAnnotation<T> {
-  const GeneratorOnAnnotation();
+abstract class GenerateOnAnnotation<T> {
+  const GenerateOnAnnotation();
 
   /// Define how to check the type [T].
   TypeChecker get typeChecker => TypeChecker.fromRuntime(T);
