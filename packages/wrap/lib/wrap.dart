@@ -55,6 +55,8 @@ export 'src/wrap/interact.dart';
 export 'src/wrap/paint.dart';
 export 'src/wrap/style.dart';
 
+part 'wrap.wrap.g.dart';
+
 @wrap
 const Function _mouse = MouseRegion.new;
 

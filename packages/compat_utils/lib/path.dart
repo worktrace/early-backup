@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:compat_utils/format/string.dart';
+import 'package:compat_utils/string.dart';
 import 'package:path/path.dart' as path;
 
 extension DirectoryUtils on Directory {

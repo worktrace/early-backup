@@ -1,0 +1,228 @@
+import 'dart:io';
+
+import 'package:concise_cli/trace.dart';
+import 'package:nest_run/dependencies.dart';
+import 'package:path/path.dart';
+import 'package:pub_semver/pub_semver.dart';
+import 'package:yaml/yaml.dart';
+import 'package:yaml_edit/yaml_edit.dart';
+
+import 'package_files.dart';
+import 'package_meta.dart';
+
+extension DartPackageChildren on DartPackage {
+  /// Get child packages iterable inside current workspace.
+  Iterable<DartPackage> get children {
+    final manifest = this.manifest;
+    if (!manifest.containsKey('workspace')) return [];
+    if (manifest['workspace'] is! YamlList) return [];
+    return (manifest['workspace'] as YamlList)
+        .whereType<String>() //
+        .map(DartPackage.from);
+  }
+
+  /// Get child packages map on their names inside current workspace.
+  Map<String, DartPackage> get childPackages {
+    final handler = <String, DartPackage>{};
+    for (final child in children) handler[child.name] = child;
+    return handler;
+  }
+
+  /// Get sorted packages by dependencies that all packages will not depends
+  /// on any package before them.
+  /// The root package of the workspace is also included.
+  List<DartPackage> get sortedPackages {
+    final packages = {name: this, ...childPackages};
+    final nodes = packages.map((name, package) => MapEntry(name, <String>{}));
+    final names = nodes.keys;
+    packages.forEach((name, package) {
+      final p = package;
+      final dependencies = {...p.dependencies.keys, ...p.devDependencies.keys};
+      for (final dependency in dependencies) {
+        if (names.contains(dependency)) nodes[name]!.add(dependency);
+      }
+    });
+    return sortDependencies(nodes).map((name) => packages[name]!).toList();
+  }
+}
+
+extension DartPackageTest on DartPackage {
+  bool get hasFlutterTest {
+    final manifest = this.manifest;
+    for (final key in DependenciesKind.values.map((k) => k.asPubspecKey)) {
+      if (manifest.containsKey(key)) {
+        final deps = manifest[key] as YamlMap;
+        if (deps.containsKey('flutter_test')) return true;
+      }
+    }
+    return false;
+  }
+
+  bool get hasTestFile {
+    if (!testDir.existsSync()) return false;
+    return testDir
+        .listSync(recursive: true)
+        .whereType<File>()
+        .where((file) => file.path.endsWith('_test.dart'))
+        .isNotEmpty;
+  }
+
+  Future<void> test({
+    bool workspace = true,
+    bool concurrent = false,
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+  }) async {
+    if (hasTestFile) await testCurrent(mode: mode);
+    if (!workspace) return;
+    final all = sortedPackages.reversed.map((p) => p.testCurrent(mode: mode));
+    await (concurrent ? Future.wait(all) : Future.forEach(all, (one) => one));
+    trace.info('all tests passed at workspace: $name');
+  }
+
+  Future<void> testCurrent({
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+  }) async {
+    if (!hasTestFile) {
+      trace.trace('no test in package: $name');
+      return;
+    }
+    trace.debug('testing package: $name');
+    final process = await Process.start(
+      hasFlutterTest ? 'flutter' : 'dart',
+      ['test'],
+      runInShell: true,
+      workingDirectory: root.path,
+      mode: mode,
+    );
+    if (await process.exitCode != 0) {
+      var message = 'test failed at: ${root.path}';
+      if (mode == ProcessStartMode.detached) message += stderr.toString();
+      throw Exception(message);
+    }
+  }
+}
+
+extension DartPackageBuild on DartPackage {
+  /// Whether the package has `build_runner` and `build.yaml`,
+  /// that it requires generated code and can be processed by `build_runner`.
+  bool get hasBuild {
+    const buildRunner = 'build_runner';
+    final hasBuildRunner =
+        dependencies.containsKey(buildRunner) ||
+        devDependencies.containsKey(buildRunner);
+
+    final hasBuildConfig = root
+        .listSync() //
+        .any((item) => item is File && basename(item.path) == 'build.yaml');
+
+    return hasBuildRunner && hasBuildConfig;
+  }
+
+  Future<void> build({
+    bool workspace = true,
+    bool concurrent = false,
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+  }) async {
+    if (!workspace) {
+      await buildCurrent(mode: mode);
+      return;
+    }
+    final packages = [...sortedPackages.reversed, this];
+    final all = packages.map((p) => p.buildCurrent(mode: mode));
+    await (concurrent ? Future.wait(all) : Future.forEach(all, (one) => one));
+    trace.info('all packages built at workspace: $name');
+  }
+
+  Future<void> buildCurrent({
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+    bool deleteConflictingOutputs = true,
+  }) async {
+    if (!hasBuild) {
+      trace.trace('no build in package: $name');
+      return;
+    }
+    trace.debug('building package: $name');
+    final d = deleteConflictingOutputs;
+    final process = await Process.start(
+      'dart',
+      ['run', 'build_runner', 'build', if (d) '--delete-conflicting-outputs'],
+      runInShell: true,
+      workingDirectory: root.path,
+      mode: mode,
+    );
+    if (await process.exitCode != 0) {
+      var message = 'build failed at: ${root.path}';
+      if (mode == ProcessStartMode.detached) message += stderr.toString();
+      throw Exception(message);
+    }
+    trace.info('built package: $name');
+  }
+
+  Future<void> watch({
+    bool workspace = true,
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+  }) async {
+    if (!workspace) {
+      await watchCurrent(mode: mode);
+      return;
+    }
+    final packages = [...sortedPackages.reversed, this];
+    final all = packages.map((p) => p.watchCurrent(mode: mode));
+    await Future.wait(all);
+    trace.warn('quit watch build at workspace: $name');
+  }
+
+  Future<void> watchCurrent({
+    ProcessStartMode mode = ProcessStartMode.inheritStdio,
+  }) async {
+    if (!hasBuild) {
+      trace.trace('no build in package: $name');
+      return;
+    }
+    trace.debug('watch building package: $name');
+    final process = await Process.start(
+      'dart',
+      ['run', 'build_runner', 'watch'],
+      runInShell: true,
+      workingDirectory: root.path,
+      mode: mode,
+    );
+    if (await process.exitCode != 0) {
+      var message = 'watch build failed at: ${root.path}';
+      if (mode == ProcessStartMode.detached) message += stderr.toString();
+      trace.warn('watch build failed at: $name');
+      throw Exception(message);
+    }
+  }
+}
+
+extension DartPackageUpdateVersion on DartPackage {
+  /// Update Dart SDK and Flutter versions of current workspace.
+  void updateEnvironment({
+    VersionConstraint? sdk,
+    VersionConstraint? flutter,
+    bool workspace = true,
+  }) {
+    updateCurrentEnvironment(sdk: sdk, flutter: flutter);
+    if (workspace) {
+      for (final child in children) {
+        child.updateEnvironment(sdk: sdk, flutter: flutter, workspace: false);
+      }
+    }
+  }
+
+  /// Update Dart SDK and Flutter versions of current package.
+  void updateCurrentEnvironment({
+    VersionConstraint? sdk,
+    VersionConstraint? flutter,
+  }) {
+    if (sdk == null && flutter == null) return;
+    const environment = 'environment';
+    final editor = YamlEditor(manifestFile.readAsStringSync());
+    if (sdk != null) editor.update([environment, 'sdk'], sdk.toString());
+    if (flutter != null && isFlutter) {
+      editor.update([environment, 'flutter'], flutter.toString());
+    }
+    manifestFile.writeAsStringSync(editor.toString());
+  }
+}

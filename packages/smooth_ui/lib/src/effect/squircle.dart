@@ -1,7 +1,7 @@
 import 'package:build_data/annotation.dart';
 import 'package:compat_utils/number.dart';
 import 'package:flutter/widgets.dart';
-import 'package:wrap/convert.dart';
+import 'package:smooth_ui/_utils.dart';
 import 'package:wrap/wrap.dart';
 
 extension WrapSquircle on Widget {

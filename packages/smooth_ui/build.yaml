@@ -2,3 +2,4 @@ targets:
   $default:
     builders:
       build_data|data_builder: { enabled: true }
+      wrap|wrap_builder: { enabled: true }
