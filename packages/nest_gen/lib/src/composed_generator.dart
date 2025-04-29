@@ -6,7 +6,12 @@ import 'package:build/build.dart';
 import 'package:meta/meta.dart';
 import 'package:source_gen/source_gen.dart';
 
-/// A generator that will generate according to multiple components.
+/// A generator abstraction that helps to generate multiple components
+/// into a single output file.
+///
+/// Override the [generateComponents] method to define how to generate,
+/// and override the [joinComponents] method to define how to compose,
+/// instead of overriding the ordinary [generate] method.
 abstract class ComposedGenerator extends DirectGenerator {
   const ComposedGenerator();
 
