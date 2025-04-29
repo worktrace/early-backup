@@ -100,6 +100,7 @@ abstract class DirectGenerator extends Generator {
   String? generate(LibraryReader library, BuildStep buildStep);
 }
 
+/// Generator that output a part file with `part of` prefix.
 mixin PartGenerator on DirectGenerator {
   /// Add part of statement as the prefix of the generated result if necessary.
   @override
