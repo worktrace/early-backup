@@ -1,10 +1,7 @@
 targets:
   $default:
     builders:
-      build_name|name_builder: { enabled: true }
-      build_lerp|lerp_builder:
-        enabled: true
-        options: { depends_on: [build_name|name_builder] }
+      build_lerp|lerp_builder: { enabled: true }
 
 # Yaml anchor syntax is unsupported in build.yaml.
 builders:

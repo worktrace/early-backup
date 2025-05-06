@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
+import 'package:build_lerp/src/build_in_anno.dart';
 import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -60,7 +61,8 @@ class LerpGenerator extends GenerateFromAnnotation<GenerateLerp> {
 
     final className = rawClass.name;
     final functionName = private ? '_\$lerp\$$className' : 'lerp$className';
-    return '${annotateBuildInLerp ? '@buildInLerp\n' : ''}'
+    const buildInLerp = GenerateBuildInLerp.shortcutName;
+    return '${annotateBuildInLerp ? '@$buildInLerp\n' : ''}'
         '$className $functionName($className a, $className b, double t) {\n'
         '  return Offset.zero;\n'
         '}';

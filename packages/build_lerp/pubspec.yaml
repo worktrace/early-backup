@@ -10,7 +10,6 @@ environment:
 dependencies:
   analyzer: ^6.11.0
   build: ^2.4.2
-  build_name: ^0.0.0
   flutter: { sdk: flutter }
   meta: ^1.16.0
   nest_gen: ^0.0.0
