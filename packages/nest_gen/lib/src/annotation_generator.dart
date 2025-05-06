@@ -9,7 +9,6 @@ import 'package:source_gen/source_gen.dart';
 /// how to build on an parsed element annotated with an annotation of type [T].
 /// When there's multiple annotation with the same specified type [T],
 /// or match the override [typeChecker] rule, it will only use the first one.
-
 abstract class GenerateFormAnnotation<T> {
   const GenerateFormAnnotation();
 
