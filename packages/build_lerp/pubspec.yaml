@@ -1,0 +1,21 @@
+name: build_lerp
+description: Generate lerp functions and avoid unnecessary nullable assertions.
+resolution: workspace
+version: 0.0.0
+
+environment:
+  sdk: ^3.8.0-278.1.beta
+  flutter: ">=3.32.0-0.2.pre <4.0.0"
+
+dependencies:
+  analyzer: ^6.11.0
+  build: ^2.4.2
+  flutter: { sdk: flutter }
+  meta: ^1.16.0
+  nest_gen: ^0.0.0
+  path: ^1.9.1
+  source_gen: ^2.0.0
+
+dev_dependencies:
+  build_runner: ^2.4.15
+  test: ^1.24.0
