@@ -1,3 +1,3 @@
 export 'src/annotation_generator.dart';
 export 'src/composed_generator.dart';
-export 'src/utils.dart';
+export 'src/encapsulations.dart';
