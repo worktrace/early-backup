@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+import 'lerp_anno.dart';
+
 /// The type declaration of a lerp function for code reuse.
 typedef Lerp<T> = T Function(T begin, T end, double t);
 
@@ -19,3 +21,7 @@ Color lerpColor(Color a, Color b, double t) => Color.from(
   green: lerpDouble(a.g, b.g, t),
   blue: lerpDouble(a.b, b.b, t),
 );
+
+@lerp
+// ignore: unused_element entrypoint for generators.
+const Set<Function> _buildInLerp = {Offset.new};
