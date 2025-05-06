@@ -21,6 +21,9 @@ class LerpGenerator extends GenerateFromAnnotation<GenerateLerp> {
     BuildStep buildStep,
   ) {
     switch (element) {
+      case final ConstructorElement element:
+        return buildConstructor(element);
+
       case final TopLevelVariableElement element:
         final result = buildConstructorSet(element);
         if (result.isNotEmpty) return result.join('\n\n');
@@ -40,7 +43,21 @@ class LerpGenerator extends GenerateFromAnnotation<GenerateLerp> {
     for (final item in items) {
       final constructor = item.toFunctionValue();
       if (constructor is! ConstructorElement) continue;
-      yield '// generate on $constructor';
+      yield buildConstructor(
+        constructor,
+        private: false,
+        annotateBuildInLerp: true,
+      );
     }
+  }
+
+  String buildConstructor(
+    ConstructorElement element, {
+    bool private = true,
+    bool annotateBuildInLerp = false,
+  }) {
+    final type = element.returnType.element.name;
+    final functionName = private ? '_\$lerp\$$type' : 'lerp$type';
+    return '$type $functionName($type a, $type b, double t) {}';
   }
 }

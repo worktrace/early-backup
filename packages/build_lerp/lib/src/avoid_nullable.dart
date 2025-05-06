@@ -2,6 +2,8 @@ import 'package:flutter/widgets.dart';
 
 import 'lerp_anno.dart';
 
+part 'avoid_nullable.lerp.g.dart';
+
 /// The type declaration of a lerp function for code reuse.
 typedef Lerp<T> = T Function(T begin, T end, double t);
 

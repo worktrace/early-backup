@@ -7,4 +7,7 @@
 
 part of 'avoid_nullable.dart';
 
-// generate on Offset Offset(double dx, double dy)
+// @Instance of 'GenerateBuildInLerp'
+Offset lerpOffset(Offset a, Offset b, double t) {
+  return Offset.zero;
+}
