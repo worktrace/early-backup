@@ -3,6 +3,8 @@ import 'package:build/build.dart';
 import 'package:meta/meta.dart';
 import 'package:source_gen/source_gen.dart';
 
+import 'composed_generator.dart';
+
 /// Define how to generate data from an annotation of specified type [T].
 ///
 /// Override the [build] method to define
@@ -37,5 +39,34 @@ abstract class GenerateFormAnnotation<T> {
     );
     if (result == null) return null;
     return build(element, ConstantReader(result), buildStep);
+  }
+}
+
+abstract class ComposedAnnotationGenerator extends ComposedGenerator {
+  const ComposedAnnotationGenerator({this.throwOnUnresolved = true});
+
+  final bool throwOnUnresolved;
+
+  Iterable<GenerateFormAnnotation<dynamic>> get generators;
+}
+
+abstract class TopLevelAnnotationGenerator extends ComposedAnnotationGenerator {
+  const TopLevelAnnotationGenerator({super.throwOnUnresolved});
+
+  @override
+  Iterable<String> generateComponents(
+    LibraryReader library,
+    BuildStep buildStep,
+  ) sync* {
+    for (final element in library.allElements) {
+      for (final generator in generators) {
+        final result = generator.maybeBuild(
+          element,
+          buildStep,
+          throwOnUnresolved: throwOnUnresolved,
+        );
+        if (result != null) yield result;
+      }
+    }
   }
 }
