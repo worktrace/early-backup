@@ -1,4 +1,3 @@
-import 'package:build_lerp/_annotation.dart';
 import 'package:flutter/widgets.dart';
 
 /// The type declaration of a lerp function for code reuse.
@@ -20,13 +19,3 @@ Color lerpColor(Color a, Color b, double t) => Color.from(
   green: lerpDouble(a.g, b.g, t),
   blue: lerpDouble(a.b, b.b, t),
 );
-
-@buildInLerp
-// ignore: unused_element generated.
-const Set<Function> _buildInLerp = {
-  Offset.new,
-  Radius.elliptical,
-  BorderRadius.only,
-  EdgeInsets.only,
-  EdgeInsetsDirectional.only,
-};
