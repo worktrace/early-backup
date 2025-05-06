@@ -11,8 +11,8 @@ import 'composed_generator.dart';
 /// how to build on an parsed element annotated with an annotation of type [T].
 /// When there's multiple annotation with the same specified type [T],
 /// or match the override [typeChecker] rule, it will only use the first one.
-abstract class GenerateFormAnnotation<T> {
-  const GenerateFormAnnotation();
+abstract class GenerateFromAnnotation<T> {
+  const GenerateFromAnnotation();
 
   /// Define how to check the type [T].
   TypeChecker get typeChecker => TypeChecker.fromRuntime(T);
@@ -47,7 +47,7 @@ abstract class ComposedAnnotationGenerator extends ComposedGenerator {
 
   final bool throwOnUnresolved;
 
-  Iterable<GenerateFormAnnotation<dynamic>> get generators;
+  Iterable<GenerateFromAnnotation<dynamic>> get generators;
 }
 
 abstract class TopLevelAnnotationGenerator extends ComposedAnnotationGenerator {
@@ -71,7 +71,7 @@ abstract class TopLevelAnnotationGenerator extends ComposedAnnotationGenerator {
   }
 }
 
-/// Generate recursively from multiple [GenerateFormAnnotation]s.
+/// Generate recursively from multiple [GenerateFromAnnotation]s.
 ///
 /// If your generating strategy is simple enough and works like
 /// the raw [GeneratorForAnnotation],
