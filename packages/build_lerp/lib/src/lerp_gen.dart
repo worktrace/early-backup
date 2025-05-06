@@ -56,8 +56,13 @@ class LerpGenerator extends GenerateFromAnnotation<GenerateLerp> {
     bool private = true,
     bool annotateBuildInLerp = false,
   }) {
-    final type = element.returnType.element.name;
-    final functionName = private ? '_\$lerp\$$type' : 'lerp$type';
-    return '$type $functionName($type a, $type b, double t) {}';
+    final rawClass = element.returnType.element;
+
+    final className = rawClass.name;
+    final functionName = private ? '_\$lerp\$$className' : 'lerp$className';
+    return '${annotateBuildInLerp ? '@buildInLerp\n' : ''}'
+        '$className $functionName($className a, $className b, double t) {\n'
+        '  return Offset.zero;\n'
+        '}';
   }
 }

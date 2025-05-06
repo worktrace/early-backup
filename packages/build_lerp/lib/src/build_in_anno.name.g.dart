@@ -5,9 +5,6 @@
 // Generator: PartAnnotationsBuilder
 // **************************************************************************
 
-part of 'avoid_nullable.dart';
+part of 'build_in_anno.dart';
 
-@buildInLerp
-Offset lerpOffset(Offset a, Offset b, double t) {
-  return Offset.zero;
-}
+const _$name$buildInLerp = 'buildInLerp';
