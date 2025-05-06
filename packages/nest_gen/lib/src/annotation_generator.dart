@@ -70,3 +70,53 @@ abstract class TopLevelAnnotationGenerator extends ComposedAnnotationGenerator {
     }
   }
 }
+
+/// Generate recursively from multiple [GenerateFormAnnotation]s.
+///
+/// If your generating strategy is simple enough and works like
+/// the raw [GeneratorForAnnotation],
+/// you may consider [TopLevelAnnotationGenerator], which is more efficient.
+/// This generator will recursively process all children elements of a library.
+abstract class RecursiveAnnotationGenerator
+    extends ComposedAnnotationGenerator {
+  const RecursiveAnnotationGenerator({super.throwOnUnresolved});
+
+  @override
+  Iterable<String> generateComponents(
+    LibraryReader library,
+    BuildStep buildStep,
+  ) => generateRootElement(
+    library.element,
+    buildStep,
+    throwOnUnresolved: throwOnUnresolved,
+  );
+
+  /// Generate code recursively based on the root [element] of a library.
+  ///
+  /// The root [element] is supposed to be at the root of a library
+  /// (from a [LibraryReader]).
+  /// The annotation of the [element] itself will not be recognized here.
+  /// It will only process the children layer, and recursive when necessary.
+  @protected
+  Iterable<String> generateRootElement(
+    Element element,
+    BuildStep buildStep, {
+    bool throwOnUnresolved = true,
+  }) sync* {
+    for (final child in element.children) {
+      for (final generator in generators) {
+        final result = generator.maybeBuild(
+          child,
+          buildStep,
+          throwOnUnresolved: throwOnUnresolved,
+        );
+        if (result != null) yield result;
+      }
+      yield* generateRootElement(
+        child,
+        buildStep,
+        throwOnUnresolved: throwOnUnresolved,
+      );
+    }
+  }
+}
