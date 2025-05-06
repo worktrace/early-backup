@@ -6,10 +6,12 @@ import 'package:source_gen/source_gen.dart';
 /// Define how to generate data from an annotation of specified type [T].
 ///
 /// Override the [build] method to define
-/// how to build on an parsed element annotated with annotation of type [T].
+/// how to build on an parsed element annotated with an annotation of type [T].
+/// When there's multiple annotation with the same specified type [T],
+/// or match the override [typeChecker] rule, it will only use the first one.
 
-abstract class GenerateOnAnnotation<T> {
-  const GenerateOnAnnotation();
+abstract class GenerateFormAnnotation<T> {
+  const GenerateFormAnnotation();
 
   /// Define how to check the type [T].
   TypeChecker get typeChecker => TypeChecker.fromRuntime(T);
