@@ -15,3 +15,7 @@ extension IterableConvertShortcut<T> on Iterable<T> {
   List<T> get list => toList();
   Set<T> get asSet => toSet();
 }
+
+extension ConstructMapEntries<K, V> on Iterable<MapEntry<K, V>> {
+  Map<K, V> get asMap => Map.fromEntries(this);
+}
