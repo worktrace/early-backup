@@ -1,5 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
+import 'package:build_lerp/src/build_in_anno.dart';
+import 'package:compat_utils/iterable.dart';
 import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -56,8 +58,29 @@ class LerpGenerator extends GenerateFromAnnotation<GenerateLerp> {
     bool private = true,
     bool annotateBuildInLerp = false,
   }) {
-    final type = element.returnType.element.name;
-    final functionName = private ? '_\$lerp\$$type' : 'lerp$type';
-    return '$type $functionName($type a, $type b, double t) {}';
+    final rawClass = element.returnType.element;
+    final parameters = () sync* {
+      final fields = rawClass.fields
+          .map((field) => MapEntry(field.name, field.type))
+          .asMap;
+
+      for (final parameter in element.parameters) {
+        final name = parameter.name;
+        final type = parameter.type;
+        if (!fields.containsKey(name) || type != fields[name]) continue;
+      }
+
+      yield '1,1';
+    }();
+
+    final className = rawClass.name;
+    final functionName = private ? '_\$lerp\$$className' : 'lerp$className';
+    final constructorName = element.name.isEmpty ? '' : '.${element.name}';
+    const buildInLerp = GenerateBuildInLerp.shortcutName;
+
+    return '${annotateBuildInLerp ? '@$buildInLerp\n' : ''}'
+        '$className $functionName($className a, $className b, double t) {\n'
+        '  return $className$constructorName(${parameters.join(',')});\n'
+        '}';
   }
 }
