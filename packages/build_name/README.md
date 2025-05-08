@@ -1,3 +1,3 @@
-# Data Build
+# Build Name
 
-Code generator for data classes and boilerplates.
+Generate name and library identifier of Dart code elements.

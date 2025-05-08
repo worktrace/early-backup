@@ -1,21 +1,12 @@
-import 'package:build_name/annotation.dart';
 import 'package:meta/meta_meta.dart';
 
-part 'lerp.name.g.dart';
-
-const lerp = GenerateLerp();
-
-@Target({TargetKind.constructor})
-class GenerateLerp {
-  const GenerateLerp();
-}
-
-/// Generate build-in lerp type map of its name and return [TypeID].
 const buildInLerp = GenerateBuildInLerp();
 
 @Target({TargetKind.function})
 class GenerateBuildInLerp {
   const GenerateBuildInLerp();
+
+  static const shortcutName = 'buildInLerp';
 }
 
 /// Elementary identifier of a type in static analysis.
@@ -25,21 +16,15 @@ class GenerateBuildInLerp {
 /// when running the generators with `package:analyzer`.
 /// Once import both `package:analyzer` and `package:flutter`,
 /// the program will crash.
-@name
-@lib
 class TypeID {
   const TypeID({required this.typeName, this.libraryIdentifier});
 
-  @name
   final String typeName;
-
-  @name
   final String? libraryIdentifier;
 
-  static String className = _$name$TypeID;
-  static String classLibrary = _$lib$TypeID;
-  static String fieldTypeName = _$name$typeName;
-  static String fieldLibraryIdentifier = _$name$libraryIdentifier;
+  static const classLibrary = 'package:build_lerp/src/build_in_anno.dart';
+  static const fieldTypeName = 'typeName';
+  static const fieldLibraryIdentifier = 'libraryIdentifier';
 }
 
 extension TypeIDMatch on Map<String, TypeID> {

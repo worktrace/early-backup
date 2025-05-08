@@ -6,7 +6,7 @@
 // **************************************************************************
 
 // ignore: implementation_imports generated.
-import 'package:build_data/src/lerp.dart';
+import 'package:build_lerp/src/build_in_anno.dart';
 
 const buildInLerpFunctions = <String, TypeID>{
   'lerpDouble': TypeID(typeName: 'double', libraryIdentifier: 'dart:core'),

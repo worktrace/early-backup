@@ -6,7 +6,12 @@ import 'package:build/build.dart';
 import 'package:meta/meta.dart';
 import 'package:source_gen/source_gen.dart';
 
-/// A generator that will generate according to multiple components.
+/// A generator abstraction that helps to generate multiple components
+/// into a single output file.
+///
+/// Override the [generateComponents] method to define how to generate,
+/// and override the [joinComponents] method to define how to compose,
+/// instead of overriding the ordinary [generate] method.
 abstract class ComposedGenerator extends DirectGenerator {
   const ComposedGenerator();
 
@@ -95,6 +100,7 @@ abstract class DirectGenerator extends Generator {
   String? generate(LibraryReader library, BuildStep buildStep);
 }
 
+/// Generator that output a part file with `part of` prefix.
 mixin PartGenerator on DirectGenerator {
   /// Add part of statement as the prefix of the generated result if necessary.
   @override

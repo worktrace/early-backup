@@ -1,11 +1,11 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
-import 'package:nest_gen/generator.dart';
+import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'equals.dart';
 
-class EqualsGenerator extends GeneratorOnAnnotation<GenerateEquals> {
+class EqualsGenerator extends GenerateFromAnnotation<GenerateEquals> {
   const EqualsGenerator();
 
   @override
@@ -14,7 +14,9 @@ class EqualsGenerator extends GeneratorOnAnnotation<GenerateEquals> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    if (element is! ClassElement) throw const AnnoPosException();
+    if (element is! ClassElement) {
+      throw const AnnotationPositionException<GenerateEquals>();
+    }
 
     final name = element.name;
     final code = element.fields

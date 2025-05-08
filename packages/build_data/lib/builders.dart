@@ -1,30 +1,20 @@
 import 'package:build/build.dart';
-import 'package:nest_gen/builder.dart';
+import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
 import '_generators.dart';
 
 Builder dataBuilder(BuilderOptions options) => LibraryBuilder(
-  const PartDataBuilder([CopyGenerator(), EqualsGenerator(), LerpGenerator()]),
+  const PartAnnotationsBuilder([CopyGenerator(), EqualsGenerator()]),
   generatedExtension: '.data.g.dart',
 );
 
-Builder buildInLerpBuilder(BuilderOptions options) => LibraryBuilder(
-  const BuildInLerpGenerator(),
-  generatedExtension: '.bil.g.dart',
-);
-
 Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
-  const PartDataBuilder([CopyGenerator()]),
+  const PartAnnotationsBuilder([CopyGenerator()]),
   generatedExtension: '.copy.g.dart',
 );
 
 Builder equalsBuilder(BuilderOptions options) => LibraryBuilder(
-  const PartDataBuilder([EqualsGenerator()]),
+  const PartAnnotationsBuilder([EqualsGenerator()]),
   generatedExtension: '.equals.g.dart',
-);
-
-Builder lerpBuilder(BuilderOptions options) => LibraryBuilder(
-  const PartDataBuilder([LerpGenerator()]),
-  generatedExtension: '.lerp.g.dart',
 );

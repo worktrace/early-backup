@@ -2,20 +2,19 @@ import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:compat_utils/iterable.dart';
-import 'package:nest_gen/builder.dart';
-import 'package:nest_gen/generator.dart';
+import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'annotation.dart';
 
 Builder wrapBuilder(BuilderOptions options) {
   return LibraryBuilder(
-    const PartDataBuilder([WrapGenerator()]),
+    const PartAnnotationsBuilder([WrapGenerator()]),
     generatedExtension: '.wrap.g.dart',
   );
 }
 
-class WrapGenerator extends GeneratorOnAnnotation<GenerateWrap> {
+class WrapGenerator extends GenerateFromAnnotation<GenerateWrap> {
   const WrapGenerator();
 
   @override
@@ -32,7 +31,7 @@ class WrapGenerator extends GeneratorOnAnnotation<GenerateWrap> {
         return buildTopLevelVariable(element);
 
       default:
-        throw const AnnoPosException();
+        throw const AnnotationPositionException<GenerateWrap>();
     }
   }
 

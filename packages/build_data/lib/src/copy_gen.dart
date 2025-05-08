@@ -1,12 +1,12 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:compat_utils/string.dart';
-import 'package:nest_gen/generator.dart';
+import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'copy.dart';
 
-class CopyGenerator extends GeneratorOnAnnotation<GenerateCopy> {
+class CopyGenerator extends GenerateFromAnnotation<GenerateCopy> {
   const CopyGenerator();
 
   @override
@@ -15,7 +15,9 @@ class CopyGenerator extends GeneratorOnAnnotation<GenerateCopy> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    if (element is! ConstructorElement) throw const AnnoPosException();
+    if (element is! ConstructorElement) {
+      throw const AnnotationPositionException<GenerateCopy>();
+    }
 
     final type = element.returnType.toString();
     final name = element.isDefaultConstructor ? '' : element.name;

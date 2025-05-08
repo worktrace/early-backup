@@ -1,3 +1,2 @@
 export 'src/copy.dart';
 export 'src/equals.dart';
-export 'src/lerp.dart';

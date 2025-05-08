@@ -7,4 +7,3 @@
 library;
 
 export '_annotation.dart';
-export 'src/lerp_deps.dart';

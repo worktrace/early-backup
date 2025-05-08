@@ -2,7 +2,6 @@ targets:
   $default:
     builders:
       build_name|name_builder: { enabled: true }
-      build_data|build_in_lerp_builder: { enabled: true }
 
 # Yaml anchor syntax is unsupported in build.yaml.
 builders:
@@ -10,14 +9,6 @@ builders:
     import: package:build_data/builders.dart
     builder_factories: [dataBuilder]
     build_extensions: { ".dart": [".data.g.dart"] }
-    auto_apply: none
-    build_to: source
-    applies_builders: ["source_gen|combining_builder"]
-
-  build_in_lerp_builder:
-    import: package:build_data/builders.dart
-    builder_factories: [buildInLerpBuilder]
-    build_extensions: { ".dart": [".bil.g.dart"] }
     auto_apply: none
     build_to: source
     applies_builders: ["source_gen|combining_builder"]
@@ -34,14 +25,6 @@ builders:
     import: package:build_data/builders.dart
     builder_factories: [equalsBuilder]
     build_extensions: { ".dart": [".equals.g.dart"] }
-    auto_apply: none
-    build_to: source
-    applies_builders: ["source_gen|combining_builder"]
-
-  lerp_builder:
-    import: package:build_data/builders.dart
-    builder_factories: [lerpBuilder]
-    build_extensions: { ".dart": [".lerp.g.dart"] }
     auto_apply: none
     build_to: source
     applies_builders: ["source_gen|combining_builder"]
