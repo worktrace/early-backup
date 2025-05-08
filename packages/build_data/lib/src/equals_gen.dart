@@ -5,7 +5,7 @@ import 'package:source_gen/source_gen.dart';
 
 import 'equals.dart';
 
-class EqualsGenerator extends GenerateFromAnnotation<GenerateEquals> {
+class EqualsGenerator extends GenerateOnAnnotation<GenerateEquals> {
   const EqualsGenerator();
 
   @override

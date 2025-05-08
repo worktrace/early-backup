@@ -11,7 +11,7 @@ abstract class ComposedAnnotationGenerator extends ComposedGenerator {
 
   final bool throwOnUnresolved;
 
-  Iterable<GenerateFromAnnotation<dynamic>> get generators;
+  Iterable<GenerateOnAnnotation<dynamic>> get generators;
 }
 
 abstract class TopLevelAnnotationGenerator extends ComposedAnnotationGenerator {
@@ -35,7 +35,7 @@ abstract class TopLevelAnnotationGenerator extends ComposedAnnotationGenerator {
   }
 }
 
-/// Generate recursively from multiple [GenerateFromAnnotation]s.
+/// Generate recursively from multiple [GenerateOnAnnotation]s.
 ///
 /// If your generating strategy is simple enough and works like
 /// the raw [GeneratorForAnnotation],

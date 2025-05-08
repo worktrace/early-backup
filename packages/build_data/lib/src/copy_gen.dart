@@ -6,7 +6,7 @@ import 'package:source_gen/source_gen.dart';
 
 import 'copy.dart';
 
-class CopyGenerator extends GenerateFromAnnotation<GenerateCopy> {
+class CopyGenerator extends GenerateOnAnnotation<GenerateCopy> {
   const CopyGenerator();
 
   @override
