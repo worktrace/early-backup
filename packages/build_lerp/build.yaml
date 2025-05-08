@@ -1,0 +1,25 @@
+targets:
+  $default:
+    builders:
+      build_lerp|build_in_lerp_builder: { enabled: true }
+      build_lerp|lerp_builder:
+        enabled: true
+        options: { depends: [build_lerp|build_in_lerp_builder] }
+
+# Yaml anchor syntax is unsupported in build.yaml.
+builders:
+  lerp_builder:
+    import: package:build_lerp/builders.dart
+    builder_factories: [lerpBuilder]
+    build_extensions: { ".dart": [".lerp.g.dart"] }
+    auto_apply: none
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]
+
+  build_in_lerp_builder:
+    import: package:build_lerp/src/build_in_gen.dart
+    builder_factories: [buildInLerpBuilder]
+    build_extensions: { ".dart": [".bil.g.dart"] }
+    auto_apply: none
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]

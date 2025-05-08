@@ -1,17 +1,16 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
-import 'package:nest_gen/builder.dart';
-import 'package:nest_gen/generator.dart';
+import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'annotation.dart';
 
 Builder nameBuilder(BuilderOptions options) => LibraryBuilder(
-  const PartDataBuilder([NameGenerator(), LibGenerator()]),
+  const PartAnnotationsBuilder([NameGenerator(), LibGenerator()]),
   generatedExtension: '.name.g.dart',
 );
 
-class NameGenerator extends GeneratorOnAnnotation<GenerateName> {
+class NameGenerator extends GenerateFromAnnotation<GenerateName> {
   const NameGenerator();
 
   @override
@@ -25,7 +24,7 @@ class NameGenerator extends GeneratorOnAnnotation<GenerateName> {
   }
 }
 
-class LibGenerator extends GeneratorOnAnnotation<GenerateLib> {
+class LibGenerator extends GenerateFromAnnotation<GenerateLib> {
   const LibGenerator();
 
   @override

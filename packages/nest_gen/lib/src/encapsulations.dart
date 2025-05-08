@@ -2,6 +2,9 @@
 /// @docImport 'package:meta/meta_meta.dart';
 library;
 
+import 'annotation_generator.dart';
+import 'composed_generator.dart';
+
 /// Throw when the annotation position is invalid.
 ///
 /// The valid position of an annotation should be indicated by the [Target]
@@ -13,4 +16,15 @@ class AnnotationPositionException<T> implements Exception {
 
   @override
   String toString() => 'invalid annotation position of $T';
+}
+
+class AnnotationsBuilder extends RecursiveAnnotationGenerator {
+  const AnnotationsBuilder(this.generators, {super.throwOnUnresolved});
+
+  @override
+  final Iterable<GenerateFromAnnotation<dynamic>> generators;
+}
+
+class PartAnnotationsBuilder extends AnnotationsBuilder with PartGenerator {
+  const PartAnnotationsBuilder(super.generators, {super.throwOnUnresolved});
 }
