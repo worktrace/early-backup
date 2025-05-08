@@ -10,6 +10,11 @@ abstract class ComposedSingleAnnotationGenerator<T> extends ComposedGenerator {
   final bool throwOnUnresolved;
 
   TypeChecker get typeChecker => TypeChecker.fromRuntime(T);
+}
+
+abstract class TopLevelSingleAnnotationGenerator<T>
+    extends ComposedSingleAnnotationGenerator<T> {
+  const TopLevelSingleAnnotationGenerator();
 
   @override
   Iterable<String> generateComponents(
