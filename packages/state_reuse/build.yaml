@@ -2,3 +2,4 @@ targets:
   $default:
     builders:
       build_data|data_builder: { enabled: true }
+      build_lerp|lerp_builder: { enabled: true }

@@ -4,8 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:smooth_ui/colors.dart';
 
 part 'colors.data.g.dart';
+part 'colors.lerp.g.dart';
 
-class AreaColors with _$Copy$AreaColors implements Copyable {
+class AreaColors {
   @copy
   @lerp
   const AreaColors({this.background = transparent, this.foreground});
@@ -21,7 +22,7 @@ class AreaColors with _$Copy$AreaColors implements Copyable {
   final Color? foreground;
 }
 
-class CardColors extends AreaColors with _$Copy$CardColors {
+class CardColors extends AreaColors {
   @copy
   @lerp
   const CardColors({

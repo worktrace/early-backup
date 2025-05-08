@@ -2,15 +2,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// Generator: PartDataBuilder
+// Generator: PartAnnotationsBuilder
 // **************************************************************************
 
 part of 'locale.dart';
 
-mixin _$Copy$Locale implements Copyable {
-  Locale get _template => this as Locale;
-
-  @override
+extension CopyLocale on Locale {
   Locale copyWith({
     String? name,
     LocaleID? id,
@@ -19,11 +16,11 @@ mixin _$Copy$Locale implements Copyable {
     String? worktrace,
   }) {
     return Locale(
-      name: name ?? _template.name,
-      id: id ?? _template.id,
-      direction: direction ?? _template.direction,
-      loading: loading ?? _template.loading,
-      worktrace: worktrace ?? _template.worktrace,
+      name: name ?? this.name,
+      id: id ?? this.id,
+      direction: direction ?? this.direction,
+      loading: loading ?? this.loading,
+      worktrace: worktrace ?? this.worktrace,
     );
   }
 }

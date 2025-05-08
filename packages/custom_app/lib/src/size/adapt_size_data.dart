@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 
 part 'adapt_size_data.data.g.dart';
 
-class AdaptedSize with _$Copy$AdaptedSize {
+class AdaptedSize {
   @copy
   const AdaptedSize({this.mode = WindowMode.landscape, this.ratio = 1})
     : assert(ratio > 0);
@@ -17,7 +17,7 @@ class AdaptedSize with _$Copy$AdaptedSize {
   final double ratio;
 }
 
-abstract class SizeAdapter implements Scalable<SizeAdapter>, Copyable {
+abstract class SizeAdapter implements Scalable<SizeAdapter> {
   const SizeAdapter({this.ratio = 1}) : assert(ratio > 0);
 
   final double ratio;
@@ -25,7 +25,7 @@ abstract class SizeAdapter implements Scalable<SizeAdapter>, Copyable {
   WindowMode adapt(Size size);
 }
 
-class DesktopSizeAdapter extends SizeAdapter with _$Copy$DesktopSizeAdapter {
+class DesktopSizeAdapter extends SizeAdapter {
   @copy
   const DesktopSizeAdapter({
     this.landscapeWidth = 1000,
@@ -47,7 +47,7 @@ class DesktopSizeAdapter extends SizeAdapter with _$Copy$DesktopSizeAdapter {
   DesktopSizeAdapter scale(double times) => copyWith(ratio: ratio * times);
 }
 
-class MobileSizeAdapter extends SizeAdapter with _$Copy$MobileSizeAdapter {
+class MobileSizeAdapter extends SizeAdapter {
   @copy
   const MobileSizeAdapter({super.ratio, this.landscapeWidth = 1200});
 

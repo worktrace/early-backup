@@ -15,7 +15,6 @@ workspace:
   # Shared libraries for code reuse.
   - packages/auto_stories
   - packages/build_data
-  - packages/build_name
   - packages/build_lerp
   - packages/compat_utils
   - packages/concise_cli

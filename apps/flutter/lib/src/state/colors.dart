@@ -4,8 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 part 'colors.data.g.dart';
+part 'colors.lerp.g.dart';
 
-class Colors extends ColorsBase with _$Copy$Colors {
+class Colors extends ColorsBase {
   @copy
   @lerp
   const Colors.light({

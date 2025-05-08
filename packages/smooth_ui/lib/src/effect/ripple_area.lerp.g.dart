@@ -5,7 +5,12 @@
 // Generator: PartAnnotationsBuilder
 // **************************************************************************
 
-part of 'ripple_line.dart';
+part of 'ripple_area.dart';
 
-bool _$equals$RippleLinePainter(RippleLinePainter a, RippleLinePainter b) =>
-    a.padding != b.padding;
+RippleCardColors _$lerp$RippleCardColors(
+  RippleCardColors a,
+  RippleCardColors b,
+  double t,
+) {
+  return RippleCardColors(ripple: AreaColors.lerp(a.ripple, b.ripple, t));
+}

@@ -6,7 +6,7 @@ import 'locales.dart';
 
 part 'locale.data.g.dart';
 
-class Locale extends LocaleBase with _$Copy$Locale {
+class Locale extends LocaleBase {
   @copy
   const Locale({
     required super.name,

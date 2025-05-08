@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// Generator: PartDataBuilder
+// Generator: PartAnnotationsBuilder
 // **************************************************************************
 
 part of 'sidebar.dart';

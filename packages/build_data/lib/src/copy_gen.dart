@@ -6,6 +6,11 @@ import 'package:source_gen/source_gen.dart';
 
 import 'copy.dart';
 
+Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
+  const PartAnnotationsBuilder([CopyGenerator()]),
+  generatedExtension: '.copy.g.dart',
+);
+
 class CopyGenerator extends GenerateFromAnnotation<GenerateCopy> {
   const CopyGenerator();
 
@@ -23,30 +28,24 @@ class CopyGenerator extends GenerateFromAnnotation<GenerateCopy> {
     final name = element.isDefaultConstructor ? '' : element.name;
     final constructorName = name.isEmpty ? '' : '.$name';
 
-    const template = '_template';
-    final inputs = element.declaration.parameters.map(_generateInput).join(',');
-    final outputs = element.declaration.parameters
-        .map((parameter) => _generateOutput(parameter, template))
-        .join(',');
-
-    return 'mixin _\$Copy\$$type implements ${Copyable.name} {\n'
-        '  $type get $template => this as $type;\n'
-        '  \n'
-        '  @override $type copyWith({$inputs}) {\n'
+    final inputs = element.declaration.parameters.map(_genInput).join(',');
+    final outputs = element.declaration.parameters.map(_genOutput).join(',');
+    return 'extension Copy$type on $type {\n'
+        '  $type copyWith({$inputs}) {\n'
         '    return $type$constructorName($outputs);\n'
         '  }\n'
         '}';
   }
 
-  String _generateInput(ParameterElement parameter) {
+  String _genInput(ParameterElement parameter) {
     final name = parameter.name;
     final type = parameter.type.toString();
     return '${type.ensureSuffix('?')} $name';
   }
 
-  String _generateOutput(ParameterElement parameter, String template) {
+  String _genOutput(ParameterElement parameter) {
     final name = parameter.name;
     final prefix = parameter.isNamed ? '$name: ' : '';
-    return '$prefix$name ?? $template.$name';
+    return '$prefix$name ?? this.$name';
   }
 }

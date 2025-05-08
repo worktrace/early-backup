@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 
 part 'animation.data.g.dart';
 
-class AnimationData with _$Copy$AnimationData implements Copyable {
+class AnimationData {
   @copy
   const AnimationData({
     this.duration = const Duration(milliseconds: 300),
@@ -17,9 +17,7 @@ class AnimationData with _$Copy$AnimationData implements Copyable {
 
 const kHoverDefibrillation = Duration(milliseconds: 35);
 
-class AnimationDefibrillation extends AnimationData
-    with _$Copy$AnimationDefibrillation
-    implements Copyable {
+class AnimationDefibrillation extends AnimationData {
   @copy
   const AnimationDefibrillation({
     super.duration,

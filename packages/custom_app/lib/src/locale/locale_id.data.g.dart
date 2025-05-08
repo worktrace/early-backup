@@ -2,24 +2,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// Generator: PartDataBuilder
+// Generator: PartAnnotationsBuilder
 // **************************************************************************
 
 part of 'locale_id.dart';
 
-mixin _$Copy$LocaleID implements Copyable {
-  LocaleID get _template => this as LocaleID;
-
-  @override
+extension CopyLocaleID on LocaleID {
   LocaleID copyWith({
     String? languageCode,
     String? scriptCode,
     String? areaCode,
   }) {
     return LocaleID(
-      languageCode ?? _template.languageCode,
-      scriptCode: scriptCode ?? _template.scriptCode,
-      areaCode: areaCode ?? _template.areaCode,
+      languageCode ?? this.languageCode,
+      scriptCode: scriptCode ?? this.scriptCode,
+      areaCode: areaCode ?? this.areaCode,
     );
   }
 }

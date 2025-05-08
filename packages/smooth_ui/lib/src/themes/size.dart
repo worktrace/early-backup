@@ -4,8 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:smooth_ui/colors.dart';
 
 part 'size.data.g.dart';
+part 'size.lerp.g.dart';
 
-class BorderSize with _$Copy$BorderSize {
+class BorderSize {
   @copy
   @lerp
   const BorderSize({this.width = 1, this.radius = BorderRadius.zero});
@@ -20,7 +21,7 @@ class BorderSize with _$Copy$BorderSize {
   final BorderRadius radius;
 }
 
-class BoxShadowSize with _$Copy$BoxShadowSize {
+class BoxShadowSize {
   @copy
   @lerp
   const BoxShadowSize({
@@ -63,7 +64,7 @@ class BoxShadowSize with _$Copy$BoxShadowSize {
   }
 }
 
-class CardSize with _$Copy$CardSize {
+class CardSize {
   @copy
   @lerp
   const CardSize({
