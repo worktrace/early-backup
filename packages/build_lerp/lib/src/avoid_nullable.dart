@@ -30,4 +30,10 @@ Color lerpColor(Color a, Color b, double t) => Color.from(
 
 @lerp
 // ignore: unused_element entrypoint for generators.
-const Set<Function> _buildInLerp = {Offset.new};
+const Set<Function> _buildInLerp = {
+  Offset.new,
+  Radius.elliptical,
+  BorderRadius.only,
+  EdgeInsets.only,
+  EdgeInsetsDirectional.only,
+};
