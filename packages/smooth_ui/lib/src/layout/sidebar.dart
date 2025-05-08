@@ -12,6 +12,7 @@ import 'package:wrap/annotation.dart';
 import 'package:wrap/wrap.dart';
 
 part 'sidebar.data.g.dart';
+part 'sidebar.lerp.g.dart';
 part 'sidebar.wrap.g.dart';
 
 /// Default sidebar width as placeholder.
@@ -175,7 +176,7 @@ class _SidebarContainerState extends State<SidebarContainer> with AdaptSize {
   }
 }
 
-class SidebarColors extends RippleCardColors with _$Copy$SidebarColors {
+class SidebarColors extends RippleCardColors {
   @copy
   @lerp
   const SidebarColors({
@@ -194,7 +195,7 @@ class SidebarColors extends RippleCardColors with _$Copy$SidebarColors {
   final Color resize;
 }
 
-class SidebarSize extends CardSize with _$Copy$SidebarSize {
+class SidebarSize extends CardSize {
   @copy
   @lerp
   const SidebarSize({

@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 part 'locale_id.data.g.dart';
 
 @immutable
-class LocaleID with _$Copy$LocaleID {
+class LocaleID {
   @copy
   const LocaleID(this.languageCode, {this.scriptCode, this.areaCode});
 

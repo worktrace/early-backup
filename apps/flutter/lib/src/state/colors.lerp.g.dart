@@ -2,9 +2,11 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// Generator: PartDataBuilder
+// Generator: PartAnnotationsBuilder
 // **************************************************************************
 
-part of 'copy.dart';
+part of 'colors.dart';
 
-const _$name$Copyable = 'Copyable';
+Colors _$lerp$Colors(Colors a, Colors b, double t) {
+  return Colors.light(sidebar: SidebarColors.lerp(a.sidebar, b.sidebar, t));
+}

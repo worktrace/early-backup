@@ -11,6 +11,7 @@ import 'package:wrap/wrap.dart';
 import 'ripple.dart';
 
 part 'ripple_area.data.g.dart';
+part 'ripple_area.lerp.g.dart';
 
 extension WrapRippleArea on Widget? {
   RippleArea ripple({
@@ -113,7 +114,7 @@ class RippleAreaPainter extends RipplePainter {
   }
 }
 
-class RippleCardColors extends CardColors with _$Copy$RippleCardColors {
+class RippleCardColors extends CardColors {
   @copy
   @lerp
   const RippleCardColors({

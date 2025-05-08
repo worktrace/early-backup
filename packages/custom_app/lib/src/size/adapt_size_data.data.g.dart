@@ -2,48 +2,36 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// Generator: PartDataBuilder
+// Generator: PartAnnotationsBuilder
 // **************************************************************************
 
 part of 'adapt_size_data.dart';
 
-mixin _$Copy$AdaptedSize implements Copyable {
-  AdaptedSize get _template => this as AdaptedSize;
-
-  @override
+extension CopyAdaptedSize on AdaptedSize {
   AdaptedSize copyWith({WindowMode? mode, double? ratio}) {
-    return AdaptedSize(
-      mode: mode ?? _template.mode,
-      ratio: ratio ?? _template.ratio,
-    );
+    return AdaptedSize(mode: mode ?? this.mode, ratio: ratio ?? this.ratio);
   }
 }
 
-mixin _$Copy$DesktopSizeAdapter implements Copyable {
-  DesktopSizeAdapter get _template => this as DesktopSizeAdapter;
-
-  @override
+extension CopyDesktopSizeAdapter on DesktopSizeAdapter {
   DesktopSizeAdapter copyWith({
     double? landscapeWidth,
     double? portraitWidth,
     double? ratio,
   }) {
     return DesktopSizeAdapter(
-      landscapeWidth: landscapeWidth ?? _template.landscapeWidth,
-      portraitWidth: portraitWidth ?? _template.portraitWidth,
-      ratio: ratio ?? _template.ratio,
+      landscapeWidth: landscapeWidth ?? this.landscapeWidth,
+      portraitWidth: portraitWidth ?? this.portraitWidth,
+      ratio: ratio ?? this.ratio,
     );
   }
 }
 
-mixin _$Copy$MobileSizeAdapter implements Copyable {
-  MobileSizeAdapter get _template => this as MobileSizeAdapter;
-
-  @override
+extension CopyMobileSizeAdapter on MobileSizeAdapter {
   MobileSizeAdapter copyWith({double? ratio, double? landscapeWidth}) {
     return MobileSizeAdapter(
-      ratio: ratio ?? _template.ratio,
-      landscapeWidth: landscapeWidth ?? _template.landscapeWidth,
+      ratio: ratio ?? this.ratio,
+      landscapeWidth: landscapeWidth ?? this.landscapeWidth,
     );
   }
 }

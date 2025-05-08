@@ -2,15 +2,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// Generator: PartDataBuilder
+// Generator: PartAnnotationsBuilder
 // **************************************************************************
 
 part of 'colors.dart';
 
-mixin _$Copy$Colors implements Copyable {
-  Colors get _template => this as Colors;
-
-  @override
+extension CopyColors on Colors {
   Colors copyWith({
     Brightness? brightness,
     Color? foreground,
@@ -18,19 +15,10 @@ mixin _$Copy$Colors implements Copyable {
     SidebarColors? sidebar,
   }) {
     return Colors.light(
-      brightness: brightness ?? _template.brightness,
-      foreground: foreground ?? _template.foreground,
-      background: background ?? _template.background,
-      sidebar: sidebar ?? _template.sidebar,
+      brightness: brightness ?? this.brightness,
+      foreground: foreground ?? this.foreground,
+      background: background ?? this.background,
+      sidebar: sidebar ?? this.sidebar,
     );
   }
-}
-
-Colors _$lerp$Colors(Colors a, Colors b, double t) {
-  return Colors.light(
-    brightness: t < 0.5 ? a.brightness : b.brightness,
-    foreground: Color.lerp(a.foreground, b.foreground, t),
-    background: lerpColor(a.background, b.background, t),
-    sidebar: SidebarColors.lerp(a.sidebar, b.sidebar, t),
-  );
 }

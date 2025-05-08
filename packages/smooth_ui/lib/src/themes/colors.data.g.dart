@@ -2,34 +2,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// Generator: PartDataBuilder
+// Generator: PartAnnotationsBuilder
 // **************************************************************************
 
 part of 'colors.dart';
 
-mixin _$Copy$AreaColors implements Copyable {
-  AreaColors get _template => this as AreaColors;
-
-  @override
+extension CopyAreaColors on AreaColors {
   AreaColors copyWith({Color? background, Color? foreground}) {
     return AreaColors(
-      background: background ?? _template.background,
-      foreground: foreground ?? _template.foreground,
+      background: background ?? this.background,
+      foreground: foreground ?? this.foreground,
     );
   }
 }
 
-AreaColors _$lerp$AreaColors(AreaColors a, AreaColors b, double t) {
-  return AreaColors(
-    background: lerpColor(a.background, b.background, t),
-    foreground: Color.lerp(a.foreground, b.foreground, t),
-  );
-}
-
-mixin _$Copy$CardColors implements Copyable {
-  CardColors get _template => this as CardColors;
-
-  @override
+extension CopyCardColors on CardColors {
   CardColors copyWith({
     Color? background,
     Color? foreground,
@@ -37,19 +24,10 @@ mixin _$Copy$CardColors implements Copyable {
     Color? shadow,
   }) {
     return CardColors(
-      background: background ?? _template.background,
-      foreground: foreground ?? _template.foreground,
-      border: border ?? _template.border,
-      shadow: shadow ?? _template.shadow,
+      background: background ?? this.background,
+      foreground: foreground ?? this.foreground,
+      border: border ?? this.border,
+      shadow: shadow ?? this.shadow,
     );
   }
-}
-
-CardColors _$lerp$CardColors(CardColors a, CardColors b, double t) {
-  return CardColors(
-    background: lerpColor(a.background, b.background, t),
-    foreground: Color.lerp(a.foreground, b.foreground, t),
-    border: lerpColor(a.border, b.border, t),
-    shadow: lerpColor(a.shadow, b.shadow, t),
-  );
 }
