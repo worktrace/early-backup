@@ -5,13 +5,8 @@ import 'package:source_gen/source_gen.dart';
 import '_generators.dart';
 
 Builder dataBuilder(BuilderOptions options) => LibraryBuilder(
-  const PartDataBuilder([CopyGenerator(), EqualsGenerator(), LerpGenerator()]),
+  const PartDataBuilder([CopyGenerator(), EqualsGenerator()]),
   generatedExtension: '.data.g.dart',
-);
-
-Builder buildInLerpBuilder(BuilderOptions options) => LibraryBuilder(
-  const BuildInLerpGenerator(),
-  generatedExtension: '.bil.g.dart',
 );
 
 Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
@@ -22,9 +17,4 @@ Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
 Builder equalsBuilder(BuilderOptions options) => LibraryBuilder(
   const PartDataBuilder([EqualsGenerator()]),
   generatedExtension: '.equals.g.dart',
-);
-
-Builder lerpBuilder(BuilderOptions options) => LibraryBuilder(
-  const PartDataBuilder([LerpGenerator()]),
-  generatedExtension: '.lerp.g.dart',
 );

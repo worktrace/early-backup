@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   build_data: ^0.0.0
+  build_lerp: ^0.0.0
   compat_utils: ^0.0.0
   flutter: { sdk: flutter }
   wrap: ^1.0.0
