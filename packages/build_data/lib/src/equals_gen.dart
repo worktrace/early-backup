@@ -5,6 +5,11 @@ import 'package:source_gen/source_gen.dart';
 
 import 'equals.dart';
 
+Builder equalsBuilder(BuilderOptions options) => LibraryBuilder(
+  const PartAnnotationsBuilder([EqualsGenerator()]),
+  generatedExtension: '.equals.g.dart',
+);
+
 class EqualsGenerator extends GenerateFromAnnotation<GenerateEquals> {
   const EqualsGenerator();
 

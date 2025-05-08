@@ -6,6 +6,11 @@ import 'package:source_gen/source_gen.dart';
 
 import 'copy.dart';
 
+Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
+  const PartAnnotationsBuilder([CopyGenerator()]),
+  generatedExtension: '.copy.g.dart',
+);
+
 class CopyGenerator extends GenerateFromAnnotation<GenerateCopy> {
   const CopyGenerator();
 
