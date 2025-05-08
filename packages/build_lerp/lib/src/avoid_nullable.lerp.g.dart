@@ -9,5 +9,5 @@ part of 'avoid_nullable.dart';
 
 @buildInLerp
 Offset lerpOffset(Offset a, Offset b, double t) {
-  return Offset(1, 1);
+  return Offset(lerpDouble(a.dx, b.dx, t), lerpDouble(a.dy, b.dy, t));
 }

@@ -2,7 +2,9 @@ targets:
   $default:
     builders:
       build_lerp|build_in_lerp_builder: { enabled: true }
-      build_lerp|lerp_builder: { enabled: true }
+      build_lerp|lerp_builder:
+        enabled: true
+        options: { depends: [build_lerp|build_in_lerp_builder] }
 
 # Yaml anchor syntax is unsupported in build.yaml.
 builders:
