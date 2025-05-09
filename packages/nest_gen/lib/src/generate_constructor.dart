@@ -1,5 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
+import 'package:compat_utils/iterable.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'annotation_builder.dart';
@@ -82,5 +84,28 @@ mixin GenerateConstructorSet<AnnoT> on GenerateConstructor<AnnoT> {
   /// to customize different build strategy.
   String buildNonSourceConstructor(ConstructorElement element) {
     return buildConstructor(element);
+  }
+}
+
+extension ConstructorUtils on ConstructorElement {
+  /// The class element of current constructor.
+  ClassElement get classElement => returnType.element as ClassElement;
+
+  /// Parameters of current constructor that are also a field in the class.
+  ///
+  /// A parameter here will only be included when it has the same name
+  /// as certain field of the class, and they also have the same type.
+  /// And the returned value is a map of parameter name to parameter type.
+  Map<String, DartType> get compatParameters {
+    return _compatParameters.asMap;
+  }
+
+  Iterable<MapEntry<String, DartType>> get _compatParameters sync* {
+    final f = classElement.fields.map((f) => MapEntry(f.name, f.type)).asMap;
+    for (final p in parameters) {
+      if (f.containsKey(p.name) && f[p.name] == p.type) {
+        yield MapEntry(p.name, p.type);
+      }
+    }
   }
 }
