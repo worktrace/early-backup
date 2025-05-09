@@ -37,3 +37,17 @@ abstract class GenerateOnAnnotation<T> {
     return build(element, ConstantReader(result), buildStep);
   }
 }
+
+mixin GenerateConstructor<AnnoT> on GenerateOnAnnotation<AnnoT> {
+  @override
+  String build(
+    Element element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) {
+    if (element is ConstructorElement) return buildConstructor(element);
+    return super.build(element, annotation, buildStep);
+  }
+
+  String buildConstructor(ConstructorElement element);
+}
