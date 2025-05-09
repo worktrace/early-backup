@@ -17,6 +17,7 @@ workspace:
   - packages/auto_stories
   - packages/build_data
   - packages/build_lerp
+  - packages/build_name
   - packages/compat_utils
   - packages/concise_cli
   - packages/custom_app
