@@ -58,12 +58,10 @@ export 'src/wrap/style.dart';
 part 'wrap.wrap.g.dart';
 
 @wrap
-const Function _mouse = MouseRegion.new;
-
-@wrap
-const Set<Function> _align = {
+const Set<Function> _wrap = {
   Center.new,
-  Align.new,
   Positioned.new,
   Positioned.fill,
+  MouseRegion.new,
+  GestureDetector.new,
 };

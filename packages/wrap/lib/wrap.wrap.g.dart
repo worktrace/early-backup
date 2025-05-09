@@ -2,11 +2,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// Generator: PartDataBuilder
+// Generator: PartAnnotationsBuilder
 // **************************************************************************
 
 part of 'wrap.dart';
 
-// build top level variable
+extension WrapCenter on Widget {}
 
-// build top level variable
+extension WrapPositioned$ on Widget {}
+
+extension WrapPositioned$fill on Widget {}
+
+extension WrapMouseRegion on Widget {}
+
+extension WrapGestureDetector on Widget {}
