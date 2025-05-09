@@ -4,7 +4,6 @@ library;
 
 import 'annotation_generator.dart';
 import 'composed_generator.dart';
-import 'generate_annotation.dart';
 
 /// Throw when the annotation position is invalid.
 ///
