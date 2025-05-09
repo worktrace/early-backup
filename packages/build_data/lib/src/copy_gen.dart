@@ -11,7 +11,7 @@ Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
   generatedExtension: '.copy.g.dart',
 );
 
-class CopyGenerator extends GenerateFromAnnotation<GenerateCopy> {
+class CopyGenerator extends GenerateOnAnnotation<GenerateCopy> {
   const CopyGenerator();
 
   @override

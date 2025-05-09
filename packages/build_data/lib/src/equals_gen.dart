@@ -10,7 +10,7 @@ Builder equalsBuilder(BuilderOptions options) => LibraryBuilder(
   generatedExtension: '.equals.g.dart',
 );
 
-class EqualsGenerator extends GenerateFromAnnotation<GenerateEquals> {
+class EqualsGenerator extends GenerateOnAnnotation<GenerateEquals> {
   const EqualsGenerator();
 
   @override

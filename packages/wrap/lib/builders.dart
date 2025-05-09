@@ -14,7 +14,7 @@ Builder wrapBuilder(BuilderOptions options) {
   );
 }
 
-class WrapGenerator extends GenerateFromAnnotation<GenerateWrap> {
+class WrapGenerator extends GenerateOnAnnotation<GenerateWrap> {
   const WrapGenerator();
 
   @override

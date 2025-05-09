@@ -4,6 +4,7 @@ library;
 
 import 'annotation_generator.dart';
 import 'composed_generator.dart';
+import 'generate_annotation.dart';
 
 /// Throw when the annotation position is invalid.
 ///
@@ -22,7 +23,7 @@ class AnnotationsBuilder extends RecursiveAnnotationGenerator {
   const AnnotationsBuilder(this.generators, {super.throwOnUnresolved});
 
   @override
-  final Iterable<GenerateFromAnnotation<dynamic>> generators;
+  final Iterable<GenerateOnAnnotation<dynamic>> generators;
 }
 
 class PartAnnotationsBuilder extends AnnotationsBuilder with PartGenerator {
