@@ -2,6 +2,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:build_lerp/src/build_in_anno.dart';
 import 'package:nest_gen/nest_gen.dart';
+import 'package:nest_gen/utils.dart';
 import 'package:source_gen/source_gen.dart';
 
 Builder buildInLerpBuilder(BuilderOptions options) => LibraryBuilder(
@@ -20,8 +21,10 @@ class BuildInLerpGenerator
     BuildStep buildStep,
   ) {
     return '// ignore: implementation_imports generated.\n'
-        "import '${TypeID.classLibrary}';\n\n"
-        'const buildInLerpFunctions = <String, TypeID>{${results.join(',')}};';
+        "import '${ConvertTypeIdentifier.libraryIdentifier}';\n\n"
+        'const buildInLerpFunctions = <String, TypeIdentifier>{ '
+        '${results.join(',')} '
+        '};';
   }
 
   @override
@@ -30,18 +33,10 @@ class BuildInLerpGenerator
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    if (element is! FunctionElement)
+    if (element is! FunctionElement) {
       throw const AnnotationPositionException<GenerateBuildInLerp>();
-
-    final name = element.name;
-    final type = element.returnType.toString();
-    final returnTypeID = element.returnType.element?.library?.identifier;
-
-    final paramType = "${TypeID.fieldTypeName}: '$type'";
-    final paramLibID = returnTypeID != null
-        ? "${TypeID.fieldLibraryIdentifier}: '$returnTypeID'"
-        : '';
-
-    return "'$name': TypeID($paramType, $paramLibID)";
+    }
+    final (name, lib) = element.returnType.identifier;
+    return "'${element.name}': ('$name', '$lib')";
   }
 }
