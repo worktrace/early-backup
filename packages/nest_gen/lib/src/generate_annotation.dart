@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
+import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
 /// Define how to generate data according to an annotation of type [T].
@@ -36,6 +37,26 @@ abstract class GenerateOnAnnotation<T> {
     if (result == null) return null;
     return build(element, ConstantReader(result), buildStep);
   }
+}
+
+/// Like [GenerateOnAnnotation], but ensure [build] implemented
+/// by throwing [AnnotationPositionException] by default.
+/// Override and call super to specify corresponding building logics.
+abstract class GenerateOnAnnotationBase<T> extends GenerateOnAnnotation<T> {
+  const GenerateOnAnnotationBase();
+
+  @override
+  String build(
+    Element element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) => throw AnnotationPositionException<T>();
+}
+
+abstract class GenerateOnAnnotatedConstructor<T>
+    extends GenerateOnAnnotationBase<T>
+    with GenerateConstructor<T> {
+  const GenerateOnAnnotatedConstructor();
 }
 
 mixin GenerateConstructor<AnnoT> on GenerateOnAnnotation<AnnoT> {

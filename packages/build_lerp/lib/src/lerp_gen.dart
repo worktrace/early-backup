@@ -17,7 +17,8 @@ Builder lerpBuilder(BuilderOptions options) => LibraryBuilder(
   options: options,
 );
 
-class LerpGenerator extends GenerateOnAnnotation<GenerateLerp> {
+class LerpGenerator extends GenerateOnAnnotatedConstructor<GenerateLerp>
+    with GenerateConstructorSet {
   const LerpGenerator();
 
   @override
@@ -43,20 +44,12 @@ class LerpGenerator extends GenerateOnAnnotation<GenerateLerp> {
     }
   }
 
-  Iterable<String> buildConstructorSet(TopLevelVariableElement element) sync* {
-    final items = element.computeConstantValue()?.toSetValue();
-    if (items == null) return;
-    for (final item in items) {
-      final constructor = item.toFunctionValue();
-      if (constructor is! ConstructorElement) continue;
-      yield buildConstructor(
-        constructor,
-        private: false,
-        annotateBuildInLerp: true,
-      );
-    }
+  @override
+  String buildNonSourceConstructor(ConstructorElement element) {
+    return buildConstructor(element, private: false, annotateBuildInLerp: true);
   }
 
+  @override
   String buildConstructor(
     ConstructorElement element, {
     bool private = true,
