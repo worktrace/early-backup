@@ -20,10 +20,10 @@ Radius lerpRadius(Radius a, Radius b, double t) {
 @buildInLerp
 BorderRadius lerpBorderRadius(BorderRadius a, BorderRadius b, double t) {
   return BorderRadius.only(
-    topLeft: Radius.lerp(a.topLeft, b.topLeft, t)!,
-    topRight: Radius.lerp(a.topRight, b.topRight, t)!,
-    bottomLeft: Radius.lerp(a.bottomLeft, b.bottomLeft, t)!,
-    bottomRight: Radius.lerp(a.bottomRight, b.bottomRight, t)!,
+    topLeft: lerpRadius(a.topLeft, b.topLeft, t),
+    topRight: lerpRadius(a.topRight, b.topRight, t),
+    bottomLeft: lerpRadius(a.bottomLeft, b.bottomLeft, t),
+    bottomRight: lerpRadius(a.bottomRight, b.bottomRight, t),
   );
 }
 

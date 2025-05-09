@@ -11,4 +11,6 @@ extension ConvertTypeIdentifier on DartType {
   TypeIdentifier get identifier {
     return (getDisplayString(), element?.declaration?.library?.identifier);
   }
+
+  static const libraryIdentifier = 'package:nest_gen/utils.dart';
 }

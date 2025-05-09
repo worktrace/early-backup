@@ -6,24 +6,24 @@
 // **************************************************************************
 
 // ignore: implementation_imports generated.
-import 'package:build_lerp/src/build_in_anno.dart';
+import 'package:nest_gen/utils.dart';
 
-const buildInLerpFunctions = <String, TypeID>{
-  'lerpDouble': TypeID(typeName: 'double', libraryIdentifier: 'dart:core'),
-  'lerpInt': TypeID(typeName: 'int', libraryIdentifier: 'dart:core'),
-  'lerpColor': TypeID(typeName: 'Color', libraryIdentifier: 'dart:ui'),
-  'lerpOffset': TypeID(typeName: 'Offset', libraryIdentifier: 'dart:ui'),
-  'lerpRadius': TypeID(typeName: 'Radius', libraryIdentifier: 'dart:ui'),
-  'lerpBorderRadius': TypeID(
-    typeName: 'BorderRadius',
-    libraryIdentifier: 'package:flutter/src/painting/border_radius.dart',
+const buildInLerpFunctions = <String, TypeIdentifier>{
+  'lerpDouble': ('double', 'dart:core'),
+  'lerpInt': ('int', 'dart:core'),
+  'lerpColor': ('Color', 'dart:ui'),
+  'lerpOffset': ('Offset', 'dart:ui'),
+  'lerpRadius': ('Radius', 'dart:ui'),
+  'lerpBorderRadius': (
+    'BorderRadius',
+    'package:flutter/src/painting/border_radius.dart',
   ),
-  'lerpEdgeInsets': TypeID(
-    typeName: 'EdgeInsets',
-    libraryIdentifier: 'package:flutter/src/painting/edge_insets.dart',
+  'lerpEdgeInsets': (
+    'EdgeInsets',
+    'package:flutter/src/painting/edge_insets.dart',
   ),
-  'lerpEdgeInsetsDirectional': TypeID(
-    typeName: 'EdgeInsetsDirectional',
-    libraryIdentifier: 'package:flutter/src/painting/edge_insets.dart',
+  'lerpEdgeInsetsDirectional': (
+    'EdgeInsetsDirectional',
+    'package:flutter/src/painting/edge_insets.dart',
   ),
 };
