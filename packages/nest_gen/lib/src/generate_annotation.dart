@@ -51,3 +51,49 @@ mixin GenerateConstructor<AnnoT> on GenerateOnAnnotation<AnnoT> {
 
   String buildConstructor(ConstructorElement element);
 }
+
+mixin GenerateConstructorSet<AnnoT> on GenerateConstructor<AnnoT> {
+  @override
+  String build(
+    Element element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) {
+    if (element is TopLevelVariableElement) {
+      final result = buildConstructorSet(element);
+      if (result.isNotEmpty) return result.join('\n\n');
+      throw Exception(
+        'annotate $AnnoT on empty top level variable: ${element.name}',
+      );
+    }
+    return super.build(element, annotation, buildStep);
+  }
+
+  /// Define how to build on a [Set] of constructors,
+  /// usually used for building constructors that
+  /// are not defined in current library.
+  Iterable<String> buildConstructorSet(TopLevelVariableElement element) sync* {
+    final items = element.computeConstantValue()?.toSetValue();
+    if (items == null) {
+      throw Exception(
+        '$AnnoT can only annotate on Set<Function> '
+        'when annotate on top level variables',
+      );
+    }
+    for (final item in items) {
+      final constructor = item.toFunctionValue();
+      if (constructor is! ConstructorElement) continue;
+      yield buildNonSourceConstructor(constructor);
+    }
+  }
+
+  /// Define how to build constructor when it's not annotated on
+  /// the source code of such constructor, such as
+  /// an annotated set of constructors build by [buildConstructorSet] method.
+  /// It will redirect to [buildConstructor] by default,
+  /// and you can also override this method
+  /// to customize different build strategy.
+  String buildNonSourceConstructor(ConstructorElement element) {
+    return buildConstructor(element);
+  }
+}
