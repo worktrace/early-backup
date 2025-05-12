@@ -10,31 +10,26 @@ Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
   generatedExtension: '.copy.g.dart',
 );
 
-class CopyGenerator extends GenerateOnAnnotatedConstructor<GenerateCopy> {
+class CopyGenerator extends GenerateOnAnnotatedConstructor<GenerateCopy>
+    with GenerateStreamExtensionConstructor, GenerateConstructorSet {
   const CopyGenerator();
 
   @override
-  String buildConstructor(ConstructorElement element) {
-    final type = element.returnType.toString();
-    final name = element.isDefaultConstructor ? '' : element.name;
-    final constructorName = name.isEmpty ? '' : '.$name';
+  String get methodName => 'copyWith';
 
-    final parameters = element.declaration.parameters;
-    final inputs = parameters.map(generateInputParameter).join(',');
-    final outputs = parameters.map(generateOutputParameter).join(',');
-    return 'extension Copy$type on $type {\n'
-        '  $type copyWith({$inputs}) {\n'
-        '    return $type$constructorName($outputs);\n'
-        '  }\n'
-        '}';
+  @override
+  String generateExtensionName(ClassElement classElement) {
+    return 'Copy${classElement.name}';
   }
 
+  @override
   String generateInputParameter(ParameterElement parameter) {
     final name = parameter.name;
     final type = parameter.type.toString();
     return '${type.ensureSuffix('?')} $name';
   }
 
+  @override
   String generateOutputParameter(ParameterElement parameter) {
     final name = parameter.name;
     final prefix = parameter.isNamed ? '$name: ' : '';

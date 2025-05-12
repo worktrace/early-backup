@@ -27,7 +27,7 @@ abstract class GenerateOnAnnotatedConstructor<T>
   const GenerateOnAnnotatedConstructor();
 }
 
-mixin GenerateConstructor<AnnoT> on GenerateOnAnnotation<AnnoT> {
+mixin GenerateConstructor<T> on GenerateOnAnnotation<T> {
   @override
   String build(
     Element element,
@@ -41,7 +41,7 @@ mixin GenerateConstructor<AnnoT> on GenerateOnAnnotation<AnnoT> {
   String buildConstructor(ConstructorElement element);
 }
 
-mixin GenerateConstructorSet<AnnoT> on GenerateConstructor<AnnoT> {
+mixin GenerateConstructorSet<T> on GenerateConstructor<T> {
   @override
   String build(
     Element element,
@@ -52,7 +52,7 @@ mixin GenerateConstructorSet<AnnoT> on GenerateConstructor<AnnoT> {
       final result = buildConstructorSet(element);
       if (result.isNotEmpty) return result.join('\n\n');
       throw Exception(
-        'annotate $AnnoT on empty top level variable: ${element.name}',
+        'annotate $T on empty top level variable: ${element.name}',
       );
     }
     return super.build(element, annotation, buildStep);
@@ -65,7 +65,7 @@ mixin GenerateConstructorSet<AnnoT> on GenerateConstructor<AnnoT> {
     final items = element.computeConstantValue()?.toSetValue();
     if (items == null) {
       throw Exception(
-        '$AnnoT can only annotate on Set<Function> '
+        '$T can only annotate on Set<Function> '
         'when annotate on top level variables',
       );
     }
@@ -108,4 +108,38 @@ extension ConstructorUtils on ConstructorElement {
       }
     }
   }
+}
+
+/// Generate an extension method that convert the class according
+/// to the parameters of the specified constructor.
+mixin GenerateStreamExtensionConstructor<T> on GenerateConstructor<T> {
+  @override
+  String buildConstructor(ConstructorElement element) {
+    final type = element.returnType.toString();
+    final name = element.isDefaultConstructor ? '' : element.name;
+    final constructorName = name.isEmpty ? '' : '.$name';
+    final extensionName = generateExtensionName(element.classElement);
+
+    final parameters = element.declaration.parameters;
+    final inputs = parameters.map(generateInputParameter).join(',');
+    final outputs = parameters.map(generateOutputParameter).join(',');
+    return 'extension $extensionName on $type {\n'
+        '  $type $methodName({$inputs}) {\n'
+        '    return $type$constructorName($outputs);\n'
+        '  }\n'
+        '}';
+  }
+
+  /// What the generated method name should be.
+  String get methodName;
+
+  /// How to generate the name of the extension,
+  /// according to the [ClassElement] of the annotated [ConstructorElement].
+  String generateExtensionName(ClassElement classElement);
+
+  /// How to generate each parameter of the generated method.
+  String generateInputParameter(ParameterElement parameter);
+
+  /// How to generate each parameter used by the output constructor.
+  String generateOutputParameter(ParameterElement parameter);
 }
