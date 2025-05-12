@@ -18,8 +18,9 @@ class NameGenerator extends GenerateOnAnnotation<GenerateName> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    final name = element.name ?? '';
-    return "const _\$name\$${name.adaptiveCodeName} = '$name';";
+    final name = element.name.nullAsEmpty;
+    final v = annotation.peek(GenerateNameBase.nameField)?.stringValue ?? name;
+    return "const _\$name\$$v = '$name';";
   }
 }
 
@@ -30,8 +31,10 @@ class LibGenerator extends GenerateOnAnnotation<GenerateLibraryIdentifier> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    final name = element.name.nullAsEmpty.adaptiveCodeName;
     final lib = element.library?.identifier ?? '';
+    final name =
+        annotation.peek(GenerateNameBase.nameField)?.stringValue ??
+        element.name.nullAsEmpty.adaptiveCodeName;
     return "const _\$lib\$$name = '$lib';";
   }
 }
