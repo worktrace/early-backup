@@ -6,7 +6,6 @@ import 'package:annotate_lerp/register_lerp.dart';
 import 'package:build/build.dart';
 import 'package:compat_utils/iterable.dart';
 import 'package:compat_utils/string.dart';
-import 'package:meta/meta.dart';
 import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -89,7 +88,6 @@ class LerpGenerator extends GenerateOnAnnotatedConstructor<GenerateLerp>
   /// use the lerp factory constructor directly without nullable assertion.
   /// 3. When lerp `String`, `bool`, `Function` or `Enum`,
   /// it will change at `0.5`.
-  @protected
   String buildLerpParameter(ParameterElement element) {
     final name = element.name;
     final type = element.type;
