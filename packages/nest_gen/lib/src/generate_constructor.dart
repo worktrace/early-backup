@@ -118,7 +118,8 @@ mixin GenerateStreamExtensionConstructor<T> on GenerateConstructor<T> {
     final type = element.returnType.toString();
     final name = element.isDefaultConstructor ? '' : element.name;
     final constructorName = name.isEmpty ? '' : '.$name';
-    final extensionName = generateExtensionName(element.classElement);
+    final extensionName = generateExtensionName(element);
+    final methodName = generateMethodName(element);
 
     final parameters = element.declaration.parameters;
     final inputs = parameters.map(generateInputParameter).join(',');
@@ -130,12 +131,11 @@ mixin GenerateStreamExtensionConstructor<T> on GenerateConstructor<T> {
         '}';
   }
 
-  /// What the generated method name should be.
-  String get methodName;
+  /// How to generate the name of the extension method.
+  String generateMethodName(ConstructorElement element);
 
-  /// How to generate the name of the extension,
-  /// according to the [ClassElement] of the annotated [ConstructorElement].
-  String generateExtensionName(ClassElement classElement);
+  /// How to generate the name of the extension.
+  String generateExtensionName(ConstructorElement element);
 
   /// How to generate each parameter of the generated method.
   String generateInputParameter(ParameterElement parameter);
