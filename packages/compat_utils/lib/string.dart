@@ -48,3 +48,7 @@ extension SplitString on String {
     return (substring(0, index), substring(index + separator.length));
   }
 }
+
+extension ResolveString on String? {
+  String get nullAsEmpty => this ?? '';
+}
