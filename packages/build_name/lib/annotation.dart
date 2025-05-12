@@ -7,4 +7,4 @@ export 'package:annotate_name/annotate_name.dart';
 part 'annotation.name.g.dart';
 
 /// The generated library identifier for further code generating about imports.
-const String buildNameAnnotationLib = _$lib$packageBuildNameAnnotationDart;
+const String buildNameAnnotationLib = _$lib$;

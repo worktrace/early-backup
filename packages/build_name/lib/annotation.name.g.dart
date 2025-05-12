@@ -7,5 +7,4 @@
 
 part of 'annotation.dart';
 
-const _$lib$packageBuildNameAnnotationDart =
-    'package:build_name/annotation.dart';
+const _$lib$ = 'package:build_name/annotation.dart';
