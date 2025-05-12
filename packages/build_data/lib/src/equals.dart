@@ -1,15 +1,37 @@
-import 'package:meta/meta_meta.dart';
+import 'package:analyzer/dart/element/element.dart';
+import 'package:annotate_data/annotate_data.dart';
+import 'package:build/build.dart';
+import 'package:nest_gen/nest_gen.dart';
+import 'package:source_gen/source_gen.dart';
 
-const equals = GenerateEquals();
+Builder equalsBuilder(BuilderOptions options) => LibraryBuilder(
+  const PartAnnotationsBuilder([EqualsGenerator()]),
+  generatedExtension: '.equals.g.dart',
+);
 
-@Target({TargetKind.classType})
-class GenerateEquals {
-  const GenerateEquals({this.ignores = const []});
+class EqualsGenerator extends GenerateOnAnnotation<GenerateEquals> {
+  const EqualsGenerator();
 
-  /// All fields here will be ignored.
-  ///
-  /// There's no type constraint, and the analyzer will parse its name
-  /// to determine which field to ignore.
-  /// All unignored fields will be compared in the generated code.
-  final Iterable<dynamic> ignores;
+  @override
+  String build(
+    Element element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) {
+    if (element is! ClassElement) {
+      throw const AnnotationPositionException<GenerateEquals>();
+    }
+
+    final name = element.name;
+    final code = element.fields
+        .map((f) => 'a.${f.name} != b.${f.name}')
+        .join(' && ');
+
+    return 'bool _\$equals\$$name($name a, $name b) => $code;';
+  }
+
+  String buildEqualsField(FieldElement field) {
+    final name = field.name;
+    return 'if (this.$name != other.$name) return false;';
+  }
 }
