@@ -13,9 +13,13 @@ workspace:
   - packages/work_trace
 
   # Shared libraries for code reuse.
+  - packages/annotate_data
+  - packages/annotate_lerp
+  - packages/annotate_name
   - packages/auto_stories
   - packages/build_data
   - packages/build_lerp
+  - packages/build_name
   - packages/compat_utils
   - packages/concise_cli
   - packages/custom_app

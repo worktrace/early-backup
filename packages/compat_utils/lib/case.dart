@@ -57,6 +57,7 @@ extension CaseConvert on String {
   }
 
   // Only check the first char, it is supposed to be a char.
+  // These shortcuts will panic when the string is empty.
   bool get _upper => codeUpper(codeUnitAt(0));
   bool get _lower => codeLower(codeUnitAt(0));
   bool get _digit => codeDigit(codeUnitAt(0));
@@ -85,5 +86,15 @@ extension CaseConvert on String {
   String get camelCase {
     if (isEmpty) return '';
     return parts[0] + parts.sublist(1).map((raw) => raw.capitalCase).join();
+  }
+
+  /// Return into an adaptive valid Dart code name identifier.
+  ///
+  /// When the first letter is uppercase, it will return the pascal case.
+  /// Otherwise, it will return the camel case.
+  String get adaptiveCodeName {
+    if (isEmpty) return '';
+    if (_upper) return pascalCase;
+    return camelCase;
   }
 }

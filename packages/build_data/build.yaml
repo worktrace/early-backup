@@ -6,7 +6,7 @@ targets:
 # Yaml anchor syntax is unsupported in build.yaml.
 builders:
   data_builder:
-    import: package:build_data/builders.dart
+    import: package:build_data/builder.dart
     builder_factories: [dataBuilder]
     build_extensions: { ".dart": [".data.g.dart"] }
     auto_apply: none
@@ -14,7 +14,7 @@ builders:
     applies_builders: ["source_gen|combining_builder"]
 
   copy_builder:
-    import: package:build_data/builders.dart
+    import: package:build_data/builder.dart
     builder_factories: [copyBuilder]
     build_extensions: { ".dart": [".copy.g.dart"] }
     auto_apply: none
@@ -22,7 +22,7 @@ builders:
     applies_builders: ["source_gen|combining_builder"]
 
   equals_builder:
-    import: package:build_data/builders.dart
+    import: package:build_data/builder.dart
     builder_factories: [equalsBuilder]
     build_extensions: { ".dart": [".equals.g.dart"] }
     auto_apply: none

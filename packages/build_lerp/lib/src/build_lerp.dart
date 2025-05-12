@@ -1,15 +1,16 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
+import 'package:annotate_data/type_identifier.dart';
+import 'package:annotate_lerp/annotate_lerp.dart';
+import 'package:annotate_lerp/register_lerp.dart';
 import 'package:build/build.dart';
-import 'package:build_lerp/src/build_in_anno.dart';
 import 'package:compat_utils/iterable.dart';
 import 'package:compat_utils/string.dart';
 import 'package:meta/meta.dart';
 import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
-import 'avoid_nullable.bil.g.dart';
-import 'lerp_anno.dart';
+import 'avoid_nullable.register.g.dart';
 
 Builder lerpBuilder(BuilderOptions options) => LibraryBuilder(
   const PartAnnotationsBuilder([LerpGenerator()]),
@@ -73,9 +74,8 @@ class LerpGenerator extends GenerateOnAnnotatedConstructor<GenerateLerp>
     final className = rawClass.name;
     final functionName = private ? '_\$lerp\$$className' : 'lerp$className';
     final constructorName = element.name.isEmpty ? '' : '.${element.name}';
-    const buildInLerp = GenerateBuildInLerp.shortcutName;
 
-    return '${annotateBuildInLerp ? '@$buildInLerp\n' : ''}'
+    return '${annotateBuildInLerp ? '@${GenerateRegisterLerp.shortcut}\n' : ''}'
         '$className $functionName($className a, $className b, double t) {\n'
         '  return $className$constructorName(${parameters.join(',')});\n'
         '}';
@@ -116,5 +116,17 @@ class LerpGenerator extends GenerateOnAnnotatedConstructor<GenerateLerp>
     final className = nullable ? typeName.removeSuffix('?') : typeName;
     final suffix = !nullable && raw ? '!' : '';
     return '$namedPrefix$className.lerp(a.$name, b.$name, t)$suffix';
+  }
+}
+
+extension TypeIdentifierMatch on Map<String, TypeIdentifier> {
+  String? match(String typeName, String? libraryIdentifier) {
+    for (final entry in entries) {
+      final type = entry.value;
+      final name = type.name;
+      final lib = type.libraryIdentifier;
+      if (name == typeName && lib == libraryIdentifier) return entry.key;
+    }
+    return null;
   }
 }

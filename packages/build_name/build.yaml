@@ -1,0 +1,13 @@
+targets:
+  $default:
+    builders:
+      build_name|name_builder: { enabled: true }
+
+builders:
+  name_builder:
+    import: package:build_name/builder.dart
+    builder_factories: [nameBuilder]
+    build_extensions: { ".dart": [".name.g.dart"] }
+    auto_apply: none
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]

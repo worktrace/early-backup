@@ -7,17 +7,17 @@
 
 part of 'avoid_nullable.dart';
 
-@buildInLerp
+@registerLerp
 Offset lerpOffset(Offset a, Offset b, double t) {
   return Offset(lerpDouble(a.dx, b.dx, t), lerpDouble(a.dy, b.dy, t));
 }
 
-@buildInLerp
+@registerLerp
 Radius lerpRadius(Radius a, Radius b, double t) {
   return Radius.elliptical(lerpDouble(a.x, b.x, t), lerpDouble(a.y, b.y, t));
 }
 
-@buildInLerp
+@registerLerp
 BorderRadius lerpBorderRadius(BorderRadius a, BorderRadius b, double t) {
   return BorderRadius.only(
     topLeft: lerpRadius(a.topLeft, b.topLeft, t),
@@ -27,7 +27,7 @@ BorderRadius lerpBorderRadius(BorderRadius a, BorderRadius b, double t) {
   );
 }
 
-@buildInLerp
+@registerLerp
 EdgeInsets lerpEdgeInsets(EdgeInsets a, EdgeInsets b, double t) {
   return EdgeInsets.only(
     left: lerpDouble(a.left, b.left, t),
@@ -37,7 +37,7 @@ EdgeInsets lerpEdgeInsets(EdgeInsets a, EdgeInsets b, double t) {
   );
 }
 
-@buildInLerp
+@registerLerp
 EdgeInsetsDirectional lerpEdgeInsetsDirectional(
   EdgeInsetsDirectional a,
   EdgeInsetsDirectional b,
