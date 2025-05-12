@@ -15,12 +15,18 @@ class CopyGenerator extends GenerateOnAnnotatedConstructor<GenerateCopy>
   const CopyGenerator();
 
   @override
-  String generateMethodName(ConstructorElement element) => 'copyWith';
+  String generateMethodName(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) => 'copyWith';
 
   @override
-  String generateExtensionName(ConstructorElement element) {
-    return 'Copy${element.classElement.name}';
-  }
+  String generateExtensionName(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) => 'Copy${element.classElement.name}';
 
   @override
   String generateInputParameter(ParameterElement parameter) {

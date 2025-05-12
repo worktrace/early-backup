@@ -29,10 +29,10 @@ class LerpGenerator extends GenerateOnAnnotatedConstructor<GenerateLerp>
   ) {
     switch (element) {
       case final ConstructorElement element:
-        return buildConstructor(element);
+        return buildConstructor(element, annotation, buildStep);
 
       case final TopLevelVariableElement element:
-        final result = buildConstructorSet(element);
+        final result = buildConstructorSet(element, annotation, buildStep);
         if (result.isNotEmpty) return result.join('\n\n');
         throw Exception(
           'annotate $GenerateLerp on '
@@ -45,13 +45,23 @@ class LerpGenerator extends GenerateOnAnnotatedConstructor<GenerateLerp>
   }
 
   @override
-  String buildNonSourceConstructor(ConstructorElement element) {
-    return buildConstructor(element, private: false, annotateBuildInLerp: true);
-  }
+  String buildNonSourceConstructor(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) => buildConstructor(
+    element,
+    annotation,
+    buildStep,
+    private: false,
+    annotateBuildInLerp: true,
+  );
 
   @override
   String buildConstructor(
-    ConstructorElement element, {
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep, {
     bool private = true,
     bool annotateBuildInLerp = false,
   }) {

@@ -33,12 +33,15 @@ mixin GenerateConstructor<T> on GenerateOnAnnotation<T> {
     Element element,
     ConstantReader annotation,
     BuildStep buildStep,
-  ) {
-    if (element is ConstructorElement) return buildConstructor(element);
-    return super.build(element, annotation, buildStep);
-  }
+  ) => element is ConstructorElement
+      ? buildConstructor(element, annotation, buildStep)
+      : super.build(element, annotation, buildStep);
 
-  String buildConstructor(ConstructorElement element);
+  String buildConstructor(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  );
 }
 
 mixin GenerateConstructorSet<T> on GenerateConstructor<T> {
@@ -49,7 +52,7 @@ mixin GenerateConstructorSet<T> on GenerateConstructor<T> {
     BuildStep buildStep,
   ) {
     if (element is TopLevelVariableElement) {
-      final result = buildConstructorSet(element);
+      final result = buildConstructorSet(element, annotation, buildStep);
       if (result.isNotEmpty) return result.join('\n\n');
       throw Exception(
         'annotate $T on empty top level variable: ${element.name}',
@@ -61,7 +64,11 @@ mixin GenerateConstructorSet<T> on GenerateConstructor<T> {
   /// Define how to build on a [Set] of constructors,
   /// usually used for building constructors that
   /// are not defined in current library.
-  Iterable<String> buildConstructorSet(TopLevelVariableElement element) sync* {
+  Iterable<String> buildConstructorSet(
+    TopLevelVariableElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) sync* {
     final items = element.computeConstantValue()?.toSetValue();
     if (items == null) {
       throw Exception(
@@ -72,7 +79,7 @@ mixin GenerateConstructorSet<T> on GenerateConstructor<T> {
     for (final item in items) {
       final constructor = item.toFunctionValue();
       if (constructor is! ConstructorElement) continue;
-      yield buildNonSourceConstructor(constructor);
+      yield buildNonSourceConstructor(constructor, annotation, buildStep);
     }
   }
 
@@ -82,9 +89,11 @@ mixin GenerateConstructorSet<T> on GenerateConstructor<T> {
   /// It will redirect to [buildConstructor] by default,
   /// and you can also override this method
   /// to customize different build strategy.
-  String buildNonSourceConstructor(ConstructorElement element) {
-    return buildConstructor(element);
-  }
+  String buildNonSourceConstructor(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) => buildConstructor(element, annotation, buildStep);
 }
 
 extension ConstructorUtils on ConstructorElement {
@@ -114,12 +123,16 @@ extension ConstructorUtils on ConstructorElement {
 /// to the parameters of the specified constructor.
 mixin GenerateStreamExtensionConstructor<T> on GenerateConstructor<T> {
   @override
-  String buildConstructor(ConstructorElement element) {
+  String buildConstructor(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) {
     final type = element.returnType.toString();
     final name = element.isDefaultConstructor ? '' : element.name;
     final constructorName = name.isEmpty ? '' : '.$name';
-    final extensionName = generateExtensionName(element);
-    final methodName = generateMethodName(element);
+    final extensionName = generateExtensionName(element, annotation, buildStep);
+    final methodName = generateMethodName(element, annotation, buildStep);
 
     final parameters = element.declaration.parameters;
     final inputs = parameters.map(generateInputParameter).join(',');
@@ -132,10 +145,18 @@ mixin GenerateStreamExtensionConstructor<T> on GenerateConstructor<T> {
   }
 
   /// How to generate the name of the extension method.
-  String generateMethodName(ConstructorElement element);
+  String generateMethodName(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  );
 
   /// How to generate the name of the extension.
-  String generateExtensionName(ConstructorElement element);
+  String generateExtensionName(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  );
 
   /// How to generate each parameter of the generated method.
   String generateInputParameter(ParameterElement parameter);
