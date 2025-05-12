@@ -1,5 +1,5 @@
 const name = GenerateName();
-const lib = GenerateLibraryIdentifier();
+const libraryIdentifier = GenerateLibraryIdentifier();
 
 class GenerateNameBase {
   const GenerateNameBase({this.name});
