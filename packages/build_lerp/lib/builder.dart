@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
+import 'package:annotate_lerp/annotate_lerp.dart';
 import 'package:build/build.dart';
 import 'package:build_lerp/src/build_in_anno.dart';
 import 'package:compat_utils/iterable.dart';
@@ -8,8 +9,7 @@ import 'package:meta/meta.dart';
 import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
-import 'avoid_nullable.bil.g.dart';
-import 'lerp_anno.dart';
+import 'src/avoid_nullable.bil.g.dart';
 
 Builder lerpBuilder(BuilderOptions options) => LibraryBuilder(
   const PartAnnotationsBuilder([LerpGenerator()]),

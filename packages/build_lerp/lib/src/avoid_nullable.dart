@@ -1,7 +1,7 @@
+import 'package:annotate_lerp/annotate_lerp.dart';
 import 'package:flutter/widgets.dart';
 
 import 'build_in_anno.dart';
-import 'lerp_anno.dart';
 
 part 'avoid_nullable.lerp.g.dart';
 
