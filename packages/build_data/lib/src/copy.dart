@@ -10,25 +10,18 @@ Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
   generatedExtension: '.copy.g.dart',
 );
 
-class CopyGenerator extends GenerateOnAnnotation<GenerateCopy> {
+class CopyGenerator extends GenerateOnAnnotatedConstructor<GenerateCopy> {
   const CopyGenerator();
 
   @override
-  String build(
-    Element element,
-    ConstantReader annotation,
-    BuildStep buildStep,
-  ) {
-    if (element is! ConstructorElement) {
-      throw const AnnotationPositionException<GenerateCopy>();
-    }
-
+  String buildConstructor(ConstructorElement element) {
     final type = element.returnType.toString();
     final name = element.isDefaultConstructor ? '' : element.name;
     final constructorName = name.isEmpty ? '' : '.$name';
 
-    final inputs = element.declaration.parameters.map(_genInput).join(',');
-    final outputs = element.declaration.parameters.map(_genOutput).join(',');
+    final parameters = element.declaration.parameters;
+    final inputs = parameters.map(generateInputParameter).join(',');
+    final outputs = parameters.map(generateOutputParameter).join(',');
     return 'extension Copy$type on $type {\n'
         '  $type copyWith({$inputs}) {\n'
         '    return $type$constructorName($outputs);\n'
@@ -36,13 +29,13 @@ class CopyGenerator extends GenerateOnAnnotation<GenerateCopy> {
         '}';
   }
 
-  String _genInput(ParameterElement parameter) {
+  String generateInputParameter(ParameterElement parameter) {
     final name = parameter.name;
     final type = parameter.type.toString();
     return '${type.ensureSuffix('?')} $name';
   }
 
-  String _genOutput(ParameterElement parameter) {
+  String generateOutputParameter(ParameterElement parameter) {
     final name = parameter.name;
     final prefix = parameter.isNamed ? '$name: ' : '';
     return '$prefix$name ?? this.$name';
