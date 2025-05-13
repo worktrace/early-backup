@@ -1,5 +1,5 @@
 import 'package:analyzer/dart/element/type.dart';
-import 'package:annotate_data/type_identifier.dart';
+import 'package:annotate_type/type_identifier.dart';
 
 extension ParseTypeIdentifier on DartType {
   TypeIdentifier get identifier => TypeIdentifier(

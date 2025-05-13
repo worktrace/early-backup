@@ -16,6 +16,7 @@ workspace:
   - packages/annotate_data
   - packages/annotate_lerp
   - packages/annotate_name
+  - packages/annotate_type
   - packages/auto_stories
   - packages/build_data
   - packages/build_lerp
