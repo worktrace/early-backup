@@ -133,13 +133,15 @@ mixin GenerateStreamExtensionConstructor<T> on GenerateConstructor<T> {
     final constructorName = name.isEmpty ? '' : '.$name';
     final extensionName = generateExtensionName(element, annotation, buildStep);
     final methodName = generateMethodName(element, annotation, buildStep);
+    final target = generateExtensionTarget(element, annotation, buildStep);
 
     final parameters = element.declaration.parameters;
-    final inputs = parameters.map(generateInputParameter).join(',');
-    final outputs = parameters.map(generateOutputParameter).join(',');
-    return 'extension $extensionName on $type {\n'
-        '  $type $methodName({$inputs}) {\n'
-        '    return $type$constructorName($outputs);\n'
+    final inputs = parameters.map(generateInputParameter).whereType<String>();
+    final outputs = parameters.map(generateOutputParameter).whereType<String>();
+
+    return 'extension $extensionName on $target {\n'
+        '  $type $methodName({${inputs.join(',')}}) {\n'
+        '    return $type$constructorName(${outputs.join(',')});\n'
         '  }\n'
         '}';
   }
@@ -158,9 +160,18 @@ mixin GenerateStreamExtensionConstructor<T> on GenerateConstructor<T> {
     BuildStep buildStep,
   );
 
+  /// How to generate the target of the extension,
+  /// which means what type should it extension onto.
+  /// Default to the return type of the constructor.
+  String generateExtensionTarget(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) => element.returnType.toString();
+
   /// How to generate each parameter of the generated method.
-  String generateInputParameter(ParameterElement parameter);
+  String? generateInputParameter(ParameterElement parameter);
 
   /// How to generate each parameter used by the output constructor.
-  String generateOutputParameter(ParameterElement parameter);
+  String? generateOutputParameter(ParameterElement parameter);
 }
