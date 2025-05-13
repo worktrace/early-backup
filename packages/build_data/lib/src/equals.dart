@@ -21,7 +21,8 @@ class EqualsGenerator extends GenerateOnAnnotation<GenerateEquals>
   ) {
     final name = element.name;
     final code = element.fields
-        .map((f) => 'a.${f.name} != b.${f.name}')
+        .where((field) => field.isPublic)
+        .map((field) => 'a.${field.name} != b.${field.name}')
         .join(' && ');
 
     return 'bool _\$equals\$$name($name a, $name b) => $code;';
