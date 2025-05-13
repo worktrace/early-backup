@@ -4,22 +4,7 @@ import 'package:build/build.dart';
 import 'package:compat_utils/iterable.dart';
 import 'package:source_gen/source_gen.dart';
 
-import 'annotation_builder.dart';
-import 'annotation_generator.dart';
-
-/// Like [GenerateOnAnnotation], but ensure [build] implemented
-/// by throwing [AnnotationPositionException] by default.
-/// Override and call super to specify corresponding building logics.
-abstract class GenerateOnAnnotationBase<T> extends GenerateOnAnnotation<T> {
-  const GenerateOnAnnotationBase();
-
-  @override
-  String build(
-    Element element,
-    ConstantReader annotation,
-    BuildStep buildStep,
-  ) => throw AnnotationPositionException<T>();
-}
+import 'generate_annotation.dart';
 
 abstract class GenerateOnAnnotatedConstructor<T>
     extends GenerateOnAnnotationBase<T>
