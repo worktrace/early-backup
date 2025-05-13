@@ -11,7 +11,7 @@ abstract class ComposedAnnotationGenerator extends ComposedGenerator {
 
   final bool throwOnUnresolved;
 
-  Iterable<GenerateOnAnnotation<dynamic>> get generators;
+  Iterable<GenerateOnAnnotationBase<dynamic>> get generators;
 }
 
 abstract class TopLevelAnnotationGenerator extends ComposedAnnotationGenerator {

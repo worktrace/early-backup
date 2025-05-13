@@ -6,13 +6,7 @@ import 'package:source_gen/source_gen.dart';
 
 import 'generate_annotation.dart';
 
-abstract class GenerateOnAnnotatedConstructor<T>
-    extends GenerateOnAnnotationBase<T>
-    with GenerateConstructor<T> {
-  const GenerateOnAnnotatedConstructor();
-}
-
-mixin GenerateConstructor<T> on GenerateOnAnnotation<T> {
+mixin GenerateConstructor<T> on GenerateOnAnnotationBase<T> {
   @override
   String build(
     Element element,

@@ -9,8 +9,8 @@ import 'package:source_gen/source_gen.dart';
 /// how to build on an parsed element annotated with an annotation of type [T].
 /// When there's multiple annotation with the same specified type [T],
 /// or match the override [typeChecker] rule, it will only use the first one.
-abstract class GenerateOnAnnotation<T> {
-  const GenerateOnAnnotation();
+abstract class GenerateOnAnnotationBase<T> {
+  const GenerateOnAnnotationBase();
 
   /// Define how to check the type [T].
   TypeChecker get typeChecker => TypeChecker.fromRuntime(T);
@@ -39,11 +39,11 @@ abstract class GenerateOnAnnotation<T> {
   }
 }
 
-/// Like [GenerateOnAnnotation], but ensure [build] implemented
+/// Like [GenerateOnAnnotationBase], but ensure [build] implemented
 /// by throwing [AnnotationPositionException] by default.
 /// Override and call super to specify corresponding building logics.
-abstract class GenerateOnAnnotationBase<T> extends GenerateOnAnnotation<T> {
-  const GenerateOnAnnotationBase();
+abstract class GenerateOnAnnotation<T> extends GenerateOnAnnotationBase<T> {
+  const GenerateOnAnnotation();
 
   @override
   String build(

@@ -10,7 +10,7 @@ class AnnotationsBuilder extends RecursiveAnnotationGenerator {
   const AnnotationsBuilder(this.generators, {super.throwOnUnresolved});
 
   @override
-  final Iterable<GenerateOnAnnotation<dynamic>> generators;
+  final Iterable<GenerateOnAnnotationBase<dynamic>> generators;
 }
 
 class PartAnnotationsBuilder extends AnnotationsBuilder with PartGenerator {

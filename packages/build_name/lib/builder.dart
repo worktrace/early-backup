@@ -11,7 +11,7 @@ Builder nameBuilder(BuilderOptions options) => LibraryBuilder(
   generatedExtension: '.name.g.dart',
 );
 
-class NameGenerator extends GenerateOnAnnotation<GenerateName> {
+class NameGenerator extends GenerateOnAnnotationBase<GenerateName> {
   @override
   String build(
     Element element,
@@ -24,7 +24,7 @@ class NameGenerator extends GenerateOnAnnotation<GenerateName> {
   }
 }
 
-class LibGenerator extends GenerateOnAnnotation<GenerateLibraryIdentifier> {
+class LibGenerator extends GenerateOnAnnotationBase<GenerateLibraryIdentifier> {
   @override
   String build(
     Element element,

@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
@@ -5,12 +6,12 @@ import 'package:source_gen/source_gen.dart';
 import 'generate_annotation.dart';
 
 abstract class GenerateOnAnnotatedTopLevelVariable<T>
-    extends GenerateOnAnnotationBase<T>
+    extends GenerateOnAnnotation<T>
     with GenerateTopLevelVariable {
   const GenerateOnAnnotatedTopLevelVariable();
 }
 
-mixin GenerateTopLevelVariable<T> on GenerateOnAnnotation<T> {
+mixin GenerateTopLevelVariable<T> on GenerateOnAnnotationBase<T> {
   @override
   String build(
     Element element,
@@ -27,6 +28,21 @@ mixin GenerateTopLevelVariable<T> on GenerateOnAnnotation<T> {
   );
 }
 
-mixin GenerateSet<T> on GenerateOnAnnotation<T> {
-  Iterable<String> buildSet(TopLevelVariableElement element);
+mixin GenerateSet<T> on GenerateTopLevelVariable<T> {
+  @override
+  String buildTopLevelVariable(
+    TopLevelVariableElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) {
+    final items = element.computeConstantValue()?.toSetValue();
+    if (items == null) throw Exception('$T can only annotate on Set');
+    return joinSetItems(items.map(buildSetItem));
+  }
+
+  String joinSetItems(Iterable<String?> results) {
+    return results.whereType<String>().join('\n\n');
+  }
+
+  String? buildSetItem(DartObject element);
 }

@@ -17,8 +17,8 @@ Builder lerpBuilder(BuilderOptions options) => LibraryBuilder(
   options: options,
 );
 
-class LerpGenerator extends GenerateOnAnnotatedConstructor<GenerateLerp>
-    with GenerateConstructorSet {
+class LerpGenerator extends GenerateOnAnnotation<GenerateLerp>
+    with GenerateConstructor, GenerateConstructorSet {
   const LerpGenerator();
 
   @override
