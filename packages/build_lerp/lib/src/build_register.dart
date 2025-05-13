@@ -1,7 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:annotate_lerp/register_lerp.dart';
 import 'package:build/build.dart';
-import 'package:build_type/type_identifier.dart';
+import 'package:build_type/builder.dart';
 import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
