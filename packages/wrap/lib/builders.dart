@@ -14,19 +14,48 @@ Builder wrapBuilder(BuilderOptions options) {
 }
 
 class WrapGenerator extends GenerateOnAnnotatedConstructor<GenerateWrap>
-    with GenerateConstructorSet {
+    with GenerateStreamExtensionConstructor, GenerateConstructorSet {
   const WrapGenerator();
 
   @override
-  String buildConstructor(ConstructorElement element) {
-    final rawClass = element.returnType.element;
+  String generateMethodName(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) {
+    final className = element.classElement.name.camelCase;
+    final constructorName = element.name.pascalCase;
+    return '$className$constructorName';
+  }
 
-    final name = element.name;
-    final type = rawClass.name;
-    return 'extension Wrap$type${name.pascalCase} on Widget {\n'
-        '  $type ${type.camelCase}${name.pascalCase}() {\n'
-        '    return $type${name.isEmpty ? '' : '.$name'}();'
-        '  }\n'
-        '}';
+  @override
+  String generateExtensionName(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) => 'Wrap${element.classElement.name}';
+
+  @override
+  String generateExtensionTarget(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) {
+    for (final parameter in element.parameters) {
+      if (parameter.name == 'child') {}
+    }
+    return '';
+  }
+
+  @override
+  String generateInputParameter(ParameterElement parameter) {
+    // TODO: implement generateInputParameter
+    throw UnimplementedError();
+  }
+
+  @override
+  String generateOutputParameter(ParameterElement parameter) {
+    // TODO: implement generateOutputParameter
+    throw UnimplementedError();
   }
 }
