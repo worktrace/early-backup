@@ -7,7 +7,7 @@
 
 // ignore: implementation_imports generated.
 
-import 'package:annotate_type/type_identifier.dart';
+import 'package:annotate_type/annotate_type.dart';
 
 const buildInLerpFunctions = <String, TypeIdentifier>{
   'lerpDouble': TypeIdentifier(name: 'double', libraryIdentifier: 'dart:core'),

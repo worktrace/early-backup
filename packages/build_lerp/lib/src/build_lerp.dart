@@ -2,7 +2,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:annotate_lerp/annotate_lerp.dart';
 import 'package:annotate_lerp/register_lerp.dart';
-import 'package:annotate_type/type_identifier.dart';
+import 'package:annotate_type/annotate_type.dart';
 import 'package:build/build.dart';
 import 'package:compat_utils/iterable.dart';
 import 'package:compat_utils/string.dart';

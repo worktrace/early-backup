@@ -1,1 +1,1 @@
-export 'package:annotate_type/type_identifier.dart';
+export 'package:annotate_type/annotate_type.dart';
