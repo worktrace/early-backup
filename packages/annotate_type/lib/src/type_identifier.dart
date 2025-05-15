@@ -15,6 +15,6 @@ class TypeIdentifier {
 
   static const String className = _$name$TypeIdentifier;
   static const String classLibraryIdentifier = _$lib$TypeIdentifier;
-  static const String nameField = _$name$name;
-  static const String libraryIdentifierField = _$name$libraryIdentifier;
+  static const String fieldName = _$name$name;
+  static const String fieldLibraryIdentifier = _$name$libraryIdentifier;
 }

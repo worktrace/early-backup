@@ -19,11 +19,14 @@ class EqualsGenerator extends GenerateOnAnnotation<GenerateEquals>
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
+    final includePrivate =
+        annotation.peek(GenerateEquals.fieldIncludePrivate)?.boolValue ?? true;
+
     final name = element.name;
     final code = element.fields
-        .map((field) => 'a.${field.name} != b.${field.name}')
-        .join(' && ');
+        .where((field) => includePrivate || field.isPublic)
+        .map((field) => 'a.${field.name} != b.${field.name}');
 
-    return 'bool _\$equals\$$name($name a, $name b) => $code;';
+    return 'bool _\$equals\$$name($name a, $name b) => ${code.join(' && ')};';
   }
 }
