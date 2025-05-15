@@ -32,7 +32,7 @@ extension ParseTypeIdentifier on DartType {
 extension GenerateTypeIdentifierCode on TypeIdentifier {
   String get code =>
       '${TypeIdentifier.className}('
-      '  ${TypeIdentifier.nameField}: $name, '
-      '  ${TypeIdentifier.libraryIdentifierField}: $libraryIdentifier, '
+      '  ${TypeIdentifier.fieldName}: $name, '
+      '  ${TypeIdentifier.fieldLibraryIdentifier}: $libraryIdentifier, '
       ')';
 }
