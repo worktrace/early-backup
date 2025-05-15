@@ -18,7 +18,11 @@ Builder lerpBuilder(BuilderOptions options) => LibraryBuilder(
 );
 
 class LerpGenerator extends GenerateOnAnnotation<GenerateLerp>
-    with GenerateConstructor, GenerateConstructorSet {
+    with
+        GenerateConstructor,
+        GenerateTopLevelVariable,
+        GenerateSet,
+        GenerateConstructorSet {
   const LerpGenerator();
 
   @override
@@ -32,12 +36,7 @@ class LerpGenerator extends GenerateOnAnnotation<GenerateLerp>
         return buildConstructor(element, annotation, buildStep);
 
       case final TopLevelVariableElement element:
-        final result = buildConstructorSet(element, annotation, buildStep);
-        if (result.isNotEmpty) return result.join('\n\n');
-        throw Exception(
-          'annotate $GenerateLerp on '
-          'empty top level variable: ${element.name}',
-        );
+        return buildTopLevelVariable(element, annotation, buildStep);
 
       default:
         throw const AnnotationPositionException<GenerateLerp>();

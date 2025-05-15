@@ -35,14 +35,18 @@ mixin GenerateSet<T> on GenerateTopLevelVariable<T> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    final items = element.computeConstantValue()?.toSetValue();
-    if (items == null) throw Exception('$T can only annotate on Set');
-    return joinSetItems(items.map(buildSetItem));
+    final s = element.computeConstantValue()?.toSetValue();
+    if (s == null) throw Exception('$T can only annotate on Set');
+    return joinSetItems(s.map((i) => buildSetItem(i, annotation, buildStep)));
   }
 
   String joinSetItems(Iterable<String?> results) {
     return results.whereType<String>().join('\n\n');
   }
 
-  String? buildSetItem(DartObject element);
+  String? buildSetItem(
+    DartObject element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  );
 }

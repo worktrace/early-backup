@@ -13,6 +13,8 @@ Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
 class CopyGenerator extends GenerateOnAnnotation<GenerateCopy>
     with
         GenerateConstructor,
+        GenerateTopLevelVariable,
+        GenerateSet,
         GenerateConstructorSet,
         GenerateStreamExtensionConstructor {
   const CopyGenerator();
