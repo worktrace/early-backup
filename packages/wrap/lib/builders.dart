@@ -13,8 +13,13 @@ Builder wrapBuilder(BuilderOptions options) {
   );
 }
 
-class WrapGenerator extends GenerateOnAnnotatedConstructor<GenerateWrap>
-    with GenerateStreamExtensionConstructor, GenerateConstructorSet {
+class WrapGenerator extends GenerateOnAnnotation<GenerateWrap>
+    with
+        GenerateConstructor,
+        GenerateTopLevelVariable,
+        GenerateSet,
+        GenerateConstructorSet,
+        GenerateStreamExtensionConstructor {
   const WrapGenerator();
 
   @override

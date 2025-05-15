@@ -9,29 +9,24 @@ Builder equalsBuilder(BuilderOptions options) => LibraryBuilder(
   generatedExtension: '.equals.g.dart',
 );
 
-class EqualsGenerator extends GenerateOnAnnotation<GenerateEquals> {
+class EqualsGenerator extends GenerateOnAnnotation<GenerateEquals>
+    with GenerateClass {
   const EqualsGenerator();
 
   @override
-  String build(
-    Element element,
+  String buildClass(
+    ClassElement element,
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    if (element is! ClassElement) {
-      throw const AnnotationPositionException<GenerateEquals>();
-    }
+    final includePrivate =
+        annotation.peek(GenerateEquals.fieldIncludePrivate)?.boolValue ?? true;
 
     final name = element.name;
     final code = element.fields
-        .map((f) => 'a.${f.name} != b.${f.name}')
-        .join(' && ');
+        .where((field) => includePrivate || field.isPublic)
+        .map((field) => 'a.${field.name} != b.${field.name}');
 
-    return 'bool _\$equals\$$name($name a, $name b) => $code;';
-  }
-
-  String buildEqualsField(FieldElement field) {
-    final name = field.name;
-    return 'if (this.$name != other.$name) return false;';
+    return 'bool _\$equals\$$name($name a, $name b) => ${code.join(' && ')};';
   }
 }
