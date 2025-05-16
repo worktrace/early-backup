@@ -1,8 +1,8 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
-import 'package:annotate_data/type_identifier.dart';
 import 'package:annotate_lerp/annotate_lerp.dart';
 import 'package:annotate_lerp/register_lerp.dart';
+import 'package:annotate_type/annotate_type.dart';
 import 'package:build/build.dart';
 import 'package:compat_utils/iterable.dart';
 import 'package:compat_utils/string.dart';
@@ -17,8 +17,12 @@ Builder lerpBuilder(BuilderOptions options) => LibraryBuilder(
   options: options,
 );
 
-class LerpGenerator extends GenerateOnAnnotatedConstructor<GenerateLerp>
-    with GenerateConstructorSet {
+class LerpGenerator extends GenerateOnAnnotation<GenerateLerp>
+    with
+        GenerateConstructor,
+        GenerateTopLevelVariable,
+        GenerateSet,
+        GenerateConstructorSet {
   const LerpGenerator();
 
   @override
@@ -32,12 +36,7 @@ class LerpGenerator extends GenerateOnAnnotatedConstructor<GenerateLerp>
         return buildConstructor(element, annotation, buildStep);
 
       case final TopLevelVariableElement element:
-        final result = buildConstructorSet(element, annotation, buildStep);
-        if (result.isNotEmpty) return result.join('\n\n');
-        throw Exception(
-          'annotate $GenerateLerp on '
-          'empty top level variable: ${element.name}',
-        );
+        return buildTopLevelVariable(element, annotation, buildStep);
 
       default:
         throw const AnnotationPositionException<GenerateLerp>();

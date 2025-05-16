@@ -1,33 +1,14 @@
+import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:compat_utils/iterable.dart';
 import 'package:source_gen/source_gen.dart';
 
-import 'annotation_builder.dart';
-import 'annotation_generator.dart';
+import 'generate_annotation.dart';
+import 'generate_variable.dart';
 
-/// Like [GenerateOnAnnotation], but ensure [build] implemented
-/// by throwing [AnnotationPositionException] by default.
-/// Override and call super to specify corresponding building logics.
-abstract class GenerateOnAnnotationBase<T> extends GenerateOnAnnotation<T> {
-  const GenerateOnAnnotationBase();
-
-  @override
-  String build(
-    Element element,
-    ConstantReader annotation,
-    BuildStep buildStep,
-  ) => throw AnnotationPositionException<T>();
-}
-
-abstract class GenerateOnAnnotatedConstructor<T>
-    extends GenerateOnAnnotationBase<T>
-    with GenerateConstructor<T> {
-  const GenerateOnAnnotatedConstructor();
-}
-
-mixin GenerateConstructor<T> on GenerateOnAnnotation<T> {
+mixin GenerateConstructor<T> on GenerateOnAnnotationBase<T> {
   @override
   String build(
     Element element,
@@ -44,48 +25,23 @@ mixin GenerateConstructor<T> on GenerateOnAnnotation<T> {
   );
 }
 
-mixin GenerateConstructorSet<T> on GenerateConstructor<T> {
+mixin GenerateConstructorSet<T> on GenerateConstructor<T>, GenerateSet<T> {
   @override
-  String build(
-    Element element,
+  String? buildSetItem(
+    DartObject element,
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    if (element is TopLevelVariableElement) {
-      final result = buildConstructorSet(element, annotation, buildStep);
-      if (result.isNotEmpty) return result.join('\n\n');
-      throw Exception(
-        'annotate $T on empty top level variable: ${element.name}',
-      );
+    final constructor = element.toFunctionValue();
+    if (constructor is ConstructorElement) {
+      return buildNonSourceConstructor(constructor, annotation, buildStep);
     }
-    return super.build(element, annotation, buildStep);
-  }
-
-  /// Define how to build on a [Set] of constructors,
-  /// usually used for building constructors that
-  /// are not defined in current library.
-  Iterable<String> buildConstructorSet(
-    TopLevelVariableElement element,
-    ConstantReader annotation,
-    BuildStep buildStep,
-  ) sync* {
-    final items = element.computeConstantValue()?.toSetValue();
-    if (items == null) {
-      throw Exception(
-        '$T can only annotate on Set<Function> '
-        'when annotate on top level variables',
-      );
-    }
-    for (final item in items) {
-      final constructor = item.toFunctionValue();
-      if (constructor is! ConstructorElement) continue;
-      yield buildNonSourceConstructor(constructor, annotation, buildStep);
-    }
+    return null;
   }
 
   /// Define how to build constructor when it's not annotated on
   /// the source code of such constructor, such as
-  /// an annotated set of constructors build by [buildConstructorSet] method.
+  /// an annotated set of constructors build by [buildTopLevelVariable] method.
   /// It will redirect to [buildConstructor] by default,
   /// and you can also override this method
   /// to customize different build strategy.
