@@ -5,12 +5,6 @@ import 'package:source_gen/source_gen.dart';
 
 import 'generate_annotation.dart';
 
-abstract class GenerateOnAnnotatedTopLevelVariable<T>
-    extends GenerateOnAnnotation<T>
-    with GenerateTopLevelVariable {
-  const GenerateOnAnnotatedTopLevelVariable();
-}
-
 mixin GenerateTopLevelVariable<T> on GenerateOnAnnotationBase<T> {
   @override
   String build(

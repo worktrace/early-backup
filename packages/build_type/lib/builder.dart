@@ -1,4 +1,4 @@
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:annotate_type/annotate_type.dart';
 import 'package:build/build.dart';
@@ -8,17 +8,29 @@ import 'package:source_gen/source_gen.dart';
 export 'package:annotate_type/annotate_type.dart';
 
 class TypeIdentifierGenerator
-    extends GenerateOnAnnotatedTopLevelVariable<GenerateTypeIdentifier> {
+    extends GenerateOnAnnotation<GenerateTypeIdentifier>
+    with GenerateTopLevelVariable, GenerateSet {
   const TypeIdentifierGenerator();
 
   @override
-  String buildTopLevelVariable(
-    TopLevelVariableElement element,
+  String? buildSetItem(
+    DartObject element,
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    // TODO: implement buildTopLevelVariable
-    throw UnimplementedError();
+    final type = element.toTypeValue()?.element;
+    if (type == null) return null;
+
+    final name = type.displayName;
+    final lib = type.library?.identifier;
+    final libParam = lib != null
+        ? "${TypeIdentifier.fieldLibraryIdentifier}: '$lib',\n"
+        : '';
+
+    return 'const _\$type$name = ${TypeIdentifier.className}(\n'
+        "  ${TypeIdentifier.fieldName}: '$name',\n"
+        '  $libParam'
+        ')';
   }
 }
 
