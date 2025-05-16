@@ -1,0 +1,13 @@
+targets:
+  $default:
+    builders:
+      build_type|type_identifier_builder: { enabled: true }
+
+builders:
+  type_identifier_builder:
+    import: package:build_type/builder.dart
+    builder_factories: [typeIdentifierBuilder]
+    build_extensions: { ".dart": [".type.g.dart"] }
+    auto_apply: none
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]

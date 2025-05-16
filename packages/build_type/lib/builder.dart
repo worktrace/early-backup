@@ -7,6 +7,13 @@ import 'package:source_gen/source_gen.dart';
 
 export 'package:annotate_type/annotate_type.dart';
 
+Builder typeIdentifierBuilder(BuilderOptions options) {
+  return LibraryBuilder(
+    const PartAnnotationsBuilder([TypeIdentifierGenerator()]),
+    generatedExtension: '.type.g.dart',
+  );
+}
+
 class TypeIdentifierGenerator
     extends GenerateOnAnnotation<GenerateTypeIdentifier>
     with GenerateTopLevelVariable, GenerateSet {
