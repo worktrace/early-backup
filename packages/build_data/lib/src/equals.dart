@@ -27,6 +27,8 @@ class EqualsGenerator extends GenerateOnAnnotation<GenerateEquals>
         .where((field) => includePrivate || field.isPublic)
         .map((field) => 'a.${field.name} != b.${field.name}');
 
-    return 'bool _\$equals\$$name($name a, $name b) => ${code.join(' && ')};';
+    return 'bool _\$equals\$$name($name a, Object b) {\n'
+        '  return b is $name && ${code.join(' && ')};\n'
+        '}';
   }
 }
