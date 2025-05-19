@@ -30,7 +30,7 @@ workspace:
   - packages/build_name
   - packages/build_type
 
-  # Other tools.
+  # Toolkit packages as ecosystem.
   - packages/compat_utils
   - packages/concise_cli
   - packages/custom_app
