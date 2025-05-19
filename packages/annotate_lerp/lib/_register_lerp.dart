@@ -1,7 +1,7 @@
 import 'package:build_name/annotation.dart';
 import 'package:meta/meta_meta.dart';
 
-part 'register.name.g.dart';
+part '_register_lerp.name.g.dart';
 
 @name
 const registerLerp = GenerateRegisterLerp();

@@ -1,9 +1,15 @@
 import 'package:build_name/annotation.dart';
 import 'package:meta/meta_meta.dart';
 
-part 'equals.name.g.dart';
+part '_annotation.name.g.dart';
 
+const copy = GenerateCopy();
 const equals = GenerateEquals();
+
+@Target({TargetKind.constructor})
+class GenerateCopy {
+  const GenerateCopy();
+}
 
 @Target({TargetKind.classType})
 class GenerateEquals {
