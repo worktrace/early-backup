@@ -5,6 +5,6 @@
 // Generator: PartAnnotationsBuilder
 // **************************************************************************
 
-part of 'equals.dart';
+part of '_annotation.dart';
 
 const _$name$includePrivate = 'includePrivate';
