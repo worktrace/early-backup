@@ -6,7 +6,7 @@ library;
 
 import 'package:meta/meta_meta.dart';
 
-export '_type_identifier.dart';
+export 'type_identifier.dart';
 
 const typeIdentifier = GenerateTypeIdentifier();
 
