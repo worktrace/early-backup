@@ -19,6 +19,10 @@ class EqualsGenerator extends GenerateOnAnnotation<GenerateEquals>
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
+    if (element.isAbstract) {
+      throw Exception('cannot build equals on abstract class');
+    }
+
     final includePrivate =
         annotation.peek(GenerateEquals.fieldIncludePrivate)?.boolValue ?? true;
 
