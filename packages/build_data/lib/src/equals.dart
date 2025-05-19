@@ -28,7 +28,7 @@ class EqualsGenerator extends GenerateOnAnnotation<GenerateEquals>
 
     final name = element.name;
     final code = element.fields
-        .where((field) => !field.isStatic)
+        .where((field) => !field.isStatic && !field.isSynthetic)
         .where((field) => includePrivate || field.isPublic)
         .map((field) => 'a.${field.name} != b.${field.name}');
 
