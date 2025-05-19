@@ -5,7 +5,7 @@ library;
 import 'package:build_type/annotation.dart';
 import 'package:flutter/widgets.dart';
 
-part '_child_types.type.g.dart';
+part '_child_type.type.g.dart';
 
 @typeIdentifier
 // ignore: unused_element generating entries.

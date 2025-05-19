@@ -5,7 +5,7 @@
 // Generator: PartAnnotationsBuilder
 // **************************************************************************
 
-part of '_child_types.dart';
+part of '_child_type.dart';
 
 const _$typeWidget = TypeIdentifier(
   name: 'Widget',
