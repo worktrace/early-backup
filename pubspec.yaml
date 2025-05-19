@@ -21,9 +21,6 @@ workspace:
   - packages/annotate_name
   - packages/annotate_type
 
-  # Other package annotations.
-  - packages/annotate_wrap
-
   # Builder packages.
   - packages/build_data
   - packages/build_lerp
