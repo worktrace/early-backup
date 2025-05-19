@@ -28,7 +28,7 @@ workspace:
   - packages/build_type
 
   # Toolkit packages as ecosystem.
-  - packages/child_types
+  - packages/child_type
   - packages/compat_utils
   - packages/concise_cli
   - packages/custom_app

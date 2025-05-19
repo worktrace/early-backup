@@ -1,4 +1,4 @@
-name: child_types
+name: child_type
 description: Generated type identifier of Flutter widget child for wrap.
 resolution: workspace
 version: 0.0.0
