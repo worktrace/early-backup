@@ -1,6 +1,6 @@
 import 'package:build_name/annotation.dart';
 
-part 'type_identifier.name.g.dart';
+part '_type_identifier.name.g.dart';
 
 @name
 @libraryIdentifier

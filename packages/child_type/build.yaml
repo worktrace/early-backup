@@ -1,0 +1,4 @@
+targets:
+  $default:
+    builders:
+      build_type|type_identifier_builder: { enabled: true }

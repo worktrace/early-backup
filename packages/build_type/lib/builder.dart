@@ -37,7 +37,7 @@ class TypeIdentifierGenerator
     return 'const _\$type$name = ${TypeIdentifier.className}(\n'
         "  ${TypeIdentifier.fieldName}: '$name',\n"
         '  $libParam'
-        ')';
+        ');';
   }
 }
 

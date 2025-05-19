@@ -1,0 +1,17 @@
+name: child_type
+description: Generated type identifier of Flutter widget child for wrap.
+resolution: workspace
+version: 0.0.0
+
+environment:
+  sdk: ^3.8.0-278.1.beta
+  flutter: ">=3.32.0-0.2.pre <4.0.0"
+
+dependencies:
+  analyzer: ^6.11.0
+  build: ^2.4.2
+  build_type: ^0.0.0
+  flutter: { sdk: flutter }
+
+dev_dependencies:
+  build_runner: ^2.4.15
