@@ -1,3 +1,6 @@
+/// This library will also export [TypeIdentifier],
+/// because such annotation will generate such type in a part file.
+///
 /// @docImport 'type_identifier.dart';
 library;
 
