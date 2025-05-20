@@ -53,6 +53,12 @@ class CopyGenerator extends GenerateOnAnnotation<GenerateCopy>
   ) => 'Copy${element.classElement.name}';
 
   @override
+  String joinInputParameters(Iterable<String> results) {
+    // All parameters in generated `copyWith` method are named.
+    return '{${results.join(',')}}';
+  }
+
+  @override
   String generateInputParameter(ParameterElement parameter) {
     final name = parameter.name;
     final type = parameter.type.toString();

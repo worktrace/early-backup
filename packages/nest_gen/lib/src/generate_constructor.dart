@@ -96,8 +96,8 @@ mixin GenerateStreamExtensionConstructor<T> on GenerateConstructor<T> {
     final outputs = parameters.map(generateOutputParameter).whereType<String>();
 
     return 'extension $extensionName on $target {\n'
-        '  $type $methodName({${inputs.join(',')}}) {\n'
-        '    return $type$constructorName(${outputs.join(',')});\n'
+        '  $type $methodName(${joinInputParameters(inputs)}) {\n'
+        '    return $type$constructorName(${joinOutputParameters(outputs)});\n'
         '  }\n'
         '}';
   }
@@ -124,6 +124,14 @@ mixin GenerateStreamExtensionConstructor<T> on GenerateConstructor<T> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) => element.returnType.toString();
+
+  /// How to join generated input parameters,
+  /// default to join with `,`.
+  String joinInputParameters(Iterable<String> results) => results.join(',');
+
+  /// How to join generated output parameters,
+  /// default to join with `,`.
+  String joinOutputParameters(Iterable<String> results) => results.join(',');
 
   /// How to generate each parameter of the generated method.
   String? generateInputParameter(ParameterElement parameter);
