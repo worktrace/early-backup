@@ -21,6 +21,14 @@ builders:
     build_to: source
     applies_builders: ["source_gen|combining_builder"]
 
+  hash_builder:
+    import: package:build_data/builder.dart
+    builder_factories: [hashBuilder]
+    build_extensions: { ".dart": [".hash.g.dart"] }
+    auto_apply: none
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]
+
   equals_builder:
     import: package:build_data/builder.dart
     builder_factories: [equalsBuilder]

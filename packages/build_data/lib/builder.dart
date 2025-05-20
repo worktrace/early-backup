@@ -6,13 +6,22 @@ import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
 Builder dataBuilder(BuilderOptions options) => LibraryBuilder(
-  const PartAnnotationsBuilder([CopyGenerator(), EqualsGenerator()]),
+  const PartAnnotationsBuilder([
+    CopyGenerator(),
+    HashGenerator(),
+    EqualsGenerator(),
+  ]),
   generatedExtension: '.data.g.dart',
 );
 
 Builder copyBuilder(BuilderOptions options) => LibraryBuilder(
   const PartAnnotationsBuilder([CopyGenerator()]),
   generatedExtension: '.copy.g.dart',
+);
+
+Builder hashBuilder(BuilderOptions options) => LibraryBuilder(
+  const PartAnnotationsBuilder([HashGenerator()]),
+  generatedExtension: '.hash.g.dart',
 );
 
 Builder equalsBuilder(BuilderOptions options) => LibraryBuilder(
@@ -55,6 +64,34 @@ class CopyGenerator extends GenerateOnAnnotation<GenerateCopy>
     final name = parameter.name;
     final prefix = parameter.isNamed ? '$name: ' : '';
     return '$prefix$name ?? this.$name';
+  }
+}
+
+class HashGenerator extends GenerateOnAnnotation<GenerateHash>
+    with GenerateClass {
+  const HashGenerator();
+
+  @override
+  String buildClass(
+    ClassElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) {
+    if (element.isAbstract) throw Exception('cannot build equals on abstract');
+    final includePrivate =
+        annotation.peek(GenerateHashBase.fieldIncludePrivate)?.boolValue ??
+        true;
+
+    const item = 'item';
+    final name = element.name;
+    final code = element.fields
+        .where((field) => !field.isStatic && !field.isSynthetic)
+        .where((field) => includePrivate || field.isPublic)
+        .map((field) => '$item.${field.name}');
+
+    return 'int _\$hash\$$name($name $item) {\n'
+        '  return Object.hashAll([${code.join(',')}]);\n'
+        '}';
   }
 }
 
