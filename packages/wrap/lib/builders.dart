@@ -56,25 +56,28 @@ class WrapGenerator extends GenerateOnAnnotation<GenerateWrap>
           : '';
 
       switch (parameter.name) {
-        case 'child':
+        case _child:
           if (parameter.type.identifier != widgetType) break;
           return '${widgetType.name}$suffix';
 
-        case 'children':
+        case _children:
       }
     }
     throw Exception('must have a child or children when wrap');
   }
 
+  static const _child = 'child';
+  static const _children = 'children';
+
   @override
-  String generateInputParameter(ParameterElement parameter) {
-    // TODO: implement generateInputParameter
-    throw UnimplementedError();
+  String? generateInputParameter(ParameterElement parameter) {
+    final name = parameter.name;
+    return name == _child || name == _children ? null : parameter.toString();
   }
 
   @override
-  String generateOutputParameter(ParameterElement parameter) {
-    // TODO: implement generateOutputParameter
-    throw UnimplementedError();
+  String? generateOutputParameter(ParameterElement parameter) {
+    final name = parameter.name;
+    return name == _child || name == _children ? '$name: $name' : '$name: this';
   }
 }
