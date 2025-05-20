@@ -57,8 +57,8 @@ class WrapGenerator extends GenerateOnAnnotation<GenerateWrap>
 
       switch (parameter.name) {
         case _child:
-          if (parameter.type.identifier != widgetType) break;
-          return '${widgetType.name}$suffix';
+          if (parameter.type.identifier != typeWidget) break;
+          return '${typeWidget.name}$suffix';
 
         case _children:
       }
@@ -70,14 +70,32 @@ class WrapGenerator extends GenerateOnAnnotation<GenerateWrap>
   static const _children = 'children';
 
   @override
+  String joinInputParameters(Iterable<String> results) {
+    final positional = <String>[];
+    final named = <String>[];
+    for (final result in results) {
+      final code = result.trim();
+      if (code.startsWith('{') && code.endsWith('}')) {
+        named.add(code.substring(1, code.length - 1));
+      } else {
+        positional.add(code);
+      }
+    }
+    final resolvedPos = positional.isEmpty ? '' : '${positional.join(',')}, ';
+    final resolvedNamed = named.isEmpty ? '' : '{${named.join(',')}}';
+    return '$resolvedPos$resolvedNamed';
+  }
+
+  @override
   String? generateInputParameter(ParameterElement parameter) {
     final name = parameter.name;
-    return name == _child || name == _children ? null : parameter.toString();
+    if (name == _child || name == _children) return null;
+    return parameter.toString();
   }
 
   @override
   String? generateOutputParameter(ParameterElement parameter) {
     final name = parameter.name;
-    return name == _child || name == _children ? '$name: $name' : '$name: this';
+    return name == _child || name == _children ? '$name: this' : '$name: $name';
   }
 }

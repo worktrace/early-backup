@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:annotate_type/annotate_type.dart';
 import 'package:build/build.dart';
+import 'package:compat_utils/case.dart';
 import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -10,7 +11,10 @@ export 'parse.dart';
 
 Builder typeIdentifierBuilder(BuilderOptions options) {
   return LibraryBuilder(
-    const PartAnnotationsBuilder([TypeIdentifierGenerator()]),
+    const LibraryAnnotationBuilder(
+      [TypeIdentifierGenerator()],
+      imports: [TypeIdentifier.classLibraryIdentifier],
+    ),
     generatedExtension: '.type.g.dart',
   );
 }
@@ -35,7 +39,7 @@ class TypeIdentifierGenerator
         ? "${TypeIdentifier.fieldLibraryIdentifier}: '$lib',\n"
         : '';
 
-    return 'const _\$type$name = ${TypeIdentifier.className}(\n'
+    return 'const type${name.pascalCase} = ${TypeIdentifier.className}(\n'
         "  ${TypeIdentifier.fieldName}: '$name',\n"
         '  $libParam'
         ');';

@@ -53,6 +53,12 @@ class CopyGenerator extends GenerateOnAnnotation<GenerateCopy>
   ) => 'Copy${element.classElement.name}';
 
   @override
+  String joinInputParameters(Iterable<String> results) {
+    // All parameters in generated `copyWith` method are named.
+    return '{${results.join(',')}}';
+  }
+
+  @override
   String generateInputParameter(ParameterElement parameter) {
     final name = parameter.name;
     final type = parameter.type.toString();
@@ -114,7 +120,7 @@ class EqualsGenerator extends GenerateOnAnnotation<GenerateEquals>
     final code = element.fields
         .where((field) => !field.isStatic && !field.isSynthetic)
         .where((field) => includePrivate || field.isPublic)
-        .map((field) => 'a.${field.name} != b.${field.name}');
+        .map((field) => 'a.${field.name} == b.${field.name}');
 
     return 'bool _\$equals\$$name($name a, Object b) {\n'
         '  return b is $name && ${code.join(' && ')};\n'

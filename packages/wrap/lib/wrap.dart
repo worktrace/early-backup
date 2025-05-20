@@ -59,9 +59,9 @@ part 'wrap.wrap.g.dart';
 
 @wrap
 const Set<Function> _wrap = {
-  Center.new,
-  Positioned.new,
+  // Center.new,
+  // Positioned.new,
   Positioned.fill,
-  MouseRegion.new,
-  GestureDetector.new,
+  // MouseRegion.new,
+  // GestureDetector.new,
 };
