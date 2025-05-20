@@ -58,4 +58,4 @@ export 'src/wrap/style.dart';
 part 'wrap.wrap.g.dart';
 
 @wrap
-const Set<Function> _wrap = {Positioned.fill};
+const Set<Function> _wrap = {Center.new, Positioned.new, Positioned.fill};

@@ -7,6 +7,17 @@
 
 part of 'wrap.dart';
 
+extension WrapCenter on Widget? {
+  Center center({Key? key, double? widthFactor, double? heightFactor}) {
+    return Center(
+      key: key,
+      widthFactor: widthFactor,
+      heightFactor: heightFactor,
+      child: this,
+    );
+  }
+}
+
 extension WrapPositioned on Widget {
   Positioned positionedFill({
     Key? key,
