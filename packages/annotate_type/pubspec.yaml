@@ -7,6 +7,7 @@ environment:
   sdk: ^3.8.0-278.1.beta
 
 dependencies:
+  build_data: ^0.0.0
   build_name: ^0.0.0
   meta: ^1.16.0
 

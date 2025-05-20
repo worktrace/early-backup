@@ -1,11 +1,12 @@
 import 'package:analyzer/dart/constant/value.dart';
-import 'package:analyzer/dart/element/type.dart';
 import 'package:annotate_type/annotate_type.dart';
 import 'package:build/build.dart';
 import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 
 export 'package:annotate_type/annotate_type.dart';
+
+export 'parse.dart';
 
 Builder typeIdentifierBuilder(BuilderOptions options) {
   return LibraryBuilder(
@@ -39,13 +40,6 @@ class TypeIdentifierGenerator
         '  $libParam'
         ');';
   }
-}
-
-extension ParseTypeIdentifier on DartType {
-  TypeIdentifier get identifier => TypeIdentifier(
-    name: toString(),
-    libraryIdentifier: element?.library?.identifier,
-  );
 }
 
 extension GenerateTypeIdentifierCode on TypeIdentifier {
