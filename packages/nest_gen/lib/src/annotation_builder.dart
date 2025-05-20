@@ -22,8 +22,8 @@ class PartAnnotationsBuilder extends AnnotationsBuilder with PartGenerator {
 
 class LibraryAnnotationBuilder extends AnnotationsBuilder {
   const LibraryAnnotationBuilder(
-    super.generators,
-    this.imports, {
+    super.generators, {
+    this.imports = const [],
     super.throwOnUnresolved,
   });
 
@@ -33,7 +33,8 @@ class LibraryAnnotationBuilder extends AnnotationsBuilder {
   String? generate(LibraryReader library, BuildStep buildStep) {
     final result = super.generate(library, buildStep);
     if (result == null) return null;
-    final importLines = imports.map((item) => "import '$item';");
+    final sortedImports = imports.toList()..sort();
+    final importLines = sortedImports.map((item) => "import '$item';");
     return '${importLines.join('\n')}\n\n$result';
   }
 }

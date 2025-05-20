@@ -2,12 +2,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// Generator: PartAnnotationsBuilder
+// Generator: LibraryAnnotationBuilder
 // **************************************************************************
 
-part of '_child_type.dart';
+import 'package:annotate_type/_type_identifier.dart';
 
-const _$typeWidget = TypeIdentifier(
+const typeWidget = TypeIdentifier(
   name: 'Widget',
   libraryIdentifier: 'package:flutter/src/widgets/framework.dart',
 );

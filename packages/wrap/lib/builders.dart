@@ -57,8 +57,8 @@ class WrapGenerator extends GenerateOnAnnotation<GenerateWrap>
 
       switch (parameter.name) {
         case _child:
-          if (parameter.type.identifier != widgetType) break;
-          return '${widgetType.name}$suffix';
+          if (parameter.type.identifier != typeWidget) break;
+          return '${typeWidget.name}$suffix';
 
         case _children:
       }
