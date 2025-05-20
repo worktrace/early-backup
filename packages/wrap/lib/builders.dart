@@ -1,5 +1,8 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:build/build.dart';
+import 'package:build_type/parse.dart';
+import 'package:child_type/child_type.dart';
 import 'package:compat_utils/case.dart';
 import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
@@ -47,9 +50,20 @@ class WrapGenerator extends GenerateOnAnnotation<GenerateWrap>
     BuildStep buildStep,
   ) {
     for (final parameter in element.parameters) {
-      if (parameter.name == 'child') {}
+      final suffix =
+          parameter.type.nullabilitySuffix == NullabilitySuffix.question
+          ? '?'
+          : '';
+
+      switch (parameter.name) {
+        case 'child':
+          if (parameter.type.identifier != widgetType) break;
+          return '${widgetType.name}$suffix';
+
+        case 'children':
+      }
     }
-    return '';
+    throw Exception('must have a child or children when wrap');
   }
 
   @override
