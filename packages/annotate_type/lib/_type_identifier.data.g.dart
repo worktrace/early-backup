@@ -13,6 +13,6 @@ int _$hash$TypeIdentifier(TypeIdentifier item) {
 
 bool _$equals$TypeIdentifier(TypeIdentifier a, Object b) {
   return b is TypeIdentifier &&
-      a.name != b.name &&
-      a.libraryIdentifier != b.libraryIdentifier;
+      a.name == b.name &&
+      a.libraryIdentifier == b.libraryIdentifier;
 }
