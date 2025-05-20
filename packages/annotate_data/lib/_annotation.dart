@@ -13,7 +13,7 @@ class GenerateCopy {
 
 @Target({TargetKind.classType})
 class GenerateEquals {
-  const GenerateEquals({this.includePrivate = true, this.ignores = const []});
+  const GenerateEquals({this.includePrivate = true});
 
   /// Whether to include private fields in the generated code.
   ///
@@ -22,13 +22,6 @@ class GenerateEquals {
   /// which can access the private fields of the source code.
   @name
   final bool includePrivate;
-
-  /// All fields here will be ignored.
-  ///
-  /// There's no type constraint, and the analyzer will parse its name
-  /// to determine which field to ignore.
-  /// All unignored fields will be compared in the generated code.
-  final Iterable<dynamic> ignores;
 
   static const String fieldIncludePrivate = _$name$includePrivate;
 }
