@@ -5,7 +5,7 @@
 // Generator: PartAnnotationsBuilder
 // **************************************************************************
 
-part of '_type_identifier.dart';
+part of 'type_identifier.dart';
 
 int _$hash$TypeIdentifier(TypeIdentifier item) {
   return Object.hashAll([item.name, item.libraryIdentifier]);

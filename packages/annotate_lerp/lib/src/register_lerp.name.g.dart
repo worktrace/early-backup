@@ -5,12 +5,8 @@
 // Generator: PartAnnotationsBuilder
 // **************************************************************************
 
-part of '_type_identifier.dart';
+part of 'register_lerp.dart';
 
-const _$name$TypeIdentifier = 'TypeIdentifier';
+const _$lib$GenerateRegisterLerp = 'package:annotate_lerp/_register_lerp.dart';
 
-const _$lib$TypeIdentifier = 'package:annotate_type/_type_identifier.dart';
-
-const _$name$name = 'name';
-
-const _$name$libraryIdentifier = 'libraryIdentifier';
+const _$name$registerLerp = 'registerLerp';

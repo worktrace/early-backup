@@ -1,7 +1,7 @@
 /// This library will also export [TypeIdentifier],
 /// because such annotation will generate such type in a part file.
 ///
-/// @docImport '_type_identifier.dart';
+/// @docImport 'src/type_identifier.dart';
 library;
 
 import 'package:meta/meta_meta.dart';

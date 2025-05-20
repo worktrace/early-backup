@@ -1,1 +1,1 @@
-export '_annotation.dart';
+export 'src/annotation.dart';

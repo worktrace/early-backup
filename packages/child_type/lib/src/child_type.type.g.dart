@@ -5,7 +5,7 @@
 // Generator: LibraryAnnotationBuilder
 // **************************************************************************
 
-import 'package:annotate_type/_type_identifier.dart';
+import 'package:annotate_type/src/type_identifier.dart';
 
 const typeWidget = TypeIdentifier(
   name: 'Widget',

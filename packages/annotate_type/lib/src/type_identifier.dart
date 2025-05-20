@@ -2,8 +2,8 @@ import 'package:build_data/annotation.dart';
 import 'package:build_name/annotation.dart';
 import 'package:meta/meta.dart';
 
-part '_type_identifier.data.g.dart';
-part '_type_identifier.name.g.dart';
+part 'type_identifier.data.g.dart';
+part 'type_identifier.name.g.dart';
 
 @libraryIdentifier
 @name
