@@ -7,6 +7,10 @@
 
 part of '_type_identifier.dart';
 
+int _$hash$TypeIdentifier(TypeIdentifier item) {
+  return Object.hashAll([item.name, item.libraryIdentifier]);
+}
+
 bool _$equals$TypeIdentifier(TypeIdentifier a, Object b) {
   return b is TypeIdentifier &&
       a.name != b.name &&

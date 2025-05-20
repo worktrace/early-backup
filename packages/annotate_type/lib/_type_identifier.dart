@@ -5,8 +5,9 @@ import 'package:meta/meta.dart';
 part '_type_identifier.data.g.dart';
 part '_type_identifier.name.g.dart';
 
-@name
 @libraryIdentifier
+@name
+@hash
 @equals
 @immutable
 class TypeIdentifier {
@@ -27,5 +28,5 @@ class TypeIdentifier {
   bool operator ==(Object other) => _$equals$TypeIdentifier(this, other);
 
   @override
-  int get hashCode => Object.hashAll([name, libraryIdentifier]);
+  int get hashCode => _$hash$TypeIdentifier(this);
 }

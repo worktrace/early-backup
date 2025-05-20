@@ -4,6 +4,7 @@ import 'package:meta/meta_meta.dart';
 part '_annotation.name.g.dart';
 
 const copy = GenerateCopy();
+const hash = GenerateHash();
 const equals = GenerateEquals();
 
 @Target({TargetKind.constructor})
@@ -11,9 +12,10 @@ class GenerateCopy {
   const GenerateCopy();
 }
 
-@Target({TargetKind.classType})
-class GenerateEquals {
-  const GenerateEquals({this.includePrivate = true, this.ignores = const []});
+/// Common shared fields between [GenerateHash] and [GenerateEquals].
+/// This class is not intended to be annotated on any code.
+class GenerateHashBase {
+  const GenerateHashBase({this.includePrivate = true});
 
   /// Whether to include private fields in the generated code.
   ///
@@ -23,12 +25,15 @@ class GenerateEquals {
   @name
   final bool includePrivate;
 
-  /// All fields here will be ignored.
-  ///
-  /// There's no type constraint, and the analyzer will parse its name
-  /// to determine which field to ignore.
-  /// All unignored fields will be compared in the generated code.
-  final Iterable<dynamic> ignores;
-
   static const String fieldIncludePrivate = _$name$includePrivate;
+}
+
+@Target({TargetKind.classType})
+class GenerateHash extends GenerateHashBase {
+  const GenerateHash({super.includePrivate});
+}
+
+@Target({TargetKind.classType})
+class GenerateEquals extends GenerateHashBase {
+  const GenerateEquals({super.includePrivate});
 }
