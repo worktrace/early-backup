@@ -1,5 +1,8 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:build/build.dart';
+import 'package:build_type/parse.dart';
+import 'package:child_type/child_type.dart';
 import 'package:compat_utils/case.dart';
 import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
@@ -47,20 +50,52 @@ class WrapGenerator extends GenerateOnAnnotation<GenerateWrap>
     BuildStep buildStep,
   ) {
     for (final parameter in element.parameters) {
-      if (parameter.name == 'child') {}
+      final suffix =
+          parameter.type.nullabilitySuffix == NullabilitySuffix.question
+          ? '?'
+          : '';
+
+      switch (parameter.name) {
+        case _child:
+          if (parameter.type.identifier != typeWidget) break;
+          return '${typeWidget.name}$suffix';
+
+        case _children:
+      }
     }
-    return '';
+    throw Exception('must have a child or children when wrap');
+  }
+
+  static const _child = 'child';
+  static const _children = 'children';
+
+  @override
+  String joinInputParameters(Iterable<String> results) {
+    final positional = <String>[];
+    final named = <String>[];
+    for (final result in results) {
+      final code = result.trim();
+      if (code.startsWith('{') && code.endsWith('}')) {
+        named.add(code.substring(1, code.length - 1));
+      } else {
+        positional.add(code);
+      }
+    }
+    final resolvedPos = positional.isEmpty ? '' : '${positional.join(',')}, ';
+    final resolvedNamed = named.isEmpty ? '' : '{${named.join(',')}}';
+    return '$resolvedPos$resolvedNamed';
   }
 
   @override
-  String generateInputParameter(ParameterElement parameter) {
-    // TODO: implement generateInputParameter
-    throw UnimplementedError();
+  String? generateInputParameter(ParameterElement parameter) {
+    final name = parameter.name;
+    if (name == _child || name == _children) return null;
+    return parameter.toString();
   }
 
   @override
-  String generateOutputParameter(ParameterElement parameter) {
-    // TODO: implement generateOutputParameter
-    throw UnimplementedError();
+  String? generateOutputParameter(ParameterElement parameter) {
+    final name = parameter.name;
+    return name == _child || name == _children ? '$name: this' : '$name: $name';
   }
 }

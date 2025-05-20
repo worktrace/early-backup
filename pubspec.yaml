@@ -10,21 +10,25 @@ workspace:
   # Application components.
   - apps/flutter
   - brand/flutter
-  - packages/work_trace
 
-  # Shared libraries for code reuse.
+  # Framework libraries.
+  - packages/work_trace
   - packages/auto_stories
 
+  # Builder package annotations.
   - packages/annotate_data
   - packages/annotate_lerp
   - packages/annotate_name
   - packages/annotate_type
 
+  # Builder packages.
   - packages/build_data
   - packages/build_lerp
   - packages/build_name
   - packages/build_type
 
+  # Toolkit packages as ecosystem.
+  - packages/child_type
   - packages/compat_utils
   - packages/concise_cli
   - packages/custom_app
