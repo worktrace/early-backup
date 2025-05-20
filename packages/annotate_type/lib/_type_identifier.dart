@@ -29,4 +29,7 @@ class TypeIdentifier {
 
   @override
   int get hashCode => _$hash$TypeIdentifier(this);
+
+  @override
+  String toString() => '$name: $libraryIdentifier';
 }
