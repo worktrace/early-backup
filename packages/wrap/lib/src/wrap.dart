@@ -5,4 +5,4 @@ part 'wrap.wrap.g.dart';
 
 @wrap
 // ignore: unused_element generating entries.
-const Set<Function> _wrap = {Center.new, Positioned.new};
+const Set<Function> _wrap = {Center.new, Positioned.new, Positioned.fill};

@@ -41,7 +41,7 @@ class WrapGenerator extends GenerateOnAnnotation<GenerateWrap>
     ConstructorElement element,
     ConstantReader annotation,
     BuildStep buildStep,
-  ) => 'Wrap${element.classElement.name}';
+  ) => 'Wrap${element.classElement.name}${element.name.pascalCase}';
 
   @override
   String generateExtensionTarget(
