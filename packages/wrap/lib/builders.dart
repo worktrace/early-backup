@@ -6,12 +6,25 @@ import 'package:child_type/child_type.dart';
 import 'package:compat_utils/case.dart';
 import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
+import 'package:yaml/yaml.dart';
 
 import 'annotation.dart';
 
-Builder wrapBuilder(BuilderOptions options) {
+Builder wrapBuilder(BuilderOptions options) => LibraryBuilder(
+  const PartAnnotationsBuilder([WrapGenerator()]),
+  generatedExtension: '.wrap.g.dart',
+);
+
+Builder wrapLibBuilder(BuilderOptions options) {
+  final rawImports = options.config['imports'];
+  final imports = <String>[];
+  if (rawImports != null) {
+    imports.addAll((rawImports as YamlList).toList().whereType<String>());
+  }
+
+  if (imports.isEmpty) imports.add('package:flutter/widgets.dart');
   return LibraryBuilder(
-    const PartAnnotationsBuilder([WrapGenerator()]),
+    LibraryAnnotationBuilder([const WrapGenerator()], imports: imports),
     generatedExtension: '.wrap.g.dart',
   );
 }

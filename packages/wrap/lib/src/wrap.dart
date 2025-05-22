@@ -1,11 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:wrap/annotation.dart';
 
-part 'wrap.wrap.g.dart';
-
 /// All wrapped constructors provided by this library.
 @wrap
-const Set<Function> wrappedConstructors = {Center.new};
+const Set<Function> wrappedConstructors = {
+  Center.new,
+  MouseRegion.new,
+  GestureDetector.new,
+};
 
 extension WrapPosition on Widget {
   Positioned position({
