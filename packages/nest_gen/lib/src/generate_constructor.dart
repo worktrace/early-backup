@@ -91,7 +91,7 @@ mixin GenerateStreamExtensionConstructor<T> on GenerateConstructor<T> {
     final methodName = generateMethodName(element, annotation, buildStep);
     final target = generateExtensionTarget(element, annotation, buildStep);
 
-    final parameters = element.declaration.parameters;
+    final parameters = resolveParameters(element, annotation, buildStep);
     final inputs = parameters.map(generateInputParameter).whereType<String>();
     final outputs = parameters.map(generateOutputParameter).whereType<String>();
 
@@ -124,6 +124,14 @@ mixin GenerateStreamExtensionConstructor<T> on GenerateConstructor<T> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) => element.returnType.toString();
+
+  /// Override this method to define how to filter parameters.
+  /// Default to all parameters of current constructor.
+  Iterable<ParameterElement> resolveParameters(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) => element.parameters;
 
   /// How to join generated input parameters,
   /// default to join with `,`.

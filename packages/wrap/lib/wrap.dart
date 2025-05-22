@@ -49,6 +49,5 @@ export 'src/wrap.wrap.g.dart';
 export 'src/wrap/decorate.dart';
 export 'src/wrap/environment.dart';
 export 'src/wrap/geometry.dart';
-export 'src/wrap/interact.dart';
 export 'src/wrap/paint.dart';
 export 'src/wrap/style.dart';

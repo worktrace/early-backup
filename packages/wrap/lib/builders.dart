@@ -4,6 +4,7 @@ import 'package:build/build.dart';
 import 'package:build_type/parse.dart';
 import 'package:child_type/child_type.dart';
 import 'package:compat_utils/case.dart';
+import 'package:compat_utils/iterable.dart';
 import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:yaml/yaml.dart';
@@ -88,6 +89,21 @@ class WrapGenerator extends GenerateOnAnnotation<GenerateWrap>
   static const _children = 'children';
 
   @override
+  Iterable<ParameterElement> resolveParameters(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) {
+    final includeDeprecated =
+        annotation.peek(GenerateWrap.fieldIncludeDeprecated)?.boolValue ??
+        const GenerateWrap().includeDeprecated;
+
+    return includeDeprecated
+        ? element.parameters
+        : element.parameters.where((parameter) => !parameter.hasDeprecated);
+  }
+
+  @override
   String joinInputParameters(Iterable<String> results) {
     final positional = <String>[];
     final named = <String>[];
@@ -102,6 +118,16 @@ class WrapGenerator extends GenerateOnAnnotation<GenerateWrap>
     final resolvedPos = positional.isEmpty ? '' : '${positional.join(',')}, ';
     final resolvedNamed = named.isEmpty ? '' : '{${named.join(',')}}';
     return '$resolvedPos$resolvedNamed';
+  }
+
+  @override
+  String joinOutputParameters(Iterable<String> results) {
+    final ordered = results.toList();
+    final child = // The child must exist.
+        ordered.maybeRemoveFirstWhere((item) => item.startsWith('$_child:')) ??
+        ordered.removeFirstWhere((item) => item.startsWith('$_children:'));
+
+    return '${ordered.join(',')},$child';
   }
 
   @override
