@@ -88,6 +88,21 @@ class WrapGenerator extends GenerateOnAnnotation<GenerateWrap>
   static const _children = 'children';
 
   @override
+  Iterable<ParameterElement> resolveParameters(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) {
+    final includeDeprecated =
+        annotation.peek(GenerateWrap.fieldIncludeDeprecated)?.boolValue ??
+        const GenerateWrap().includeDeprecated;
+
+    return includeDeprecated
+        ? element.parameters
+        : element.parameters.where((parameter) => !parameter.hasDeprecated);
+  }
+
+  @override
   String joinInputParameters(Iterable<String> results) {
     final positional = <String>[];
     final named = <String>[];
