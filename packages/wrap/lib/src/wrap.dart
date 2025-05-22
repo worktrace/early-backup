@@ -3,6 +3,10 @@ import 'package:wrap/annotation.dart';
 
 part 'wrap.wrap.g.dart';
 
+/// All wrapped constructors provided by this library.
 @wrap
-// ignore: unused_element generating entries.
-const Set<Function> _wrap = {Center.new, Positioned.new, Positioned.fill};
+const Set<Function> wrappedConstructors = {
+  Center.new,
+  Positioned.new,
+  Positioned.fill,
+};
