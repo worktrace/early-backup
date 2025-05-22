@@ -5,6 +5,12 @@
 // Generator: PartAnnotationsBuilder
 // **************************************************************************
 
-part of '_annotation.dart';
+part of 'type_identifier.dart';
 
-const _$name$includePrivate = 'includePrivate';
+const _$name$TypeIdentifier = 'TypeIdentifier';
+
+const _$lib$TypeIdentifier = 'package:annotate_type/src/type_identifier.dart';
+
+const _$name$name = 'name';
+
+const _$name$libraryIdentifier = 'libraryIdentifier';

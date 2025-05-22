@@ -45,17 +45,9 @@
 
 library;
 
-import 'package:flutter/widgets.dart';
-import 'package:wrap/annotation.dart';
-
 export 'src/wrap/decorate.dart';
 export 'src/wrap/environment.dart';
 export 'src/wrap/geometry.dart';
 export 'src/wrap/interact.dart';
 export 'src/wrap/paint.dart';
 export 'src/wrap/style.dart';
-
-part 'wrap.wrap.g.dart';
-
-@wrap
-const Set<Function> _wrap = {Center.new, Positioned.new, Positioned.fill};

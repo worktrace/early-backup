@@ -1,7 +1,7 @@
 import 'package:build_name/annotation.dart';
 import 'package:meta/meta_meta.dart';
 
-part '_annotation.name.g.dart';
+part 'annotation.name.g.dart';
 
 const copy = GenerateCopy();
 const hash = GenerateHash();

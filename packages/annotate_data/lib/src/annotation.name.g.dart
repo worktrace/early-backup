@@ -2,12 +2,9 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// Generator: LibraryAnnotationBuilder
+// Generator: PartAnnotationsBuilder
 // **************************************************************************
 
-import 'package:annotate_type/_type_identifier.dart';
+part of 'annotation.dart';
 
-const typeWidget = TypeIdentifier(
-  name: 'Widget',
-  libraryIdentifier: 'package:flutter/src/widgets/framework.dart',
-);
+const _$name$includePrivate = 'includePrivate';

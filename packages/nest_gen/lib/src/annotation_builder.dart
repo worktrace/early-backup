@@ -35,6 +35,7 @@ class LibraryAnnotationBuilder extends AnnotationsBuilder {
     if (result == null) return null;
     final sortedImports = imports.toList()..sort();
     final importLines = sortedImports.map((item) => "import '$item';");
-    return '${importLines.join('\n')}\n\n$result';
+    const prefix = '// ignore_for_file: implementation_imports generated.';
+    return '$prefix\n\n${importLines.join('\n')}\n\n$result';
   }
 }

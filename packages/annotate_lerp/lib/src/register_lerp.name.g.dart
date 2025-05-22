@@ -5,7 +5,7 @@
 // Generator: PartAnnotationsBuilder
 // **************************************************************************
 
-part of '_register_lerp.dart';
+part of 'register_lerp.dart';
 
 const _$lib$GenerateRegisterLerp = 'package:annotate_lerp/_register_lerp.dart';
 

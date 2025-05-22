@@ -1,1 +1,1 @@
-export '_type_identifier.dart';
+export 'src/type_identifier.dart';

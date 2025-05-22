@@ -19,19 +19,23 @@ extension WrapCenter on Widget? {
 }
 
 extension WrapPositioned on Widget {
-  Positioned positionedFill({
+  Positioned positioned({
     Key? key,
-    double? left = 0.0,
-    double? top = 0.0,
-    double? right = 0.0,
-    double? bottom = 0.0,
+    double? left,
+    double? top,
+    double? right,
+    double? bottom,
+    double? width,
+    double? height,
   }) {
-    return Positioned.fill(
+    return Positioned(
       key: key,
       left: left,
       top: top,
       right: right,
       bottom: bottom,
+      width: width,
+      height: height,
       child: this,
     );
   }

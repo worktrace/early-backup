@@ -1,1 +1,1 @@
-export '_register_lerp.dart';
+export 'src/register_lerp.dart';
