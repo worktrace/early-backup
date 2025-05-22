@@ -45,6 +45,7 @@
 
 library;
 
+export 'src/wrap.dart';
 export 'src/wrap/decorate.dart';
 export 'src/wrap/environment.dart';
 export 'src/wrap/geometry.dart';

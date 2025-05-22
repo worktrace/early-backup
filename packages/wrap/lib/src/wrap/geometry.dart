@@ -1,50 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-extension WrapAlign on Widget {
-  Center center({Key? key, double? widthFactor, double? heightFactor}) {
-    return Center(
-      key: key,
-      widthFactor: widthFactor,
-      heightFactor: heightFactor,
-      child: this,
-    );
-  }
-
-  Positioned position({
-    Key? key,
-    double? left,
-    double? top,
-    double? right,
-    double? bottom,
-    double? width,
-    double? height,
-  }) => Positioned(
-    key: key,
-    left: left,
-    top: top,
-    right: right,
-    bottom: bottom,
-    width: width,
-    height: height,
-    child: this,
-  );
-
-  Positioned positionFill({
-    Key? key,
-    double? left = 0.0,
-    double? top = 0.0,
-    double? right = 0.0,
-    double? bottom = 0.0,
-  }) => Positioned.fill(
-    key: key,
-    top: top,
-    left: left,
-    right: right,
-    bottom: bottom,
-    child: this,
-  );
-}
-
 extension WrapDisplay on List<Widget> {
   Column asColumn({
     Key? key,
@@ -81,19 +36,4 @@ extension WrapDisplay on List<Widget> {
     clipBehavior: clipBehavior,
     children: this,
   );
-}
-
-extension WrapConstraint on Widget? {
-  SizedBox size({Key? key, double? width, double? height}) {
-    return SizedBox(key: key, width: width, height: height, child: this);
-  }
-
-  SizedBox sizeAs(Size size, {Key? key}) {
-    return SizedBox(
-      key: key,
-      width: size.width,
-      height: size.height,
-      child: this,
-    );
-  }
 }
