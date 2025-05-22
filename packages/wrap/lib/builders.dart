@@ -31,8 +31,13 @@ class WrapGenerator extends GenerateOnAnnotation<GenerateWrap>
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    final className = element.classElement.name.camelCase;
-    final constructorName = element.name.pascalCase;
+    final typeName = annotation.peek(GenerateWrap.fieldTypeName)?.stringValue;
+    final consName = annotation
+        .peek(GenerateWrap.fieldConstructorName)
+        ?.stringValue;
+
+    final className = (typeName ?? element.classElement.name).camelCase;
+    final constructorName = (consName ?? element.name).pascalCase;
     return '$className$constructorName';
   }
 

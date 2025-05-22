@@ -1,6 +1,7 @@
 targets:
   $default:
     builders:
+      build_name|name_builder: { enabled: true }
       wrap|wrap_builder: { enabled: true }
 
 # Yaml anchor syntax is unsupported in build.yaml.
