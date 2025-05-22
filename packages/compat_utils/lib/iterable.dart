@@ -19,3 +19,29 @@ extension IterableConvertShortcut<T> on Iterable<T> {
 extension ConstructMapEntries<K, V> on Iterable<MapEntry<K, V>> {
   Map<K, V> get asMap => Map.fromEntries(this);
 }
+
+extension RemoveSingleWhere<T> on List<T> {
+  T removeFirstWhere(bool Function(T element) test) {
+    final index = indexWhere(test);
+    if (index == -1) throw StateError('No element satisfies the test.');
+    return removeAt(index);
+  }
+
+  T? maybeRemoveFirstWhere(bool Function(T element) test) {
+    final index = indexWhere(test);
+    if (index == -1) return null;
+    return removeAt(index);
+  }
+
+  T removeLastWhere(bool Function(T element) test) {
+    final index = lastIndexWhere(test);
+    if (index == -1) throw StateError('No element satisfies the test.');
+    return removeAt(index);
+  }
+
+  T? maybeRemoveLastWhere(bool Function(T element) test) {
+    final index = lastIndexWhere(test);
+    if (index == -1) return null;
+    return removeAt(index);
+  }
+}
