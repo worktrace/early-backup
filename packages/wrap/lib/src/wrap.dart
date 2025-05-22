@@ -19,8 +19,8 @@ const Set<Function> wrapPositioned = {
   Positioned.directional,
 };
 
-@GenerateWrap(typeNameOverride: 'gesture')
-const Set<Function> wrapGesture = {GestureDetector.new};
-
 @GenerateWrap(typeNameOverride: 'mouse')
 const Set<Function> wrapMouse = {MouseRegion.new};
+
+@GenerateWrap(typeNameOverride: 'gesture')
+const Set<Function> wrapGesture = {GestureDetector.new};

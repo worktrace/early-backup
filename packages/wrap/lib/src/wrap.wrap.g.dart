@@ -56,7 +56,6 @@ extension WrapFocus on Widget {
   }) {
     return Focus(
       key: key,
-      child: this,
       focusNode: focusNode,
       parentNode: parentNode,
       autofocus: autofocus,
@@ -68,6 +67,7 @@ extension WrapFocus on Widget {
       descendantsAreTraversable: descendantsAreTraversable,
       includeSemantics: includeSemantics,
       debugLabel: debugLabel,
+      child: this,
     );
   }
 }
@@ -172,6 +172,29 @@ extension WrapPositionedDirectional on Widget {
   }
 }
 
+extension WrapMouseRegion on Widget? {
+  MouseRegion mouse({
+    Key? key,
+    void Function(PointerEnterEvent)? onEnter,
+    void Function(PointerExitEvent)? onExit,
+    void Function(PointerHoverEvent)? onHover,
+    MouseCursor cursor = MouseCursor.defer,
+    bool opaque = true,
+    HitTestBehavior? hitTestBehavior,
+  }) {
+    return MouseRegion(
+      key: key,
+      onEnter: onEnter,
+      onExit: onExit,
+      onHover: onHover,
+      cursor: cursor,
+      opaque: opaque,
+      hitTestBehavior: hitTestBehavior,
+      child: this,
+    );
+  }
+}
+
 extension WrapGestureDetector on Widget? {
   GestureDetector gesture({
     Key? key,
@@ -242,7 +265,6 @@ extension WrapGestureDetector on Widget? {
   }) {
     return GestureDetector(
       key: key,
-      child: this,
       onTapDown: onTapDown,
       onTapUp: onTapUp,
       onTap: onTap,
@@ -307,28 +329,6 @@ extension WrapGestureDetector on Widget? {
       trackpadScrollCausesScale: trackpadScrollCausesScale,
       trackpadScrollToScaleFactor: trackpadScrollToScaleFactor,
       supportedDevices: supportedDevices,
-    );
-  }
-}
-
-extension WrapMouseRegion on Widget? {
-  MouseRegion mouse({
-    Key? key,
-    void Function(PointerEnterEvent)? onEnter,
-    void Function(PointerExitEvent)? onExit,
-    void Function(PointerHoverEvent)? onHover,
-    MouseCursor cursor = MouseCursor.defer,
-    bool opaque = true,
-    HitTestBehavior? hitTestBehavior,
-  }) {
-    return MouseRegion(
-      key: key,
-      onEnter: onEnter,
-      onExit: onExit,
-      onHover: onHover,
-      cursor: cursor,
-      opaque: opaque,
-      hitTestBehavior: hitTestBehavior,
       child: this,
     );
   }
