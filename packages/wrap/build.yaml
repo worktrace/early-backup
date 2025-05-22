@@ -2,13 +2,27 @@ targets:
   $default:
     builders:
       build_name|name_builder: { enabled: true }
-      wrap|wrap_builder: { enabled: true }
+      wrap|wrap_lib_builder:
+        enabled: true
+        options:
+          imports:
+            - package:flutter/gestures.dart
+            - package:flutter/services.dart
+            - package:flutter/widgets.dart
 
 # Yaml anchor syntax is unsupported in build.yaml.
 builders:
   wrap_builder:
     import: package:wrap/builders.dart
     builder_factories: [wrapBuilder]
+    build_extensions: { ".dart": [".wrap.g.dart"] }
+    auto_apply: none
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]
+
+  wrap_lib_builder:
+    import: package:wrap/builders.dart
+    builder_factories: [wrapLibBuilder]
     build_extensions: { ".dart": [".wrap.g.dart"] }
     auto_apply: none
     build_to: source
