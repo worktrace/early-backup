@@ -4,9 +4,11 @@ import 'package:wrap/annotation.dart';
 /// All wrapped constructors provided by this library.
 @wrap
 const Set<Function> wrapConstructors = {
+  Align.new,
   Center.new,
-  MouseRegion.new,
-  GestureDetector.new,
+  Focus.new,
+  Padding.new,
+  Transform.new,
 };
 
 @GenerateWrap(typeNameOverride: 'position')
@@ -16,3 +18,9 @@ const Set<Function> wrapPositioned = {
   Positioned.fromRect,
   Positioned.directional,
 };
+
+@GenerateWrap(typeNameOverride: 'gesture')
+const Set<Function> wrapGesture = {GestureDetector.new};
+
+@GenerateWrap(typeNameOverride: 'mouse')
+const Set<Function> wrapMouse = {MouseRegion.new};

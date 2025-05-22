@@ -11,6 +11,23 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+extension WrapAlign on Widget? {
+  Align align({
+    Key? key,
+    AlignmentGeometry alignment = Alignment.center,
+    double? widthFactor,
+    double? heightFactor,
+  }) {
+    return Align(
+      key: key,
+      alignment: alignment,
+      widthFactor: widthFactor,
+      heightFactor: heightFactor,
+      child: this,
+    );
+  }
+}
+
 extension WrapCenter on Widget? {
   Center center({Key? key, double? widthFactor, double? heightFactor}) {
     return Center(
@@ -22,31 +39,143 @@ extension WrapCenter on Widget? {
   }
 }
 
-extension WrapMouseRegion on Widget? {
-  MouseRegion mouseRegion({
+extension WrapFocus on Widget {
+  Focus focus({
     Key? key,
-    void Function(PointerEnterEvent)? onEnter,
-    void Function(PointerExitEvent)? onExit,
-    void Function(PointerHoverEvent)? onHover,
-    MouseCursor cursor = MouseCursor.defer,
-    bool opaque = true,
-    HitTestBehavior? hitTestBehavior,
+    FocusNode? focusNode,
+    FocusNode? parentNode,
+    bool autofocus = false,
+    void Function(bool)? onFocusChange,
+    KeyEventResult Function(FocusNode, KeyEvent)? onKeyEvent,
+    KeyEventResult Function(FocusNode, RawKeyEvent)? onKey,
+    bool? canRequestFocus,
+    bool? skipTraversal,
+    bool? descendantsAreFocusable,
+    bool? descendantsAreTraversable,
+    bool includeSemantics = true,
+    String? debugLabel,
   }) {
-    return MouseRegion(
+    return Focus(
       key: key,
-      onEnter: onEnter,
-      onExit: onExit,
-      onHover: onHover,
-      cursor: cursor,
-      opaque: opaque,
-      hitTestBehavior: hitTestBehavior,
+      child: this,
+      focusNode: focusNode,
+      parentNode: parentNode,
+      autofocus: autofocus,
+      onFocusChange: onFocusChange,
+      onKeyEvent: onKeyEvent,
+      onKey: onKey,
+      canRequestFocus: canRequestFocus,
+      skipTraversal: skipTraversal,
+      descendantsAreFocusable: descendantsAreFocusable,
+      descendantsAreTraversable: descendantsAreTraversable,
+      includeSemantics: includeSemantics,
+      debugLabel: debugLabel,
+    );
+  }
+}
+
+extension WrapPadding on Widget? {
+  Padding padding({Key? key, required EdgeInsetsGeometry padding}) {
+    return Padding(key: key, padding: padding, child: this);
+  }
+}
+
+extension WrapTransform on Widget? {
+  Transform transform({
+    Key? key,
+    required Matrix4 transform,
+    Offset? origin,
+    AlignmentGeometry? alignment,
+    bool transformHitTests = true,
+    FilterQuality? filterQuality,
+  }) {
+    return Transform(
+      key: key,
+      transform: transform,
+      origin: origin,
+      alignment: alignment,
+      transformHitTests: transformHitTests,
+      filterQuality: filterQuality,
+      child: this,
+    );
+  }
+}
+
+extension WrapPositioned on Widget {
+  Positioned position({
+    Key? key,
+    double? left,
+    double? top,
+    double? right,
+    double? bottom,
+    double? width,
+    double? height,
+  }) {
+    return Positioned(
+      key: key,
+      left: left,
+      top: top,
+      right: right,
+      bottom: bottom,
+      width: width,
+      height: height,
+      child: this,
+    );
+  }
+}
+
+extension WrapPositionedFill on Widget {
+  Positioned positionFill({
+    Key? key,
+    double? left = 0.0,
+    double? top = 0.0,
+    double? right = 0.0,
+    double? bottom = 0.0,
+  }) {
+    return Positioned.fill(
+      key: key,
+      left: left,
+      top: top,
+      right: right,
+      bottom: bottom,
+      child: this,
+    );
+  }
+}
+
+extension WrapPositionedFromRect on Widget {
+  Positioned positionFromRect({Key? key, required Rect rect}) {
+    return Positioned.fromRect(key: key, rect: rect, child: this);
+  }
+}
+
+extension WrapPositionedDirectional on Widget {
+  Positioned positionDirectional({
+    Key? key,
+    required TextDirection textDirection,
+    double? start,
+    double? top,
+    double? end,
+    double? bottom,
+    double? width,
+    double? height,
+  }) {
+    return Positioned.directional(
+      key: key,
+      textDirection: textDirection,
+      start: start,
+      top: top,
+      end: end,
+      bottom: bottom,
+      width: width,
+      height: height,
       child: this,
     );
   }
 }
 
 extension WrapGestureDetector on Widget? {
-  GestureDetector gestureDetector({
+  GestureDetector gesture({
     Key? key,
     void Function(TapDownDetails)? onTapDown,
     void Function(TapUpDetails)? onTapUp,
@@ -184,74 +313,24 @@ extension WrapGestureDetector on Widget? {
   }
 }
 
-extension WrapPositioned on Widget {
-  Positioned position({
+extension WrapMouseRegion on Widget? {
+  MouseRegion mouse({
     Key? key,
-    double? left,
-    double? top,
-    double? right,
-    double? bottom,
-    double? width,
-    double? height,
+    void Function(PointerEnterEvent)? onEnter,
+    void Function(PointerExitEvent)? onExit,
+    void Function(PointerHoverEvent)? onHover,
+    MouseCursor cursor = MouseCursor.defer,
+    bool opaque = true,
+    HitTestBehavior? hitTestBehavior,
   }) {
-    return Positioned(
+    return MouseRegion(
       key: key,
-      left: left,
-      top: top,
-      right: right,
-      bottom: bottom,
-      width: width,
-      height: height,
-      child: this,
-    );
-  }
-}
-
-extension WrapPositionedFill on Widget {
-  Positioned positionFill({
-    Key? key,
-    double? left = 0.0,
-    double? top = 0.0,
-    double? right = 0.0,
-    double? bottom = 0.0,
-  }) {
-    return Positioned.fill(
-      key: key,
-      left: left,
-      top: top,
-      right: right,
-      bottom: bottom,
-      child: this,
-    );
-  }
-}
-
-extension WrapPositionedFromRect on Widget {
-  Positioned positionFromRect({Key? key, required Rect rect}) {
-    return Positioned.fromRect(key: key, rect: rect, child: this);
-  }
-}
-
-extension WrapPositionedDirectional on Widget {
-  Positioned positionDirectional({
-    Key? key,
-    required TextDirection textDirection,
-    double? start,
-    double? top,
-    double? end,
-    double? bottom,
-    double? width,
-    double? height,
-  }) {
-    return Positioned.directional(
-      key: key,
-      textDirection: textDirection,
-      start: start,
-      top: top,
-      end: end,
-      bottom: bottom,
-      width: width,
-      height: height,
+      onEnter: onEnter,
+      onExit: onExit,
+      onHover: onHover,
+      cursor: cursor,
+      opaque: opaque,
+      hitTestBehavior: hitTestBehavior,
       child: this,
     );
   }
