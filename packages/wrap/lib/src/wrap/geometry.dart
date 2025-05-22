@@ -1,6 +1,15 @@
 import 'package:flutter/widgets.dart';
 
 extension WrapAlign on Widget {
+  Center center({Key? key, double? widthFactor, double? heightFactor}) {
+    return Center(
+      key: key,
+      widthFactor: widthFactor,
+      heightFactor: heightFactor,
+      child: this,
+    );
+  }
+
   Positioned position({
     Key? key,
     double? left,
