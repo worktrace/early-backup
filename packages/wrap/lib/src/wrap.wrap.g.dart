@@ -183,3 +183,76 @@ extension WrapGestureDetector on Widget? {
     );
   }
 }
+
+extension WrapPositioned on Widget {
+  Positioned position({
+    Key? key,
+    double? left,
+    double? top,
+    double? right,
+    double? bottom,
+    double? width,
+    double? height,
+  }) {
+    return Positioned(
+      key: key,
+      left: left,
+      top: top,
+      right: right,
+      bottom: bottom,
+      width: width,
+      height: height,
+      child: this,
+    );
+  }
+}
+
+extension WrapPositionedFill on Widget {
+  Positioned positionFill({
+    Key? key,
+    double? left = 0.0,
+    double? top = 0.0,
+    double? right = 0.0,
+    double? bottom = 0.0,
+  }) {
+    return Positioned.fill(
+      key: key,
+      left: left,
+      top: top,
+      right: right,
+      bottom: bottom,
+      child: this,
+    );
+  }
+}
+
+extension WrapPositionedFromRect on Widget {
+  Positioned positionFromRect({Key? key, required Rect rect}) {
+    return Positioned.fromRect(key: key, rect: rect, child: this);
+  }
+}
+
+extension WrapPositionedDirectional on Widget {
+  Positioned positionDirectional({
+    Key? key,
+    required TextDirection textDirection,
+    double? start,
+    double? top,
+    double? end,
+    double? bottom,
+    double? width,
+    double? height,
+  }) {
+    return Positioned.directional(
+      key: key,
+      textDirection: textDirection,
+      start: start,
+      top: top,
+      end: end,
+      bottom: bottom,
+      width: width,
+      height: height,
+      child: this,
+    );
+  }
+}

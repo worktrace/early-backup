@@ -37,3 +37,18 @@ extension WrapDisplay on List<Widget> {
     children: this,
   );
 }
+
+extension WrapSize on Widget? {
+  SizedBox size({Key? key, double? width, double? height}) {
+    return SizedBox(key: key, width: width, height: height, child: this);
+  }
+
+  SizedBox sizeAs(Size size, {Key? key}) {
+    return SizedBox(
+      key: key,
+      width: size.width,
+      height: size.height,
+      child: this,
+    );
+  }
+}
