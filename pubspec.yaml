@@ -27,6 +27,9 @@ workspace:
   - packages/build_name
   - packages/build_type
 
+  # Other packages for annotation.
+  - packages/annotate_wrap
+
   # Toolkit packages as ecosystem.
   - packages/child_type
   - packages/compat_utils
