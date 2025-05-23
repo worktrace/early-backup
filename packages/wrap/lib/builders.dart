@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:build_type/parse.dart';
 import 'package:child_type/child_type.dart';
@@ -97,6 +98,13 @@ class WrapGenerator extends GenerateOnAnnotation<GenerateWrap>
           return '${typeWidget.name}$suffix';
 
         case _children:
+          if (!parameter.type.isDartCoreList) break;
+          final identifier = (parameter.type as ParameterizedType)
+              .typeArguments
+              .first
+              .identifier;
+          if (identifier != typeWidget) break;
+          return 'List<${typeWidget.name}>$suffix';
       }
     }
     throw Exception('must have a child or children when wrap');
