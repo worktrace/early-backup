@@ -3,17 +3,6 @@ import 'dart:ui';
 import 'package:flutter/widgets.dart';
 
 extension WrapDecoration on Widget {
-  ClipPath clipPath({
-    Key? key,
-    CustomClipper<Path>? clipper,
-    Clip clipBehavior = Clip.antiAlias,
-  }) => ClipPath(
-    key: key,
-    clipper: clipper,
-    clipBehavior: clipBehavior,
-    child: this,
-  );
-
   DecoratedBox decorate({
     Key? key,
     required Decoration decoration,

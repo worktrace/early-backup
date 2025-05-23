@@ -40,6 +40,21 @@ extension WrapCenter on Widget? {
   }
 }
 
+extension WrapClipPath on Widget? {
+  ClipPath clipPath({
+    Key? key,
+    CustomClipper<Path>? clipper,
+    Clip clipBehavior = Clip.antiAlias,
+  }) {
+    return ClipPath(
+      key: key,
+      clipper: clipper,
+      clipBehavior: clipBehavior,
+      child: this,
+    );
+  }
+}
+
 extension WrapFocus on Widget {
   Focus focus({
     Key? key,
@@ -168,6 +183,27 @@ extension WrapPositionedDirectional on Widget {
       bottom: bottom,
       width: width,
       height: height,
+      child: this,
+    );
+  }
+}
+
+extension WrapCustomPaint on Widget? {
+  CustomPaint paint({
+    Key? key,
+    CustomPainter? painter,
+    CustomPainter? foregroundPainter,
+    Size size = Size.zero,
+    bool isComplex = false,
+    bool willChange = false,
+  }) {
+    return CustomPaint(
+      key: key,
+      painter: painter,
+      foregroundPainter: foregroundPainter,
+      size: size,
+      isComplex: isComplex,
+      willChange: willChange,
       child: this,
     );
   }

@@ -6,6 +6,7 @@ import 'package:wrap/annotation.dart';
 const Set<Function> wrapConstructors = {
   Align.new,
   Center.new,
+  ClipPath.new,
   Focus.new,
   Padding.new,
   Transform.new,
@@ -18,6 +19,9 @@ const Set<Function> wrapPositioned = {
   Positioned.fromRect,
   Positioned.directional,
 };
+
+@GenerateWrap(typeNameOverride: 'paint')
+const Set<Function> wrapPaint = {CustomPaint.new};
 
 @GenerateWrap(typeNameOverride: 'mouse')
 const Set<Function> wrapMouse = {MouseRegion.new};
