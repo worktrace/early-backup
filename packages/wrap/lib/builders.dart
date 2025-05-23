@@ -38,7 +38,11 @@ Builder wrapLibBuilder(BuilderOptions options) {
   }
 
   return LibraryBuilder(
-    LibraryAnnotationBuilder([const WrapGenerator()], imports: imports),
+    LibraryAnnotationBuilder(
+      [const WrapGenerator()],
+      imports: imports,
+      prefixComments: prefixComments,
+    ),
     generatedExtension: '.wrap.g.dart',
   );
 }
