@@ -9,15 +9,13 @@ export 'package:annotate_type/annotate_type.dart';
 
 export 'parse.dart';
 
-Builder typeIdentifierBuilder(BuilderOptions options) {
-  return LibraryBuilder(
-    const LibraryAnnotationBuilder(
-      [TypeIdentifierGenerator()],
-      imports: [TypeIdentifier.classLibraryIdentifier],
-    ),
-    generatedExtension: '.type.g.dart',
-  );
-}
+Builder typeIdentifierBuilder(BuilderOptions options) => LibraryBuilder(
+  const LibraryAnnotationBuilder(
+    [TypeIdentifierGenerator()],
+    imports: [TypeIdentifier.classLibraryIdentifier],
+  ),
+  generatedExtension: '.type.g.dart',
+);
 
 class TypeIdentifierGenerator
     extends GenerateOnAnnotation<GenerateTypeIdentifier>
