@@ -4,7 +4,7 @@ version: 0.0.0
 publish_to: none
 
 environment:
-  sdk: ^3.8.0-278.1.beta
+  sdk: ^3.8.0
 
 workspace:
   # Application components.
