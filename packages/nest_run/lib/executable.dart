@@ -102,7 +102,7 @@ class UpdateEnvironmentCommand extends Command<void> {
   String get description =>
       'Update environment versions of current workspace.\n\n'
       'Example:\n\n    '
-      'dart run workspace_utils environment '
+      'dart run nest_run environment '
       'sdk:^a.b.c '
       'flutter:">=a.b.c <d.0.0"';
 
