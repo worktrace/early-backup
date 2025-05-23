@@ -16,6 +16,12 @@ extension PrefixAndSuffix on String {
   }
 
   String get unwrapParenthesis => removePrefix('(').removeSuffix(')');
+  String get unwrapBracket => removePrefix('[').removeSuffix(']');
+  String get unwrapCurlyBrace => removePrefix('{').removeSuffix('}');
+  String get unwrapAngle => removePrefix('<').removeSuffix('>');
+  String get unwrapQuote => removePrefix('"').removeSuffix('"');
+  String get unwrapSingleQuote => removePrefix("'").removeSuffix("'");
+  String get unwrapBacktick => removePrefix('`').removeSuffix('`');
 }
 
 extension StringBeforeAndAfter on String {
@@ -47,4 +53,8 @@ extension SplitString on String {
     if (index == -1) return null;
     return (substring(0, index), substring(index + separator.length));
   }
+}
+
+extension ResolveString on String? {
+  String get nullAsEmpty => this ?? '';
 }

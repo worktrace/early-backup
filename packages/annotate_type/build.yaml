@@ -1,0 +1,5 @@
+targets:
+  $default:
+    builders:
+      build_name|name_builder: { enabled: true }
+      build_data|data_builder: { enabled: true }

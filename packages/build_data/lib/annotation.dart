@@ -1,2 +1,1 @@
-export 'src/copy.dart';
-export 'src/equals.dart';
+export 'package:annotate_data/annotate_data.dart';

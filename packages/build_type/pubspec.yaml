@@ -1,0 +1,19 @@
+name: build_type
+description: Generate type identifier and corresponding parse utilities.
+resolution: workspace
+version: 0.0.0
+
+environment:
+  sdk: ^3.8.0-278.1.beta
+
+dependencies:
+  analyzer: ^6.11.0
+  annotate_type: ^0.0.0
+  build: ^2.4.2
+  compat_utils: ^0.0.0
+  meta: ^1.16.0
+  nest_gen: ^0.0.0
+  source_gen: ^2.0.0
+
+dev_dependencies:
+  build_runner: ^2.4.15

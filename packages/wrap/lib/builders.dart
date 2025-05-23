@@ -1,95 +1,170 @@
-import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
+import 'package:build_type/parse.dart';
+import 'package:child_type/child_type.dart';
+import 'package:compat_utils/case.dart';
 import 'package:compat_utils/iterable.dart';
 import 'package:nest_gen/nest_gen.dart';
 import 'package:source_gen/source_gen.dart';
+import 'package:yaml/yaml.dart';
 
 import 'annotation.dart';
 
-Builder wrapBuilder(BuilderOptions options) {
+Builder wrapBuilder(BuilderOptions options) => LibraryBuilder(
+  const PartAnnotationsBuilder([WrapGenerator()]),
+  generatedExtension: '.wrap.g.dart',
+);
+
+Builder wrapLibBuilder(BuilderOptions options) {
+  final rawImports = options.config['imports'];
+  final imports = <String>[];
+  if (rawImports != null) {
+    imports.addAll((rawImports as YamlList).toList().whereType<String>());
+  }
+
+  final rawPrefixComments = options.config['prefix_comments'];
+  final prefixComments = <String>[];
+  if (rawPrefixComments != null) {
+    prefixComments.addAll(
+      (rawPrefixComments as YamlList).toList().whereType<String>(),
+    );
+  }
+
+  // Resolve default values.
+  if (imports.isEmpty) imports.add('package:flutter/widgets.dart');
+  if (prefixComments.isEmpty) {
+    prefixComments.add('ignore_for_file: implementation_imports generated.');
+  }
+
   return LibraryBuilder(
-    const PartAnnotationsBuilder([WrapGenerator()]),
+    LibraryAnnotationBuilder(
+      [const WrapGenerator()],
+      imports: imports,
+      prefixComments: prefixComments,
+    ),
     generatedExtension: '.wrap.g.dart',
   );
 }
 
-class WrapGenerator extends GenerateOnAnnotation<GenerateWrap> {
+class WrapGenerator extends GenerateOnAnnotation<GenerateWrap>
+    with
+        GenerateConstructor,
+        GenerateTopLevelVariable,
+        GenerateSet,
+        GenerateConstructorSet,
+        GenerateStreamExtensionConstructor {
   const WrapGenerator();
 
   @override
-  String build(
-    Element element,
+  String generateMethodName(
+    ConstructorElement element,
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    switch (element) {
-      case final ConstructorElement element:
-        return buildConstructor(element);
+    final typeName = annotation.peek(GenerateWrap.fieldTypeName)?.stringValue;
+    final consName = annotation
+        .peek(GenerateWrap.fieldConstructorName)
+        ?.stringValue;
 
-      case final TopLevelVariableElement element:
-        return buildTopLevelVariable(element);
-
-      default:
-        throw const AnnotationPositionException<GenerateWrap>();
-    }
+    final className = (typeName ?? element.classElement.name).camelCase;
+    final constructorName = (consName ?? element.name).pascalCase;
+    return '$className$constructorName';
   }
-
-  String buildConstructor(ConstructorElement element) {
-    final type = element.returnType.toString();
-    final name = element.name;
-    final nameSuffix = name.isEmpty ? '' : '\$$name';
-
-    return 'extension Wrap$type$nameSuffix on Widget {}';
-  }
-
-  String buildWrapMethod(ConstructorElement element) {
-    return '';
-  }
-
-  String? buildVConstructor(DartObject raw, String name) {
-    final element = raw.toFunctionValue();
-    return element is ConstructorElement ? buildConstructor(element) : null;
-  }
-
-  String? buildVConstructorBaseMethod(DartObject raw) {
-    final element = raw.toFunctionValue();
-    return element is ConstructorElement ? buildWrapMethod(element) : null;
-  }
-
-  String? buildVConstructorSet(DartObject raw, String name) {
-    final method = buildVConstructorSetBaseMethods(raw);
-    if (method == null) return null;
-    return method;
-  }
-
-  String? buildVConstructorSetBaseMethods(DartObject raw) => raw
-      .toSetValue()
-      ?.map(buildVConstructorBaseMethod)
-      .nullIfEmpty
-      ?.join('\n\n');
-
-  /// Build wrap extension output based on a top level variable.
-  ///
-  /// This top level variable is an entry to mark which constructor to build,
-  /// and such constructors are usually imported from other packages.
-  String buildTopLevelVariable(TopLevelVariableElement element) {
-    final raw = element.computeConstantValue();
-    if (raw == null) throw WrapAnnoException(element);
-
-    final result =
-        buildVConstructor(raw, element.name) ??
-        buildVConstructorSet(raw, element.name);
-    if (result != null) throw WrapAnnoException(element);
-    return result!;
-  }
-}
-
-class WrapAnnoException implements Exception {
-  const WrapAnnoException(this.element);
-
-  final Element element;
 
   @override
-  String toString() => 'invalid wrap annotation position or format: $element';
+  String generateExtensionName(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) => 'Wrap${element.classElement.name}${element.name.pascalCase}';
+
+  @override
+  String generateExtensionTarget(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) {
+    for (final parameter in element.parameters) {
+      final suffix =
+          parameter.type.nullabilitySuffix == NullabilitySuffix.question
+          ? '?'
+          : '';
+
+      switch (parameter.name) {
+        case _child:
+          if (parameter.type.identifier != typeWidget) break;
+          return '${typeWidget.name}$suffix';
+
+        case _children:
+          if (!parameter.type.isDartCoreList) break;
+          final identifier = (parameter.type as ParameterizedType)
+              .typeArguments
+              .first
+              .identifier;
+          if (identifier != typeWidget) break;
+          return 'List<${typeWidget.name}>$suffix';
+      }
+    }
+    throw Exception('must have a child or children when wrap');
+  }
+
+  static const _child = 'child';
+  static const _children = 'children';
+
+  @override
+  Iterable<ParameterElement> resolveParameters(
+    ConstructorElement element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) {
+    final includeDeprecated =
+        annotation.peek(GenerateWrap.fieldIncludeDeprecated)?.boolValue ??
+        const GenerateWrap().includeDeprecated;
+
+    return includeDeprecated
+        ? element.parameters
+        : element.parameters.where((parameter) => !parameter.hasDeprecated);
+  }
+
+  @override
+  String joinInputParameters(Iterable<String> results) {
+    final positional = <String>[];
+    final named = <String>[];
+    for (final result in results) {
+      final code = result.trim();
+      if (code.startsWith('{') && code.endsWith('}')) {
+        named.add(code.substring(1, code.length - 1));
+      } else {
+        positional.add(code);
+      }
+    }
+    final resolvedPos = positional.isEmpty ? '' : '${positional.join(',')}, ';
+    final resolvedNamed = named.isEmpty ? '' : '{${named.join(',')}}';
+    return '$resolvedPos$resolvedNamed';
+  }
+
+  @override
+  String joinOutputParameters(Iterable<String> results) {
+    final ordered = results.toList();
+    final child = // The child must exist.
+        ordered.maybeRemoveFirstWhere((item) => item.startsWith('$_child:')) ??
+        ordered.removeFirstWhere((item) => item.startsWith('$_children:'));
+
+    return '${ordered.join(',')},$child';
+  }
+
+  @override
+  String? generateInputParameter(ParameterElement parameter) {
+    final name = parameter.name;
+    if (name == _child || name == _children) return null;
+    return parameter.toString();
+  }
+
+  @override
+  String? generateOutputParameter(ParameterElement parameter) {
+    final name = parameter.name;
+    return name == _child || name == _children ? '$name: this' : '$name: $name';
+  }
 }

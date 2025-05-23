@@ -7,27 +7,27 @@
 
 part of 'avoid_nullable.dart';
 
-@buildInLerp
+@registerLerp
 Offset lerpOffset(Offset a, Offset b, double t) {
   return Offset(lerpDouble(a.dx, b.dx, t), lerpDouble(a.dy, b.dy, t));
 }
 
-@buildInLerp
+@registerLerp
 Radius lerpRadius(Radius a, Radius b, double t) {
   return Radius.elliptical(lerpDouble(a.x, b.x, t), lerpDouble(a.y, b.y, t));
 }
 
-@buildInLerp
+@registerLerp
 BorderRadius lerpBorderRadius(BorderRadius a, BorderRadius b, double t) {
   return BorderRadius.only(
-    topLeft: Radius.lerp(a.topLeft, b.topLeft, t)!,
-    topRight: Radius.lerp(a.topRight, b.topRight, t)!,
-    bottomLeft: Radius.lerp(a.bottomLeft, b.bottomLeft, t)!,
-    bottomRight: Radius.lerp(a.bottomRight, b.bottomRight, t)!,
+    topLeft: lerpRadius(a.topLeft, b.topLeft, t),
+    topRight: lerpRadius(a.topRight, b.topRight, t),
+    bottomLeft: lerpRadius(a.bottomLeft, b.bottomLeft, t),
+    bottomRight: lerpRadius(a.bottomRight, b.bottomRight, t),
   );
 }
 
-@buildInLerp
+@registerLerp
 EdgeInsets lerpEdgeInsets(EdgeInsets a, EdgeInsets b, double t) {
   return EdgeInsets.only(
     left: lerpDouble(a.left, b.left, t),
@@ -37,7 +37,7 @@ EdgeInsets lerpEdgeInsets(EdgeInsets a, EdgeInsets b, double t) {
   );
 }
 
-@buildInLerp
+@registerLerp
 EdgeInsetsDirectional lerpEdgeInsetsDirectional(
   EdgeInsetsDirectional a,
   EdgeInsetsDirectional b,

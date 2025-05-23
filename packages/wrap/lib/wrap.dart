@@ -45,25 +45,8 @@
 
 library;
 
-import 'package:flutter/widgets.dart';
-import 'package:wrap/annotation.dart';
-
-export 'src/wrap/decorate.dart';
-export 'src/wrap/environment.dart';
-export 'src/wrap/geometry.dart';
-export 'src/wrap/interact.dart';
-export 'src/wrap/paint.dart';
-export 'src/wrap/style.dart';
-
-part 'wrap.wrap.g.dart';
-
-@wrap
-const Function _mouse = MouseRegion.new;
-
-@wrap
-const Set<Function> _align = {
-  Center.new,
-  Align.new,
-  Positioned.new,
-  Positioned.fill,
-};
+export 'src/environment.dart';
+export 'src/filter.dart';
+export 'src/size.dart';
+export 'src/style.dart';
+export 'src/wrap.wrap.g.dart';
