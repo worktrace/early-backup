@@ -35,6 +35,7 @@ workspace:
   - packages/compat_utils
   - packages/concise_cli
   - packages/custom_app
+  - packages/inherit
   - packages/nest_gen
   - packages/nest_run
   - packages/paint_out
