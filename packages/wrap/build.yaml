@@ -9,6 +9,9 @@ targets:
             - package:flutter/gestures.dart
             - package:flutter/services.dart
             - package:flutter/widgets.dart
+          prefix_comments:
+            - "ignore_for_file: implementation_imports generated."
+            - "ignore_for_file: avoid_positional_boolean_parameters generated."
 
 # Yaml anchor syntax is unsupported in build.yaml.
 builders:

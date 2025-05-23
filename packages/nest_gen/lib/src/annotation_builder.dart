@@ -24,10 +24,12 @@ class LibraryAnnotationBuilder extends AnnotationsBuilder {
   const LibraryAnnotationBuilder(
     super.generators, {
     this.imports = const [],
+    this.prefixComments = const [],
     super.throwOnUnresolved,
   });
 
   final Iterable<String> imports;
+  final Iterable<String> prefixComments;
 
   @override
   String? generate(LibraryReader library, BuildStep buildStep) {
@@ -35,7 +37,7 @@ class LibraryAnnotationBuilder extends AnnotationsBuilder {
     if (result == null) return null;
     final sortedImports = imports.toList()..sort();
     final importLines = sortedImports.map((item) => "import '$item';");
-    const prefix = '// ignore_for_file: implementation_imports generated.';
+    final prefix = prefixComments.map((line) => '// $line').join('\n');
     return '$prefix\n\n${importLines.join('\n')}\n\n$result';
   }
 }

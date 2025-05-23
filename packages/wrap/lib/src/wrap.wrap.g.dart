@@ -6,6 +6,7 @@
 // **************************************************************************
 
 // ignore_for_file: implementation_imports generated.
+// ignore_for_file: avoid_positional_boolean_parameters generated.
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';

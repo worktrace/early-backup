@@ -23,7 +23,20 @@ Builder wrapLibBuilder(BuilderOptions options) {
     imports.addAll((rawImports as YamlList).toList().whereType<String>());
   }
 
+  final rawPrefixComments = options.config['prefix_comments'];
+  final prefixComments = <String>[];
+  if (rawPrefixComments != null) {
+    prefixComments.addAll(
+      (rawPrefixComments as YamlList).toList().whereType<String>(),
+    );
+  }
+
+  // Resolve default values.
   if (imports.isEmpty) imports.add('package:flutter/widgets.dart');
+  if (prefixComments.isEmpty) {
+    prefixComments.add('ignore_for_file: implementation_imports generated.');
+  }
+
   return LibraryBuilder(
     LibraryAnnotationBuilder([const WrapGenerator()], imports: imports),
     generatedExtension: '.wrap.g.dart',
