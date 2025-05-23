@@ -1,3 +1,7 @@
+## 0.2.0
+
+- Simplify `Inherit` code reuse and `BuildContext` wrapper.
+
 ## 0.1.0
 
 - Generics of `InheritedWidget`.
