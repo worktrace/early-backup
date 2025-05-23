@@ -45,9 +45,8 @@
 
 library;
 
+export 'src/environment.dart';
+export 'src/filter.dart';
+export 'src/size.dart';
+export 'src/style.dart';
 export 'src/wrap.wrap.g.dart';
-export 'src/wrap/decorate.dart';
-export 'src/wrap/environment.dart';
-export 'src/wrap/geometry.dart';
-export 'src/wrap/paint.dart';
-export 'src/wrap/style.dart';

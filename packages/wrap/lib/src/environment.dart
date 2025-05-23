@@ -29,22 +29,20 @@ extension AsText on String {
     TextWidthBasis? textWidthBasis,
     TextHeightBehavior? textHeightBehavior,
     Color? selectionColor,
-  }) {
-    return Text(
-      key: key,
-      style: style,
-      strutStyle: strutStyle,
-      textAlign: textAlign,
-      textDirection: textDirection,
-      locale: locale,
-      softWrap: softWrap,
-      overflow: overflow,
-      maxLines: maxLines,
-      semanticsLabel: semanticsLabel,
-      textWidthBasis: textWidthBasis,
-      textHeightBehavior: textHeightBehavior,
-      selectionColor: selectionColor,
-      this,
-    );
-  }
+  }) => Text(
+    key: key,
+    style: style,
+    strutStyle: strutStyle,
+    textAlign: textAlign,
+    textDirection: textDirection,
+    locale: locale,
+    softWrap: softWrap,
+    overflow: overflow,
+    maxLines: maxLines,
+    semanticsLabel: semanticsLabel,
+    textWidthBasis: textWidthBasis,
+    textHeightBehavior: textHeightBehavior,
+    selectionColor: selectionColor,
+    this,
+  );
 }

@@ -2,19 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
 
-extension WrapDecoration on Widget {
-  DecoratedBox decorate({
-    Key? key,
-    required Decoration decoration,
-    DecorationPosition position = DecorationPosition.background,
-  }) => DecoratedBox(
-    key: key,
-    decoration: decoration,
-    position: position,
-    child: this,
-  );
-}
-
 extension WrapFilter on Widget? {
   Opacity opacity(
     double opacity, {

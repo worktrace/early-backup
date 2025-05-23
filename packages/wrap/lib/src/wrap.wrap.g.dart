@@ -209,6 +209,21 @@ extension WrapCustomPaint on Widget? {
   }
 }
 
+extension WrapDecoratedBox on Widget? {
+  DecoratedBox decorate({
+    Key? key,
+    required Decoration decoration,
+    DecorationPosition position = DecorationPosition.background,
+  }) {
+    return DecoratedBox(
+      key: key,
+      decoration: decoration,
+      position: position,
+      child: this,
+    );
+  }
+}
+
 extension WrapMouseRegion on Widget? {
   MouseRegion mouse({
     Key? key,

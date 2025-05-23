@@ -23,6 +23,9 @@ const Set<Function> wrapPositioned = {
 @GenerateWrap(typeNameOverride: 'paint')
 const Set<Function> wrapPaint = {CustomPaint.new};
 
+@GenerateWrap(typeNameOverride: 'decorate')
+const Set<Function> wrapDecorate = {DecoratedBox.new};
+
 @GenerateWrap(typeNameOverride: 'mouse')
 const Set<Function> wrapMouse = {MouseRegion.new};
 
