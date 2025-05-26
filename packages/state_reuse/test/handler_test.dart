@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:state_reuse/binding.dart';
 import 'package:state_reuse/test.dart';
-import 'package:wrap/modifier.dart';
 import 'package:wrap/test.dart';
 import 'package:wrap/wrap.dart';
 
@@ -46,7 +45,10 @@ class _HandlerUpdateState extends UpdateTesterState<HandlerUpdate> {
   Widget build(BuildContext context) {
     return Handler(
       data: message,
-      builder: (context, data) => [data.asText(), button].asColumn().center,
+      builder: (context, data) => [data.asText(), button].asColumn(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+      ),
     );
   }
 }

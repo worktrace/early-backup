@@ -1,6 +1,6 @@
 ## 1.0.0
 
-This package is now been included inside the [WorkTrace](https://github.com/worktrace/worktrace) monorepo. And many APIs had changed, that such package is no longer compatible with the older versions of `0.x.x`.
+This package is now been included inside the [WorkTrace](https://github.com/worktrace/worktrace) monorepo. And many APIs had changed, that such package is no longer compatible with the older versions of `0.x.x`. It's strongly not recommended to use versions before `1.0.0` because those versions are far not mature enough for production usages.
 
 ## 0.7.0
 

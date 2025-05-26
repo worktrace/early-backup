@@ -10,5 +10,4 @@ export 'package:state_reuse/animation.dart';
 export 'package:state_reuse/binding.dart';
 export 'package:state_reuse/interact.dart';
 export 'package:state_reuse/size.dart';
-export 'package:wrap/modifier.dart';
 export 'package:wrap/wrap.dart';
