@@ -1,0 +1,14 @@
+name: inherit
+description: Syntax sugars to manage flutter inherit in chain programming style.
+resolution: workspace
+version: 0.0.0
+
+environment:
+  sdk: ^3.8.0
+  flutter: ">=3.32.0 <4.0.0"
+
+dependencies:
+  flutter: { sdk: flutter }
+
+dev_dependencies:
+  flutter_test: { sdk: flutter }
