@@ -1,5 +1,7 @@
 # WorkTrace 工作溯源
 
+This repository had [been refactored](https://github.com/worktrace/worktrace) and it's now archived.
+
 ## License
 
 All components inside this monorepo expect the following items are licensed under [Mulan PSL v2](http://license.coscl.org.cn/MulanPSL2):
