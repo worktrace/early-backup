@@ -1,6 +1,6 @@
 # WorkTrace 工作溯源
 
-This repository had [been refactored](https://github.com/worktrace/worktrace) and it's now archived.
+⚠️ This repository had [been refactored](https://github.com/worktrace/worktrace) and it's now archived.
 
 ## License
 
